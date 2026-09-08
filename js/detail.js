@@ -663,7 +663,7 @@ function openAdminEditSeriesModal() {
   if (previewImg && previewBox) {
     if (currentSeries.cover) {
       previewImg.src = currentSeries.cover;
-      previewBox.style.display = 'block';
+      previewBox.style.display = 'inline-block';
     } else {
       previewBox.style.display = 'none';
     }
@@ -678,6 +678,35 @@ function closeAdminEditSeriesModal() {
   if (modal) modal.classList.remove('active');
 }
 
+// Remove / Clear Cover
+function adminRemoveCover(type = 'edit') {
+  const fileInput = document.getElementById('adminEditSeriesCoverFile');
+  const urlInput = document.getElementById('adminEditSeriesCoverUrl');
+  const previewBox = document.getElementById('adminEditCoverPreviewBox');
+  const previewImg = document.getElementById('adminEditCoverPreview');
+
+  if (fileInput) fileInput.value = '';
+  if (urlInput) urlInput.value = '';
+  if (previewImg) previewImg.src = '';
+  if (previewBox) previewBox.style.display = 'none';
+}
+
+// Live URL Input for Cover
+function handleAdminCoverUrlInput(type, val) {
+  const trimmed = (val || '').trim();
+  const previewBox = document.getElementById('adminEditCoverPreviewBox');
+  const previewImg = document.getElementById('adminEditCoverPreview');
+  if (!previewBox || !previewImg) return;
+
+  if (trimmed) {
+    previewImg.src = trimmed;
+    previewBox.style.display = 'inline-block';
+  } else {
+    previewImg.src = '';
+    previewBox.style.display = 'none';
+  }
+}
+
 function handleAdminEditCoverUpload(input) {
   if (input.files && input.files[0]) {
     const file = input.files[0];
@@ -690,7 +719,7 @@ function handleAdminEditCoverUpload(input) {
       const previewImg = document.getElementById('adminEditCoverPreview');
       if (previewImg && previewBox) {
         previewImg.src = dataUrl;
-        previewBox.style.display = 'block';
+        previewBox.style.display = 'inline-block';
       }
     };
     reader.readAsDataURL(file);
@@ -820,4 +849,6 @@ window.adminExportSingleChapter = adminExportSingleChapter;
 window.adminExportCurrentSeries = adminExportCurrentSeries;
 window.openCharModal = openCharModal;
 window.closeCharModal = closeCharModal;
+window.adminRemoveCover = adminRemoveCover;
+window.handleAdminCoverUrlInput = handleAdminCoverUrlInput;
 

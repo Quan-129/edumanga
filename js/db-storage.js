@@ -628,37 +628,56 @@ const dbStorage = {
         chapters: allChaptersList
       };
 
-      // Call Dev Server API
-      const resp = await fetch('/api/backup/save', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-      });
+      // Try multiple endpoints in case app is served on VS Code Live Server or python dev server
+      const candidateEndpoints = [
+        '/api/backup/save',
+        'http://localhost:8080/api/backup/save',
+        'http://127.0.0.1:8080/api/backup/save'
+      ];
 
-      if (resp.ok) {
-        const result = await resp.json();
-        if (result.success) {
-          settings.lastBackupTimestamp = Date.now();
-          settings.lastBackupFolder = result.targetFolder;
-          settings.lastBackupStatus = `Thành công (${result.totalFiles} files lúc ${new Date().toLocaleTimeString('vi-VN')})`;
-          this.saveBackupSettings(settings);
+      let lastErr = null;
+      let result = null;
 
-          console.log(`[Auto-Backup] ✅ Sao lưu thành công vào: ${result.targetFolder}`);
-          return {
-            success: true,
-            folder: result.targetFolder,
-            dateFolder: dateFolder,
-            totalFiles: result.totalFiles,
-            isAuto: isAuto
-          };
+      for (const endpoint of candidateEndpoints) {
+        try {
+          const resp = await fetch(endpoint, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+
+          if (resp.ok) {
+            result = await resp.json();
+            if (result && result.success) {
+              break;
+            }
+          }
+        } catch (e) {
+          lastErr = e;
         }
       }
-      throw new Error(`Server status: ${resp.status}`);
+
+      if (result && result.success) {
+        settings.lastBackupTimestamp = Date.now();
+        settings.lastBackupFolder = result.targetFolder;
+        settings.lastBackupStatus = `Thành công (${result.totalFiles} files lúc ${new Date().toLocaleTimeString('vi-VN')})`;
+        this.saveBackupSettings(settings);
+
+        console.log(`[Auto-Backup] ✅ Sao lưu thành công vào: ${result.targetFolder}`);
+        return {
+          success: true,
+          folder: result.targetFolder,
+          dateFolder: dateFolder,
+          totalFiles: result.totalFiles,
+          isAuto: isAuto
+        };
+      }
+
+      throw new Error(lastErr ? lastErr.message : "Không thể kết nối Python Dev Server (hãy chạy 'python scripts/dev_server.py')");
 
     } catch (err) {
-      console.warn("[Auto-Backup] Local server API not available, fallback to client-side trigger:", err);
-      // Fallback: If local server offline, update status
-      settings.lastBackupStatus = `Chưa kết nối dev server (Lỗi: ${err.message})`;
+      console.warn("[Auto-Backup] Local server API not available:", err);
+      settings.lastBackupStatus = `Chưa kết nối Python Server (Lỗi: ${err.message})`;
       this.saveBackupSettings(settings);
       return { success: false, error: err.message };
     }

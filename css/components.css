@@ -3768,6 +3768,8 @@ body.auth-locked {
 }
 
 .admin-cover-preview-wrapper {
+  position: relative;
+  display: inline-block;
   width: 120px;
   height: 160px;
   border-radius: 10px;
@@ -3780,6 +3782,36 @@ body.auth-locked {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  display: block;
+}
+
+.btn-admin-remove-cover {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: rgba(239, 68, 68, 0.9);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 0.8rem;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+  z-index: 5;
+  padding: 0;
+  line-height: 1;
+}
+
+.btn-admin-remove-cover:hover {
+  background: #dc2626;
+  transform: scale(1.15);
+  box-shadow: 0 0 12px rgba(239, 68, 68, 0.7);
+  border-color: #ffffff;
 }
 
 /* JSON Dropzone */

@@ -206,10 +206,13 @@
               <i class="fas fa-cloud-arrow-up"></i> <span>Tải ảnh bìa từ máy tính</span>
             </label>
             <span style="color: var(--text-muted); font-size: 0.85rem;">hoặc dán URL:</span>
-            <input type="text" id="adminSeriesCoverUrl" class="gate-input flex-1" placeholder="assets/covers/your_cover.jpg hoặc link https://...">
+            <input type="text" id="adminSeriesCoverUrl" class="gate-input flex-1" placeholder="assets/covers/your_cover.jpg hoặc link https://..." oninput="handleAdminCoverUrlInput('create', this.value)">
           </div>
           <div id="adminCoverPreviewBox" class="admin-cover-preview-wrapper" style="display: none; margin-top: 10px;">
             <img id="adminCoverPreview" src="" alt="Cover Preview" class="admin-cover-preview-img">
+            <button type="button" class="btn-admin-remove-cover" onclick="adminRemoveCover('create')" title="Gỡ bỏ ảnh bìa">
+              <i class="fas fa-xmark"></i>
+            </button>
           </div>
         </div>
 
@@ -299,10 +302,13 @@
               <i class="fas fa-cloud-arrow-up"></i> <span>Tải ảnh bìa mới</span>
             </label>
             <span style="color: var(--text-muted); font-size: 0.85rem;">hoặc dán URL:</span>
-            <input type="text" id="adminEditSeriesCoverUrl" class="gate-input flex-1" placeholder="assets/covers/... hoặc URL ảnh https://...">
+            <input type="text" id="adminEditSeriesCoverUrl" class="gate-input flex-1" placeholder="assets/covers/... hoặc URL ảnh https://..." oninput="handleAdminCoverUrlInput('edit', this.value)">
           </div>
           <div id="adminEditCoverPreviewBox" class="admin-cover-preview-wrapper" style="margin-top: 10px;">
             <img id="adminEditCoverPreview" src="" alt="Cover Preview" class="admin-cover-preview-img">
+            <button type="button" class="btn-admin-remove-cover" onclick="adminRemoveCover('edit')" title="Gỡ bỏ ảnh bìa">
+              <i class="fas fa-xmark"></i>
+            </button>
           </div>
         </div>
 

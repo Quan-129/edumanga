@@ -326,10 +326,42 @@ function handleAdminSeriesCoverUpload(input) {
     const previewBox = document.getElementById('adminCoverPreviewBox');
     const urlInput = document.getElementById('adminSeriesCoverUrl');
     if (previewImg) previewImg.src = e.target.result;
-    if (previewBox) previewBox.style.display = 'block';
+    if (previewBox) previewBox.style.display = 'inline-block';
     if (urlInput) urlInput.value = e.target.result; // Store base64 data URL
   };
   reader.readAsDataURL(file);
+}
+
+// Remove / Clear Cover
+function adminRemoveCover(type = 'create') {
+  const isCreate = (type === 'create');
+  const fileInput = document.getElementById(isCreate ? 'adminSeriesCoverFile' : 'adminEditSeriesCoverFile');
+  const urlInput = document.getElementById(isCreate ? 'adminSeriesCoverUrl' : 'adminEditSeriesCoverUrl');
+  const previewBox = document.getElementById(isCreate ? 'adminCoverPreviewBox' : 'adminEditCoverPreviewBox');
+  const previewImg = document.getElementById(isCreate ? 'adminCoverPreview' : 'adminEditCoverPreview');
+
+  if (fileInput) fileInput.value = '';
+  if (urlInput) urlInput.value = '';
+  if (previewImg) previewImg.src = '';
+  if (previewBox) previewBox.style.display = 'none';
+}
+
+// Live URL Input for Cover
+function handleAdminCoverUrlInput(type, val) {
+  const trimmed = (val || '').trim();
+  const boxId = (type === 'create') ? 'adminCoverPreviewBox' : 'adminEditCoverPreviewBox';
+  const imgId = (type === 'create') ? 'adminCoverPreview' : 'adminEditCoverPreview';
+  const previewBox = document.getElementById(boxId);
+  const previewImg = document.getElementById(imgId);
+  if (!previewBox || !previewImg) return;
+
+  if (trimmed) {
+    previewImg.src = trimmed;
+    previewBox.style.display = 'inline-block';
+  } else {
+    previewImg.src = '';
+    previewBox.style.display = 'none';
+  }
 }
 
 // Create New Series
@@ -460,7 +492,7 @@ function openAdminEditSeriesModal(seriesId, event) {
   if (previewImg && previewBox) {
     if (series.cover) {
       previewImg.src = series.cover;
-      previewBox.style.display = 'block';
+      previewBox.style.display = 'inline-block';
     } else {
       previewBox.style.display = 'none';
     }
@@ -487,7 +519,7 @@ function handleAdminEditCoverUpload(input) {
       const previewImg = document.getElementById('adminEditCoverPreview');
       if (previewImg && previewBox) {
         previewImg.src = dataUrl;
-        previewBox.style.display = 'block';
+        previewBox.style.display = 'inline-block';
       }
     };
     reader.readAsDataURL(file);
@@ -665,3 +697,5 @@ window.handleAdminSeriesCoverUpload = handleAdminSeriesCoverUpload;
 window.handleAdminCreateSeries = handleAdminCreateSeries;
 window.adminDeleteSeries = adminDeleteSeries;
 window.adminExportMangaJson = adminExportMangaJson;
+window.adminRemoveCover = adminRemoveCover;
+window.handleAdminCoverUrlInput = handleAdminCoverUrlInput;
