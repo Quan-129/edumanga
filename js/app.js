@@ -85,7 +85,7 @@ function renderHeroFeatured(featured) {
       </div>
       <div class="hero-preview">
         <a href="detail.html?id=${featured.id}" class="hero-cover-stack">
-          <img src="${featured.cover}" alt="${featured.title}" onerror="this.src='assets/covers/n2_cover.jpg'">
+          <img src="${window.getSeriesCover ? window.getSeriesCover(featured) : (featured.cover || 'assets/covers/n2_cover.jpg')}" alt="${featured.title}" onerror="this.src='assets/covers/n2_cover.jpg'">
         </a>
       </div>
     </div>
@@ -143,7 +143,7 @@ function renderMangaGrid(mangaList) {
         <a href="detail.html?id=${m.id}" class="card-cover-wrapper">
           <span class="card-badge">${escapeHtml(m.badge || 'Mới')}</span>
           <span class="card-category">${escapeHtml(m.category)}</span>
-          <img class="card-cover" src="${m.cover}" alt="${escapeHtml(m.title)}" loading="lazy" onerror="this.src='assets/covers/n2_cover.jpg'">
+          <img class="card-cover" src="${window.getSeriesCover ? window.getSeriesCover(m) : (m.cover || 'assets/covers/n2_cover.jpg')}" alt="${escapeHtml(m.title)}" loading="lazy" onerror="this.src='assets/covers/n2_cover.jpg'">
           ${adminActionsHtml}
         </a>
         <div class="card-info">
@@ -217,7 +217,7 @@ function renderSearchDropdown(matches, query) {
 
   searchDropdown.innerHTML = matches.slice(0, 5).map(m => `
     <a href="detail.html?id=${m.id}" class="search-drop-item">
-      <img src="${m.cover}" alt="${escapeHtml(m.title)}" onerror="this.src='assets/covers/n2_cover.jpg'">
+      <img src="${window.getSeriesCover ? window.getSeriesCover(m) : (m.cover || 'assets/covers/n2_cover.jpg')}" alt="${escapeHtml(m.title)}" onerror="this.src='assets/covers/n2_cover.jpg'">
       <div>
         <div style="font-weight: 700; color: #fff;">${escapeHtml(m.title)}</div>
         <div style="font-size: 0.8rem; color: var(--text-muted);">${escapeHtml(m.category)} • ${(m.chapters || []).length} chương</div>
@@ -375,7 +375,7 @@ async function handleAdminCreateSeries(e) {
   const badge = document.getElementById('adminSeriesBadge').value.trim() || 'Mới';
   const author = document.getElementById('adminSeriesAuthor').value.trim() || 'TBMQ / Admin';
   const desc = document.getElementById('adminSeriesDesc').value.trim() || 'Bộ truyện tranh kiến thức mới được khởi tạo.';
-  const coverUrl = document.getElementById('adminSeriesCoverUrl').value.trim() || 'assets/covers/n2_cover.jpg';
+  const coverUrl = document.getElementById('adminSeriesCoverUrl').value.trim();
 
   if (!title || !id) {
     showToast("⚠️ Vui lòng nhập đầy đủ tên bộ truyện!");
@@ -490,10 +490,11 @@ function openAdminEditSeriesModal(seriesId, event) {
   const previewBox = document.getElementById('adminEditCoverPreviewBox');
   const previewImg = document.getElementById('adminEditCoverPreview');
   if (previewImg && previewBox) {
-    if (series.cover) {
+    if (series.cover && series.cover.trim() !== '') {
       previewImg.src = series.cover;
       previewBox.style.display = 'inline-block';
     } else {
+      previewImg.src = '';
       previewBox.style.display = 'none';
     }
   }
@@ -544,7 +545,7 @@ async function handleAdminSaveEditedSeries(event) {
   const author = document.getElementById('adminEditSeriesAuthor').value.trim() || 'TBMQ';
   const status = document.getElementById('adminEditSeriesStatus').value || 'Đang phát hành';
   const desc = document.getElementById('adminEditSeriesDesc').value.trim();
-  const coverUrl = document.getElementById('adminEditSeriesCoverUrl').value.trim() || 'assets/covers/n2_cover.jpg';
+  const coverUrl = document.getElementById('adminEditSeriesCoverUrl').value.trim();
 
   if (!title || !originalId) {
     showToast("⚠️ Vui lòng nhập đầy đủ tên bộ truyện!");

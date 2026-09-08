@@ -107,7 +107,7 @@ function renderSeriesInfo(s) {
         box-shadow: var(--shadow-neon);
         aspect-ratio: 3/4.2;
       ">
-        <img src="${s.cover}" alt="${escapeHtml(s.title)}" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.src='assets/covers/n2_cover.jpg'">
+        <img src="${window.getSeriesCover ? window.getSeriesCover(s) : (s.cover || 'assets/covers/n2_cover.jpg')}" alt="${escapeHtml(s.title)}" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.src='assets/covers/n2_cover.jpg'">
       </div>
       <div class="series-info-main" style="display: flex; flex-direction: column; justify-content: space-between;">
         <div>
@@ -661,10 +661,11 @@ function openAdminEditSeriesModal() {
   const previewBox = document.getElementById('adminEditCoverPreviewBox');
   const previewImg = document.getElementById('adminEditCoverPreview');
   if (previewImg && previewBox) {
-    if (currentSeries.cover) {
+    if (currentSeries.cover && currentSeries.cover.trim() !== '') {
       previewImg.src = currentSeries.cover;
       previewBox.style.display = 'inline-block';
     } else {
+      previewImg.src = '';
       previewBox.style.display = 'none';
     }
   }
@@ -744,7 +745,7 @@ async function handleAdminSaveEditedSeries(event) {
   const author = document.getElementById('adminEditSeriesAuthor').value.trim() || 'TBMQ';
   const status = document.getElementById('adminEditSeriesStatus').value || 'Đang phát hành';
   const desc = document.getElementById('adminEditSeriesDesc').value.trim();
-  const coverUrl = document.getElementById('adminEditSeriesCoverUrl').value.trim() || 'assets/covers/n2_cover.jpg';
+  const coverUrl = document.getElementById('adminEditSeriesCoverUrl').value.trim();
 
   if (!title || !originalId) {
     showToast("⚠️ Vui lòng nhập đầy đủ tên bộ truyện!");

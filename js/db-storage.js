@@ -706,12 +706,66 @@ const dbStorage = {
         showToast(`⏰ Tự động sao lưu bù vào thư mục "${res.dateFolder}" thành công!`);
       }
     }
+  },
+
+  // 7. Dynamic Series Cover Resolver (Fallback to First Page of Chapter 1)
+  getSeriesCover(series) {
+    if (!series) return 'assets/covers/n2_cover.jpg';
+    if (series.cover && typeof series.cover === 'string' && series.cover.trim() !== '') {
+      return series.cover.trim();
+    }
+
+    const chaps = series.chapters || [];
+    if (chaps.length > 0) {
+      const firstChap = chaps[0];
+      if (firstChap) {
+        if (firstChap.pages && Array.isArray(firstChap.pages) && firstChap.pages.length > 0 && firstChap.pages[0].imageUrl) {
+          return firstChap.pages[0].imageUrl;
+        }
+        if (series.id && firstChap.id) {
+          return `assets/chapters/${series.id}/${firstChap.id}/page_01.jpg`;
+        }
+      }
+    }
+
+    return 'assets/covers/n2_cover.jpg';
+  },
+
+  async getSeriesCoverAsync(series) {
+    if (!series) return 'assets/covers/n2_cover.jpg';
+    if (series.cover && typeof series.cover === 'string' && series.cover.trim() !== '') {
+      return series.cover.trim();
+    }
+
+    const chaps = series.chapters || [];
+    if (chaps.length > 0) {
+      const firstChap = chaps[0];
+      if (firstChap) {
+        if (firstChap.pages && Array.isArray(firstChap.pages) && firstChap.pages.length > 0 && firstChap.pages[0].imageUrl) {
+          return firstChap.pages[0].imageUrl;
+        }
+        try {
+          const storedPages = await this.getChapterPages(series.id, firstChap.id);
+          if (storedPages && storedPages.length > 0 && storedPages[0].imageUrl) {
+            return storedPages[0].imageUrl;
+          }
+        } catch (e) {}
+
+        if (series.id && firstChap.id) {
+          return `assets/chapters/${series.id}/${firstChap.id}/page_01.jpg`;
+        }
+      }
+    }
+
+    return 'assets/covers/n2_cover.jpg';
   }
 };
 
 // Global Export
 window.dbStorage = dbStorage;
 window.getFullMangaCatalog = () => dbStorage.getFullMangaCatalog();
+window.getSeriesCover = (series) => dbStorage.getSeriesCover(series);
+window.getSeriesCoverAsync = (series) => dbStorage.getSeriesCoverAsync(series);
 
 
 
