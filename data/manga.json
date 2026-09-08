@@ -4279,7 +4279,7 @@
   },
   {
     "id": "n2",
-    "title": "Tiếng Nhật JLPT N2",
+    "title": "N2",
     "folder": "3. N2",
     "category": "Ngoại ngữ & JLPT",
     "categoryKey": "n2",
@@ -4289,7 +4289,7 @@
     "rating": 4.9,
     "views": "25.2K",
     "likes": "3.4K",
-    "description": "Bộ truyện tranh học tập & chuyên đề kiến thức Tiếng Nhật JLPT N2. Toàn bộ hình ảnh, dàn nhân vật và bong bóng thoại được tự động cập nhật từ hệ thống kịch bản.",
+    "description": "Bộ truyện tranh học tập & chuyên đề kiến thức N2. Toàn bộ hình ảnh, dàn nhân vật và bong bóng thoại được tự động cập nhật từ hệ thống kịch bản.",
     "cover": "assets/covers/n2_cover.jpg",
     "characters": [
       {
@@ -4346,1305 +4346,9 @@
           "Mới"
         ],
         "avatar": "assets/characters/n2_Lan.jpg"
-      },
-      {
-        "id": "char-add-manga-1",
-        "name": "Narrator",
-        "appearance": "22 years old, 4th-year female student, intelligent look, thin glasses.. White shirt, pastel blue blazer, holding a digital tablet.",
-        "clothing": "",
-        "role": "The objective narrator and analyst, observing everyday family dynamics.",
-        "tags": [
-          "Mới"
-        ],
-        "avatar": "assets/characters/add-manga_Narrator.jpg"
-      },
-      {
-        "id": "char-add-manga-4",
-        "name": "Nam",
-        "appearance": "52 years old, father, neat hair with slight grey temples, stern yet caring.. Simple polo shirt, dark trousers.",
-        "clothing": "",
-        "role": "The traditional father and bakery shop owner, valuing family heritage.",
-        "tags": [
-          "Mới"
-        ],
-        "avatar": "assets/characters/add-manga_Nam.jpg"
-      },
-      {
-        "id": "char-add-manga-5",
-        "name": "Hân",
-        "appearance": "50 years old, mother, gentle face, warm smile, hardworking.. Floral apron over a casual blouse and trousers.",
-        "clothing": "",
-        "role": "The devoted mother balancing work and household duties.",
-        "tags": [
-          "Mới"
-        ],
-        "avatar": "assets/characters/add-manga_H_n.jpg"
       }
     ],
     "chapters": [
-      {
-        "id": "chuong-01",
-        "title": "Manga Project",
-        "subtitle": "Tự động đồng bộ từ chuong_01.json",
-        "releaseDate": "2026-09-08",
-        "pagesCount": 30,
-        "pages": [
-          {
-            "pageNumber": 1,
-            "imageUrl": "assets/chapters/add-manga/chuong-01/page_01.jpg",
-            "bubbles": [],
-            "dialogue": "\n\n"
-          },
-          {
-            "pageNumber": 2,
-            "imageUrl": "assets/chapters/add-manga/chuong-01/page_02.jpg",
-            "bubbles": [
-              {
-                "id": "221043d7-d16b-4fca-a7d6-e7dc22553a11",
-                "text": "Trong cả một 人生 (じんせい - Nhân Sinh - Đời người, cuộc đời), gia đình chính là nơi đầu tiên dạy chúng ta cách đối nhân xử thế.",
-                "x": 29.42053301155274,
-                "y": 16.991842610636823,
-                "fontSize": 17,
-                "width": 40.0,
-                "fontWeight": "bold",
-                "fontStyle": "normal",
-                "textAlign": "center",
-                "bubbleType": "narration"
-              },
-              {
-                "id": "02a1704c-c900-43ed-b19a-c31e12dd483c",
-                "text": "Dù đi đâu, các con cũng không được quên cội nguồn 祖先 (そせん - Tổ Tiên - tổ tiên, tổ tông) của dòng họ mình.",
-                "x": 74.91722359227964,
-                "y": 47.257330153671674,
-                "fontSize": 17,
-                "width": 40.0,
-                "fontWeight": "bold",
-                "fontStyle": "normal",
-                "textAlign": "center",
-                "bubbleType": "normal"
-              },
-              {
-                "id": "0171315a-baea-4ece-a8a1-bc0134cf0e76",
-                "text": "Mới sáng sớm ngày giỗ họ mà áp lực đã đè nặng lên vai rồi...",
-                "x": 43.52649384662527,
-                "y": 67.98741887151448,
-                "fontSize": 17,
-                "width": 40.0,
-                "fontWeight": "bold",
-                "fontStyle": "italic",
-                "textAlign": "center",
-                "bubbleType": "thought"
-              }
-            ],
-            "dialogue": "PANEL 1:\nNarrator (Dẫn) : \"Trong cả một 人生 (じんせい - Nhân Sinh - Đời người, cuộc đời), gia đình chính là nơi đầu tiên dạy chúng ta cách đối nhân xử thế.\"\n\nPANEL 2:\nNam : \"Dù đi đâu, các con cũng không được quên cội nguồn 祖先 (そせん - Tổ Tiên - tổ tiên, tổ tông) của dòng họ mình.\"\n\nPANEL 3:\nMinh (Nghĩ) : \"Mới sáng sớm ngày giỗ họ mà áp lực đã đè nặng lên vai rồi...\"\n\n--------------------------------------------------"
-          },
-          {
-            "pageNumber": 3,
-            "imageUrl": "assets/chapters/add-manga/chuong-01/page_03.jpg",
-            "bubbles": [
-              {
-                "id": "92b559e5-5339-4171-8b87-b0ef2238a23b",
-                "text": "Mau ra chào các bác kìa Minh! Hôm nay 親戚 (しんせき - Thân Thích - họ hàng) xa gần đều tề tựu đông đủ đấy.",
-                "x": 72.731793040367,
-                "y": 15.620160820079185,
-                "fontSize": 17,
-                "width": 40.0,
-                "fontWeight": "bold",
-                "fontStyle": "normal",
-                "textAlign": "center",
-                "bubbleType": "normal"
-              },
-              {
-                "id": "2005e317-b4c2-479a-b4a3-2c05808bfb6c",
-                "text": "Chào anh chị, hai 夫婦 (ふうふ - Phu Phụ - vợ chồng) anh chị đi đường xa có mệt không ạ?",
-                "x": 23.26159236525347,
-                "y": 42.965294301944006,
-                "fontSize": 17,
-                "width": 40.0,
-                "fontWeight": "bold",
-                "fontStyle": "normal",
-                "textAlign": "center",
-                "bubbleType": "normal"
-              },
-              {
-                "id": "fee54e01-4f39-4191-953e-92f2bf1f4cc8",
-                "text": "Dạ, con chào các bác mới tới ạ!",
-                "x": 70.94371349789301,
-                "y": 49.7352059892018,
-                "fontSize": 17,
-                "width": 40.0,
-                "fontWeight": "bold",
-                "fontStyle": "normal",
-                "textAlign": "center",
-                "bubbleType": "normal"
-              }
-            ],
-            "dialogue": "PANEL 1:\nNam : \"Mau ra chào các bác kìa Minh! Hôm nay 親戚 (しんせき - Thân Thích - họ hàng) xa gần đều tề tựu đông đủ đấy.\"\n\nPANEL 2:\nHân : \"Chào anh chị, hai 夫婦 (ふうふ - Phu Phụ - vợ chồng) anh chị đi đường xa có mệt không ạ?\"\n\nPANEL 3:\nMinh : \"Dạ, con chào các bác mới tới ạ!\"\n\n--------------------------------------------------"
-          },
-          {
-            "pageNumber": 4,
-            "imageUrl": "assets/chapters/add-manga/chuong-01/page_04.jpg",
-            "bubbles": [
-              {
-                "id": "e7c174ef-89d3-46ae-9795-8cebc2f4443d",
-                "text": "Minh là 長男 (ちょうなん - Trưởng Nam - trưởng nam) trong nhà, sau này phải gánh vác việc lớn đấy nhé cháu!",
-                "x": 31.009937049307396,
-                "y": 14.823700621578267,
-                "fontSize": 17,
-                "width": 40.0,
-                "fontWeight": "bold",
-                "fontStyle": "normal",
-                "textAlign": "center",
-                "bubbleType": "normal"
-              },
-              {
-                "id": "bdccd89a-9933-4699-8b82-ffb3bb86d0e5",
-                "text": "Anh hai lại sắp bị các bác tra hỏi chuyện cưới xin và công việc rồi kìa.",
-                "x": 58.029805691136474,
-                "y": 38.89449756303629,
-                "fontSize": 17,
-                "width": 40.0,
-                "fontWeight": "bold",
-                "fontStyle": "normal",
-                "textAlign": "center",
-                "bubbleType": "whisper"
-              },
-              {
-                "id": "9e618b71-edc0-42ed-baad-63a8d5b3a40c",
-                "text": "Làm trưởng nam đúng là không bao giờ thoát khỏi sự soi xét của mọi người.",
-                "x": 74.91722359227964,
-                "y": 60.66440965539469,
-                "fontSize": 17,
-                "width": 40.0,
-                "fontWeight": "bold",
-                "fontStyle": "italic",
-                "textAlign": "center",
-                "bubbleType": "thought"
-              }
-            ],
-            "dialogue": "PANEL 1:\nBác Ba : \"Minh là 長男 (ちょうなん - Trưởng Nam - trưởng nam) trong nhà, sau này phải gánh vác việc lớn đấy nhé cháu!\"\n\nPANEL 2:\nLan (Thầm) : \"Anh hai lại sắp bị các bác tra hỏi chuyện cưới xin và công việc rồi kìa.\"\n\nPANEL 3:\nMinh (Nghĩ) : \"Làm trưởng nam đúng là không bao giờ thoát khỏi sự soi xét của mọi người.\"\n\n--------------------------------------------------"
-          },
-          {
-            "pageNumber": 5,
-            "imageUrl": "assets/chapters/add-manga/chuong-01/page_05.jpg",
-            "bubbles": [
-              {
-                "id": "40a33951-2c3e-4e99-9f49-dd8da4be3bb5",
-                "text": "Bố của Minh vừa là trụ cột gia đình, vừa là 主人 (しゅじん - Chủ Nhân - chồng, chủ tiệm) của một tiệm bánh truyền thống lâu đời.",
-                "x": 25.24834741244678,
-                "y": 21.90334666168339,
-                "fontSize": 17,
-                "width": 40.0,
-                "fontWeight": "bold",
-                "fontStyle": "normal",
-                "textAlign": "center",
-                "bubbleType": "narration"
-              },
-              {
-                "id": "22d09fcf-c87e-422a-8c8c-3ec387aaa075",
-                "text": "Bố ơi, để con phụ một tay nhào bột cho kịp mẻ bánh trưa nhé.",
-                "x": 29.61920851627207,
-                "y": 59.07148925839285,
-                "fontSize": 17,
-                "width": 40.0,
-                "fontWeight": "bold",
-                "fontStyle": "normal",
-                "textAlign": "center",
-                "bubbleType": "normal"
-              },
-              {
-                "id": "2642c41f-e2ed-457c-ae9c-3a8c414f877b",
-                "text": "Làm bánh cũng như làm 人 (ひと - Nhân - người), phải có tâm và sự kiên trì thì bánh mới thơm ngon được.",
-                "x": 37.566228705045326,
-                "y": 80.37679906191663,
-                "fontSize": 17,
-                "width": 40.0,
-                "fontWeight": "bold",
-                "fontStyle": "normal",
-                "textAlign": "center",
-                "bubbleType": "normal"
-              }
-            ],
-            "dialogue": "PANEL 1:\nNarrator (Dẫn) : \"Bố của Minh vừa là trụ cột gia đình, vừa là 主人 (しゅじん - Chủ Nhân - chồng, chủ tiệm) của một tiệm bánh truyền thống lâu đời.\"\n\nPANEL 2:\nMinh : \"Bố ơi, để con phụ một tay nhào bột cho kịp mẻ bánh trưa nhé.\"\n\nPANEL 3:\nNam : \"Làm bánh cũng như làm 人 (ひと - Nhân - người), phải có tâm và sự kiên trì thì bánh mới thơm ngon được.\"\n\n--------------------------------------------------"
-          },
-          {
-            "pageNumber": 6,
-            "imageUrl": "assets/chapters/add-manga/chuong-01/page_06.jpg",
-            "bubbles": [
-              {
-                "id": "393ab8d9-2a1b-4c3f-8705-f73a25bf3548",
-                "text": "Tuy là 双子 (ふたご - Song Tử - sinh đôi), nhưng tính cách của Minh và Lan lại như hai thái cực hoàn toàn trái ngược.",
-                "x": 76.30795212531496,
-                "y": 32.721931024654175,
-                "fontSize": 17,
-                "width": 40.0,
-                "fontWeight": "bold",
-                "fontStyle": "normal",
-                "textAlign": "center",
-                "bubbleType": "narration"
-              },
-              {
-                "id": "3c537217-4850-4575-836b-c8ad9feb1701",
-                "text": "Anh còn nhớ hồi bé đi công viên nước, anh mải ngắm đồ chơi rồi thành 迷子 (まいご - Mê Tử - lạc đường, lạc lối) khóc nhè không?",
-                "x": 23.658943374692132,
-                "y": 60.59803797218628,
-                "fontSize": 17,
-                "width": 40.0,
-                "fontWeight": "bold",
-                "fontStyle": "normal",
-                "textAlign": "center",
-                "bubbleType": "normal"
-              },
-              {
-                "id": "0b4f4f9a-4ab4-425c-bef6-d994a9f82c81",
-                "text": "Này! Rõ ràng là em chạy lung tung làm anh phải đi tìm mệt muốn xỉu!",
-                "x": 83.65894579993022,
-                "y": 64.58033896469087,
-                "fontSize": 17,
-                "width": 40.0,
-                "fontWeight": "900",
-                "fontStyle": "normal",
-                "textAlign": "center",
-                "bubbleType": "scream"
-              }
-            ],
-            "dialogue": "PANEL 1:\nNarrator (Dẫn) : \"Tuy là 双子 (ふたご - Song Tử - sinh đôi), nhưng tính cách của Minh và Lan lại như hai thái cực hoàn toàn trái ngược.\"\n\nPANEL 2:\nLan : \"Anh còn nhớ hồi bé đi công viên nước, anh mải ngắm đồ chơi rồi thành 迷子 (まいご - Mê Tử - lạc đường, lạc lối) khóc nhè không?\"\n\nPANEL 3:\nMinh (Hét) : \"Này! Rõ ràng là em chạy lung tung làm anh phải đi tìm mệt muốn xỉu!\"\n\n--------------------------------------------------"
-          },
-          {
-            "pageNumber": 7,
-            "imageUrl": "assets/chapters/add-manga/chuong-01/page_07.jpg",
-            "bubbles": [
-              {
-                "id": "dcd67ea3-7cf4-47ae-8f8c-771fea7fcde3",
-                "text": "Sống ở thành phố lớn, ai nấy đều vội vã như những 他人 (たにん - Tha Nhân - người dưng, người lạ) lướt qua đời nhau anh nhỉ.",
-                "x": 73.52649505924433,
-                "y": 29.005116764983235,
-                "fontSize": 17,
-                "width": 40.0,
-                "fontWeight": "bold",
-                "fontStyle": "normal",
-                "textAlign": "center",
-                "bubbleType": "normal"
-              },
-              {
-                "id": "1845798d-6cbf-4396-9827-2d1039ca25f5",
-                "text": "Đúng vậy, ngoài xã hội phức tạp lắm, không cẩn thận là biến bạn thành 敵 (てき - Địch - kẻ thù) ngay.",
-                "x": 27.036426954920767,
-                "y": 32.1909575589869,
-                "fontSize": 17,
-                "width": 40.0,
-                "fontWeight": "bold",
-                "fontStyle": "normal",
-                "textAlign": "center",
-                "bubbleType": "normal"
-              },
-              {
-                "id": "2df35b20-dc00-4d8b-a2b5-fa48d0075b8f",
-                "text": "Nhưng yên tâm đi! Dù có chuyện gì xảy ra thì em vẫn mãi là 味方 (みかた - Vị Phương - bạn bè, đồng minh) số một của anh hai!",
-                "x": 29.22185750683341,
-                "y": 73.73963124745141,
-                "fontSize": 17,
-                "width": 40.0,
-                "fontWeight": "bold",
-                "fontStyle": "normal",
-                "textAlign": "center",
-                "bubbleType": "normal"
-              }
-            ],
-            "dialogue": "PANEL 1:\nLan : \"Sống ở thành phố lớn, ai nấy đều vội vã như những 他人 (たにん - Tha Nhân - người dưng, người lạ) lướt qua đời nhau anh nhỉ.\"\n\nPANEL 2:\nMinh : \"Đúng vậy, ngoài xã hội phức tạp lắm, không cẩn thận là biến bạn thành 敵 (てき - Địch - kẻ thù) ngay.\"\n\nPANEL 3:\nLan : \"Nhưng yên tâm đi! Dù có chuyện gì xảy ra thì em vẫn mãi là 味方 (みかた - Vị Phương - bạn bè, đồng minh) số một của anh hai!\"\n\n--------------------------------------------------"
-          },
-          {
-            "pageNumber": 8,
-            "imageUrl": "assets/chapters/add-manga/chuong-01/page_08.jpg",
-            "bubbles": [
-              {
-                "id": "71de66c9-e159-4cee-a426-502b67221e98",
-                "text": "Đoạn này 筆者 (ひっしゃ - Bút Giả - tác giả, người viết) phân tích về bản tính tốt đẹp của con người rất sâu sắc.",
-                "x": 77.10265414419229,
-                "y": 24.182107953964042,
-                "fontSize": 17,
-                "width": 40.0,
-                "fontWeight": "bold",
-                "fontStyle": "normal",
-                "textAlign": "center",
-                "bubbleType": "normal"
-              },
-              {
-                "id": "95743e75-59b4-4236-85d6-9822095a0d78",
-                "text": "Bản chất của 人間 (にんげん - Nhân Gian - con người) luôn khao khát được yêu thương và thấu hiểu lẫn nhau.",
-                "x": 31.208612554026725,
-                "y": 41.43874558815058,
-                "fontSize": 17,
-                "width": 40.0,
-                "fontWeight": "bold",
-                "fontStyle": "normal",
-                "textAlign": "center",
-                "bubbleType": "narration"
-              },
-              {
-                "id": "5abc1c12-0753-4162-a02e-47f69c59f774",
-                "text": "Mỗi cuộc gặp gỡ đều mang lại bài học quý giá cho hành trình trưởng thành.",
-                "x": 36.17550017201001,
-                "y": 69.97856936776678,
-                "fontSize": 17,
-                "width": 40.0,
-                "fontWeight": "bold",
-                "fontStyle": "normal",
-                "textAlign": "center",
-                "bubbleType": "normal"
-              }
-            ],
-            "dialogue": "PANEL 1:\nMinh : \"Đoạn này 筆者 (ひっしゃ - Bút Giả - tác giả, người viết) phân tích về bản tính tốt đẹp của con người rất sâu sắc.\"\n\nPANEL 2:\nNarrator (Dẫn) : \"Bản chất của 人間 (にんげん - Nhân Gian - con người) luôn khao khát được yêu thương và thấu hiểu lẫn nhau.\"\n\nPANEL 3:\nNarrator : \"Mỗi cuộc gặp gỡ đều mang lại bài học quý giá cho hành trình trưởng thành.\"\n\n--------------------------------------------------"
-          },
-          {
-            "pageNumber": 9,
-            "imageUrl": "assets/chapters/add-manga/chuong-01/page_09.jpg",
-            "bubbles": [
-              {
-                "id": "2c8eb849-9fe1-4f45-ad13-f7154f6eb9a2",
-                "text": "Dạo này xương khớp nhức mỏi quá, con người ta ai rồi cũng đến lúc 寿命 (じゅみょう - Thọ Mệnh - tuổi thọ) suy giảm.",
-                "x": 76.70530313475362,
-                "y": 12.478568152464959,
-                "fontSize": 17,
-                "width": 40.0,
-                "fontWeight": "bold",
-                "fontStyle": "normal",
-                "textAlign": "center",
-                "bubbleType": "normal"
-              },
-              {
-                "id": "e26a0203-f96f-41d7-938f-d34dec822bc6",
-                "text": "Ông uống ngụm trà nóng này đi, đừng làm việc quá sức nữa.",
-                "x": 60.612587252487785,
-                "y": 32.25732974857107,
-                "fontSize": 17,
-                "width": 40.0,
-                "fontWeight": "bold",
-                "fontStyle": "normal",
-                "textAlign": "center",
-                "bubbleType": "normal"
-              },
-              {
-                "id": "4e794ff0-83c0-44fa-bd95-419f899d87de",
-                "text": "Mình phải nỗ lực hơn nữa để lo cho bố mẹ trong 将来 (しょうらい - Tương Lai - tương lai).",
-                "x": 34.38742062953603,
-                "y": 58.42989648950348,
-                "fontSize": 17,
-                "width": 40.0,
-                "fontWeight": "bold",
-                "fontStyle": "italic",
-                "textAlign": "center",
-                "bubbleType": "thought"
-              }
-            ],
-            "dialogue": "PANEL 1:\nNam : \"Dạo này xương khớp nhức mỏi quá, con người ta ai rồi cũng đến lúc 寿命 (じゅみょう - Thọ Mệnh - tuổi thọ) suy giảm.\"\n\nPANEL 2:\nHân : \"Ông uống ngụm trà nóng này đi, đừng làm việc quá sức nữa.\"\n\nPANEL 3:\nMinh (Nghĩ) : \"Mình phải nỗ lực hơn nữa để lo cho bố mẹ trong 将来 (しょうらい - Tương Lai - tương lai).\"\n\n--------------------------------------------------"
-          },
-          {
-            "pageNumber": 10,
-            "imageUrl": "assets/chapters/add-manga/chuong-01/page_10.jpg",
-            "bubbles": [
-              {
-                "id": "4e8520b2-7aa5-4ba0-be92-ed22ae66c053",
-                "text": "Em vẽ đẹp thật đấy Lan, công nhận em có 才能 (さいのう - Tài Năng - tài năng) nghệ thuật bẩm sinh.",
-                "x": 74.51987258284099,
-                "y": 30.155559442720918,
-                "fontSize": 17,
-                "width": 40.0,
-                "fontWeight": "bold",
-                "fontStyle": "normal",
-                "textAlign": "center",
-                "bubbleType": "normal"
-              },
-              {
-                "id": "d1522072-10f8-482f-97e1-b96f4d5570a5",
-                "text": "Tài năng chỉ là một phần thôi, quan trọng là phải rèn luyện 能力 (のうりょく - Năng Lực - năng lực) vẽ mỗi ngày đấy!",
-                "x": 26.837751450201434,
-                "y": 56.17325926041755,
-                "fontSize": 17,
-                "width": 40.0,
-                "fontWeight": "bold",
-                "fontStyle": "normal",
-                "textAlign": "center",
-                "bubbleType": "normal"
-              },
-              {
-                "id": "1c0fdd96-bb63-4772-a557-d0a9d217301e",
-                "text": "Sự kiên trì đúng là 長所 (ちょうしょ - Trường Sở - sở trường, điểm mạnh) lớn nhất của em.",
-                "x": 72.731793040367,
-                "y": 64.18210835906464,
-                "fontSize": 17,
-                "width": 40.0,
-                "fontWeight": "bold",
-                "fontStyle": "normal",
-                "textAlign": "center",
-                "bubbleType": "normal"
-              }
-            ],
-            "dialogue": "PANEL 1:\nMinh : \"Em vẽ đẹp thật đấy Lan, công nhận em có 才能 (さいのう - Tài Năng - tài năng) nghệ thuật bẩm sinh.\"\n\nPANEL 2:\nLan : \"Tài năng chỉ là một phần thôi, quan trọng là phải rèn luyện 能力 (のうりょく - Năng Lực - năng lực) vẽ mỗi ngày đấy!\"\n\nPANEL 3:\nMinh : \"Sự kiên trì đúng là 長所 (ちょうしょ - Trường Sở - sở trường, điểm mạnh) lớn nhất của em.\"\n\n--------------------------------------------------"
-          },
-          {
-            "pageNumber": 11,
-            "imageUrl": "assets/chapters/add-manga/chuong-01/page_11.jpg",
-            "bubbles": [
-              {
-                "id": "c91bae59-ba8e-4e2c-87c6-0913f72ade0b",
-                "text": "Mỗi đứa trẻ lớn lên trong cùng một mái nhà vẫn sở hữu một 個性 (こせい - Cá Tính - cá tính, tính cách) rất riêng biệt.",
-                "x": 74.71854808756031,
-                "y": 13.562638640618482,
-                "fontSize": 17,
-                "width": 40.0,
-                "fontWeight": "bold",
-                "fontStyle": "normal",
-                "textAlign": "center",
-                "bubbleType": "narration"
-              },
-              {
-                "id": "069b104e-4bc6-4a15-85d8-222efe0d82bb",
-                "text": "Hai đứa sinh cùng một giờ mà sao chẳng giống nhau chút nào, không biết 遺伝 (いでん - Di Truyền - di truyền) gen từ ai nữa!",
-                "x": 76.10927662059564,
-                "y": 62.25732954602077,
-                "fontSize": 17,
-                "width": 40.0,
-                "fontWeight": "bold",
-                "fontStyle": "normal",
-                "textAlign": "center",
-                "bubbleType": "normal"
-              },
-              {
-                "id": "7c57bc85-94b5-44c8-9cf1-eee7528e160d",
-                "text": "Chắc con nhận hết gen lý trí của bố rồi mẹ ơi.",
-                "x": 49.08940797876655,
-                "y": 32.12458536940274,
-                "fontSize": 17,
-                "width": 40.0,
-                "fontWeight": "bold",
-                "fontStyle": "italic",
-                "textAlign": "center",
-                "bubbleType": "thought"
-              }
-            ],
-            "dialogue": "PANEL 1:\nNarrator (Dẫn) : \"Mỗi đứa trẻ lớn lên trong cùng một mái nhà vẫn sở hữu một 個性 (こせい - Cá Tính - cá tính, tính cách) rất riêng biệt.\"\n\nPANEL 2:\nHân : \"Hai đứa sinh cùng một giờ mà sao chẳng giống nhau chút nào, không biết 遺伝 (いでん - Di Truyền - di truyền) gen từ ai nữa!\"\n\nPANEL 3:\nMinh (Nghĩ) : \"Chắc con nhận hết gen lý trí của bố rồi mẹ ơi.\"\n\n--------------------------------------------------"
-          },
-          {
-            "pageNumber": 12,
-            "imageUrl": "assets/chapters/add-manga/chuong-01/page_12.jpg",
-            "bubbles": [
-              {
-                "id": "313c5587-868e-495b-b9db-908635f5f3cd",
-                "text": "Nhìn kìa, từng 動作 (どうさ - Động Tác - động tác, hành vi, thao tác) của em y hệt như bố lúc đang dạy nghề vậy!",
-                "x": 24.254969888850127,
-                "y": 27.744055290399206,
-                "fontSize": 17,
-                "width": 40.0,
-                "fontWeight": "bold",
-                "fontStyle": "normal",
-                "textAlign": "center",
-                "bubbleType": "normal"
-              },
-              {
-                "id": "5c8dfc35-dacb-46a4-b086-d5d87a418771",
-                "text": "Em chỉ 真似 (まね - Chân Tự - bắt chước, copy) lại chút đỉnh thôi mà làm gì anh cười dữ vậy!",
-                "x": 77.8973561630696,
-                "y": 40.620161832830696,
-                "fontSize": 17,
-                "width": 40.0,
-                "fontWeight": "bold",
-                "fontStyle": "normal",
-                "textAlign": "center",
-                "bubbleType": "normal"
-              },
-              {
-                "id": "655ba5b2-1591-4abe-8145-864422c14a72",
-                "text": "Giống đến từng cái nhíu mày luôn đấy!",
-                "x": 53.26159357787251,
-                "y": 69.24848085247427,
-                "fontSize": 17,
-                "width": 40.0,
-                "fontWeight": "bold",
-                "fontStyle": "normal",
-                "textAlign": "center",
-                "bubbleType": "normal"
-              }
-            ],
-            "dialogue": "PANEL 1:\nMinh : \"Nhìn kìa, từng 動作 (どうさ - Động Tác - động tác, hành vi, thao tác) của em y hệt như bố lúc đang dạy nghề vậy!\"\n\nPANEL 2:\nLan : \"Em chỉ 真似 (まね - Chân Tự - bắt chước, copy) lại chút đỉnh thôi mà làm gì anh cười dữ vậy!\"\n\nPANEL 3:\nMinh : \"Giống đến từng cái nhíu mày luôn đấy!\"\n\n--------------------------------------------------"
-          },
-          {
-            "pageNumber": 13,
-            "imageUrl": "assets/chapters/add-manga/chuong-01/page_13.jpg",
-            "bubbles": [
-              {
-                "id": "ff87416b-b0e4-4d1b-9fb4-98c5605c377c",
-                "text": "Chất lượng 睡眠 (すいみん - Thụy Miên - ngủ, giấc ngủ) ảnh hưởng trực tiếp đến năng suất làm việc của cả một ngày.",
-                "x": 22.466890346376143,
-                "y": 15.686532503287594,
-                "fontSize": 17,
-                "width": 40.0,
-                "fontWeight": "bold",
-                "fontStyle": "normal",
-                "textAlign": "center",
-                "bubbleType": "narration"
-              },
-              {
-                "id": "e80579b8-6b25-4d00-9aa3-2396c02c8cc3",
-                "text": "Đêm qua chỉ chợp mắt được 4 tiếng... đầu óc nặng trịch...",
-                "x": 73.92384606868299,
-                "y": 30.686532908388198,
-                "fontSize": 17,
-                "width": 40.0,
-                "fontWeight": "bold",
-                "fontStyle": "italic",
-                "textAlign": "center",
-                "bubbleType": "thought"
-              },
-              {
-                "id": "46254b91-5eb1-4904-b16b-5b819299d7dd",
-                "text": "Minh ơi, mau vào ăn sáng cho lại sức nào con!",
-                "x": 73.92384606868299,
-                "y": 63.3414010469258,
-                "fontSize": 17,
-                "width": 40.0,
-                "fontWeight": "bold",
-                "fontStyle": "normal",
-                "textAlign": "center",
-                "bubbleType": "normal"
-              }
-            ],
-            "dialogue": "PANEL 1:\nNarrator (Dẫn) : \"Chất lượng 睡眠 (すいみん - Thụy Miên - ngủ, giấc ngủ) ảnh hưởng trực tiếp đến năng suất làm việc của cả một ngày.\"\n\nPANEL 2:\nMinh (Nghĩ) : \"Đêm qua chỉ chợp mắt được 4 tiếng... đầu óc nặng trịch...\"\n\nPANEL 3:\nHân : \"Minh ơi, mau vào ăn sáng cho lại sức nào con!\"\n\n--------------------------------------------------"
-          },
-          {
-            "pageNumber": 14,
-            "imageUrl": "assets/chapters/add-manga/chuong-01/page_14.jpg",
-            "bubbles": [
-              {
-                "id": "7a80abd0-4bd2-47f3-9e23-570081feb274",
-                "text": "Mùi phở bò thơm nức mũi làm 食欲 (しょくよく - Thực Dục - thèm ăn, cảm giác ngon miệng) của em tăng vọt luôn!",
-                "x": 24.850996403008118,
-                "y": 31.217506374055475,
-                "fontSize": 17,
-                "width": 40.0,
-                "fontWeight": "bold",
-                "fontStyle": "normal",
-                "textAlign": "center",
-                "bubbleType": "normal"
-              },
-              {
-                "id": "1fc707c9-bd9e-4dc1-9574-de8c0925bff8",
-                "text": "Ăn nhiều vào con gái! Còn Minh sao uể oải thế, hôm nay cả nhà không 外食 (がいしょく - Ngoại Thực - ăn ngoài) mà mẹ nấu ở nhà đấy.",
-                "x": 80.48013772442091,
-                "y": 18.075913098790345,
-                "fontSize": 17,
-                "width": 40.0,
-                "fontWeight": "bold",
-                "fontStyle": "normal",
-                "textAlign": "center",
-                "bubbleType": "normal"
-              },
-              {
-                "id": "39dff125-d487-457e-a788-e4c25780c69f",
-                "text": "Dạ con đang ăn đây ạ, tại tối qua thức khuya quá thôi mẹ.",
-                "x": 77.69868065835028,
-                "y": 47.810427176157916,
-                "fontSize": 17,
-                "width": 40.0,
-                "fontWeight": "bold",
-                "fontStyle": "normal",
-                "textAlign": "center",
-                "bubbleType": "normal"
-              }
-            ],
-            "dialogue": "PANEL 1:\nLan : \"Mùi phở bò thơm nức mũi làm 食欲 (しょくよく - Thực Dục - thèm ăn, cảm giác ngon miệng) của em tăng vọt luôn!\"\n\nPANEL 2:\nHân : \"Ăn nhiều vào con gái! Còn Minh sao uể oải thế, hôm nay cả nhà không 外食 (がいしょく - Ngoại Thực - ăn ngoài) mà mẹ nấu ở nhà đấy.\"\n\nPANEL 3:\nMinh : \"Dạ con đang ăn đây ạ, tại tối qua thức khuya quá thôi mẹ.\"\n\n--------------------------------------------------"
-          },
-          {
-            "pageNumber": 15,
-            "imageUrl": "assets/chapters/add-manga/chuong-01/page_15.jpg",
-            "bubbles": [
-              {
-                "id": "d7d2a54c-cd93-41aa-bfdb-e96c8b83309c",
-                "text": "Chia sẻ công việc 家事 (かじ - Gia Sự - việc nhà, nội trợ) là bí quyết giữ cho ngọn lửa gia đình luôn ấm áp.",
-                "x": 38.55960622864199,
-                "y": 14.668833445154602,
-                "fontSize": 17,
-                "width": 40.0,
-                "fontWeight": "bold",
-                "fontStyle": "normal",
-                "textAlign": "center",
-                "bubbleType": "narration"
-              },
-              {
-                "id": "0ce23ee7-4f65-44ab-a0d7-88f1a58e351d",
-                "text": "Mẹ để con phơi đồ cho, mẹ ngồi nghỉ ngơi một lát đi ạ.",
-                "x": 60.612587252487785,
-                "y": 31.659984346507503,
-                "fontSize": 17,
-                "width": 40.0,
-                "fontWeight": "bold",
-                "fontStyle": "normal",
-                "textAlign": "center",
-                "bubbleType": "normal"
-              },
-              {
-                "id": "dc2eb714-eded-44d4-b8e0-808ecbbbfcd9",
-                "text": "Hai đứa biết đỡ đần thế này là mẹ vui lắm rồi.",
-                "x": 73.52649505924433,
-                "y": 54.55821492681493,
-                "fontSize": 17,
-                "width": 40.0,
-                "fontWeight": "bold",
-                "fontStyle": "normal",
-                "textAlign": "center",
-                "bubbleType": "normal"
-              }
-            ],
-            "dialogue": "PANEL 1:\nNarrator (Dẫn) : \"Chia sẻ công việc 家事 (かじ - Gia Sự - việc nhà, nội trợ) là bí quyết giữ cho ngọn lửa gia đình luôn ấm áp.\"\n\nPANEL 2:\nMinh : \"Mẹ để con phơi đồ cho, mẹ ngồi nghỉ ngơi một lát đi ạ.\"\n\nPANEL 3:\nHân : \"Hai đứa biết đỡ đần thế này là mẹ vui lắm rồi.\"\n\n--------------------------------------------------"
-          },
-          {
-            "pageNumber": 16,
-            "imageUrl": "assets/chapters/add-manga/chuong-01/page_16.jpg",
-            "bubbles": [
-              {
-                "id": "1bcad8f4-5c2e-4ed7-98e6-42a7f81df9d2",
-                "text": "Khoảnh khắc 出産 (しゅっさん - Xuất Sản - sinh đẻ, sinh con) hai đứa con cùng lúc là ký ức thiêng liêng nhất của người mẹ.",
-                "x": 78.69205818194695,
-                "y": 19.62458568588758,
-                "fontSize": 17,
-                "width": 40.0,
-                "fontWeight": "bold",
-                "fontStyle": "normal",
-                "textAlign": "center",
-                "bubbleType": "narration"
-              },
-              {
-                "id": "751adc7b-92ce-4365-9b2b-1ee2bbba9e63",
-                "text": "Nhìn em lúc mới sinh kìa, bé xíu xiu như củ khoai tây vậy!",
-                "x": 33.79139411537804,
-                "y": 32.76617896115271,
-                "fontSize": 17,
-                "width": 40.0,
-                "fontWeight": "bold",
-                "fontStyle": "normal",
-                "textAlign": "center",
-                "bubbleType": "normal"
-              },
-              {
-                "id": "81e371d6-b34e-42a4-9773-8b09c620626b",
-                "text": "Hồi đó sinh đôi vất vả gấp đôi, nhưng nhìn hai con lớn khôn thế này là bao cực nhọc tan biến hết.",
-                "x": 77.30132964891162,
-                "y": 64.115737182232,
-                "fontSize": 17,
-                "width": 40.0,
-                "fontWeight": "bold",
-                "fontStyle": "normal",
-                "textAlign": "center",
-                "bubbleType": "normal"
-              }
-            ],
-            "dialogue": "PANEL 1:\nNarrator (Dẫn) : \"Khoảnh khắc 出産 (しゅっさん - Xuất Sản - sinh đẻ, sinh con) hai đứa con cùng lúc là ký ức thiêng liêng nhất của người mẹ.\"\n\nPANEL 2:\nLan : \"Nhìn em lúc mới sinh kìa, bé xíu xiu như củ khoai tây vậy!\"\n\nPANEL 3:\nHân : \"Hồi đó sinh đôi vất vả gấp đôi, nhưng nhìn hai con lớn khôn thế này là bao cực nhọc tan biến hết.\"\n\n--------------------------------------------------"
-          },
-          {
-            "pageNumber": 17,
-            "imageUrl": "assets/chapters/add-manga/chuong-01/page_17.jpg",
-            "bubbles": [
-              {
-                "id": "2706ffc7-deaa-4768-9e4c-0bd4985ecfb9",
-                "text": "Khu phố mình đang kêu gọi thanh niên tham gia công tác 介護 (かいご - Giới Hộ - điều dưỡng, chăm sóc người già/bệnh) cho các cụ neo đơn.",
-                "x": 24.65232089828879,
-                "y": 18.562638944443936,
-                "fontSize": 17,
-                "width": 40.0,
-                "fontWeight": "bold",
-                "fontStyle": "normal",
-                "textAlign": "center",
-                "bubbleType": "normal"
-              },
-              {
-                "id": "86287d8a-56db-4bb3-83b5-5e964aaa282b",
-                "text": "Cuối tuần này con rảnh, con sẽ đăng ký tham gia phụ giúp các bác một tay ạ.",
-                "x": 25.64569842188544,
-                "y": 62.23520649557756,
-                "fontSize": 17,
-                "width": 40.0,
-                "fontWeight": "bold",
-                "fontStyle": "normal",
-                "textAlign": "center",
-                "bubbleType": "normal"
-              },
-              {
-                "id": "0734e8db-b44b-465c-8fdd-79eaef6650a7",
-                "text": "Tốt lắm con trai! Giúp đỡ người già là đạo lý làm người cơ bản nhất.",
-                "x": 50.6788120165212,
-                "y": 81.88122421889109,
-                "fontSize": 17,
-                "width": 40.0,
-                "fontWeight": "bold",
-                "fontStyle": "normal",
-                "textAlign": "center",
-                "bubbleType": "normal"
-              }
-            ],
-            "dialogue": "PANEL 1:\nNam : \"Khu phố mình đang kêu gọi thanh niên tham gia công tác 介護 (かいご - Giới Hộ - điều dưỡng, chăm sóc người già/bệnh) cho các cụ neo đơn.\"\n\nPANEL 2:\nMinh : \"Cuối tuần này con rảnh, con sẽ đăng ký tham gia phụ giúp các bác một tay ạ.\"\n\nPANEL 3:\nNam : \"Tốt lắm con trai! Giúp đỡ người già là đạo lý làm người cơ bản nhất.\"\n\n--------------------------------------------------"
-          },
-          {
-            "pageNumber": 18,
-            "imageUrl": "assets/chapters/add-manga/chuong-01/page_18.jpg",
-            "bubbles": [
-              {
-                "id": "9e7e0d66-d0ad-4ce0-959f-fe4ad0a6bf96",
-                "text": "Ở các đô thị hiện đại, mô hình gia đình 共働き (ともばたらき - Cộng Động - 2 vợ chồng cùng đi làm) ngày càng trở nên phổ biến.",
-                "x": 73.52649505924433,
-                "y": 15.000692114384531,
-                "fontSize": 17,
-                "width": 40.0,
-                "fontWeight": "bold",
-                "fontStyle": "normal",
-                "textAlign": "center",
-                "bubbleType": "narration"
-              },
-              {
-                "id": "a664fb36-1846-4fcf-aa4d-e7944547bf08",
-                "text": "Bố mẹ đi làm cẩn thận nhé, con chuẩn bị sẵn cơm trưa cho bố mẹ rồi ạ.",
-                "x": 21.672188327498816,
-                "y": 29.204232320984218,
-                "fontSize": 17,
-                "width": 40.0,
-                "fontWeight": "bold",
-                "fontStyle": "normal",
-                "textAlign": "center",
-                "bubbleType": "normal"
-              },
-              {
-                "id": "15c9ad11-61cc-446d-98d9-34471fce4273",
-                "text": "Cảm ơn hai con, chiều bố mẹ về sớm cùng ăn cơm nhé!",
-                "x": 36.57285118144868,
-                "y": 64.77945452069184,
-                "fontSize": 17,
-                "width": 40.0,
-                "fontWeight": "bold",
-                "fontStyle": "normal",
-                "textAlign": "center",
-                "bubbleType": "normal"
-              }
-            ],
-            "dialogue": "PANEL 1:\nNarrator (Dẫn) : \"Ở các đô thị hiện đại, mô hình gia đình 共働き (ともばたらき - Cộng Động - 2 vợ chồng cùng đi làm) ngày càng trở nên phổ biến.\"\n\nPANEL 2:\nMinh : \"Bố mẹ đi làm cẩn thận nhé, con chuẩn bị sẵn cơm trưa cho bố mẹ rồi ạ.\"\n\nPANEL 3:\nHân : \"Cảm ơn hai con, chiều bố mẹ về sớm cùng ăn cơm nhé!\"\n\n--------------------------------------------------"
-          },
-          {
-            "pageNumber": 19,
-            "imageUrl": "assets/chapters/add-manga/chuong-01/page_19.jpg",
-            "bubbles": [
-              {
-                "id": "f70c7088-509c-4d4e-91e3-c6cc819dc48e",
-                "text": "Giờ cao điểm 出勤 (しゅっきん - Xuất Cần - đi làm, đến nơi làm việc) luôn mang theo nhịp sống hối hả và căng thẳng của thành phố.",
-                "x": 28.625830992675418,
-                "y": 16.328125778552728,
-                "fontSize": 17,
-                "width": 40.0,
-                "fontWeight": "bold",
-                "fontStyle": "normal",
-                "textAlign": "center",
-                "bubbleType": "narration"
-              },
-              {
-                "id": "148dae26-0e3e-4ebb-b18a-440e2b4cace9",
-                "text": "Ai nấy đều đang nỗ lực không ngừng nghỉ vì cuộc sống của mình.",
-                "x": 76.5066276300343,
-                "y": 39.02724143582886,
-                "fontSize": 17,
-                "width": 40.0,
-                "fontWeight": "bold",
-                "fontStyle": "italic",
-                "textAlign": "center",
-                "bubbleType": "thought"
-              },
-              {
-                "id": "7f75a4e1-dd95-46a9-88b9-b70118a8bc33",
-                "text": "Mình cũng không được phép lười biếng!",
-                "x": 28.824506497394747,
-                "y": 52.83255116339628,
-                "fontSize": 17,
-                "width": 40.0,
-                "fontWeight": "bold",
-                "fontStyle": "italic",
-                "textAlign": "center",
-                "bubbleType": "thought"
-              }
-            ],
-            "dialogue": "PANEL 1:\nNarrator (Dẫn) : \"Giờ cao điểm 出勤 (しゅっきん - Xuất Cần - đi làm, đến nơi làm việc) luôn mang theo nhịp sống hối hả và căng thẳng của thành phố.\"\n\nPANEL 2:\nMinh (Nghĩ) : \"Ai nấy đều đang nỗ lực không ngừng nghỉ vì cuộc sống của mình.\"\n\nPANEL 3:\nMinh (Nghĩ) : \"Mình cũng không được phép lười biếng!\"\n\n--------------------------------------------------"
-          },
-          {
-            "pageNumber": 20,
-            "imageUrl": "assets/chapters/add-manga/chuong-01/page_20.jpg",
-            "bubbles": [
-              {
-                "id": "eccaa533-e392-4811-8fda-d5e5f695e9dc",
-                "text": "Con đường để đạt được 出世 (しゅっせ - Xuất Thế - thành đạt, thăng tiến) không bao giờ trải đầy hoa hồng.",
-                "x": 28.427155487956085,
-                "y": 22.699807366560062,
-                "fontSize": 17,
-                "width": 40.0,
-                "fontWeight": "bold",
-                "fontStyle": "normal",
-                "textAlign": "center",
-                "bubbleType": "narration"
-              },
-              {
-                "id": "55f30023-f509-4ca0-b6a9-7def2766861e",
-                "text": "Để có được một 地位 (ちい - Địa Vị - địa vị, chức vị) vững chắc trong ngành công nghệ, mình cần trau dồi kỹ năng mỗi ngày.",
-                "x": 77.8973561630696,
-                "y": 26.28387825981419,
-                "fontSize": 17,
-                "width": 40.0,
-                "fontWeight": "bold",
-                "fontStyle": "italic",
-                "textAlign": "center",
-                "bubbleType": "thought"
-              },
-              {
-                "id": "bf03dd7e-f8fe-4e0e-a62d-6f67dea41cf2",
-                "text": "Không có thành công nào đến từ sự may mắn đơn thuần cả.",
-                "x": 70.94371349789301,
-                "y": 70.42104725714154,
-                "fontSize": 17,
-                "width": 40.0,
-                "fontWeight": "bold",
-                "fontStyle": "normal",
-                "textAlign": "center",
-                "bubbleType": "normal"
-              }
-            ],
-            "dialogue": "PANEL 1:\nNarrator (Dẫn) : \"Con đường để đạt được 出世 (しゅっせ - Xuất Thế - thành đạt, thăng tiến) không bao giờ trải đầy hoa hồng.\"\n\nPANEL 2:\nMinh (Nghĩ) : \"Để có được một 地位 (ちい - Địa Vị - địa vị, chức vị) vững chắc trong ngành công nghệ, mình cần trau dồi kỹ năng mỗi ngày.\"\n\nPANEL 3:\nMinh : \"Không có thành công nào đến từ sự may mắn đơn thuần cả.\"\n\n--------------------------------------------------"
-          },
-          {
-            "pageNumber": 21,
-            "imageUrl": "assets/chapters/add-manga/chuong-01/page_21.jpg",
-            "bubbles": [
-              {
-                "id": "b7459a45-9e78-4c3b-9cb5-1294f4b59980",
-                "text": "Kỳ thi 受験 (じゅけん - Thụ Nghiệm - dự thi, tham gia kỳ thi) chứng chỉ quốc tế sẽ diễn ra vào đúng tháng sau rồi.",
-                "x": 70.54636248845435,
-                "y": 14.071488549466796,
-                "fontSize": 17,
-                "width": 40.0,
-                "fontWeight": "bold",
-                "fontStyle": "normal",
-                "textAlign": "center",
-                "bubbleType": "normal"
-              },
-              {
-                "id": "47f007ad-0d40-4288-9062-eca3e4a1cbca",
-                "text": "Minh ơi, cậu chọn 専攻 (せんこう - Chuyên Công - chuyên ngành) về Trí Tuệ Nhân Tạo đúng không?",
-                "x": 27.036426954920767,
-                "y": 33.1865333134888,
-                "fontSize": 17,
-                "width": 40.0,
-                "fontWeight": "bold",
-                "fontStyle": "normal",
-                "textAlign": "center",
-                "bubbleType": "normal"
-              },
-              {
-                "id": "661fe963-ecac-4260-9400-7c2bae9d0131",
-                "text": "Ừ, tớ đang dồn hết tâm huyết cho chuyên ngành này!",
-                "x": 71.34106450733168,
-                "y": 61.46087010708349,
-                "fontSize": 17,
-                "width": 40.0,
-                "fontWeight": "bold",
-                "fontStyle": "normal",
-                "textAlign": "center",
-                "bubbleType": "normal"
-              }
-            ],
-            "dialogue": "PANEL 1:\nMinh : \"Kỳ thi 受験 (じゅけん - Thụ Nghiệm - dự thi, tham gia kỳ thi) chứng chỉ quốc tế sẽ diễn ra vào đúng tháng sau rồi.\"\n\nPANEL 2:\nBạn học : \"Minh ơi, cậu chọn 専攻 (せんこう - Chuyên Công - chuyên ngành) về Trí Tuệ Nhân Tạo đúng không?\"\n\nPANEL 3:\nMinh : \"Ừ, tớ đang dồn hết tâm huyết cho chuyên ngành này!\"\n\n--------------------------------------------------"
-          },
-          {
-            "pageNumber": 22,
-            "imageUrl": "assets/chapters/add-manga/chuong-01/page_22.jpg",
-            "bubbles": [
-              {
-                "id": "8a7041f8-a9fa-41d4-abd7-8c3d8c236745",
-                "text": "Hôm nay có buổi phỏng vấn thực tập, mình phải làm 支度 (したく - Chi Độ - chuẩn bị, sửa soạn) cho thật chỉn chu mới được.",
-                "x": 56.44040165338182,
-                "y": 13.00954161813224,
-                "fontSize": 17,
-                "width": 40.0,
-                "fontWeight": "bold",
-                "fontStyle": "normal",
-                "textAlign": "center",
-                "bubbleType": "normal"
-              },
-              {
-                "id": "0ec0f4d9-fad6-409c-adc4-bb1384ebc5ae",
-                "text": "Trông anh bảnh bao đấy! Đúng là 全身 (ぜんしん - Toàn Thân - toàn bộ cơ thể, toàn thân) toát lên vẻ tự tin luôn.",
-                "x": 79.48676020082426,
-                "y": 45.66440975666984,
-                "fontSize": 17,
-                "width": 40.0,
-                "fontWeight": "bold",
-                "fontStyle": "normal",
-                "textAlign": "center",
-                "bubbleType": "normal"
-              },
-              {
-                "id": "5f2177c5-f4df-4a8d-9023-430731e844e4",
-                "text": "Phải kiểm tra kỹ xem áo sơ mi có bị しわ (しわ - Nếp Nhăn - nếp nhăn) chỗ nào không đã.",
-                "x": 37.963579714484,
-                "y": 69.75733025494682,
-                "fontSize": 17,
-                "width": 40.0,
-                "fontWeight": "bold",
-                "fontStyle": "normal",
-                "textAlign": "center",
-                "bubbleType": "normal"
-              }
-            ],
-            "dialogue": "PANEL 1:\nMinh : \"Hôm nay có buổi phỏng vấn thực tập, mình phải làm 支度 (したく - Chi Độ - chuẩn bị, sửa soạn) cho thật chỉn chu mới được.\"\n\nPANEL 2:\nLan : \"Trông anh bảnh bao đấy! Đúng là 全身 (ぜんしん - Toàn Thân - toàn bộ cơ thể, toàn thân) toát lên vẻ tự tin luôn.\"\n\nPANEL 3:\nMinh : \"Phải kiểm tra kỹ xem áo sơ mi có bị しわ (しわ - Nếp Nhăn - nếp nhăn) chỗ nào không đã.\"\n\n--------------------------------------------------"
-          },
-          {
-            "pageNumber": 23,
-            "imageUrl": "assets/chapters/add-manga/chuong-01/page_23.jpg",
-            "bubbles": [
-              {
-                "id": "8689214e-4054-490b-82bf-fff0d8bf2b4d",
-                "text": "Một bộ 服装 (ふくそう - Phục Trang - quần áo, trang phục) lịch sự sẽ tạo ấn tượng đầu tiên rất tốt với nhà tuyển dụng.",
-                "x": 25.64569842188544,
-                "y": 43.82812618365333,
-                "fontSize": 17,
-                "width": 40.0,
-                "fontWeight": "bold",
-                "fontStyle": "normal",
-                "textAlign": "center",
-                "bubbleType": "normal"
-              },
-              {
-                "id": "355367bb-401d-4664-8a5b-cc43ff78d015",
-                "text": "Thái độ chuyên nghiệp bắt đầu ngay từ cách bạn chăm chút cho vẻ ngoài của mình.",
-                "x": 60.01656073832978,
-                "y": 13.297151907784844,
-                "fontSize": 17,
-                "width": 40.0,
-                "fontWeight": "bold",
-                "fontStyle": "normal",
-                "textAlign": "center",
-                "bubbleType": "normal"
-              },
-              {
-                "id": "96898027-0d00-4473-bc3f-e7a672083495",
-                "text": "Mọi thứ đã sẵn sàng, xuất phát thôi!",
-                "x": 77.69868065835028,
-                "y": 62.41219748200807,
-                "fontSize": 17,
-                "width": 40.0,
-                "fontWeight": "bold",
-                "fontStyle": "normal",
-                "textAlign": "center",
-                "bubbleType": "normal"
-              }
-            ],
-            "dialogue": "PANEL 1:\nMinh : \"Một bộ 服装 (ふくそう - Phục Trang - quần áo, trang phục) lịch sự sẽ tạo ấn tượng đầu tiên rất tốt với nhà tuyển dụng.\"\n\nPANEL 2:\nNarrator : \"Thái độ chuyên nghiệp bắt đầu ngay từ cách bạn chăm chút cho vẻ ngoài của mình.\"\n\nPANEL 3:\nMinh : \"Mọi thứ đã sẵn sàng, xuất phát thôi!\"\n\n--------------------------------------------------"
-          },
-          {
-            "pageNumber": 24,
-            "imageUrl": "assets/chapters/add-manga/chuong-01/page_24.jpg",
-            "bubbles": [
-              {
-                "id": "5e67c3d0-9b48-4ef5-99f8-a7ab41d3a245",
-                "text": "Anh bạn ngồi cạnh mình có vẻ mặt 悲しげ（な／に） (〜げ（な／に） - có vẻ/mang cảm giác buồn rầu, lo âu) quá.",
-                "x": 76.90397863947295,
-                "y": 13.673258450216336,
-                "fontSize": 17,
-                "width": 40.0,
-                "fontWeight": "bold",
-                "fontStyle": "italic",
-                "textAlign": "center",
-                "bubbleType": "thought"
-              },
-              {
-                "id": "4defea1c-24c0-4911-96d1-aff906c7c1b8",
-                "text": "Trước các kỳ phỏng vấn quan trọng, ứng viên thường rất dễ rơi vào trạng thái bất an.",
-                "x": 24.056294384130794,
-                "y": 66.37237491769369,
-                "fontSize": 17,
-                "width": 40.0,
-                "fontWeight": "bold",
-                "fontStyle": "normal",
-                "textAlign": "center",
-                "bubbleType": "narration"
-              },
-              {
-                "id": "1745842d-ca7a-4ddc-ad1e-4e602b5749ac",
-                "text": "Cứ bình tĩnh trả lời bằng những gì mình đã chuẩn bị là được.",
-                "x": 76.30795212531496,
-                "y": 67.30157822942354,
-                "fontSize": 17,
-                "width": 40.0,
-                "fontWeight": "bold",
-                "fontStyle": "normal",
-                "textAlign": "center",
-                "bubbleType": "whisper"
-              }
-            ],
-            "dialogue": "PANEL 1:\nMinh (Nghĩ) : \"Anh bạn ngồi cạnh mình có vẻ mặt 悲しげ（な／に） (〜げ（な／に） - có vẻ/mang cảm giác buồn rầu, lo âu) quá.\"\n\nPANEL 2:\nNarrator (Dẫn) : \"Trước các kỳ phỏng vấn quan trọng, ứng viên thường rất dễ rơi vào trạng thái bất an.\"\n\nPANEL 3:\nMinh (Thầm) : \"Cứ bình tĩnh trả lời bằng những gì mình đã chuẩn bị là được.\"\n\n--------------------------------------------------"
-          },
-          {
-            "pageNumber": 25,
-            "imageUrl": "assets/chapters/add-manga/chuong-01/page_25.jpg",
-            "bubbles": [
-              {
-                "id": "9a44532f-3fbb-4435-9ddb-ad195721ecf0",
-                "text": "Khi gặp áp lực deadline, các bạn trẻ thường hay xử lý thế nào?",
-                "x": 73.52649505924433,
-                "y": 23.89449766431144,
-                "fontSize": 17,
-                "width": 40.0,
-                "fontWeight": "bold",
-                "fontStyle": "normal",
-                "textAlign": "center",
-                "bubbleType": "normal"
-              },
-              {
-                "id": "392ca593-fd41-4f9f-9167-7a7b5ae29ec4",
-                "text": "Dạ, người mới đi làm thì 焦りがち (〜がち - thường hay/dễ bị xu hướng nóng vội), nhưng em luôn ưu tiên rà soát lại quy trình trước ạ.",
-                "x": 23.658943374692132,
-                "y": 55.620162237931304,
-                "fontSize": 17,
-                "width": 40.0,
-                "fontWeight": "bold",
-                "fontStyle": "normal",
-                "textAlign": "center",
-                "bubbleType": "normal"
-              },
-              {
-                "id": "71f22bf7-d666-4824-86d7-53ec555ca2c2",
-                "text": "Rất tốt, câu trả lời rất có tư duy hệ thống.",
-                "x": 74.91722359227964,
-                "y": 68.56263995719544,
-                "fontSize": 17,
-                "width": 40.0,
-                "fontWeight": "bold",
-                "fontStyle": "normal",
-                "textAlign": "center",
-                "bubbleType": "normal"
-              }
-            ],
-            "dialogue": "PANEL 1:\nNgười phỏng vấn : \"Khi gặp áp lực deadline, các bạn trẻ thường hay xử lý thế nào?\"\n\nPANEL 2:\nMinh : \"Dạ, người mới đi làm thì 焦りがち (〜がち - thường hay/dễ bị xu hướng nóng vội), nhưng em luôn ưu tiên rà soát lại quy trình trước ạ.\"\n\nPANEL 3:\nNgười phỏng vấn : \"Rất tốt, câu trả lời rất có tư duy hệ thống.\"\n\n--------------------------------------------------"
-          },
-          {
-            "pageNumber": 26,
-            "imageUrl": "assets/chapters/add-manga/chuong-01/page_26.jpg",
-            "bubbles": [
-              {
-                "id": "b4e16639-5c93-4766-9773-f2b07ccc2a5f",
-                "text": "Phù! Ban đầu tớ tưởng ông giám đốc khó tính là người 怒りっぽい (〜っぽい - hơi có vẻ/đậm chất hay cáu kỉnh), ai ngờ bác ấy lại rất cởi mở.",
-                "x": 45.711924398537924,
-                "y": 15.000692114384531,
-                "fontSize": 17,
-                "width": 40.0,
-                "fontWeight": "bold",
-                "fontStyle": "normal",
-                "textAlign": "center",
-                "bubbleType": "normal"
-              },
-              {
-                "id": "e2038cd4-5253-4639-9428-74fbf3fff286",
-                "text": "Thế buổi phỏng vấn diễn ra suôn sẻ chứ anh hai?",
-                "x": 27.63245346907876,
-                "y": 50.708657680508985,
-                "fontSize": 17,
-                "width": 40.0,
-                "fontWeight": "bold",
-                "fontStyle": "normal",
-                "textAlign": "center",
-                "bubbleType": "normal"
-              },
-              {
-                "id": "8ae6244b-d034-41e8-a664-873fb7a3d732",
-                "text": "Rất tốt em ạ! Họ hẹn tuần sau gửi thư mời nhận việc luôn rồi!",
-                "x": 74.51987258284099,
-                "y": 39.29272816866251,
-                "fontSize": 17,
-                "width": 40.0,
-                "fontWeight": "bold",
-                "fontStyle": "normal",
-                "textAlign": "center",
-                "bubbleType": "normal"
-              }
-            ],
-            "dialogue": "PANEL 1:\nMinh : \"Phù! Ban đầu tớ tưởng ông giám đốc khó tính là người 怒りっぽい (〜っぽい - hơi có vẻ/đậm chất hay cáu kỉnh), ai ngờ bác ấy lại rất cởi mở.\"\n\nPANEL 2:\nLan : \"Thế buổi phỏng vấn diễn ra suôn sẻ chứ anh hai?\"\n\nPANEL 3:\nMinh : \"Rất tốt em ạ! Họ hẹn tuần sau gửi thư mời nhận việc luôn rồi!\"\n\n--------------------------------------------------"
-          },
-          {
-            "pageNumber": 27,
-            "imageUrl": "assets/chapters/add-manga/chuong-01/page_27.jpg",
-            "bubbles": [
-              {
-                "id": "b4ea3a84-0fd4-4e43-b56f-72c8b79377dc",
-                "text": "Hôm nay con nói nhiều quá nên cổ họng hơi 風邪気味 (〜ぎみ - có vẻ/có triệu chứng nhẹ là bị cảm) một chút ạ.",
-                "x": 23.85761887941146,
-                "y": 30.531665668667568,
-                "fontSize": 17,
-                "width": 40.0,
-                "fontWeight": "bold",
-                "fontStyle": "normal",
-                "textAlign": "center",
-                "bubbleType": "normal"
-              },
-              {
-                "id": "7e1dca7b-2a9a-4e89-88f8-dd4897ead85c",
-                "text": "Mau vào phòng nghỉ ngơi đi con, mẹ nấu cháo hành tía tô giải cảm ngay đây.",
-                "x": 76.30795212531496,
-                "y": 38.761754386510376,
-                "fontSize": 17,
-                "width": 40.0,
-                "fontWeight": "bold",
-                "fontStyle": "normal",
-                "textAlign": "center",
-                "bubbleType": "normal"
-              },
-              {
-                "id": "690807ed-8109-4f9c-a7b1-a023b8f3feef",
-                "text": "Uống bát cháo nóng rồi ngủ một giấc thật sâu là khỏe ngay thôi con.",
-                "x": 41.73841430415129,
-                "y": 57.080338952031475,
-                "fontSize": 17,
-                "width": 40.0,
-                "fontWeight": "bold",
-                "fontStyle": "normal",
-                "textAlign": "center",
-                "bubbleType": "normal"
-              }
-            ],
-            "dialogue": "PANEL 1:\nMinh : \"Hôm nay con nói nhiều quá nên cổ họng hơi 風邪気味 (〜ぎみ - có vẻ/có triệu chứng nhẹ là bị cảm) một chút ạ.\"\n\nPANEL 2:\nHân : \"Mau vào phòng nghỉ ngơi đi con, mẹ nấu cháo hành tía tô giải cảm ngay đây.\"\n\nPANEL 3:\nNam : \"Uống bát cháo nóng rồi ngủ một giấc thật sâu là khỏe ngay thôi con.\"\n\n--------------------------------------------------"
-          },
-          {
-            "pageNumber": 28,
-            "imageUrl": "assets/chapters/add-manga/chuong-01/page_28.jpg",
-            "bubbles": [
-              {
-                "id": "7a30ec37-0763-4ffb-be2c-28294346d7df",
-                "text": "Thời gian trôi nhanh thật, やり直せるものなら (Vれるものなら - nếu như có thể làm được thì) mình cũng không muốn thay đổi bất cứ điều gì trong quá khứ.",
-                "x": 27.83112897379809,
-                "y": 16.328125462067877,
-                "fontSize": 17,
-                "width": 40.0,
-                "fontWeight": "bold",
-                "fontStyle": "italic",
-                "textAlign": "center",
-                "bubbleType": "thought"
-              },
-              {
-                "id": "85d4df1d-08ae-460d-ae0e-639e72ad5824",
-                "text": "Chính những vấp ngã và thử thách đã tôi luyện nên sự trưởng thành của ngày hôm nay.",
-                "x": 24.254969888850127,
-                "y": 62.52281703841804,
-                "fontSize": 17,
-                "width": 40.0,
-                "fontWeight": "bold",
-                "fontStyle": "normal",
-                "textAlign": "center",
-                "bubbleType": "narration"
-              },
-              {
-                "id": "0077b3b5-c184-403e-93af-ea2dec589380",
-                "text": "Cảm ơn cả nhà đã luôn là điểm tựa vững chắc nhất của con.",
-                "x": 78.89073368666627,
-                "y": 63.45202060333578,
-                "fontSize": 17,
-                "width": 40.0,
-                "fontWeight": "bold",
-                "fontStyle": "normal",
-                "textAlign": "center",
-                "bubbleType": "whisper"
-              }
-            ],
-            "dialogue": "PANEL 1:\nMinh (Nghĩ) : \"Thời gian trôi nhanh thật, やり直せるものなら (Vれるものなら - nếu như có thể làm được thì) mình cũng không muốn thay đổi bất cứ điều gì trong quá khứ.\"\n\nPANEL 2:\nNarrator (Dẫn) : \"Chính những vấp ngã và thử thách đã tôi luyện nên sự trưởng thành của ngày hôm nay.\"\n\nPANEL 3:\nMinh (Thầm) : \"Cảm ơn cả nhà đã luôn là điểm tựa vững chắc nhất của con.\"\n\n--------------------------------------------------"
-          },
-          {
-            "pageNumber": 29,
-            "imageUrl": "assets/chapters/add-manga/chuong-01/page_29.jpg",
-            "bubbles": [
-              {
-                "id": "4a017766-2552-40ce-a99c-3f0e56063b58",
-                "text": "Hôm nay con về trễ một chút là 渋滞したものですから (〜ものだから - vì kẹt xe... giải thích lý do), mong cả nhà thông cảm ạ!",
-                "x": 50.6788120165212,
-                "y": 18.58476262785684,
-                "fontSize": 17,
-                "width": 40.0,
-                "fontWeight": "bold",
-                "fontStyle": "normal",
-                "textAlign": "center",
-                "bubbleType": "normal"
-              },
-              {
-                "id": "96804035-e162-4d93-9d90-6e23e0d8e49d",
-                "text": "Không sao đâu! Hôm nay anh hai đỗ thực tập, em hào phóng nhường đùi gà cho anh ăn mừng đấy!",
-                "x": 24.65232089828879,
-                "y": 53.49626799548037,
-                "fontSize": 17,
-                "width": 40.0,
-                "fontWeight": "bold",
-                "fontStyle": "normal",
-                "textAlign": "center",
-                "bubbleType": "normal"
-              },
-              {
-                "id": "d9071f97-c251-4acc-b46c-6f5045a30d09",
-                "text": "Chúc mừng con trai đã bước thêm một bước vững chắc trên con đường sự nghiệp!",
-                "x": 75.51325010643764,
-                "y": 52.168834331312176,
-                "fontSize": 17,
-                "width": 40.0,
-                "fontWeight": "bold",
-                "fontStyle": "normal",
-                "textAlign": "center",
-                "bubbleType": "normal"
-              }
-            ],
-            "dialogue": "PANEL 1:\nMinh : \"Hôm nay con về trễ một chút là 渋滞したものですから (〜ものだから - vì kẹt xe... giải thích lý do), mong cả nhà thông cảm ạ!\"\n\nPANEL 2:\nLan : \"Không sao đâu! Hôm nay anh hai đỗ thực tập, em hào phóng nhường đùi gà cho anh ăn mừng đấy!\"\n\nPANEL 3:\nNam : \"Chúc mừng con trai đã bước thêm một bước vững chắc trên con đường sự nghiệp!\"\n\n--------------------------------------------------"
-          },
-          {
-            "pageNumber": 30,
-            "imageUrl": "assets/chapters/add-manga/chuong-01/page_30.jpg",
-            "bubbles": [
-              {
-                "id": "7a74a905-727b-42b3-8517-303f616cba22",
-                "text": "Chỉ cần cả nhà mình luôn yêu thương và đoàn kết thế này, khó khăn nào cũng sẽ vượt qua được.",
-                "x": 56.639077158101145,
-                "y": 12.611311139099962,
-                "fontSize": 17,
-                "width": 40.0,
-                "fontWeight": "bold",
-                "fontStyle": "normal",
-                "textAlign": "center",
-                "bubbleType": "normal"
-              },
-              {
-                "id": "5056e710-9e9e-4388-9fe3-30a88635f045",
-                "text": "Gia đình không chỉ là nơi ta sinh ra, mà còn là bến đỗ bình yên nhất che chở ta trước mọi giông bão của cuộc đời.",
-                "x": 25.64569842188544,
-                "y": 45.92989610972166,
-                "fontSize": 17,
-                "width": 40.0,
-                "fontWeight": "bold",
-                "fontStyle": "normal",
-                "textAlign": "center",
-                "bubbleType": "narration"
-              },
-              {
-                "id": "f6333555-2efc-47a3-8364-e8bc3946d37a",
-                "text": "Hãy luôn trân trọng từng khoảnh khắc sum vầy bên những người thân yêu nhất.",
-                "x": 77.30132964891162,
-                "y": 49.51396700297579,
-                "fontSize": 17,
-                "width": 40.0,
-                "fontWeight": "bold",
-                "fontStyle": "normal",
-                "textAlign": "center",
-                "bubbleType": "normal"
-              }
-            ],
-            "dialogue": "PANEL 1:\nHân : \"Chỉ cần cả nhà mình luôn yêu thương và đoàn kết thế này, khó khăn nào cũng sẽ vượt qua được.\"\n\nPANEL 2:\nNarrator (Dẫn) : \"Gia đình không chỉ là nơi ta sinh ra, mà còn là bến đỗ bình yên nhất che chở ta trước mọi giông bão của cuộc đời.\"\n\nPANEL 3:\nNarrator : \"Hãy luôn trân trọng từng khoảnh khắc sum vầy bên những người thân yêu nhất.\""
-          }
-        ],
-        "pdfUrl": ""
-      },
       {
         "id": "chuong-1-n2",
         "title": "Chương 1 N2",
@@ -7452,6 +6156,1360 @@
     "views": "30.2K",
     "likes": "4.2K",
     "description": "Bộ truyện tranh học tập & chuyên đề kiến thức Pháp luật đại cương. Toàn bộ hình ảnh, dàn nhân vật và bong bóng thoại được tự động cập nhật từ hệ thống kịch bản.",
+    "cover": "assets/covers/n2_cover.jpg",
+    "characters": [],
+    "chapters": []
+  },
+  {
+    "id": "add-manga",
+    "title": "add-manga",
+    "folder": "add-manga",
+    "category": "Kiến thức chuyên đề",
+    "categoryKey": "add-manga",
+    "badge": "Mới",
+    "status": "Đang phát hành",
+    "author": "TBMQ",
+    "rating": 4.9,
+    "views": "505.2K",
+    "likes": "80.2K",
+    "description": "Bộ truyện tranh học tập & chuyên đề kiến thức add-manga. Toàn bộ hình ảnh, dàn nhân vật và bong bóng thoại được tự động cập nhật từ hệ thống kịch bản.",
+    "cover": "assets/covers/add-manga_cover.jpg",
+    "characters": [
+      {
+        "id": "char-add-manga-1",
+        "name": "Narrator",
+        "appearance": "22 years old, 4th-year female student, intelligent look, thin glasses.. White shirt, pastel blue blazer, holding a digital tablet.",
+        "clothing": "",
+        "role": "The objective narrator and analyst, observing everyday family dynamics.",
+        "tags": [
+          "Mới"
+        ],
+        "avatar": "assets/characters/add-manga_Narrator.jpg"
+      },
+      {
+        "id": "char-add-manga-2",
+        "name": "Minh",
+        "appearance": "21 years old, male student, short black hair, slightly messy, eldest son.. Grey hoodie, dark jeans, sneakers.",
+        "clothing": "",
+        "role": "The eldest son facing heavy family expectations, exams, and career choices.",
+        "tags": [
+          "Mới"
+        ],
+        "avatar": "assets/characters/add-manga_Minh.jpg"
+      },
+      {
+        "id": "char-add-manga-3",
+        "name": "Lan",
+        "appearance": "21 years old, female art student, ponytail, expressive eyes, Minh's twin sister.. Oversized beige knit sweater, plaid skirt.",
+        "clothing": "",
+        "role": "The free-spirited twin sister who loves art and often teases Minh.",
+        "tags": [
+          "Mới"
+        ],
+        "avatar": "assets/characters/add-manga_Lan.jpg"
+      },
+      {
+        "id": "char-add-manga-4",
+        "name": "Nam",
+        "appearance": "52 years old, father, neat hair with slight grey temples, stern yet caring.. Simple polo shirt, dark trousers.",
+        "clothing": "",
+        "role": "The traditional father and bakery shop owner, valuing family heritage.",
+        "tags": [
+          "Mới"
+        ],
+        "avatar": "assets/characters/add-manga_Nam.jpg"
+      },
+      {
+        "id": "char-add-manga-5",
+        "name": "Hân",
+        "appearance": "50 years old, mother, gentle face, warm smile, hardworking.. Floral apron over a casual blouse and trousers.",
+        "clothing": "",
+        "role": "The devoted mother balancing work and household duties.",
+        "tags": [
+          "Mới"
+        ],
+        "avatar": "assets/characters/add-manga_H_n.jpg"
+      }
+    ],
+    "chapters": [
+      {
+        "id": "chapter-1",
+        "title": "Chapter 1",
+        "subtitle": "Tự động đồng bộ từ Chapter 1.json",
+        "releaseDate": "2026-09-08",
+        "pagesCount": 30,
+        "pages": [
+          {
+            "pageNumber": 1,
+            "imageUrl": "assets/chapters/add-manga/chapter-1/page_01.jpg",
+            "bubbles": [],
+            "dialogue": "\n\n"
+          },
+          {
+            "pageNumber": 2,
+            "imageUrl": "assets/chapters/add-manga/chapter-1/page_02.jpg",
+            "bubbles": [
+              {
+                "id": "221043d7-d16b-4fca-a7d6-e7dc22553a11",
+                "text": "Trong cả một 人生 (じんせい - Nhân Sinh - Đời người, cuộc đời), gia đình chính là nơi đầu tiên dạy chúng ta cách đối nhân xử thế.",
+                "x": 29.42053301155274,
+                "y": 16.991842610636823,
+                "fontSize": 17,
+                "width": 40.0,
+                "fontWeight": "bold",
+                "fontStyle": "normal",
+                "textAlign": "center",
+                "bubbleType": "narration"
+              },
+              {
+                "id": "02a1704c-c900-43ed-b19a-c31e12dd483c",
+                "text": "Dù đi đâu, các con cũng không được quên cội nguồn 祖先 (そせん - Tổ Tiên - tổ tiên, tổ tông) của dòng họ mình.",
+                "x": 74.91722359227964,
+                "y": 47.257330153671674,
+                "fontSize": 17,
+                "width": 40.0,
+                "fontWeight": "bold",
+                "fontStyle": "normal",
+                "textAlign": "center",
+                "bubbleType": "normal"
+              },
+              {
+                "id": "0171315a-baea-4ece-a8a1-bc0134cf0e76",
+                "text": "Mới sáng sớm ngày giỗ họ mà áp lực đã đè nặng lên vai rồi...",
+                "x": 43.52649384662527,
+                "y": 67.98741887151448,
+                "fontSize": 17,
+                "width": 40.0,
+                "fontWeight": "bold",
+                "fontStyle": "italic",
+                "textAlign": "center",
+                "bubbleType": "thought"
+              }
+            ],
+            "dialogue": "PANEL 1:\nNarrator (Dẫn) : \"Trong cả một 人生 (じんせい - Nhân Sinh - Đời người, cuộc đời), gia đình chính là nơi đầu tiên dạy chúng ta cách đối nhân xử thế.\"\n\nPANEL 2:\nNam : \"Dù đi đâu, các con cũng không được quên cội nguồn 祖先 (そせん - Tổ Tiên - tổ tiên, tổ tông) của dòng họ mình.\"\n\nPANEL 3:\nMinh (Nghĩ) : \"Mới sáng sớm ngày giỗ họ mà áp lực đã đè nặng lên vai rồi...\"\n\n--------------------------------------------------"
+          },
+          {
+            "pageNumber": 3,
+            "imageUrl": "assets/chapters/add-manga/chapter-1/page_03.jpg",
+            "bubbles": [
+              {
+                "id": "92b559e5-5339-4171-8b87-b0ef2238a23b",
+                "text": "Mau ra chào các bác kìa Minh! Hôm nay 親戚 (しんせき - Thân Thích - họ hàng) xa gần đều tề tựu đông đủ đấy.",
+                "x": 72.731793040367,
+                "y": 15.620160820079185,
+                "fontSize": 17,
+                "width": 40.0,
+                "fontWeight": "bold",
+                "fontStyle": "normal",
+                "textAlign": "center",
+                "bubbleType": "normal"
+              },
+              {
+                "id": "2005e317-b4c2-479a-b4a3-2c05808bfb6c",
+                "text": "Chào anh chị, hai 夫婦 (ふうふ - Phu Phụ - vợ chồng) anh chị đi đường xa có mệt không ạ?",
+                "x": 23.26159236525347,
+                "y": 42.965294301944006,
+                "fontSize": 17,
+                "width": 40.0,
+                "fontWeight": "bold",
+                "fontStyle": "normal",
+                "textAlign": "center",
+                "bubbleType": "normal"
+              },
+              {
+                "id": "fee54e01-4f39-4191-953e-92f2bf1f4cc8",
+                "text": "Dạ, con chào các bác mới tới ạ!",
+                "x": 70.94371349789301,
+                "y": 49.7352059892018,
+                "fontSize": 17,
+                "width": 40.0,
+                "fontWeight": "bold",
+                "fontStyle": "normal",
+                "textAlign": "center",
+                "bubbleType": "normal"
+              }
+            ],
+            "dialogue": "PANEL 1:\nNam : \"Mau ra chào các bác kìa Minh! Hôm nay 親戚 (しんせき - Thân Thích - họ hàng) xa gần đều tề tựu đông đủ đấy.\"\n\nPANEL 2:\nHân : \"Chào anh chị, hai 夫婦 (ふうふ - Phu Phụ - vợ chồng) anh chị đi đường xa có mệt không ạ?\"\n\nPANEL 3:\nMinh : \"Dạ, con chào các bác mới tới ạ!\"\n\n--------------------------------------------------"
+          },
+          {
+            "pageNumber": 4,
+            "imageUrl": "assets/chapters/add-manga/chapter-1/page_04.jpg",
+            "bubbles": [
+              {
+                "id": "e7c174ef-89d3-46ae-9795-8cebc2f4443d",
+                "text": "Minh là 長男 (ちょうなん - Trưởng Nam - trưởng nam) trong nhà, sau này phải gánh vác việc lớn đấy nhé cháu!",
+                "x": 31.009937049307396,
+                "y": 14.823700621578267,
+                "fontSize": 17,
+                "width": 40.0,
+                "fontWeight": "bold",
+                "fontStyle": "normal",
+                "textAlign": "center",
+                "bubbleType": "normal"
+              },
+              {
+                "id": "bdccd89a-9933-4699-8b82-ffb3bb86d0e5",
+                "text": "Anh hai lại sắp bị các bác tra hỏi chuyện cưới xin và công việc rồi kìa.",
+                "x": 58.029805691136474,
+                "y": 38.89449756303629,
+                "fontSize": 17,
+                "width": 40.0,
+                "fontWeight": "bold",
+                "fontStyle": "normal",
+                "textAlign": "center",
+                "bubbleType": "whisper"
+              },
+              {
+                "id": "9e618b71-edc0-42ed-baad-63a8d5b3a40c",
+                "text": "Làm trưởng nam đúng là không bao giờ thoát khỏi sự soi xét của mọi người.",
+                "x": 74.91722359227964,
+                "y": 60.66440965539469,
+                "fontSize": 17,
+                "width": 40.0,
+                "fontWeight": "bold",
+                "fontStyle": "italic",
+                "textAlign": "center",
+                "bubbleType": "thought"
+              }
+            ],
+            "dialogue": "PANEL 1:\nBác Ba : \"Minh là 長男 (ちょうなん - Trưởng Nam - trưởng nam) trong nhà, sau này phải gánh vác việc lớn đấy nhé cháu!\"\n\nPANEL 2:\nLan (Thầm) : \"Anh hai lại sắp bị các bác tra hỏi chuyện cưới xin và công việc rồi kìa.\"\n\nPANEL 3:\nMinh (Nghĩ) : \"Làm trưởng nam đúng là không bao giờ thoát khỏi sự soi xét của mọi người.\"\n\n--------------------------------------------------"
+          },
+          {
+            "pageNumber": 5,
+            "imageUrl": "assets/chapters/add-manga/chapter-1/page_05.jpg",
+            "bubbles": [
+              {
+                "id": "40a33951-2c3e-4e99-9f49-dd8da4be3bb5",
+                "text": "Bố của Minh vừa là trụ cột gia đình, vừa là 主人 (しゅじん - Chủ Nhân - chồng, chủ tiệm) của một tiệm bánh truyền thống lâu đời.",
+                "x": 25.24834741244678,
+                "y": 21.90334666168339,
+                "fontSize": 17,
+                "width": 40.0,
+                "fontWeight": "bold",
+                "fontStyle": "normal",
+                "textAlign": "center",
+                "bubbleType": "narration"
+              },
+              {
+                "id": "22d09fcf-c87e-422a-8c8c-3ec387aaa075",
+                "text": "Bố ơi, để con phụ một tay nhào bột cho kịp mẻ bánh trưa nhé.",
+                "x": 29.61920851627207,
+                "y": 59.07148925839285,
+                "fontSize": 17,
+                "width": 40.0,
+                "fontWeight": "bold",
+                "fontStyle": "normal",
+                "textAlign": "center",
+                "bubbleType": "normal"
+              },
+              {
+                "id": "2642c41f-e2ed-457c-ae9c-3a8c414f877b",
+                "text": "Làm bánh cũng như làm 人 (ひと - Nhân - người), phải có tâm và sự kiên trì thì bánh mới thơm ngon được.",
+                "x": 37.566228705045326,
+                "y": 80.37679906191663,
+                "fontSize": 17,
+                "width": 40.0,
+                "fontWeight": "bold",
+                "fontStyle": "normal",
+                "textAlign": "center",
+                "bubbleType": "normal"
+              }
+            ],
+            "dialogue": "PANEL 1:\nNarrator (Dẫn) : \"Bố của Minh vừa là trụ cột gia đình, vừa là 主人 (しゅじん - Chủ Nhân - chồng, chủ tiệm) của một tiệm bánh truyền thống lâu đời.\"\n\nPANEL 2:\nMinh : \"Bố ơi, để con phụ một tay nhào bột cho kịp mẻ bánh trưa nhé.\"\n\nPANEL 3:\nNam : \"Làm bánh cũng như làm 人 (ひと - Nhân - người), phải có tâm và sự kiên trì thì bánh mới thơm ngon được.\"\n\n--------------------------------------------------"
+          },
+          {
+            "pageNumber": 6,
+            "imageUrl": "assets/chapters/add-manga/chapter-1/page_06.jpg",
+            "bubbles": [
+              {
+                "id": "393ab8d9-2a1b-4c3f-8705-f73a25bf3548",
+                "text": "Tuy là 双子 (ふたご - Song Tử - sinh đôi), nhưng tính cách của Minh và Lan lại như hai thái cực hoàn toàn trái ngược.",
+                "x": 76.30795212531496,
+                "y": 32.721931024654175,
+                "fontSize": 17,
+                "width": 40.0,
+                "fontWeight": "bold",
+                "fontStyle": "normal",
+                "textAlign": "center",
+                "bubbleType": "narration"
+              },
+              {
+                "id": "3c537217-4850-4575-836b-c8ad9feb1701",
+                "text": "Anh còn nhớ hồi bé đi công viên nước, anh mải ngắm đồ chơi rồi thành 迷子 (まいご - Mê Tử - lạc đường, lạc lối) khóc nhè không?",
+                "x": 23.658943374692132,
+                "y": 60.59803797218628,
+                "fontSize": 17,
+                "width": 40.0,
+                "fontWeight": "bold",
+                "fontStyle": "normal",
+                "textAlign": "center",
+                "bubbleType": "normal"
+              },
+              {
+                "id": "0b4f4f9a-4ab4-425c-bef6-d994a9f82c81",
+                "text": "Này! Rõ ràng là em chạy lung tung làm anh phải đi tìm mệt muốn xỉu!",
+                "x": 83.65894579993022,
+                "y": 64.58033896469087,
+                "fontSize": 17,
+                "width": 40.0,
+                "fontWeight": "900",
+                "fontStyle": "normal",
+                "textAlign": "center",
+                "bubbleType": "scream"
+              }
+            ],
+            "dialogue": "PANEL 1:\nNarrator (Dẫn) : \"Tuy là 双子 (ふたご - Song Tử - sinh đôi), nhưng tính cách của Minh và Lan lại như hai thái cực hoàn toàn trái ngược.\"\n\nPANEL 2:\nLan : \"Anh còn nhớ hồi bé đi công viên nước, anh mải ngắm đồ chơi rồi thành 迷子 (まいご - Mê Tử - lạc đường, lạc lối) khóc nhè không?\"\n\nPANEL 3:\nMinh (Hét) : \"Này! Rõ ràng là em chạy lung tung làm anh phải đi tìm mệt muốn xỉu!\"\n\n--------------------------------------------------"
+          },
+          {
+            "pageNumber": 7,
+            "imageUrl": "assets/chapters/add-manga/chapter-1/page_07.jpg",
+            "bubbles": [
+              {
+                "id": "dcd67ea3-7cf4-47ae-8f8c-771fea7fcde3",
+                "text": "Sống ở thành phố lớn, ai nấy đều vội vã như những 他人 (たにん - Tha Nhân - người dưng, người lạ) lướt qua đời nhau anh nhỉ.",
+                "x": 73.52649505924433,
+                "y": 29.005116764983235,
+                "fontSize": 17,
+                "width": 40.0,
+                "fontWeight": "bold",
+                "fontStyle": "normal",
+                "textAlign": "center",
+                "bubbleType": "normal"
+              },
+              {
+                "id": "1845798d-6cbf-4396-9827-2d1039ca25f5",
+                "text": "Đúng vậy, ngoài xã hội phức tạp lắm, không cẩn thận là biến bạn thành 敵 (てき - Địch - kẻ thù) ngay.",
+                "x": 27.036426954920767,
+                "y": 32.1909575589869,
+                "fontSize": 17,
+                "width": 40.0,
+                "fontWeight": "bold",
+                "fontStyle": "normal",
+                "textAlign": "center",
+                "bubbleType": "normal"
+              },
+              {
+                "id": "2df35b20-dc00-4d8b-a2b5-fa48d0075b8f",
+                "text": "Nhưng yên tâm đi! Dù có chuyện gì xảy ra thì em vẫn mãi là 味方 (みかた - Vị Phương - bạn bè, đồng minh) số một của anh hai!",
+                "x": 29.22185750683341,
+                "y": 73.73963124745141,
+                "fontSize": 17,
+                "width": 40.0,
+                "fontWeight": "bold",
+                "fontStyle": "normal",
+                "textAlign": "center",
+                "bubbleType": "normal"
+              }
+            ],
+            "dialogue": "PANEL 1:\nLan : \"Sống ở thành phố lớn, ai nấy đều vội vã như những 他人 (たにん - Tha Nhân - người dưng, người lạ) lướt qua đời nhau anh nhỉ.\"\n\nPANEL 2:\nMinh : \"Đúng vậy, ngoài xã hội phức tạp lắm, không cẩn thận là biến bạn thành 敵 (てき - Địch - kẻ thù) ngay.\"\n\nPANEL 3:\nLan : \"Nhưng yên tâm đi! Dù có chuyện gì xảy ra thì em vẫn mãi là 味方 (みかた - Vị Phương - bạn bè, đồng minh) số một của anh hai!\"\n\n--------------------------------------------------"
+          },
+          {
+            "pageNumber": 8,
+            "imageUrl": "assets/chapters/add-manga/chapter-1/page_08.jpg",
+            "bubbles": [
+              {
+                "id": "71de66c9-e159-4cee-a426-502b67221e98",
+                "text": "Đoạn này 筆者 (ひっしゃ - Bút Giả - tác giả, người viết) phân tích về bản tính tốt đẹp của con người rất sâu sắc.",
+                "x": 77.10265414419229,
+                "y": 24.182107953964042,
+                "fontSize": 17,
+                "width": 40.0,
+                "fontWeight": "bold",
+                "fontStyle": "normal",
+                "textAlign": "center",
+                "bubbleType": "normal"
+              },
+              {
+                "id": "95743e75-59b4-4236-85d6-9822095a0d78",
+                "text": "Bản chất của 人間 (にんげん - Nhân Gian - con người) luôn khao khát được yêu thương và thấu hiểu lẫn nhau.",
+                "x": 31.208612554026725,
+                "y": 41.43874558815058,
+                "fontSize": 17,
+                "width": 40.0,
+                "fontWeight": "bold",
+                "fontStyle": "normal",
+                "textAlign": "center",
+                "bubbleType": "narration"
+              },
+              {
+                "id": "5abc1c12-0753-4162-a02e-47f69c59f774",
+                "text": "Mỗi cuộc gặp gỡ đều mang lại bài học quý giá cho hành trình trưởng thành.",
+                "x": 36.17550017201001,
+                "y": 69.97856936776678,
+                "fontSize": 17,
+                "width": 40.0,
+                "fontWeight": "bold",
+                "fontStyle": "normal",
+                "textAlign": "center",
+                "bubbleType": "normal"
+              }
+            ],
+            "dialogue": "PANEL 1:\nMinh : \"Đoạn này 筆者 (ひっしゃ - Bút Giả - tác giả, người viết) phân tích về bản tính tốt đẹp của con người rất sâu sắc.\"\n\nPANEL 2:\nNarrator (Dẫn) : \"Bản chất của 人間 (にんげん - Nhân Gian - con người) luôn khao khát được yêu thương và thấu hiểu lẫn nhau.\"\n\nPANEL 3:\nNarrator : \"Mỗi cuộc gặp gỡ đều mang lại bài học quý giá cho hành trình trưởng thành.\"\n\n--------------------------------------------------"
+          },
+          {
+            "pageNumber": 9,
+            "imageUrl": "assets/chapters/add-manga/chapter-1/page_09.jpg",
+            "bubbles": [
+              {
+                "id": "2c8eb849-9fe1-4f45-ad13-f7154f6eb9a2",
+                "text": "Dạo này xương khớp nhức mỏi quá, con người ta ai rồi cũng đến lúc 寿命 (じゅみょう - Thọ Mệnh - tuổi thọ) suy giảm.",
+                "x": 76.70530313475362,
+                "y": 12.478568152464959,
+                "fontSize": 17,
+                "width": 40.0,
+                "fontWeight": "bold",
+                "fontStyle": "normal",
+                "textAlign": "center",
+                "bubbleType": "normal"
+              },
+              {
+                "id": "e26a0203-f96f-41d7-938f-d34dec822bc6",
+                "text": "Ông uống ngụm trà nóng này đi, đừng làm việc quá sức nữa.",
+                "x": 60.612587252487785,
+                "y": 32.25732974857107,
+                "fontSize": 17,
+                "width": 40.0,
+                "fontWeight": "bold",
+                "fontStyle": "normal",
+                "textAlign": "center",
+                "bubbleType": "normal"
+              },
+              {
+                "id": "4e794ff0-83c0-44fa-bd95-419f899d87de",
+                "text": "Mình phải nỗ lực hơn nữa để lo cho bố mẹ trong 将来 (しょうらい - Tương Lai - tương lai).",
+                "x": 34.38742062953603,
+                "y": 58.42989648950348,
+                "fontSize": 17,
+                "width": 40.0,
+                "fontWeight": "bold",
+                "fontStyle": "italic",
+                "textAlign": "center",
+                "bubbleType": "thought"
+              }
+            ],
+            "dialogue": "PANEL 1:\nNam : \"Dạo này xương khớp nhức mỏi quá, con người ta ai rồi cũng đến lúc 寿命 (じゅみょう - Thọ Mệnh - tuổi thọ) suy giảm.\"\n\nPANEL 2:\nHân : \"Ông uống ngụm trà nóng này đi, đừng làm việc quá sức nữa.\"\n\nPANEL 3:\nMinh (Nghĩ) : \"Mình phải nỗ lực hơn nữa để lo cho bố mẹ trong 将来 (しょうらい - Tương Lai - tương lai).\"\n\n--------------------------------------------------"
+          },
+          {
+            "pageNumber": 10,
+            "imageUrl": "assets/chapters/add-manga/chapter-1/page_10.jpg",
+            "bubbles": [
+              {
+                "id": "4e8520b2-7aa5-4ba0-be92-ed22ae66c053",
+                "text": "Em vẽ đẹp thật đấy Lan, công nhận em có 才能 (さいのう - Tài Năng - tài năng) nghệ thuật bẩm sinh.",
+                "x": 74.51987258284099,
+                "y": 30.155559442720918,
+                "fontSize": 17,
+                "width": 40.0,
+                "fontWeight": "bold",
+                "fontStyle": "normal",
+                "textAlign": "center",
+                "bubbleType": "normal"
+              },
+              {
+                "id": "d1522072-10f8-482f-97e1-b96f4d5570a5",
+                "text": "Tài năng chỉ là một phần thôi, quan trọng là phải rèn luyện 能力 (のうりょく - Năng Lực - năng lực) vẽ mỗi ngày đấy!",
+                "x": 26.837751450201434,
+                "y": 56.17325926041755,
+                "fontSize": 17,
+                "width": 40.0,
+                "fontWeight": "bold",
+                "fontStyle": "normal",
+                "textAlign": "center",
+                "bubbleType": "normal"
+              },
+              {
+                "id": "1c0fdd96-bb63-4772-a557-d0a9d217301e",
+                "text": "Sự kiên trì đúng là 長所 (ちょうしょ - Trường Sở - sở trường, điểm mạnh) lớn nhất của em.",
+                "x": 72.731793040367,
+                "y": 64.18210835906464,
+                "fontSize": 17,
+                "width": 40.0,
+                "fontWeight": "bold",
+                "fontStyle": "normal",
+                "textAlign": "center",
+                "bubbleType": "normal"
+              }
+            ],
+            "dialogue": "PANEL 1:\nMinh : \"Em vẽ đẹp thật đấy Lan, công nhận em có 才能 (さいのう - Tài Năng - tài năng) nghệ thuật bẩm sinh.\"\n\nPANEL 2:\nLan : \"Tài năng chỉ là một phần thôi, quan trọng là phải rèn luyện 能力 (のうりょく - Năng Lực - năng lực) vẽ mỗi ngày đấy!\"\n\nPANEL 3:\nMinh : \"Sự kiên trì đúng là 長所 (ちょうしょ - Trường Sở - sở trường, điểm mạnh) lớn nhất của em.\"\n\n--------------------------------------------------"
+          },
+          {
+            "pageNumber": 11,
+            "imageUrl": "assets/chapters/add-manga/chapter-1/page_11.jpg",
+            "bubbles": [
+              {
+                "id": "c91bae59-ba8e-4e2c-87c6-0913f72ade0b",
+                "text": "Mỗi đứa trẻ lớn lên trong cùng một mái nhà vẫn sở hữu một 個性 (こせい - Cá Tính - cá tính, tính cách) rất riêng biệt.",
+                "x": 74.71854808756031,
+                "y": 13.562638640618482,
+                "fontSize": 17,
+                "width": 40.0,
+                "fontWeight": "bold",
+                "fontStyle": "normal",
+                "textAlign": "center",
+                "bubbleType": "narration"
+              },
+              {
+                "id": "069b104e-4bc6-4a15-85d8-222efe0d82bb",
+                "text": "Hai đứa sinh cùng một giờ mà sao chẳng giống nhau chút nào, không biết 遺伝 (いでん - Di Truyền - di truyền) gen từ ai nữa!",
+                "x": 76.10927662059564,
+                "y": 62.25732954602077,
+                "fontSize": 17,
+                "width": 40.0,
+                "fontWeight": "bold",
+                "fontStyle": "normal",
+                "textAlign": "center",
+                "bubbleType": "normal"
+              },
+              {
+                "id": "7c57bc85-94b5-44c8-9cf1-eee7528e160d",
+                "text": "Chắc con nhận hết gen lý trí của bố rồi mẹ ơi.",
+                "x": 49.08940797876655,
+                "y": 32.12458536940274,
+                "fontSize": 17,
+                "width": 40.0,
+                "fontWeight": "bold",
+                "fontStyle": "italic",
+                "textAlign": "center",
+                "bubbleType": "thought"
+              }
+            ],
+            "dialogue": "PANEL 1:\nNarrator (Dẫn) : \"Mỗi đứa trẻ lớn lên trong cùng một mái nhà vẫn sở hữu một 個性 (こせい - Cá Tính - cá tính, tính cách) rất riêng biệt.\"\n\nPANEL 2:\nHân : \"Hai đứa sinh cùng một giờ mà sao chẳng giống nhau chút nào, không biết 遺伝 (いでん - Di Truyền - di truyền) gen từ ai nữa!\"\n\nPANEL 3:\nMinh (Nghĩ) : \"Chắc con nhận hết gen lý trí của bố rồi mẹ ơi.\"\n\n--------------------------------------------------"
+          },
+          {
+            "pageNumber": 12,
+            "imageUrl": "assets/chapters/add-manga/chapter-1/page_12.jpg",
+            "bubbles": [
+              {
+                "id": "313c5587-868e-495b-b9db-908635f5f3cd",
+                "text": "Nhìn kìa, từng 動作 (どうさ - Động Tác - động tác, hành vi, thao tác) của em y hệt như bố lúc đang dạy nghề vậy!",
+                "x": 24.254969888850127,
+                "y": 27.744055290399206,
+                "fontSize": 17,
+                "width": 40.0,
+                "fontWeight": "bold",
+                "fontStyle": "normal",
+                "textAlign": "center",
+                "bubbleType": "normal"
+              },
+              {
+                "id": "5c8dfc35-dacb-46a4-b086-d5d87a418771",
+                "text": "Em chỉ 真似 (まね - Chân Tự - bắt chước, copy) lại chút đỉnh thôi mà làm gì anh cười dữ vậy!",
+                "x": 77.8973561630696,
+                "y": 40.620161832830696,
+                "fontSize": 17,
+                "width": 40.0,
+                "fontWeight": "bold",
+                "fontStyle": "normal",
+                "textAlign": "center",
+                "bubbleType": "normal"
+              },
+              {
+                "id": "655ba5b2-1591-4abe-8145-864422c14a72",
+                "text": "Giống đến từng cái nhíu mày luôn đấy!",
+                "x": 53.26159357787251,
+                "y": 69.24848085247427,
+                "fontSize": 17,
+                "width": 40.0,
+                "fontWeight": "bold",
+                "fontStyle": "normal",
+                "textAlign": "center",
+                "bubbleType": "normal"
+              }
+            ],
+            "dialogue": "PANEL 1:\nMinh : \"Nhìn kìa, từng 動作 (どうさ - Động Tác - động tác, hành vi, thao tác) của em y hệt như bố lúc đang dạy nghề vậy!\"\n\nPANEL 2:\nLan : \"Em chỉ 真似 (まね - Chân Tự - bắt chước, copy) lại chút đỉnh thôi mà làm gì anh cười dữ vậy!\"\n\nPANEL 3:\nMinh : \"Giống đến từng cái nhíu mày luôn đấy!\"\n\n--------------------------------------------------"
+          },
+          {
+            "pageNumber": 13,
+            "imageUrl": "assets/chapters/add-manga/chapter-1/page_13.jpg",
+            "bubbles": [
+              {
+                "id": "ff87416b-b0e4-4d1b-9fb4-98c5605c377c",
+                "text": "Chất lượng 睡眠 (すいみん - Thụy Miên - ngủ, giấc ngủ) ảnh hưởng trực tiếp đến năng suất làm việc của cả một ngày.",
+                "x": 22.466890346376143,
+                "y": 15.686532503287594,
+                "fontSize": 17,
+                "width": 40.0,
+                "fontWeight": "bold",
+                "fontStyle": "normal",
+                "textAlign": "center",
+                "bubbleType": "narration"
+              },
+              {
+                "id": "e80579b8-6b25-4d00-9aa3-2396c02c8cc3",
+                "text": "Đêm qua chỉ chợp mắt được 4 tiếng... đầu óc nặng trịch...",
+                "x": 73.92384606868299,
+                "y": 30.686532908388198,
+                "fontSize": 17,
+                "width": 40.0,
+                "fontWeight": "bold",
+                "fontStyle": "italic",
+                "textAlign": "center",
+                "bubbleType": "thought"
+              },
+              {
+                "id": "46254b91-5eb1-4904-b16b-5b819299d7dd",
+                "text": "Minh ơi, mau vào ăn sáng cho lại sức nào con!",
+                "x": 73.92384606868299,
+                "y": 63.3414010469258,
+                "fontSize": 17,
+                "width": 40.0,
+                "fontWeight": "bold",
+                "fontStyle": "normal",
+                "textAlign": "center",
+                "bubbleType": "normal"
+              }
+            ],
+            "dialogue": "PANEL 1:\nNarrator (Dẫn) : \"Chất lượng 睡眠 (すいみん - Thụy Miên - ngủ, giấc ngủ) ảnh hưởng trực tiếp đến năng suất làm việc của cả một ngày.\"\n\nPANEL 2:\nMinh (Nghĩ) : \"Đêm qua chỉ chợp mắt được 4 tiếng... đầu óc nặng trịch...\"\n\nPANEL 3:\nHân : \"Minh ơi, mau vào ăn sáng cho lại sức nào con!\"\n\n--------------------------------------------------"
+          },
+          {
+            "pageNumber": 14,
+            "imageUrl": "assets/chapters/add-manga/chapter-1/page_14.jpg",
+            "bubbles": [
+              {
+                "id": "7a80abd0-4bd2-47f3-9e23-570081feb274",
+                "text": "Mùi phở bò thơm nức mũi làm 食欲 (しょくよく - Thực Dục - thèm ăn, cảm giác ngon miệng) của em tăng vọt luôn!",
+                "x": 24.850996403008118,
+                "y": 31.217506374055475,
+                "fontSize": 17,
+                "width": 40.0,
+                "fontWeight": "bold",
+                "fontStyle": "normal",
+                "textAlign": "center",
+                "bubbleType": "normal"
+              },
+              {
+                "id": "1fc707c9-bd9e-4dc1-9574-de8c0925bff8",
+                "text": "Ăn nhiều vào con gái! Còn Minh sao uể oải thế, hôm nay cả nhà không 外食 (がいしょく - Ngoại Thực - ăn ngoài) mà mẹ nấu ở nhà đấy.",
+                "x": 80.48013772442091,
+                "y": 18.075913098790345,
+                "fontSize": 17,
+                "width": 40.0,
+                "fontWeight": "bold",
+                "fontStyle": "normal",
+                "textAlign": "center",
+                "bubbleType": "normal"
+              },
+              {
+                "id": "39dff125-d487-457e-a788-e4c25780c69f",
+                "text": "Dạ con đang ăn đây ạ, tại tối qua thức khuya quá thôi mẹ.",
+                "x": 77.69868065835028,
+                "y": 47.810427176157916,
+                "fontSize": 17,
+                "width": 40.0,
+                "fontWeight": "bold",
+                "fontStyle": "normal",
+                "textAlign": "center",
+                "bubbleType": "normal"
+              }
+            ],
+            "dialogue": "PANEL 1:\nLan : \"Mùi phở bò thơm nức mũi làm 食欲 (しょくよく - Thực Dục - thèm ăn, cảm giác ngon miệng) của em tăng vọt luôn!\"\n\nPANEL 2:\nHân : \"Ăn nhiều vào con gái! Còn Minh sao uể oải thế, hôm nay cả nhà không 外食 (がいしょく - Ngoại Thực - ăn ngoài) mà mẹ nấu ở nhà đấy.\"\n\nPANEL 3:\nMinh : \"Dạ con đang ăn đây ạ, tại tối qua thức khuya quá thôi mẹ.\"\n\n--------------------------------------------------"
+          },
+          {
+            "pageNumber": 15,
+            "imageUrl": "assets/chapters/add-manga/chapter-1/page_15.jpg",
+            "bubbles": [
+              {
+                "id": "d7d2a54c-cd93-41aa-bfdb-e96c8b83309c",
+                "text": "Chia sẻ công việc 家事 (かじ - Gia Sự - việc nhà, nội trợ) là bí quyết giữ cho ngọn lửa gia đình luôn ấm áp.",
+                "x": 38.55960622864199,
+                "y": 14.668833445154602,
+                "fontSize": 17,
+                "width": 40.0,
+                "fontWeight": "bold",
+                "fontStyle": "normal",
+                "textAlign": "center",
+                "bubbleType": "narration"
+              },
+              {
+                "id": "0ce23ee7-4f65-44ab-a0d7-88f1a58e351d",
+                "text": "Mẹ để con phơi đồ cho, mẹ ngồi nghỉ ngơi một lát đi ạ.",
+                "x": 60.612587252487785,
+                "y": 31.659984346507503,
+                "fontSize": 17,
+                "width": 40.0,
+                "fontWeight": "bold",
+                "fontStyle": "normal",
+                "textAlign": "center",
+                "bubbleType": "normal"
+              },
+              {
+                "id": "dc2eb714-eded-44d4-b8e0-808ecbbbfcd9",
+                "text": "Hai đứa biết đỡ đần thế này là mẹ vui lắm rồi.",
+                "x": 73.52649505924433,
+                "y": 54.55821492681493,
+                "fontSize": 17,
+                "width": 40.0,
+                "fontWeight": "bold",
+                "fontStyle": "normal",
+                "textAlign": "center",
+                "bubbleType": "normal"
+              }
+            ],
+            "dialogue": "PANEL 1:\nNarrator (Dẫn) : \"Chia sẻ công việc 家事 (かじ - Gia Sự - việc nhà, nội trợ) là bí quyết giữ cho ngọn lửa gia đình luôn ấm áp.\"\n\nPANEL 2:\nMinh : \"Mẹ để con phơi đồ cho, mẹ ngồi nghỉ ngơi một lát đi ạ.\"\n\nPANEL 3:\nHân : \"Hai đứa biết đỡ đần thế này là mẹ vui lắm rồi.\"\n\n--------------------------------------------------"
+          },
+          {
+            "pageNumber": 16,
+            "imageUrl": "assets/chapters/add-manga/chapter-1/page_16.jpg",
+            "bubbles": [
+              {
+                "id": "1bcad8f4-5c2e-4ed7-98e6-42a7f81df9d2",
+                "text": "Khoảnh khắc 出産 (しゅっさん - Xuất Sản - sinh đẻ, sinh con) hai đứa con cùng lúc là ký ức thiêng liêng nhất của người mẹ.",
+                "x": 78.69205818194695,
+                "y": 19.62458568588758,
+                "fontSize": 17,
+                "width": 40.0,
+                "fontWeight": "bold",
+                "fontStyle": "normal",
+                "textAlign": "center",
+                "bubbleType": "narration"
+              },
+              {
+                "id": "751adc7b-92ce-4365-9b2b-1ee2bbba9e63",
+                "text": "Nhìn em lúc mới sinh kìa, bé xíu xiu như củ khoai tây vậy!",
+                "x": 33.79139411537804,
+                "y": 32.76617896115271,
+                "fontSize": 17,
+                "width": 40.0,
+                "fontWeight": "bold",
+                "fontStyle": "normal",
+                "textAlign": "center",
+                "bubbleType": "normal"
+              },
+              {
+                "id": "81e371d6-b34e-42a4-9773-8b09c620626b",
+                "text": "Hồi đó sinh đôi vất vả gấp đôi, nhưng nhìn hai con lớn khôn thế này là bao cực nhọc tan biến hết.",
+                "x": 77.30132964891162,
+                "y": 64.115737182232,
+                "fontSize": 17,
+                "width": 40.0,
+                "fontWeight": "bold",
+                "fontStyle": "normal",
+                "textAlign": "center",
+                "bubbleType": "normal"
+              }
+            ],
+            "dialogue": "PANEL 1:\nNarrator (Dẫn) : \"Khoảnh khắc 出産 (しゅっさん - Xuất Sản - sinh đẻ, sinh con) hai đứa con cùng lúc là ký ức thiêng liêng nhất của người mẹ.\"\n\nPANEL 2:\nLan : \"Nhìn em lúc mới sinh kìa, bé xíu xiu như củ khoai tây vậy!\"\n\nPANEL 3:\nHân : \"Hồi đó sinh đôi vất vả gấp đôi, nhưng nhìn hai con lớn khôn thế này là bao cực nhọc tan biến hết.\"\n\n--------------------------------------------------"
+          },
+          {
+            "pageNumber": 17,
+            "imageUrl": "assets/chapters/add-manga/chapter-1/page_17.jpg",
+            "bubbles": [
+              {
+                "id": "2706ffc7-deaa-4768-9e4c-0bd4985ecfb9",
+                "text": "Khu phố mình đang kêu gọi thanh niên tham gia công tác 介護 (かいご - Giới Hộ - điều dưỡng, chăm sóc người già/bệnh) cho các cụ neo đơn.",
+                "x": 24.65232089828879,
+                "y": 18.562638944443936,
+                "fontSize": 17,
+                "width": 40.0,
+                "fontWeight": "bold",
+                "fontStyle": "normal",
+                "textAlign": "center",
+                "bubbleType": "normal"
+              },
+              {
+                "id": "86287d8a-56db-4bb3-83b5-5e964aaa282b",
+                "text": "Cuối tuần này con rảnh, con sẽ đăng ký tham gia phụ giúp các bác một tay ạ.",
+                "x": 25.64569842188544,
+                "y": 62.23520649557756,
+                "fontSize": 17,
+                "width": 40.0,
+                "fontWeight": "bold",
+                "fontStyle": "normal",
+                "textAlign": "center",
+                "bubbleType": "normal"
+              },
+              {
+                "id": "0734e8db-b44b-465c-8fdd-79eaef6650a7",
+                "text": "Tốt lắm con trai! Giúp đỡ người già là đạo lý làm người cơ bản nhất.",
+                "x": 50.6788120165212,
+                "y": 81.88122421889109,
+                "fontSize": 17,
+                "width": 40.0,
+                "fontWeight": "bold",
+                "fontStyle": "normal",
+                "textAlign": "center",
+                "bubbleType": "normal"
+              }
+            ],
+            "dialogue": "PANEL 1:\nNam : \"Khu phố mình đang kêu gọi thanh niên tham gia công tác 介護 (かいご - Giới Hộ - điều dưỡng, chăm sóc người già/bệnh) cho các cụ neo đơn.\"\n\nPANEL 2:\nMinh : \"Cuối tuần này con rảnh, con sẽ đăng ký tham gia phụ giúp các bác một tay ạ.\"\n\nPANEL 3:\nNam : \"Tốt lắm con trai! Giúp đỡ người già là đạo lý làm người cơ bản nhất.\"\n\n--------------------------------------------------"
+          },
+          {
+            "pageNumber": 18,
+            "imageUrl": "assets/chapters/add-manga/chapter-1/page_18.jpg",
+            "bubbles": [
+              {
+                "id": "9e7e0d66-d0ad-4ce0-959f-fe4ad0a6bf96",
+                "text": "Ở các đô thị hiện đại, mô hình gia đình 共働き (ともばたらき - Cộng Động - 2 vợ chồng cùng đi làm) ngày càng trở nên phổ biến.",
+                "x": 73.52649505924433,
+                "y": 15.000692114384531,
+                "fontSize": 17,
+                "width": 40.0,
+                "fontWeight": "bold",
+                "fontStyle": "normal",
+                "textAlign": "center",
+                "bubbleType": "narration"
+              },
+              {
+                "id": "a664fb36-1846-4fcf-aa4d-e7944547bf08",
+                "text": "Bố mẹ đi làm cẩn thận nhé, con chuẩn bị sẵn cơm trưa cho bố mẹ rồi ạ.",
+                "x": 21.672188327498816,
+                "y": 29.204232320984218,
+                "fontSize": 17,
+                "width": 40.0,
+                "fontWeight": "bold",
+                "fontStyle": "normal",
+                "textAlign": "center",
+                "bubbleType": "normal"
+              },
+              {
+                "id": "15c9ad11-61cc-446d-98d9-34471fce4273",
+                "text": "Cảm ơn hai con, chiều bố mẹ về sớm cùng ăn cơm nhé!",
+                "x": 36.57285118144868,
+                "y": 64.77945452069184,
+                "fontSize": 17,
+                "width": 40.0,
+                "fontWeight": "bold",
+                "fontStyle": "normal",
+                "textAlign": "center",
+                "bubbleType": "normal"
+              }
+            ],
+            "dialogue": "PANEL 1:\nNarrator (Dẫn) : \"Ở các đô thị hiện đại, mô hình gia đình 共働き (ともばたらき - Cộng Động - 2 vợ chồng cùng đi làm) ngày càng trở nên phổ biến.\"\n\nPANEL 2:\nMinh : \"Bố mẹ đi làm cẩn thận nhé, con chuẩn bị sẵn cơm trưa cho bố mẹ rồi ạ.\"\n\nPANEL 3:\nHân : \"Cảm ơn hai con, chiều bố mẹ về sớm cùng ăn cơm nhé!\"\n\n--------------------------------------------------"
+          },
+          {
+            "pageNumber": 19,
+            "imageUrl": "assets/chapters/add-manga/chapter-1/page_19.jpg",
+            "bubbles": [
+              {
+                "id": "f70c7088-509c-4d4e-91e3-c6cc819dc48e",
+                "text": "Giờ cao điểm 出勤 (しゅっきん - Xuất Cần - đi làm, đến nơi làm việc) luôn mang theo nhịp sống hối hả và căng thẳng của thành phố.",
+                "x": 28.625830992675418,
+                "y": 16.328125778552728,
+                "fontSize": 17,
+                "width": 40.0,
+                "fontWeight": "bold",
+                "fontStyle": "normal",
+                "textAlign": "center",
+                "bubbleType": "narration"
+              },
+              {
+                "id": "148dae26-0e3e-4ebb-b18a-440e2b4cace9",
+                "text": "Ai nấy đều đang nỗ lực không ngừng nghỉ vì cuộc sống của mình.",
+                "x": 76.5066276300343,
+                "y": 39.02724143582886,
+                "fontSize": 17,
+                "width": 40.0,
+                "fontWeight": "bold",
+                "fontStyle": "italic",
+                "textAlign": "center",
+                "bubbleType": "thought"
+              },
+              {
+                "id": "7f75a4e1-dd95-46a9-88b9-b70118a8bc33",
+                "text": "Mình cũng không được phép lười biếng!",
+                "x": 28.824506497394747,
+                "y": 52.83255116339628,
+                "fontSize": 17,
+                "width": 40.0,
+                "fontWeight": "bold",
+                "fontStyle": "italic",
+                "textAlign": "center",
+                "bubbleType": "thought"
+              }
+            ],
+            "dialogue": "PANEL 1:\nNarrator (Dẫn) : \"Giờ cao điểm 出勤 (しゅっきん - Xuất Cần - đi làm, đến nơi làm việc) luôn mang theo nhịp sống hối hả và căng thẳng của thành phố.\"\n\nPANEL 2:\nMinh (Nghĩ) : \"Ai nấy đều đang nỗ lực không ngừng nghỉ vì cuộc sống của mình.\"\n\nPANEL 3:\nMinh (Nghĩ) : \"Mình cũng không được phép lười biếng!\"\n\n--------------------------------------------------"
+          },
+          {
+            "pageNumber": 20,
+            "imageUrl": "assets/chapters/add-manga/chapter-1/page_20.jpg",
+            "bubbles": [
+              {
+                "id": "eccaa533-e392-4811-8fda-d5e5f695e9dc",
+                "text": "Con đường để đạt được 出世 (しゅっせ - Xuất Thế - thành đạt, thăng tiến) không bao giờ trải đầy hoa hồng.",
+                "x": 28.427155487956085,
+                "y": 22.699807366560062,
+                "fontSize": 17,
+                "width": 40.0,
+                "fontWeight": "bold",
+                "fontStyle": "normal",
+                "textAlign": "center",
+                "bubbleType": "narration"
+              },
+              {
+                "id": "55f30023-f509-4ca0-b6a9-7def2766861e",
+                "text": "Để có được một 地位 (ちい - Địa Vị - địa vị, chức vị) vững chắc trong ngành công nghệ, mình cần trau dồi kỹ năng mỗi ngày.",
+                "x": 77.8973561630696,
+                "y": 26.28387825981419,
+                "fontSize": 17,
+                "width": 40.0,
+                "fontWeight": "bold",
+                "fontStyle": "italic",
+                "textAlign": "center",
+                "bubbleType": "thought"
+              },
+              {
+                "id": "bf03dd7e-f8fe-4e0e-a62d-6f67dea41cf2",
+                "text": "Không có thành công nào đến từ sự may mắn đơn thuần cả.",
+                "x": 70.94371349789301,
+                "y": 70.42104725714154,
+                "fontSize": 17,
+                "width": 40.0,
+                "fontWeight": "bold",
+                "fontStyle": "normal",
+                "textAlign": "center",
+                "bubbleType": "normal"
+              }
+            ],
+            "dialogue": "PANEL 1:\nNarrator (Dẫn) : \"Con đường để đạt được 出世 (しゅっせ - Xuất Thế - thành đạt, thăng tiến) không bao giờ trải đầy hoa hồng.\"\n\nPANEL 2:\nMinh (Nghĩ) : \"Để có được một 地位 (ちい - Địa Vị - địa vị, chức vị) vững chắc trong ngành công nghệ, mình cần trau dồi kỹ năng mỗi ngày.\"\n\nPANEL 3:\nMinh : \"Không có thành công nào đến từ sự may mắn đơn thuần cả.\"\n\n--------------------------------------------------"
+          },
+          {
+            "pageNumber": 21,
+            "imageUrl": "assets/chapters/add-manga/chapter-1/page_21.jpg",
+            "bubbles": [
+              {
+                "id": "b7459a45-9e78-4c3b-9cb5-1294f4b59980",
+                "text": "Kỳ thi 受験 (じゅけん - Thụ Nghiệm - dự thi, tham gia kỳ thi) chứng chỉ quốc tế sẽ diễn ra vào đúng tháng sau rồi.",
+                "x": 70.54636248845435,
+                "y": 14.071488549466796,
+                "fontSize": 17,
+                "width": 40.0,
+                "fontWeight": "bold",
+                "fontStyle": "normal",
+                "textAlign": "center",
+                "bubbleType": "normal"
+              },
+              {
+                "id": "47f007ad-0d40-4288-9062-eca3e4a1cbca",
+                "text": "Minh ơi, cậu chọn 専攻 (せんこう - Chuyên Công - chuyên ngành) về Trí Tuệ Nhân Tạo đúng không?",
+                "x": 27.036426954920767,
+                "y": 33.1865333134888,
+                "fontSize": 17,
+                "width": 40.0,
+                "fontWeight": "bold",
+                "fontStyle": "normal",
+                "textAlign": "center",
+                "bubbleType": "normal"
+              },
+              {
+                "id": "661fe963-ecac-4260-9400-7c2bae9d0131",
+                "text": "Ừ, tớ đang dồn hết tâm huyết cho chuyên ngành này!",
+                "x": 71.34106450733168,
+                "y": 61.46087010708349,
+                "fontSize": 17,
+                "width": 40.0,
+                "fontWeight": "bold",
+                "fontStyle": "normal",
+                "textAlign": "center",
+                "bubbleType": "normal"
+              }
+            ],
+            "dialogue": "PANEL 1:\nMinh : \"Kỳ thi 受験 (じゅけん - Thụ Nghiệm - dự thi, tham gia kỳ thi) chứng chỉ quốc tế sẽ diễn ra vào đúng tháng sau rồi.\"\n\nPANEL 2:\nBạn học : \"Minh ơi, cậu chọn 専攻 (せんこう - Chuyên Công - chuyên ngành) về Trí Tuệ Nhân Tạo đúng không?\"\n\nPANEL 3:\nMinh : \"Ừ, tớ đang dồn hết tâm huyết cho chuyên ngành này!\"\n\n--------------------------------------------------"
+          },
+          {
+            "pageNumber": 22,
+            "imageUrl": "assets/chapters/add-manga/chapter-1/page_22.jpg",
+            "bubbles": [
+              {
+                "id": "8a7041f8-a9fa-41d4-abd7-8c3d8c236745",
+                "text": "Hôm nay có buổi phỏng vấn thực tập, mình phải làm 支度 (したく - Chi Độ - chuẩn bị, sửa soạn) cho thật chỉn chu mới được.",
+                "x": 56.44040165338182,
+                "y": 13.00954161813224,
+                "fontSize": 17,
+                "width": 40.0,
+                "fontWeight": "bold",
+                "fontStyle": "normal",
+                "textAlign": "center",
+                "bubbleType": "normal"
+              },
+              {
+                "id": "0ec0f4d9-fad6-409c-adc4-bb1384ebc5ae",
+                "text": "Trông anh bảnh bao đấy! Đúng là 全身 (ぜんしん - Toàn Thân - toàn bộ cơ thể, toàn thân) toát lên vẻ tự tin luôn.",
+                "x": 79.48676020082426,
+                "y": 45.66440975666984,
+                "fontSize": 17,
+                "width": 40.0,
+                "fontWeight": "bold",
+                "fontStyle": "normal",
+                "textAlign": "center",
+                "bubbleType": "normal"
+              },
+              {
+                "id": "5f2177c5-f4df-4a8d-9023-430731e844e4",
+                "text": "Phải kiểm tra kỹ xem áo sơ mi có bị しわ (しわ - Nếp Nhăn - nếp nhăn) chỗ nào không đã.",
+                "x": 37.963579714484,
+                "y": 69.75733025494682,
+                "fontSize": 17,
+                "width": 40.0,
+                "fontWeight": "bold",
+                "fontStyle": "normal",
+                "textAlign": "center",
+                "bubbleType": "normal"
+              }
+            ],
+            "dialogue": "PANEL 1:\nMinh : \"Hôm nay có buổi phỏng vấn thực tập, mình phải làm 支度 (したく - Chi Độ - chuẩn bị, sửa soạn) cho thật chỉn chu mới được.\"\n\nPANEL 2:\nLan : \"Trông anh bảnh bao đấy! Đúng là 全身 (ぜんしん - Toàn Thân - toàn bộ cơ thể, toàn thân) toát lên vẻ tự tin luôn.\"\n\nPANEL 3:\nMinh : \"Phải kiểm tra kỹ xem áo sơ mi có bị しわ (しわ - Nếp Nhăn - nếp nhăn) chỗ nào không đã.\"\n\n--------------------------------------------------"
+          },
+          {
+            "pageNumber": 23,
+            "imageUrl": "assets/chapters/add-manga/chapter-1/page_23.jpg",
+            "bubbles": [
+              {
+                "id": "8689214e-4054-490b-82bf-fff0d8bf2b4d",
+                "text": "Một bộ 服装 (ふくそう - Phục Trang - quần áo, trang phục) lịch sự sẽ tạo ấn tượng đầu tiên rất tốt với nhà tuyển dụng.",
+                "x": 25.64569842188544,
+                "y": 43.82812618365333,
+                "fontSize": 17,
+                "width": 40.0,
+                "fontWeight": "bold",
+                "fontStyle": "normal",
+                "textAlign": "center",
+                "bubbleType": "normal"
+              },
+              {
+                "id": "355367bb-401d-4664-8a5b-cc43ff78d015",
+                "text": "Thái độ chuyên nghiệp bắt đầu ngay từ cách bạn chăm chút cho vẻ ngoài của mình.",
+                "x": 60.01656073832978,
+                "y": 13.297151907784844,
+                "fontSize": 17,
+                "width": 40.0,
+                "fontWeight": "bold",
+                "fontStyle": "normal",
+                "textAlign": "center",
+                "bubbleType": "normal"
+              },
+              {
+                "id": "96898027-0d00-4473-bc3f-e7a672083495",
+                "text": "Mọi thứ đã sẵn sàng, xuất phát thôi!",
+                "x": 77.69868065835028,
+                "y": 62.41219748200807,
+                "fontSize": 17,
+                "width": 40.0,
+                "fontWeight": "bold",
+                "fontStyle": "normal",
+                "textAlign": "center",
+                "bubbleType": "normal"
+              }
+            ],
+            "dialogue": "PANEL 1:\nMinh : \"Một bộ 服装 (ふくそう - Phục Trang - quần áo, trang phục) lịch sự sẽ tạo ấn tượng đầu tiên rất tốt với nhà tuyển dụng.\"\n\nPANEL 2:\nNarrator : \"Thái độ chuyên nghiệp bắt đầu ngay từ cách bạn chăm chút cho vẻ ngoài của mình.\"\n\nPANEL 3:\nMinh : \"Mọi thứ đã sẵn sàng, xuất phát thôi!\"\n\n--------------------------------------------------"
+          },
+          {
+            "pageNumber": 24,
+            "imageUrl": "assets/chapters/add-manga/chapter-1/page_24.jpg",
+            "bubbles": [
+              {
+                "id": "5e67c3d0-9b48-4ef5-99f8-a7ab41d3a245",
+                "text": "Anh bạn ngồi cạnh mình có vẻ mặt 悲しげ（な／に） (〜げ（な／に） - có vẻ/mang cảm giác buồn rầu, lo âu) quá.",
+                "x": 76.90397863947295,
+                "y": 13.673258450216336,
+                "fontSize": 17,
+                "width": 40.0,
+                "fontWeight": "bold",
+                "fontStyle": "italic",
+                "textAlign": "center",
+                "bubbleType": "thought"
+              },
+              {
+                "id": "4defea1c-24c0-4911-96d1-aff906c7c1b8",
+                "text": "Trước các kỳ phỏng vấn quan trọng, ứng viên thường rất dễ rơi vào trạng thái bất an.",
+                "x": 24.056294384130794,
+                "y": 66.37237491769369,
+                "fontSize": 17,
+                "width": 40.0,
+                "fontWeight": "bold",
+                "fontStyle": "normal",
+                "textAlign": "center",
+                "bubbleType": "narration"
+              },
+              {
+                "id": "1745842d-ca7a-4ddc-ad1e-4e602b5749ac",
+                "text": "Cứ bình tĩnh trả lời bằng những gì mình đã chuẩn bị là được.",
+                "x": 76.30795212531496,
+                "y": 67.30157822942354,
+                "fontSize": 17,
+                "width": 40.0,
+                "fontWeight": "bold",
+                "fontStyle": "normal",
+                "textAlign": "center",
+                "bubbleType": "whisper"
+              }
+            ],
+            "dialogue": "PANEL 1:\nMinh (Nghĩ) : \"Anh bạn ngồi cạnh mình có vẻ mặt 悲しげ（な／に） (〜げ（な／に） - có vẻ/mang cảm giác buồn rầu, lo âu) quá.\"\n\nPANEL 2:\nNarrator (Dẫn) : \"Trước các kỳ phỏng vấn quan trọng, ứng viên thường rất dễ rơi vào trạng thái bất an.\"\n\nPANEL 3:\nMinh (Thầm) : \"Cứ bình tĩnh trả lời bằng những gì mình đã chuẩn bị là được.\"\n\n--------------------------------------------------"
+          },
+          {
+            "pageNumber": 25,
+            "imageUrl": "assets/chapters/add-manga/chapter-1/page_25.jpg",
+            "bubbles": [
+              {
+                "id": "9a44532f-3fbb-4435-9ddb-ad195721ecf0",
+                "text": "Khi gặp áp lực deadline, các bạn trẻ thường hay xử lý thế nào?",
+                "x": 73.52649505924433,
+                "y": 23.89449766431144,
+                "fontSize": 17,
+                "width": 40.0,
+                "fontWeight": "bold",
+                "fontStyle": "normal",
+                "textAlign": "center",
+                "bubbleType": "normal"
+              },
+              {
+                "id": "392ca593-fd41-4f9f-9167-7a7b5ae29ec4",
+                "text": "Dạ, người mới đi làm thì 焦りがち (〜がち - thường hay/dễ bị xu hướng nóng vội), nhưng em luôn ưu tiên rà soát lại quy trình trước ạ.",
+                "x": 23.658943374692132,
+                "y": 55.620162237931304,
+                "fontSize": 17,
+                "width": 40.0,
+                "fontWeight": "bold",
+                "fontStyle": "normal",
+                "textAlign": "center",
+                "bubbleType": "normal"
+              },
+              {
+                "id": "71f22bf7-d666-4824-86d7-53ec555ca2c2",
+                "text": "Rất tốt, câu trả lời rất có tư duy hệ thống.",
+                "x": 74.91722359227964,
+                "y": 68.56263995719544,
+                "fontSize": 17,
+                "width": 40.0,
+                "fontWeight": "bold",
+                "fontStyle": "normal",
+                "textAlign": "center",
+                "bubbleType": "normal"
+              }
+            ],
+            "dialogue": "PANEL 1:\nNgười phỏng vấn : \"Khi gặp áp lực deadline, các bạn trẻ thường hay xử lý thế nào?\"\n\nPANEL 2:\nMinh : \"Dạ, người mới đi làm thì 焦りがち (〜がち - thường hay/dễ bị xu hướng nóng vội), nhưng em luôn ưu tiên rà soát lại quy trình trước ạ.\"\n\nPANEL 3:\nNgười phỏng vấn : \"Rất tốt, câu trả lời rất có tư duy hệ thống.\"\n\n--------------------------------------------------"
+          },
+          {
+            "pageNumber": 26,
+            "imageUrl": "assets/chapters/add-manga/chapter-1/page_26.jpg",
+            "bubbles": [
+              {
+                "id": "b4e16639-5c93-4766-9773-f2b07ccc2a5f",
+                "text": "Phù! Ban đầu tớ tưởng ông giám đốc khó tính là người 怒りっぽい (〜っぽい - hơi có vẻ/đậm chất hay cáu kỉnh), ai ngờ bác ấy lại rất cởi mở.",
+                "x": 45.711924398537924,
+                "y": 15.000692114384531,
+                "fontSize": 17,
+                "width": 40.0,
+                "fontWeight": "bold",
+                "fontStyle": "normal",
+                "textAlign": "center",
+                "bubbleType": "normal"
+              },
+              {
+                "id": "e2038cd4-5253-4639-9428-74fbf3fff286",
+                "text": "Thế buổi phỏng vấn diễn ra suôn sẻ chứ anh hai?",
+                "x": 27.63245346907876,
+                "y": 50.708657680508985,
+                "fontSize": 17,
+                "width": 40.0,
+                "fontWeight": "bold",
+                "fontStyle": "normal",
+                "textAlign": "center",
+                "bubbleType": "normal"
+              },
+              {
+                "id": "8ae6244b-d034-41e8-a664-873fb7a3d732",
+                "text": "Rất tốt em ạ! Họ hẹn tuần sau gửi thư mời nhận việc luôn rồi!",
+                "x": 74.51987258284099,
+                "y": 39.29272816866251,
+                "fontSize": 17,
+                "width": 40.0,
+                "fontWeight": "bold",
+                "fontStyle": "normal",
+                "textAlign": "center",
+                "bubbleType": "normal"
+              }
+            ],
+            "dialogue": "PANEL 1:\nMinh : \"Phù! Ban đầu tớ tưởng ông giám đốc khó tính là người 怒りっぽい (〜っぽい - hơi có vẻ/đậm chất hay cáu kỉnh), ai ngờ bác ấy lại rất cởi mở.\"\n\nPANEL 2:\nLan : \"Thế buổi phỏng vấn diễn ra suôn sẻ chứ anh hai?\"\n\nPANEL 3:\nMinh : \"Rất tốt em ạ! Họ hẹn tuần sau gửi thư mời nhận việc luôn rồi!\"\n\n--------------------------------------------------"
+          },
+          {
+            "pageNumber": 27,
+            "imageUrl": "assets/chapters/add-manga/chapter-1/page_27.jpg",
+            "bubbles": [
+              {
+                "id": "b4ea3a84-0fd4-4e43-b56f-72c8b79377dc",
+                "text": "Hôm nay con nói nhiều quá nên cổ họng hơi 風邪気味 (〜ぎみ - có vẻ/có triệu chứng nhẹ là bị cảm) một chút ạ.",
+                "x": 23.85761887941146,
+                "y": 30.531665668667568,
+                "fontSize": 17,
+                "width": 40.0,
+                "fontWeight": "bold",
+                "fontStyle": "normal",
+                "textAlign": "center",
+                "bubbleType": "normal"
+              },
+              {
+                "id": "7e1dca7b-2a9a-4e89-88f8-dd4897ead85c",
+                "text": "Mau vào phòng nghỉ ngơi đi con, mẹ nấu cháo hành tía tô giải cảm ngay đây.",
+                "x": 76.30795212531496,
+                "y": 38.761754386510376,
+                "fontSize": 17,
+                "width": 40.0,
+                "fontWeight": "bold",
+                "fontStyle": "normal",
+                "textAlign": "center",
+                "bubbleType": "normal"
+              },
+              {
+                "id": "690807ed-8109-4f9c-a7b1-a023b8f3feef",
+                "text": "Uống bát cháo nóng rồi ngủ một giấc thật sâu là khỏe ngay thôi con.",
+                "x": 41.73841430415129,
+                "y": 57.080338952031475,
+                "fontSize": 17,
+                "width": 40.0,
+                "fontWeight": "bold",
+                "fontStyle": "normal",
+                "textAlign": "center",
+                "bubbleType": "normal"
+              }
+            ],
+            "dialogue": "PANEL 1:\nMinh : \"Hôm nay con nói nhiều quá nên cổ họng hơi 風邪気味 (〜ぎみ - có vẻ/có triệu chứng nhẹ là bị cảm) một chút ạ.\"\n\nPANEL 2:\nHân : \"Mau vào phòng nghỉ ngơi đi con, mẹ nấu cháo hành tía tô giải cảm ngay đây.\"\n\nPANEL 3:\nNam : \"Uống bát cháo nóng rồi ngủ một giấc thật sâu là khỏe ngay thôi con.\"\n\n--------------------------------------------------"
+          },
+          {
+            "pageNumber": 28,
+            "imageUrl": "assets/chapters/add-manga/chapter-1/page_28.jpg",
+            "bubbles": [
+              {
+                "id": "7a30ec37-0763-4ffb-be2c-28294346d7df",
+                "text": "Thời gian trôi nhanh thật, やり直せるものなら (Vれるものなら - nếu như có thể làm được thì) mình cũng không muốn thay đổi bất cứ điều gì trong quá khứ.",
+                "x": 27.83112897379809,
+                "y": 16.328125462067877,
+                "fontSize": 17,
+                "width": 40.0,
+                "fontWeight": "bold",
+                "fontStyle": "italic",
+                "textAlign": "center",
+                "bubbleType": "thought"
+              },
+              {
+                "id": "85d4df1d-08ae-460d-ae0e-639e72ad5824",
+                "text": "Chính những vấp ngã và thử thách đã tôi luyện nên sự trưởng thành của ngày hôm nay.",
+                "x": 24.254969888850127,
+                "y": 62.52281703841804,
+                "fontSize": 17,
+                "width": 40.0,
+                "fontWeight": "bold",
+                "fontStyle": "normal",
+                "textAlign": "center",
+                "bubbleType": "narration"
+              },
+              {
+                "id": "0077b3b5-c184-403e-93af-ea2dec589380",
+                "text": "Cảm ơn cả nhà đã luôn là điểm tựa vững chắc nhất của con.",
+                "x": 78.89073368666627,
+                "y": 63.45202060333578,
+                "fontSize": 17,
+                "width": 40.0,
+                "fontWeight": "bold",
+                "fontStyle": "normal",
+                "textAlign": "center",
+                "bubbleType": "whisper"
+              }
+            ],
+            "dialogue": "PANEL 1:\nMinh (Nghĩ) : \"Thời gian trôi nhanh thật, やり直せるものなら (Vれるものなら - nếu như có thể làm được thì) mình cũng không muốn thay đổi bất cứ điều gì trong quá khứ.\"\n\nPANEL 2:\nNarrator (Dẫn) : \"Chính những vấp ngã và thử thách đã tôi luyện nên sự trưởng thành của ngày hôm nay.\"\n\nPANEL 3:\nMinh (Thầm) : \"Cảm ơn cả nhà đã luôn là điểm tựa vững chắc nhất của con.\"\n\n--------------------------------------------------"
+          },
+          {
+            "pageNumber": 29,
+            "imageUrl": "assets/chapters/add-manga/chapter-1/page_29.jpg",
+            "bubbles": [
+              {
+                "id": "4a017766-2552-40ce-a99c-3f0e56063b58",
+                "text": "Hôm nay con về trễ một chút là 渋滞したものですから (〜ものだから - vì kẹt xe... giải thích lý do), mong cả nhà thông cảm ạ!",
+                "x": 50.6788120165212,
+                "y": 18.58476262785684,
+                "fontSize": 17,
+                "width": 40.0,
+                "fontWeight": "bold",
+                "fontStyle": "normal",
+                "textAlign": "center",
+                "bubbleType": "normal"
+              },
+              {
+                "id": "96804035-e162-4d93-9d90-6e23e0d8e49d",
+                "text": "Không sao đâu! Hôm nay anh hai đỗ thực tập, em hào phóng nhường đùi gà cho anh ăn mừng đấy!",
+                "x": 24.65232089828879,
+                "y": 53.49626799548037,
+                "fontSize": 17,
+                "width": 40.0,
+                "fontWeight": "bold",
+                "fontStyle": "normal",
+                "textAlign": "center",
+                "bubbleType": "normal"
+              },
+              {
+                "id": "d9071f97-c251-4acc-b46c-6f5045a30d09",
+                "text": "Chúc mừng con trai đã bước thêm một bước vững chắc trên con đường sự nghiệp!",
+                "x": 75.51325010643764,
+                "y": 52.168834331312176,
+                "fontSize": 17,
+                "width": 40.0,
+                "fontWeight": "bold",
+                "fontStyle": "normal",
+                "textAlign": "center",
+                "bubbleType": "normal"
+              }
+            ],
+            "dialogue": "PANEL 1:\nMinh : \"Hôm nay con về trễ một chút là 渋滞したものですから (〜ものだから - vì kẹt xe... giải thích lý do), mong cả nhà thông cảm ạ!\"\n\nPANEL 2:\nLan : \"Không sao đâu! Hôm nay anh hai đỗ thực tập, em hào phóng nhường đùi gà cho anh ăn mừng đấy!\"\n\nPANEL 3:\nNam : \"Chúc mừng con trai đã bước thêm một bước vững chắc trên con đường sự nghiệp!\"\n\n--------------------------------------------------"
+          },
+          {
+            "pageNumber": 30,
+            "imageUrl": "assets/chapters/add-manga/chapter-1/page_30.jpg",
+            "bubbles": [
+              {
+                "id": "7a74a905-727b-42b3-8517-303f616cba22",
+                "text": "Chỉ cần cả nhà mình luôn yêu thương và đoàn kết thế này, khó khăn nào cũng sẽ vượt qua được.",
+                "x": 56.639077158101145,
+                "y": 12.611311139099962,
+                "fontSize": 17,
+                "width": 40.0,
+                "fontWeight": "bold",
+                "fontStyle": "normal",
+                "textAlign": "center",
+                "bubbleType": "normal"
+              },
+              {
+                "id": "5056e710-9e9e-4388-9fe3-30a88635f045",
+                "text": "Gia đình không chỉ là nơi ta sinh ra, mà còn là bến đỗ bình yên nhất che chở ta trước mọi giông bão của cuộc đời.",
+                "x": 25.64569842188544,
+                "y": 45.92989610972166,
+                "fontSize": 17,
+                "width": 40.0,
+                "fontWeight": "bold",
+                "fontStyle": "normal",
+                "textAlign": "center",
+                "bubbleType": "narration"
+              },
+              {
+                "id": "f6333555-2efc-47a3-8364-e8bc3946d37a",
+                "text": "Hãy luôn trân trọng từng khoảnh khắc sum vầy bên những người thân yêu nhất.",
+                "x": 77.30132964891162,
+                "y": 49.51396700297579,
+                "fontSize": 17,
+                "width": 40.0,
+                "fontWeight": "bold",
+                "fontStyle": "normal",
+                "textAlign": "center",
+                "bubbleType": "normal"
+              }
+            ],
+            "dialogue": "PANEL 1:\nHân : \"Chỉ cần cả nhà mình luôn yêu thương và đoàn kết thế này, khó khăn nào cũng sẽ vượt qua được.\"\n\nPANEL 2:\nNarrator (Dẫn) : \"Gia đình không chỉ là nơi ta sinh ra, mà còn là bến đỗ bình yên nhất che chở ta trước mọi giông bão của cuộc đời.\"\n\nPANEL 3:\nNarrator : \"Hãy luôn trân trọng từng khoảnh khắc sum vầy bên những người thân yêu nhất.\""
+          }
+        ],
+        "pdfUrl": ""
+      }
+    ]
+  },
+  {
+    "id": "vocab",
+    "title": "vocab",
+    "folder": "vocab",
+    "category": "Kiến thức chuyên đề",
+    "categoryKey": "vocab",
+    "badge": "Mới",
+    "status": "Đang phát hành",
+    "author": "TBMQ",
+    "rating": 4.9,
+    "views": "505.2K",
+    "likes": "80.2K",
+    "description": "Bộ truyện tranh học tập & chuyên đề kiến thức vocab. Toàn bộ hình ảnh, dàn nhân vật và bong bóng thoại được tự động cập nhật từ hệ thống kịch bản.",
     "cover": "assets/covers/n2_cover.jpg",
     "characters": [],
     "chapters": []
