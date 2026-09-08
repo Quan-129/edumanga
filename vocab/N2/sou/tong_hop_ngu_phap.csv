@@ -1,0 +1,176 @@
+STT,Tên ngữ pháp,Nghĩa ngữ pháp
+1,~げ(な),"có vẻ, giống như"
+2,~がち,"thường, hay"
+3,~っぽい,"hay, có khuynh hướng như thế, hơi có vẻ"
+4,~気味,"có vẻ, có triệu chứng"
+5,Vれるものなら／Vれるもんなら,nếu như có thể
+6,~ものだから／もんだから。,vì nghĩ rằng...
+7,~もの／もん,là vì
+8,~ものの,mặc dù...nhưng
+9,Nはもとより〜も,đến cả...nói chi tới
+10,N1はともかくN2は／が,N1 thì chưa hẳn được nhưng N2 thì được
+11,N1はまだしもN2...,"nếu là N1 thì còn có thể làm được, chứ N2 thì chắc chắn không thể"
+12,~たまらない。,"~ không chịu được / ~ không kể xiết / rất, cực kỳ ~"
+13,~仕方がない／しょうがない。,không biết phải làm sao / không có cách nào khác
+14,~かなわない。,không thể chịu đựng được vì ~
+15,~ならない。,rất ~ / thực sự ~
+16,~ない + ことはない,không phải là không
+17,~ない + こともない,cũng không phải là không
+18,Vないではいられない,không thực hiện V thì không xong / không thể được
+19,Vずにはいられない,không sao ngăn được / không thể nào không
+20,Vねば + ならない,phải làm gì đó
+21,Vてはならない,không được (làm gì đó)
+22,Vてはいられない／Vてられない／Vてらんない,không thể làm gì đó
+23,Vてばかりは + いられない／Vてばかりも + いられない,chỉ V thì cũng không được
+24,~かいがある／かいあって,thật đáng công ~ / bõ công
+25,~かいがない／かい（も）なく~,thật chẳng đáng ~
+26,Vがい,đáng làm gì đó
+27,Vてまで（も）／NまでVて,tới mức ~ / thậm chí ~
+28,Vかける／VかけのN／Vかけだ。,dở dang làm gì đó / sắp
+29,V切る／V切れる,"làm ~ xong / làm hết, hoàn thành một việc gì đó"
+30,Vえる／Vえない／Vうる,có thể tiến hành V / V có khả năng xảy ra
+31,V抜く,"làm V tới cùng, làm xong tất cả trọn vẹn"
+32,~うちに,"nhân lúc, trong lúc đang ~"
+33,VるかVないかのうちに,"vào khoảng, vừa mới...thì"
+34,~限り,"chừng nào mà, nếu, trong giới hạn"
+35,Vる／Vた／Vている + 限り（では）,"trong phạm vi, theo như"
+36,Nに限り／限って／限らず〜も,chỉ / không chỉ N
+37,Nさえ + Vば／Aければ／Aなら／Nなら。Vさえすれば,chỉ cần có N / làm V là đủ
+38,~からこそ,chính vì
+39,Vてこそ,"đầu tiên làm V, chính lúc, chính"
+40,Vるばかりだ。,"cứ, toàn"
+41,（ただ）Vる + ばかりだ／のみだ。,chỉ ~
+42,Nにしたら／すれば／してみたら／してみれば,"đối với N, nếu trên lập trường của N"
+43,~と + したら／すれば,giả sử / nếu
+44,~としても／としたって,cho dù / dẫu
+45,N1をN2としてV／するN／したN,với tư cách là ~
+46,~とともに,cùng với ~
+47,~ともない／ともなって／ともなうN,đồng thời với ~
+48,~つれて／つれ,cùng với ~
+49,~したがって／したがい,theo như N / càng ~ càng
+50,~とおり／とおりに／とおりだ／とおりのN,đúng như ~
+51,Vる／Vられる + ままに,"theo như V, cứ theo đúng như..."
+52,~ことに,cái việc mà ~
+53,~あまり,quá ~
+54,~わけだ,"lý do là vì, có nghĩa là, tức là"
+55,~わけではない／わけでもない,không hẳn là ~
+56,~わけがない／わけはない,chắc chắn không ~ / lẽ nào lại ~ / không có lý do nào mà ~
+57,~わけにはいかない／わけにもいかない。,không thể / không thể không
+58,Vたとたん／とたんに,ngay khi / vừa mới
+59,~あげく／あげくに／あげくのN,làm ~ nhưng cuối cùng ~
+60,~末／末に／すえのN,sau khi ~
+61,~思ったら／思うと,"cứ ngỡ, vừa mới"
+62,~ところ（に／へ／を）,đang lúc ~ / vừa ~
+63,Vたところ,vừa làm gì xong
+64,Vるところ／Nどころ／Vているどころ + ではない／じゃない／ではなく／じゃなく,phải làm sao đó
+65,~どころか,nói chi tới
+66,Nだらけ,"đầy, toàn là ~"
+67,VたきりVない／Vたきりだ／Vたっきりだ,cứ mãi mà không
+68,Vきり／Vっきり,"chỉ mải lo, cứ mãi miết"
+69,Vっぱなし,"vẫn V, suốt, hoài"
+70,Nに反して／反し／反するN,ngược với ~
+71,~反面,nhưng / trái lại
+72,~一方（で）,nhưng
+73,Vる一方だ,có xu hướng / dần dần
+74,Vるべきだ,nên làm gì
+75,Vざるをえない,không muốn nhưng vẫn phải làm
+76,Vる／Vない／Nという + ことになっている,"quyết định do người khác, tổ chức nào đó"
+77,~にすぎない,không quá / nằm trong vòng / chỉ là
+78,~あたって／あたり／あたっては／あたってのN,"nhân dịp, khi mà"
+79,Nに沿って／沿い／沿ったN,"dựa theo, dựa trên"
+80,~先立って／先立ち／先立つN,trước khi ~
+81,Nにわたって／わたり／わたるN,"trải suốt, trải khắp"
+82,Vっこない,"tuyệt đối không, làm gì có chuyện"
+83,Vかねない,e rằng / sợ rằng / có nguy cơ
+84,Vかねる,không V
+85,信じがたい,không thể ~ / rất khó ~
+86,~ことから,bởi
+87,Nのことだから,vì ~
+88,Vることなく,không hề V
+89,V1ないことにはV2ない,"sẽ không V2 trừ khi phải V1, không V1 thì không thể V2"
+90,~当然だ／当然のN／当たり前だ／当たり前のN,đương nhiên ~
+91,~もっともだ。,đương nhiên ~
+92,~同然だ。,"y như là, gần như là"
+93,~だけましだ,"kể cũng còn may, không bị ~ là quý rồi"
+94,~だけあって／だけに／だけのことはある,vì rằng...
+95,Aばかりか／ばかりでなくBも,không chỉ A mà còn B
+96,~ばかりに,chỉ vì ~
+97,~のみならず／のみか,không chỉ ~ mà còn ~
+98,Vようではないか／じゃないか,hãy cùng nhau làm đi
+99,Vようがない／ようもない,không biết V / không có cách để V
+100,~かのようだ／かのように~,có vẻ như / như thể
+101,~そうにない／そうもない,không nghĩ là / không có vẻ gì là
+102,~際して／際し／際してのN,"vào lúc, khi"
+103,Nに基づいて／基づき／基づくN／基づいたN,dựa vào ~
+104,Nに応じて／応じ／応じたN,tương ứng với ~ / thích hợp / phù hợp
+105,Nの下で／下／下に,dưới ~
+106,~以来,từ khi ~
+107,~以上,khi mà ~
+108,Vるからには／Vたからには,một khi mà đã ~
+109,~折（に）,khi mà ~
+110,Nから言うと／言えば,từ N có thể nói
+111,Nからすると／すれば／いって,xét thấy từ N ~
+112,Nからして,ngay cả...
+113,Nから見ると／見れば／見ても／見て,nếu nhìn từ N ~
+114,~からといって／からって,nói thế nhưng mà
+115,Vてからでないと〜できない／Vてからでなければ〜できない,trừ khi ~ nếu không
+116,N1からN2にかけて,từ N1 đến N2
+117,Nに／NのAさに + かけては／かけても,khi nói đến N ~
+118,~とか,nghe rằng ~
+119,Vるまい,không làm gì lại lần nữa
+120,VようかVるまいか,làm gì hay không làm gì ~
+121,~決まっている／違いない／相違ない,chắc chắn ~ / không sai ~
+122,~とは限らない,"không phải lúc nào cũng nhất thiết là, không hẳn là..."
+123,Vる／Vるより + ほかない／ほかはない,chỉ có cách là / không còn cách nào khác
+124,Nにほかならない,chính vì / do vì
+125,Nをはじめ／はじめとして／はじめとするN,trước tiên là N
+126,Nをめぐって／めぐるN,xung quanh việc liên quan tới
+127,Nにおいて／おいては／おいても／おけるN,ở N
+128,Nにて,tại N / bằng N
+129,Nも／Vるのも + かまわず,không lo lắng / quan tâm về ~
+130,~にも + かかわらず,mặc dù ~
+131,~かかわらず／かかわりなく,dù trong trường hợp nào ~ / dù là N đi nữa
+132,Nを問わず,"bất chấp, không quan trọng..."
+133,AやらBやら,nào là...nào là...
+134,Aにつけ（Bにつけ）,dù là ~
+135,Aにしろ／Aにせよ（Bにしろ／Bにせよ）,dù thế này hay thế kia
+136,N1もVばN2もVる／N1もAければN2もAい／N1もAならN2もAなだ／N1もNならN2もNだ,N1 cũng ~ N2 cũng ~
+137,~ものだ／もんだ,"là thứ, là cái"
+138,Vるものではない／もんじゃない,không nên làm gì
+139,~というものだ／というもんだ,"giải thích, nói về một điều tất yếu nào đó"
+140,~ものか／ものですか,nhất định không ~ / một chút cũng không
+141,Nを中心に／中心にして／中心にしたN／中心として,lấy N làm trung tâm / đặc biệt
+142,Nをこめて,dồn nén N
+143,Nを通じて／通して,thông qua N
+144,Nを頼りにV／頼りとして／頼りにして,nhờ có N
+145,~恐れがある,e rằng / sợ rằng / có nguy cơ
+146,~ものがある,có những cái
+147,Vば／Aければ／Aなら／Nなら + Aいという／Aだ（Nだ）という + ものでもない／ものではない,không phải là...
+148,どうにか／なんとか + Vないものか／Vれないもの（だろう）か,liệu có cách nào không
+149,Nをもとに／もとにして,dựa trên ~ / từ ~
+150,Nにつき,về ~ / vì ~ / đối với ~
+151,~きっかけに／きっかけとして／きっかけにして／契機に／契機として,"nhân dịp, nhân cơ hội"
+152,~際に,trong trường hợp / khi
+153,A（事実）。それなのにB（予想外の結果）,tuy ~ nhưng
+154,A（状況）。それでもB（結果）,A. Nhưng B
+155,「A」「それなら（ば）B」,A. Tốt hơn là B
+156,A（理由）。それでB（結果）,A. Chính vì vậy B
+157,「A」「それがB」,Thể hiện kết quả ngoài dự tưởng
+158,A（予定）。それがB（Aと異なる結果）,A. Thế nhưng B
+159,A（事情の説明）。そこでB（提案）,A. Vì thế B
+160,A。そういえばB,nhắc tới chuyện này tôi mới nhớ ra
+161,A。それはそうとB,nhân đây
+162,AすなわちA’,"nói cách khác, tức là"
+163,AあるいはB,hoặc là
+164,A。だがB,A. Nhưng B
+165,A。だってB,"thì là vì, do vì"
+166,A。ということはB,có nghĩa là
+167,A。というのはB,"sở dĩ thế, lý do là..."
+168,A。したがってB,"vì vậy, do đó"
+169,A。ただしB,tuy nhiên
+170,A。もっともB,tuy nhiên
+171,A。なおB,"hơn nữa, ngoài ra"
+172,A。さてB,vậy thì
+173,A。するとB,lập tức
+174,A。要するにA’,tóm lại
+175,（Nは）A。しかもB,thêm vào đó
