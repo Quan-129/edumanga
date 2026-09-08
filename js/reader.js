@@ -521,31 +521,64 @@ function initTouchZones() {
 // Keyboard Navigation (Uses native browser zoom Ctrl +/- / wheel)
 function initKeyboardNav() {
   document.addEventListener('keydown', (e) => {
-    if (e.target.matches('input, textarea, select')) return;
-
     // Flashcard Modal active interactions
     const fcModal = document.getElementById('flashcardModal');
     if (fcModal && fcModal.classList.contains('active')) {
       if (e.key === 'Escape') {
-        closeFlashcardModal();
+        if (typeof closeFlashcardModal === 'function') closeFlashcardModal();
         return;
       }
+
+      // If user is typing in the practice input field
+      if (e.target && e.target.id === 'practiceTypingInput') {
+        if (e.key === 'Tab') {
+          e.preventDefault();
+          if (window.flashcardService && typeof window.flashcardService.revealAnswer === 'function') {
+            window.flashcardService.revealAnswer();
+          }
+          return;
+        }
+        return; // Allow standard text typing in input
+      }
+
+      // If in practice session
       if (typeof isPracticeModeActive !== 'undefined' && isPracticeModeActive) {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          if (window.flashcardService) {
+            if (typeof currentTypingState !== 'undefined' && currentTypingState !== 'input') {
+              window.flashcardService.nextPracticeCard();
+            } else {
+              window.flashcardService.checkTypingAnswer();
+            }
+          }
+          return;
+        }
+
+        // Grammar 3D flip card shortcuts
         if (e.key === ' ' || e.code === 'Space') {
           e.preventDefault();
-          if (typeof toggleFlipPracticeCard === 'function') toggleFlipPracticeCard();
+          if (window.flashcardService && typeof window.flashcardService.toggleFlip === 'function') {
+            window.flashcardService.toggleFlip();
+          }
           return;
         } else if (e.key === '1' || e.key === 'ArrowLeft') {
           e.preventDefault();
-          if (typeof rateCurrentPracticeCard === 'function') rateCurrentPracticeCard(false);
+          if (window.flashcardService && typeof window.flashcardService.ratePracticeCard === 'function') {
+            window.flashcardService.ratePracticeCard(false);
+          }
           return;
         } else if (e.key === '2' || e.key === 'ArrowRight') {
           e.preventDefault();
-          if (typeof rateCurrentPracticeCard === 'function') rateCurrentPracticeCard(true);
+          if (window.flashcardService && typeof window.flashcardService.ratePracticeCard === 'function') {
+            window.flashcardService.ratePracticeCard(true);
+          }
           return;
         }
       }
     }
+
+    if (e.target.matches('input, textarea, select')) return;
 
     if (e.key === 'ArrowRight' || e.key === 'PageDown') {
       nextPage();
