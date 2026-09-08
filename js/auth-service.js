@@ -327,8 +327,8 @@ function injectAuthGateDOM() {
             <span>Đồng bộ Cloud</span>
           </div>
           <div class="feature-pill">
-            <i class="fas fa-pen-ruler"></i>
-            <span>Vở & Bảng vẽ</span>
+            <i class="fas fa-book-open-reader"></i>
+            <span>Webtoon Mượt Mà</span>
           </div>
           <div class="feature-pill">
             <i class="fas fa-layer-group"></i>

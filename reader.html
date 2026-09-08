@@ -110,7 +110,8 @@
 
   <!-- Floating HUD Quick Action -->
   <div class="floating-reader-dock" style="position: fixed; right: 20px; bottom: 85px; display: flex; flex-direction: column; gap: 0.6rem; z-index: 1100; transition: right 0.3s cubic-bezier(0.16, 1, 0.3, 1);">
-    <button id="btnNotebookToggle" class="btn-icon" onclick="toggleNotebookSplitView()" title="Mở quyển vở ghi chép & viết tay (Split View - Phím N)" style="width: 44px; height: 44px; border-radius: var(--radius-full); background: var(--bg-tertiary); box-shadow: var(--shadow-md); border: 1px solid rgba(255,255,255,0.12);">
+    <!-- Temporarily disabled notebook toggle button -->
+    <button id="btnNotebookToggle" class="btn-icon" onclick="toggleNotebookSplitView()" title="Vở ghi chép (Đang bảo trì cải tiến)" style="display: none !important; width: 44px; height: 44px; border-radius: var(--radius-full); background: var(--bg-tertiary); box-shadow: var(--shadow-md); border: 1px solid rgba(255,255,255,0.12);">
       <i class="fas fa-book-open" style="color: var(--accent-secondary);"></i>
     </button>
     <button class="btn-icon" onclick="openCurrentPageScript()" title="Xem kịch bản lời thoại trang này" style="width: 44px; height: 44px; border-radius: var(--radius-full); background: var(--bg-tertiary); box-shadow: var(--shadow-md);">
@@ -121,8 +122,8 @@
     </button>
   </div>
 
-  <!-- Study Notebook Split-Screen Panel -->
-  <aside id="readerNotebookPanel" class="reader-notebook-panel">
+  <!-- Study Notebook Split-Screen Panel (Temporarily Disabled for improvement) -->
+  <aside id="readerNotebookPanel" class="reader-notebook-panel" style="display: none !important;">
     <!-- Draggable Resizer Splitter Gutter Handle -->
     <div id="notebookResizer" class="notebook-resizer" title="Kéo để điều chỉnh độ rộng (Nhấp đúp để đặt lại mặc định)">
       <div class="resizer-grip">
@@ -571,48 +572,8 @@
         </div>
       </div>
 
-      <!-- Ergonomic Handedness & Layout Workspace Modes -->
-      <div class="modal-section">
-        <label class="modal-label">Bố cục học tập & Vị trí thuận tay</label>
-        <div class="layout-mode-grid">
-          <button id="btnLayoutSplitRight" class="layout-mode-card active" onclick="setLayoutMode('split-right')" title="Manga Trái - Vở Phải (Thuận tay phải)">
-            <div class="layout-card-preview">
-              <span class="preview-mini-pane pane-manga">📖 Manga</span>
-              <span class="preview-mini-pane pane-notebook">📝 Vở</span>
-            </div>
-            <div class="layout-card-title"><i class="fas fa-hand-point-right" style="color: var(--accent-secondary);"></i> Thuận tay phải</div>
-            <div class="layout-card-desc">Manga Trái • Vở Phải</div>
-          </button>
-
-          <button id="btnLayoutSplitLeft" class="layout-mode-card" onclick="setLayoutMode('split-left')" title="Vở Trái - Manga Phải (Thuận tay trái)">
-            <div class="layout-card-preview">
-              <span class="preview-mini-pane pane-notebook">📝 Vở</span>
-              <span class="preview-mini-pane pane-manga">📖 Manga</span>
-            </div>
-            <div class="layout-card-title"><i class="fas fa-hand-point-left" style="color: #ec4899;"></i> Thuận tay trái</div>
-            <div class="layout-card-desc">Vở Trái • Manga Phải</div>
-          </button>
-
-          <button id="btnLayoutFocusManga" class="layout-mode-card" onclick="setLayoutMode('focus-manga')" title="Chỉ đọc Manga toàn màn hình">
-            <div class="layout-card-preview">
-              <span class="preview-mini-pane pane-full">📖 100% Manga</span>
-            </div>
-            <div class="layout-card-title"><i class="fas fa-book-open" style="color: #38bdf8;"></i> Chỉ Manga</div>
-            <div class="layout-card-desc">Đọc truyện tập trung</div>
-          </button>
-
-          <button id="btnLayoutFocusNotebook" class="layout-mode-card" onclick="setLayoutMode('focus-notebook')" title="Chỉ mở Vở ghi chép toàn màn hình">
-            <div class="layout-card-preview">
-              <span class="preview-mini-pane pane-full" style="background: rgba(139, 92, 246, 0.25); border-color: rgba(139, 92, 246, 0.5);">📝 100% Vở & Thẻ</span>
-            </div>
-            <div class="layout-card-title"><i class="fas fa-pen-nib" style="color: #a78bfa;"></i> Chỉ Vở ghi chép</div>
-            <div class="layout-card-desc">Vẽ mindmap • Ôn thẻ từ</div>
-          </button>
-        </div>
-      </div>
-
       <div style="margin-top: 1rem; text-align: center; color: var(--text-muted); font-size: 0.75rem;">
-        Phím tắt: <strong>← / →</strong> chuyển trang • <strong>F</strong> toàn màn hình • <strong>N</strong> bật/tắt vở • <strong>Alt + S</strong> đổi bên tay trái/phải • <strong>Alt + F</strong> toàn màn hình vở
+        Phím tắt: <strong>← / →</strong> chuyển trang • <strong>F</strong> toàn màn hình • <strong>B</strong> bật/tắt thoại • <strong>S</strong> kịch bản • <strong>+/-/0</strong> thu phóng
       </div>
     </div>
   </div>

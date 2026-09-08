@@ -543,21 +543,6 @@ function initKeyboardNav() {
       }
     }
 
-    // Alt Shortcuts for Notebook Workspace Ergonomics
-    if (e.altKey && (e.key === 's' || e.key === 'S')) {
-      e.preventDefault();
-      if (typeof swapNotebookSide === 'function') {
-        swapNotebookSide();
-      }
-      return;
-    } else if (e.altKey && (e.key === 'f' || e.key === 'F')) {
-      e.preventDefault();
-      if (typeof toggleFocusNotebookMode === 'function') {
-        toggleFocusNotebookMode();
-      }
-      return;
-    }
-
     if (e.key === 'ArrowRight' || e.key === 'PageDown') {
       nextPage();
     } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
@@ -574,10 +559,6 @@ function initKeyboardNav() {
       }
     } else if (e.key === 'm' || e.key === 'M') {
       toggleMenuVisibility();
-    } else if (e.key === 'n' || e.key === 'N') {
-      if (typeof toggleNotebookSplitView === 'function') {
-        toggleNotebookSplitView();
-      }
     }
   });
 }

@@ -28,10 +28,14 @@ let notebookStorageKey = '';
 let currentNotebookWidth = 480;
 
 document.addEventListener('DOMContentLoaded', () => {
+  // Clear any existing split-view classes since notebook is temporarily disabled
+  document.body.classList.remove('split-notebook-active', 'layout-focus-notebook', 'notebook-side-left');
   initNotebookEngine();
 });
 
 function initNotebookEngine() {
+  // Feature temporarily disabled for upgrade
+  document.body.classList.remove('split-notebook-active', 'layout-focus-notebook');
   notebookCanvas = document.getElementById('notebookCanvas');
   notebookTextarea = document.getElementById('notebookTextarea');
 
@@ -532,6 +536,14 @@ function initPaletteAndStrokeHandlers() {
 // TOGGLE & MODE SWITCHING
 // ==========================================================================
 function toggleNotebookSplitView() {
+  if (typeof showToast === 'function') {
+    showToast('ℹ️ Tính năng Vở ghi chép đang được bảo trì để cải tiến!');
+  }
+  document.body.classList.remove('split-notebook-active', 'layout-focus-notebook');
+  return false;
+}
+
+function _legacyToggleNotebookSplitView() {
   const anchor = captureReadingAnchor();
   notebookState.isOpen = !notebookState.isOpen;
   document.body.classList.toggle('split-notebook-active', notebookState.isOpen);
