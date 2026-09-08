@@ -42,22 +42,6 @@
 
     <!-- Actions -->
     <div class="reader-header-actions">
-      <!-- Zoom Controls Dock -->
-      <div class="header-zoom-controls" title="Phóng to / Thu nhỏ Manga (Ctrl + Cuộn hoặc +/-)">
-        <button id="btnZoomOut" class="btn-icon-sm" title="Thu nhỏ (-)">
-          <i class="fas fa-minus"></i>
-        </button>
-        <button id="btnZoomReset" class="btn-zoom-val" title="Đặt lại kích thước chuẩn (0)">
-          <span id="headerZoomVal">100%</span>
-        </button>
-        <button id="btnZoomIn" class="btn-icon-sm" title="Phóng to (+)">
-          <i class="fas fa-plus"></i>
-        </button>
-        <button id="btnFitWidth" class="btn-icon-sm" title="Khớp tràn chiều ngang màn hình (Fit Width)" style="border-left: 1px solid rgba(255,255,255,0.12); margin-left: 2px; padding-left: 4px;">
-          <i class="fas fa-arrows-alt-h" style="color: var(--accent-secondary);"></i>
-        </button>
-      </div>
-
       <!-- User Profile / Login Button -->
       <div id="headerUserContainer"></div>
 
@@ -72,12 +56,6 @@
       </button>
     </div>
   </header>
-
-  <!-- Manga Zoom HUD Overlay Indicator -->
-  <div id="mangaZoomHUD" class="manga-zoom-hud">
-    <i class="fas fa-search-plus" style="color: var(--accent-secondary);"></i>
-    <span id="hudZoomValText">100%</span>
-  </div>
 
   <!-- Touch Gesture Zones (Mobile Tap Navigation) -->
   <div class="touch-zone-container">
@@ -486,19 +464,6 @@
             <i class="fas fa-file-alt"></i>
             <span>Trang đơn</span>
           </button>
-        </div>
-      </div>
-
-      <!-- Manga Isolated Zoom Option -->
-      <div class="modal-section">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
-          <label class="modal-label" style="margin-bottom: 0;">Kích thước hiển thị tranh (Manga Zoom)</label>
-          <span id="modalZoomValText" style="font-size: 0.82rem; font-weight: 800; color: var(--accent-primary);">100%</span>
-        </div>
-        <div style="display: flex; align-items: center; gap: 0.75rem; background: var(--bg-tertiary); padding: 0.6rem 0.85rem; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
-          <i class="fas fa-search-minus" style="color: var(--text-muted); font-size: 0.8rem;"></i>
-          <input type="range" id="modalZoomSlider" min="30" max="250" step="5" value="100" style="flex: 1; accent-color: var(--accent-primary); cursor: pointer; height: 6px;">
-          <i class="fas fa-search-plus" style="color: var(--text-muted); font-size: 0.8rem;"></i>
         </div>
       </div>
 

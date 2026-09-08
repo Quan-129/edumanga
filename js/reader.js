@@ -35,7 +35,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   // 3. Bind UI controls and synchronize active states
   initReaderControls();
-  initZoomEngine();
   initTouchZones();
   initKeyboardNav();
   initStudyMode();
@@ -251,9 +250,6 @@ function renderPages() {
     canvasLayer.appendChild(pageWrapper);
     window.scrollTo({ top: 0, behavior: 'instant' });
   }
-
-  // Synchronize zoom UI & viewport scaling
-  updateZoomUI(false);
 }
 
 // Intersection Observer for Webtoon Mode scroll tracking
@@ -514,34 +510,10 @@ function initTouchZones() {
   }
 }
 
-// Keyboard Navigation
+// Keyboard Navigation (Uses native browser zoom Ctrl +/- / wheel)
 function initKeyboardNav() {
   document.addEventListener('keydown', (e) => {
-    // Isolated Manga Zoom Shortcuts (Intercept Ctrl +, Ctrl -, Ctrl 0 & single key + / - / 0)
-    if ((e.ctrlKey || e.metaKey) && (e.key === '=' || e.key === '+' || e.key === 'Add')) {
-      e.preventDefault();
-      zoomIn(0.15, true);
-      return;
-    } else if ((e.ctrlKey || e.metaKey) && (e.key === '-' || e.key === '_' || e.key === 'Subtract')) {
-      e.preventDefault();
-      zoomOut(0.15, true);
-      return;
-    } else if ((e.ctrlKey || e.metaKey) && (e.key === '0' || e.key === 'NumPad0')) {
-      e.preventDefault();
-      resetZoom();
-      return;
-    } else if (!e.ctrlKey && !e.altKey && !e.metaKey && !e.target.matches('input, textarea, select')) {
-      if (e.key === '+' || e.key === '=') {
-        zoomIn(0.15, true);
-        return;
-      } else if (e.key === '-' || e.key === '_') {
-        zoomOut(0.15, true);
-        return;
-      } else if (e.key === '0') {
-        resetZoom();
-        return;
-      }
-    }
+    if (e.target.matches('input, textarea, select')) return;
 
     if (e.key === 'ArrowRight' || e.key === 'PageDown') {
       nextPage();
@@ -563,315 +535,13 @@ function initKeyboardNav() {
   });
 }
 
-// ==========================================================================
-// PDF-STYLE "FIT-WIDTH-FIRST" MANGA ZOOM ENGINE (ZERO JITTER, ZERO DRIFT)
-// ==========================================================================
-const BASE_MANGA_WIDTH = 820;
-const MIN_MANGA_ZOOM = 0.3; // Minimum zoom level: 30% (down to ~246px width)
-let zoomScale = 1.0;
-let preSplitZoomScale = 1.0;
-let hudTimeout = null;
+// Clean up any legacy zoom localStorage on load
+try {
+  localStorage.removeItem('edumanga_manga_zoom');
+  document.documentElement.style.removeProperty('--manga-zoom-scale');
+} catch (e) {}
 
-function isZoomLocked() {
-  return document.body.classList.contains('split-notebook-active');
-}
 
-function getFitWidthScale() {
-  const screenW = window.innerWidth;
-  if (screenW <= BASE_MANGA_WIDTH) return 1.0;
-  return Math.round((screenW / BASE_MANGA_WIDTH) * 100) / 100;
-}
-
-function getMaxZoomScale() {
-  return Math.max(1.0, getFitWidthScale());
-}
-
-function isFitWidthActive() {
-  const fitScale = getFitWidthScale();
-  return Math.abs(zoomScale - fitScale) < 0.05 && zoomScale > 1.05;
-}
-
-function initZoomEngine() {
-  // Load saved zoom preference or default to 1.0
-  const savedZoom = parseFloat(localStorage.getItem('edumanga_manga_zoom'));
-  const maxScale = getMaxZoomScale();
-  if (!isNaN(savedZoom) && savedZoom >= MIN_MANGA_ZOOM && savedZoom <= maxScale) {
-    zoomScale = savedZoom;
-  } else if (!isNaN(savedZoom) && savedZoom > maxScale) {
-    zoomScale = maxScale;
-  } else if (!isNaN(savedZoom) && savedZoom < MIN_MANGA_ZOOM) {
-    zoomScale = MIN_MANGA_ZOOM;
-  } else {
-    zoomScale = 1.0;
-  }
-
-  // Set CSS variable on initialization
-  document.documentElement.style.setProperty('--manga-zoom-scale', zoomScale);
-  const viewport = document.getElementById('readerViewport');
-  if (viewport) {
-    viewport.style.setProperty('--manga-zoom-scale', zoomScale);
-  }
-
-  updateZoomUI(false);
-
-  // Header Zoom Controls
-  const btnZoomIn = document.getElementById('btnZoomIn');
-  const btnZoomOut = document.getElementById('btnZoomOut');
-  const btnZoomReset = document.getElementById('btnZoomReset');
-  const btnFitWidth = document.getElementById('btnFitWidth');
-
-  if (btnZoomIn) btnZoomIn.onclick = () => zoomIn(0.15, true);
-  if (btnZoomOut) btnZoomOut.onclick = () => zoomOut(0.15, true);
-  if (btnZoomReset) btnZoomReset.onclick = () => resetZoom();
-  if (btnFitWidth) btnFitWidth.onclick = () => toggleFitWidth();
-
-  // Settings Modal Zoom Slider
-  const modalZoomSlider = document.getElementById('modalZoomSlider');
-  if (modalZoomSlider) {
-    modalZoomSlider.min = 30;
-    modalZoomSlider.max = Math.max(30, Math.round(maxScale * 100));
-    modalZoomSlider.value = Math.round(zoomScale * 100);
-    modalZoomSlider.addEventListener('input', (e) => {
-      setMangaZoom(parseInt(e.target.value, 10) / 100, null, window.innerHeight / 2, false);
-    });
-  }
-
-  // Intercept Ctrl + Wheel / Trackpad Pinch on both window and document: zero browser zoom, zero roll
-  const onWheelZoom = (e) => {
-    if (e.ctrlKey || e.metaKey) {
-      e.preventDefault();
-      e.stopPropagation();
-      if (isZoomLocked()) return;
-      const factor = e.deltaY < 0 ? 1.08 : (1 / 1.08);
-      setMangaZoom(zoomScale * factor, null, e.clientY, false);
-    }
-  };
-
-  window.addEventListener('wheel', onWheelZoom, { passive: false });
-  document.addEventListener('wheel', onWheelZoom, { passive: false });
-
-  // Double Click on viewport: Quick toggle between Standard (100%) and Fit Width
-  if (viewport) {
-    viewport.addEventListener('dblclick', (e) => {
-      if (isZoomLocked()) return;
-      if (e.target.closest('.bubble-overlay') || e.target.closest('.vocab-interactive') || e.target.closest('.vocab-popover')) {
-        return;
-      }
-      toggleQuickZoom(e.clientY);
-    });
-  }
-
-  // Window Resize listener to update Fit Width scale indicator dynamically
-  window.addEventListener('resize', () => {
-    if (isZoomLocked()) {
-      const availW = window.innerWidth >= 860 ? (window.innerWidth - 480) : window.innerWidth;
-      const splitScale = Math.min(1.0, Math.max(MIN_MANGA_ZOOM, Math.floor((availW / BASE_MANGA_WIDTH) * 100) / 100));
-      setMangaZoom(splitScale, null, window.innerHeight / 2, false, true);
-      return;
-    }
-
-    const maxScale = getMaxZoomScale();
-    if (zoomScale > maxScale) {
-      setMangaZoom(maxScale, null, window.innerHeight / 2, false);
-    } else {
-      updateZoomUI(false);
-    }
-  });
-}
-
-function setMangaZoom(targetScale, feedbackMsg = null, anchorClientY = null, smoothAnimate = false, force = false) {
-  if (isZoomLocked() && !force) {
-    showToast('🔒 Zoom đã được khóa ở chế độ Vở ghi chép');
-    return;
-  }
-
-  const maxScale = getMaxZoomScale();
-  const newScale = Math.max(MIN_MANGA_ZOOM, Math.min(maxScale, Math.round(targetScale * 100) / 100));
-  if (Math.abs(newScale - zoomScale) < 0.001) return;
-
-  const oldScale = zoomScale;
-  const anchorY = (anchorClientY !== null) ? anchorClientY : (window.innerHeight / 2);
-  const currentScrollY = window.scrollY;
-
-  // Formula: keep the exact pixel coordinate under cursor completely stationary
-  const newScrollY = Math.max(0, (currentScrollY + anchorY) * (newScale / oldScale) - anchorY);
-
-  zoomScale = newScale;
-
-  const viewport = document.getElementById('readerViewport');
-  if (smoothAnimate && viewport) {
-    viewport.classList.add('smooth-animate');
-    setTimeout(() => viewport.classList.remove('smooth-animate'), 220);
-  } else if (viewport) {
-    viewport.classList.remove('smooth-animate');
-  }
-
-  // Apply CSS scale synchronously
-  document.documentElement.style.setProperty('--manga-zoom-scale', zoomScale);
-  if (viewport) {
-    viewport.style.setProperty('--manga-zoom-scale', zoomScale);
-  }
-
-  // Apply scroll synchronously in same frame
-  window.scrollTo({
-    top: newScrollY,
-    behavior: 'instant'
-  });
-
-  updateZoomUI(!isZoomLocked());
-
-  if (feedbackMsg) {
-    showToast(feedbackMsg);
-  }
-}
-
-function updateZoomUI(showHud = true) {
-  const percentStr = `${Math.round(zoomScale * 100)}%`;
-  const fitActive = isFitWidthActive();
-  const maxScale = getMaxZoomScale();
-  const locked = isZoomLocked();
-
-  // Sync Header Button & Values
-  const zoomControlsDock = document.querySelector('.header-zoom-controls');
-  if (zoomControlsDock) {
-    zoomControlsDock.classList.toggle('is-locked', locked);
-    zoomControlsDock.title = locked ? 'Đã khóa zoom khi đang mở Vở ghi chép' : 'Phóng to / Thu nhỏ Manga (Ctrl + Lăn chuột hoặc + / -)';
-  }
-
-  const headerZoomVal = document.getElementById('headerZoomVal');
-  if (headerZoomVal) {
-    if (locked) {
-      headerZoomVal.innerHTML = `<i class="fas fa-lock" style="font-size: 0.62rem; margin-right: 2px;"></i>${percentStr}`;
-    } else {
-      headerZoomVal.textContent = percentStr;
-    }
-  }
-
-  const btnFit = document.getElementById('btnFitWidth');
-  if (btnFit) {
-    btnFit.classList.toggle('active', fitActive && !locked);
-  }
-
-  // Sync Settings Modal
-  const modalZoomVal = document.getElementById('modalZoomValText');
-  if (modalZoomVal) {
-    modalZoomVal.textContent = locked ? `Đã khóa (${percentStr})` : (fitActive ? `Tràn màn hình (${percentStr})` : percentStr);
-  }
-
-  const modalSlider = document.getElementById('modalZoomSlider');
-  if (modalSlider) {
-    modalSlider.min = 30;
-    modalSlider.max = Math.max(30, Math.round(maxScale * 100));
-    modalSlider.value = Math.round(zoomScale * 100);
-    modalSlider.disabled = locked;
-  }
-
-  // Save preference only if not in temporary locked split view
-  if (!locked) {
-    localStorage.setItem('edumanga_manga_zoom', zoomScale.toFixed(2));
-  }
-
-  // Show floating HUD notification
-  if (showHud && !locked) {
-    const hud = document.getElementById('mangaZoomHUD');
-    const hudText = document.getElementById('hudZoomValText');
-    if (hud && hudText) {
-      hudText.textContent = fitActive ? `Tràn màn hình (${percentStr})` : percentStr;
-      hud.classList.add('active');
-      if (hudTimeout) clearTimeout(hudTimeout);
-      hudTimeout = setTimeout(() => {
-        hud.classList.remove('active');
-      }, 1300);
-    }
-  }
-}
-
-// Split Notebook View Hook: handles auto scaling and zoom lock/unlock
-function onNotebookSplitViewToggled(isOpen, notebookWidth = 480) {
-  if (isOpen) {
-    preSplitZoomScale = zoomScale;
-    updateZoomUI(false);
-  } else {
-    const restoreScale = preSplitZoomScale || 1.0;
-    setMangaZoom(restoreScale, null, window.innerHeight / 2, true, true);
-    updateZoomUI(false);
-  }
-}
-
-// Live drag resize hook from notebook resizer handle (Zero vertical scroll jumps)
-function onNotebookResized(newNotebookWidth) {
-  if (document.body.classList.contains('split-notebook-active')) {
-    const headerZoomVal = document.getElementById('headerZoomVal');
-    if (headerZoomVal) {
-      const availW = window.innerWidth >= 860 ? (window.innerWidth - newNotebookWidth) : window.innerWidth;
-      const fitPercent = Math.min(100, Math.round((availW / BASE_MANGA_WIDTH) * 100));
-      headerZoomVal.innerHTML = `<i class="fas fa-lock" style="font-size: 0.62rem; margin-right: 2px;"></i>${fitPercent}%`;
-    }
-  }
-}
-
-function fitWidth() {
-  if (isZoomLocked()) {
-    showToast('🔒 Zoom đã được khóa ở chế độ Vở ghi chép');
-    return;
-  }
-  const target = getFitWidthScale();
-  setMangaZoom(target, `📐 Khớp tràn chiều ngang (${Math.round(target * 100)}%)`, window.innerHeight / 2, true);
-}
-
-function fitStandard() {
-  if (isZoomLocked()) {
-    showToast('🔒 Zoom đã được khóa ở chế độ Vở ghi chép');
-    return;
-  }
-  setMangaZoom(1.0, '📏 Kích thước chuẩn (820px)', window.innerHeight / 2, true);
-}
-
-function toggleFitWidth() {
-  if (isZoomLocked()) {
-    showToast('🔒 Zoom đã được khóa ở chế độ Vở ghi chép');
-    return;
-  }
-  if (isFitWidthActive() || zoomScale > 1.05) {
-    fitStandard();
-  } else {
-    fitWidth();
-  }
-}
-
-function zoomIn(step = 0.15, smooth = false) {
-  if (isZoomLocked()) {
-    showToast('🔒 Zoom đã được khóa ở chế độ Vở ghi chép');
-    return;
-  }
-  setMangaZoom(zoomScale + step, null, window.innerHeight / 2, smooth);
-}
-
-function zoomOut(step = 0.15, smooth = false) {
-  if (isZoomLocked()) {
-    showToast('🔒 Zoom đã được khóa ở chế độ Vở ghi chép');
-    return;
-  }
-  setMangaZoom(zoomScale - step, null, window.innerHeight / 2, smooth);
-}
-
-function resetZoom() {
-  if (isZoomLocked()) {
-    showToast('🔒 Zoom đã được khóa ở chế độ Vở ghi chép');
-    return;
-  }
-  fitStandard();
-}
-
-function toggleQuickZoom(anchorY = null) {
-  if (isZoomLocked()) return;
-  if (zoomScale > 1.05) {
-    setMangaZoom(1.0, '📏 Kích thước chuẩn (820px)', anchorY, true);
-  } else {
-    const target = getFitWidthScale();
-    setMangaZoom(target, `📐 Khớp tràn chiều ngang (${Math.round(target * 100)}%)`, anchorY, true);
-  }
-}
 
 function saveReadingHistory() {
   if (!currentSeries || !currentChapter) return;
