@@ -629,11 +629,13 @@ const dbStorage = {
       };
 
       // Try multiple endpoints in case app is served on VS Code Live Server or python dev server
-      const candidateEndpoints = [
-        '/api/backup/save',
-        'http://localhost:8080/api/backup/save',
-        'http://127.0.0.1:8080/api/backup/save'
-      ];
+      const isHttps = window.location.protocol === 'https:';
+      const isLocal = ['localhost', '127.0.0.1', ''].includes(window.location.hostname);
+
+      const candidateEndpoints = ['/api/backup/save'];
+      if (!isHttps || isLocal) {
+        candidateEndpoints.push('http://localhost:8080/api/backup/save', 'http://127.0.0.1:8080/api/backup/save');
+      }
 
       let lastErr = null;
       let result = null;
