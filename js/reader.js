@@ -72,6 +72,10 @@ async function loadChapterData(seriesId, chapId, initialPage = 0) {
       loadChapterNotebook(seriesId, chapId);
     }
 
+    if (window.flashcardService && typeof window.flashcardService.initChapterFlashcards === 'function') {
+      window.flashcardService.initChapterFlashcards(seriesId, currentChapter.id, currentChapter.pages);
+    }
+
     if (window.commentService && typeof window.commentService.initChapterComments === 'function') {
       window.commentService.initChapterComments(seriesId, currentChapter.id);
     }
@@ -519,15 +523,53 @@ function initKeyboardNav() {
   document.addEventListener('keydown', (e) => {
     if (e.target.matches('input, textarea, select')) return;
 
+    // Flashcard Modal active interactions
+    const fcModal = document.getElementById('flashcardModal');
+    if (fcModal && fcModal.classList.contains('active')) {
+      if (e.key === 'Escape') {
+        closeFlashcardModal();
+        return;
+      }
+      if (typeof isPracticeModeActive !== 'undefined' && isPracticeModeActive) {
+        if (e.key === ' ' || e.code === 'Space') {
+          e.preventDefault();
+          if (typeof toggleFlipPracticeCard === 'function') toggleFlipPracticeCard();
+          return;
+        } else if (e.key === '1' || e.key === 'ArrowLeft') {
+          e.preventDefault();
+          if (typeof rateCurrentPracticeCard === 'function') rateCurrentPracticeCard(false);
+          return;
+        } else if (e.key === '2' || e.key === 'ArrowRight') {
+          e.preventDefault();
+          if (typeof rateCurrentPracticeCard === 'function') rateCurrentPracticeCard(true);
+          return;
+        }
+      }
+    }
+
     if (e.key === 'ArrowRight' || e.key === 'PageDown') {
       nextPage();
     } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
       prevPage();
     } else if (e.key === 'f' || e.key === 'F') {
       toggleFullscreen();
+    } else if (e.key === 'v' || e.key === 'V') {
+      if (typeof openFlashcardModal === 'function') {
+        const modal = document.getElementById('flashcardModal');
+        if (modal && modal.classList.contains('active')) {
+          closeFlashcardModal();
+        } else {
+          openFlashcardModal();
+        }
+      }
     } else if (e.key === 'c' || e.key === 'C') {
       if (typeof openCommentModal === 'function') {
-        openCommentModal();
+        const modal = document.getElementById('commentModal');
+        if (modal && modal.classList.contains('active')) {
+          closeCommentModal();
+        } else {
+          openCommentModal();
+        }
       }
     } else if (e.key === 'b' || e.key === 'B') {
       const toggle = document.getElementById('bubblesVisibleToggle');
