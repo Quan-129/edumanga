@@ -695,3 +695,32 @@ function saveReadingHistory() {
     window.syncEngine.saveReadingProgress(currentSeries.id, currentChapter.id, currentPageIndex + 1);
   }
 }
+
+// Export Chapter JSON in Reader
+async function adminExportCurrentReadingChapter() {
+  if (!currentSeries || !currentChapter) {
+    if (typeof showToast === 'function') showToast("⚠️ Không tìm thấy thông tin chương đang đọc!");
+    return;
+  }
+  if (typeof showToast === 'function') showToast(`⏳ Đang trích xuất JSON chương "${currentChapter.title}"...`);
+  const res = await window.dbStorage.exportSingleChapter(currentSeries.id, currentChapter.id, currentChapter);
+  if (res.success) {
+    if (typeof showToast === 'function') showToast(`📥 Đã tải file JSON chương thành công! (${res.pagesCount} trang)`);
+  } else {
+    if (typeof showToast === 'function') showToast(`❌ Lỗi xuất JSON: ${res.error}`);
+  }
+}
+
+// Sync Admin Visibility for Reader Tools
+if (window.authService && typeof window.authService.onAuthStateChanged === 'function') {
+  window.authService.onAuthStateChanged(user => {
+    const adminSection = document.getElementById('readerAdminSection');
+    if (adminSection) {
+      const isAdmin = window.authService.isAdmin();
+      adminSection.style.display = isAdmin ? 'block' : 'none';
+    }
+  });
+}
+
+window.adminExportCurrentReadingChapter = adminExportCurrentReadingChapter;
+

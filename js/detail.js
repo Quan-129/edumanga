@@ -167,18 +167,21 @@ function renderSeriesInfo(s) {
           </div>
         </div>
 
-        <div style="display: flex; gap: 1rem; margin-top: 1.5rem; flex-wrap: wrap;">
+        <div style="display: flex; gap: 0.75rem; margin-top: 1.5rem; flex-wrap: wrap;">
           ${(s.chapters && s.chapters.length > 0) ? `
-            <a href="reader.html?series=${s.id}&chap=${s.chapters[0].id}" class="btn-primary" style="padding: 12px 28px; font-size: 1rem;">
+            <a href="reader.html?series=${s.id}&chap=${s.chapters[0].id}" class="btn-primary" style="padding: 12px 26px; font-size: 0.95rem;">
               <i class="fas fa-book-open"></i> Đọc Từ Chương 1
             </a>
           ` : ''}
           ${isAdmin ? `
-            <button type="button" class="btn-secondary" onclick="openAdminEditSeriesModal()" style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 12px 22px;">
-              <i class="fas fa-pen-to-square" style="color: #38bdf8;"></i> Sửa Thông Tin Truyện
+            <button type="button" class="btn-secondary" onclick="openAdminEditSeriesModal()" style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 11px 20px;">
+              <i class="fas fa-pen-to-square" style="color: #38bdf8;"></i> <span>Sửa Thông Tin</span>
             </button>
-            <button type="button" class="btn-primary" onclick="openAdminAddChapterModal()" style="background: linear-gradient(135deg, #0284c7, #6366f1); display: inline-flex; align-items: center; gap: 0.5rem; padding: 12px 22px;">
-              <i class="fas fa-plus"></i> Thêm Chương Mới (JSON)
+            <button type="button" class="btn-primary" onclick="openAdminAddChapterModal()" style="background: linear-gradient(135deg, #0284c7, #6366f1); display: inline-flex; align-items: center; gap: 0.5rem; padding: 11px 20px;">
+              <i class="fas fa-plus"></i> <span>Thêm Chương (JSON)</span>
+            </button>
+            <button type="button" class="btn-outline-admin" onclick="adminExportCurrentSeries()" title="Tải toàn bộ kịch bản và thông tin của bộ truyện này về máy">
+              <i class="fas fa-cloud-arrow-down" style="color: #38bdf8;"></i> <span>Sao Lưu Bộ Truyện (JSON)</span>
             </button>
           ` : ''}
         </div>
@@ -225,9 +228,11 @@ function renderChapterList(chapters) {
         <span style="color: var(--text-muted); font-size: 0.85rem;">Hỗ trợ đọc Webtoon mượt mà hoặc tải PDF</span>
       </div>
       ${isAdmin ? `
-        <button type="button" class="btn-primary" onclick="openAdminAddChapterModal()" style="padding: 8px 18px; font-size: 0.88rem; background: linear-gradient(135deg, #0284c7, #6366f1);">
-          <i class="fas fa-plus"></i> <span>+ Thêm Chương (Nạp JSON)</span>
-        </button>
+        <div style="display: flex; gap: 8px; align-items: center;">
+          <button type="button" class="btn-primary" onclick="openAdminAddChapterModal()" style="padding: 8px 18px; font-size: 0.88rem; background: linear-gradient(135deg, #0284c7, #6366f1);">
+            <i class="fas fa-plus"></i> <span>+ Thêm Chương (Nạp JSON)</span>
+          </button>
+        </div>
       ` : ''}
     `;
   }
@@ -249,6 +254,11 @@ function renderChapterList(chapters) {
 
   container.innerHTML = chapters.map((chap, idx) => {
     const pagesCount = (chap.pages || []).length || chap.pagesCount || 0;
+    const adminExportBtn = isAdmin ? `
+      <button type="button" class="btn-icon btn-admin-export-chap" onclick="adminExportSingleChapter('${chap.id}', event)" title="Tải file JSON kịch bản chương này">
+        <i class="fas fa-file-code"></i>
+      </button>
+    ` : '';
     const adminDeleteBtn = isAdmin ? `
       <button type="button" class="btn-icon text-danger" onclick="adminDeleteChapter('${chap.id}', event)" title="Xóa chương này" style="color: #f87171; width: 36px; height: 36px; border-radius: 50%; background: rgba(239, 68, 68, 0.15);">
         <i class="fas fa-trash-can"></i>
@@ -286,7 +296,7 @@ function renderChapterList(chapters) {
           </div>
         </div>
 
-        <div style="display: flex; gap: 0.75rem; align-items: center;">
+        <div style="display: flex; gap: 0.6rem; align-items: center;">
           <a href="reader.html?series=${currentSeries.id}&chap=${chap.id}" class="btn-primary" style="padding: 9px 20px; font-size: 0.9rem;">
             <i class="fas fa-play"></i> Đọc Ngay
           </a>
@@ -295,6 +305,7 @@ function renderChapterList(chapters) {
               <i class="fas fa-file-pdf" style="color: #f43f5e;"></i>
             </a>
           ` : ''}
+          ${adminExportBtn}
           ${adminDeleteBtn}
         </div>
       </div>
@@ -774,6 +785,45 @@ async function handleAdminSaveEditedSeries(event) {
   showToast(`🎉 Đã cập nhật bộ truyện "${title}" thành công!`);
 }
 
+// Export Single Chapter JSON
+async function adminExportSingleChapter(chapId, event) {
+  if (event) {
+    event.preventDefault();
+    event.stopPropagation();
+  }
+
+  if (!currentSeries) {
+    showToast("⚠️ Không tìm thấy thông tin bộ truyện!");
+    return;
+  }
+
+  const chap = (currentSeries.chapters || []).find(c => c.id === chapId);
+  showToast(`⏳ Đang trích xuất JSON chương "${chap ? chap.title : chapId}"...`);
+
+  const res = await window.dbStorage.exportSingleChapter(currentSeries.id, chapId, chap);
+  if (res.success) {
+    showToast(`📥 Đã tải file JSON chương thành công! (${res.pagesCount} trang)`);
+  } else {
+    showToast(`❌ Lỗi khi xuất JSON: ${res.error}`);
+  }
+}
+
+// Export Current Series Full Backup
+async function adminExportCurrentSeries() {
+  if (!currentSeries) {
+    showToast("⚠️ Không tìm thấy thông tin bộ truyện!");
+    return;
+  }
+
+  showToast(`⏳ Đang đóng gói toàn bộ dữ liệu bộ truyện "${currentSeries.title}"...`);
+  const res = await window.dbStorage.exportSeriesFullBackup(currentSeries);
+  if (res.success) {
+    showToast(`💾 Đã xuất file Backup trọn bộ truyện thành công! (${res.chaptersCount} chương)`);
+  } else {
+    showToast(`❌ Lỗi khi tạo backup: ${res.error}`);
+  }
+}
+
 // Global Exports
 window.openAdminAddChapterModal = openAdminAddChapterModal;
 window.closeAdminAddChapterModal = closeAdminAddChapterModal;
@@ -785,5 +835,8 @@ window.handleAdminChapterNumChange = handleAdminChapterNumChange;
 window.handleAdminChapterJsonUpload = handleAdminChapterJsonUpload;
 window.handleAdminSaveChapter = handleAdminSaveChapter;
 window.adminDeleteChapter = adminDeleteChapter;
+window.adminExportSingleChapter = adminExportSingleChapter;
+window.adminExportCurrentSeries = adminExportCurrentSeries;
 window.openCharModal = openCharModal;
 window.closeCharModal = closeCharModal;
+

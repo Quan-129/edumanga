@@ -93,8 +93,354 @@ const dbStorage = {
       const tx = db.transaction('chapters', 'readwrite');
       tx.objectStore('chapters').delete(`${seriesId}_${chapId}`);
     } catch (e) {}
+  },
+
+  // Retrieve all chapters stored in IndexedDB
+  async getAllStoredChapters() {
+    try {
+      const db = await this.getDB();
+      return new Promise((resolve) => {
+        const tx = db.transaction('chapters', 'readonly');
+        const store = tx.objectStore('chapters');
+        const request = store.getAll();
+        request.onsuccess = () => resolve(request.result || []);
+        request.onerror = () => resolve([]);
+      });
+    } catch (e) {
+      return [];
+    }
+  },
+
+  // Helper: Trigger browser file download for JSON object
+  triggerDownloadJson(data, filename) {
+    try {
+      const jsonStr = typeof data === 'string' ? data : JSON.stringify(data, null, 2);
+      const blob = new Blob([jsonStr], { type: 'application/json;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename || `edumanga_export_${Date.now()}.json`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      return true;
+    } catch (err) {
+      console.error("Failed to trigger JSON download:", err);
+      return false;
+    }
+  },
+
+  // 1. Export Single Chapter JSON
+  async exportSingleChapter(seriesId, chapId, chapMeta) {
+    try {
+      let pages = await this.getChapterPages(seriesId, chapId);
+      
+      // Fallback: If not in IndexedDB, check chapMeta.pages
+      if (!pages && chapMeta && Array.isArray(chapMeta.pages) && chapMeta.pages.length > 0) {
+        pages = chapMeta.pages;
+      }
+
+      // Fallback 2: Try fetching from static data folder
+      if (!pages || pages.length === 0) {
+        try {
+          const resp = await fetch(`data/${seriesId}/${chapId}.json`);
+          if (resp.ok) {
+            const staticData = await resp.json();
+            pages = staticData.pages || (Array.isArray(staticData) ? staticData : []);
+          }
+        } catch (e) {}
+      }
+
+      const chapterExport = {
+        id: chapId,
+        title: chapMeta ? chapMeta.title : chapId,
+        chapterNumber: chapMeta ? (chapMeta.chapterNumber || 1) : 1,
+        subtitle: chapMeta ? (chapMeta.subtitle || '') : '',
+        pdfUrl: chapMeta ? (chapMeta.pdfUrl || '') : '',
+        releaseDate: chapMeta ? (chapMeta.releaseDate || new Date().toISOString().slice(0, 10)) : new Date().toISOString().slice(0, 10),
+        seriesId: seriesId,
+        pagesCount: pages ? pages.length : 0,
+        exportedAt: new Date().toISOString(),
+        pages: pages || []
+      };
+
+      const safeSeries = (seriesId || 'manga').replace(/[^a-zA-Z0-9_-]/g, '_');
+      const safeChap = (chapId || 'chap').replace(/[^a-zA-Z0-9_-]/g, '_');
+      const filename = `edumanga_${safeSeries}_${safeChap}.json`;
+
+      this.triggerDownloadJson(chapterExport, filename);
+      return { success: true, filename: filename, pagesCount: (pages || []).length };
+    } catch (err) {
+      console.error("Export chapter error:", err);
+      return { success: false, error: err.message };
+    }
+  },
+
+  // 2. Export Entire Series Backup (Metadata + All Chapters with Pages)
+  async exportSeriesFullBackup(series) {
+    if (!series) return { success: false, error: "Missing series data" };
+
+    try {
+      const enrichedChapters = [];
+      const chaptersList = series.chapters || [];
+
+      for (const chap of chaptersList) {
+        let pages = await this.getChapterPages(series.id, chap.id);
+        if (!pages && chap.pages) pages = chap.pages;
+        if (!pages) {
+          try {
+            const resp = await fetch(`data/${series.id}/${chap.id}.json`);
+            if (resp.ok) {
+              const staticData = await resp.json();
+              pages = staticData.pages || (Array.isArray(staticData) ? staticData : []);
+            }
+          } catch (e) {}
+        }
+
+        enrichedChapters.push({
+          ...chap,
+          pagesCount: (pages || []).length,
+          pages: pages || []
+        });
+      }
+
+      const backupData = {
+        exportType: "series_backup",
+        version: "1.0",
+        app: "EduManga Hub",
+        exportedAt: new Date().toISOString(),
+        series: {
+          ...series,
+          chapters: enrichedChapters
+        }
+      };
+
+      const dateStr = new Date().toISOString().slice(0, 10);
+      const safeSeriesId = (series.id || 'series').replace(/[^a-zA-Z0-9_-]/g, '_');
+      const filename = `edumanga_series_${safeSeriesId}_backup_${dateStr}.json`;
+
+      this.triggerDownloadJson(backupData, filename);
+      return { success: true, filename: filename, chaptersCount: enrichedChapters.length };
+    } catch (err) {
+      console.error("Export series backup error:", err);
+      return { success: false, error: err.message };
+    }
+  },
+
+  // 3. Export Master System Backup (Full Catalog + All Stored Chapters)
+  async exportMasterBackup(fullCatalog) {
+    if (!fullCatalog || !Array.isArray(fullCatalog)) {
+      return { success: false, error: "Invalid catalog list" };
+    }
+
+    try {
+      const enrichedCatalog = [];
+      let totalChaps = 0;
+
+      for (const series of fullCatalog) {
+        const enrichedChapters = [];
+        for (const chap of (series.chapters || [])) {
+          let pages = await this.getChapterPages(series.id, chap.id);
+          if (!pages && chap.pages) pages = chap.pages;
+          enrichedChapters.push({
+            ...chap,
+            pagesCount: (pages || []).length,
+            pages: pages || []
+          });
+          totalChaps++;
+        }
+
+        enrichedCatalog.push({
+          ...series,
+          chapters: enrichedChapters
+        });
+      }
+
+      const masterBackup = {
+        exportType: "master_backup",
+        version: "1.0",
+        app: "EduManga Hub",
+        exportedAt: new Date().toISOString(),
+        totalSeries: enrichedCatalog.length,
+        totalChapters: totalChaps,
+        catalog: enrichedCatalog
+      };
+
+      const dateStr = new Date().toISOString().slice(0, 10);
+      const filename = `edumanga_master_backup_${dateStr}.json`;
+
+      this.triggerDownloadJson(masterBackup, filename);
+      return { success: true, filename: filename, totalSeries: enrichedCatalog.length, totalChapters: totalChaps };
+    } catch (err) {
+      console.error("Export master backup error:", err);
+      return { success: false, error: err.message };
+    }
+  },
+
+  // 4. Restore / Import JSON Backup File Smartly
+  async restoreBackupData(rawData) {
+    try {
+      const parsed = typeof rawData === 'string' ? JSON.parse(rawData) : rawData;
+      if (!parsed) throw new Error("File JSON rỗng hoặc không hợp lệ");
+
+      let customCatalog = [];
+      try {
+        const raw = localStorage.getItem('edumanga_custom_catalog');
+        if (raw) customCatalog = JSON.parse(raw);
+      } catch (e) {
+        customCatalog = [];
+      }
+
+      // Case 1: Master Backup
+      if (parsed.exportType === 'master_backup' || Array.isArray(parsed.catalog)) {
+        const catalogList = parsed.catalog || [];
+        let importedSeries = 0;
+        let importedChapters = 0;
+
+        for (const s of catalogList) {
+          if (!s.id) continue;
+          
+          // Separate clean chapters metadata from heavy pages
+          const cleanChapters = [];
+          for (const chap of (s.chapters || [])) {
+            if (!chap.id) continue;
+            if (chap.pages && Array.isArray(chap.pages) && chap.pages.length > 0) {
+              await this.saveChapterPages(s.id, chap.id, chap.pages);
+              importedChapters++;
+            }
+            const { pages, ...cleanChap } = chap;
+            cleanChapters.push({ ...cleanChap, pagesCount: (pages || []).length || cleanChap.pagesCount || 0 });
+          }
+
+          const seriesToStore = {
+            ...s,
+            chapters: cleanChapters
+          };
+
+          const existIdx = customCatalog.findIndex(m => m.id === s.id);
+          if (existIdx >= 0) {
+            customCatalog[existIdx] = { ...customCatalog[existIdx], ...seriesToStore };
+          } else {
+            customCatalog.push(seriesToStore);
+          }
+          importedSeries++;
+        }
+
+        localStorage.setItem('edumanga_custom_catalog', JSON.stringify(customCatalog));
+        return {
+          success: true,
+          type: 'master',
+          message: `Khôi phục thành công Master Backup: ${importedSeries} bộ truyện và ${importedChapters} chương!`,
+          seriesCount: importedSeries,
+          chaptersCount: importedChapters
+        };
+      }
+
+      // Case 2: Series Backup
+      if (parsed.exportType === 'series_backup' || parsed.series || (parsed.id && parsed.title && parsed.chapters)) {
+        const s = parsed.series || parsed;
+        if (!s.id) throw new Error("Không tìm thấy thông tin định danh ID bộ truyện");
+
+        let importedChapters = 0;
+        const cleanChapters = [];
+        for (const chap of (s.chapters || [])) {
+          if (!chap.id) continue;
+          if (chap.pages && Array.isArray(chap.pages) && chap.pages.length > 0) {
+            await this.saveChapterPages(s.id, chap.id, chap.pages);
+            importedChapters++;
+          }
+          const { pages, ...cleanChap } = chap;
+          cleanChapters.push({ ...cleanChap, pagesCount: (pages || []).length || cleanChap.pagesCount || 0 });
+        }
+
+        const seriesToStore = {
+          ...s,
+          chapters: cleanChapters
+        };
+
+        const existIdx = customCatalog.findIndex(m => m.id === s.id);
+        if (existIdx >= 0) {
+          customCatalog[existIdx] = { ...customCatalog[existIdx], ...seriesToStore };
+        } else {
+          customCatalog.push(seriesToStore);
+        }
+
+        localStorage.setItem('edumanga_custom_catalog', JSON.stringify(customCatalog));
+        return {
+          success: true,
+          type: 'series',
+          message: `Khôi phục thành công bộ truyện "${s.title}" với ${importedChapters} chương!`,
+          seriesTitle: s.title,
+          chaptersCount: importedChapters
+        };
+      }
+
+      // Case 3: Single Chapter JSON
+      if (parsed.pages || Array.isArray(parsed) || parsed.chapterNumber || parsed.id) {
+        let pagesArray = [];
+        if (Array.isArray(parsed)) pagesArray = parsed;
+        else if (Array.isArray(parsed.pages)) pagesArray = parsed.pages;
+
+        if (pagesArray.length === 0) {
+          throw new Error("File JSON không chứa dữ liệu trang truyện (pages)");
+        }
+
+        const targetSeriesId = parsed.seriesId || (window.currentSeries ? window.currentSeries.id : null);
+        const targetChapId = parsed.id || `chap-${parsed.chapterNumber || '01'}`;
+
+        if (!targetSeriesId) {
+          return {
+            success: false,
+            needsSeriesSelection: true,
+            pages: pagesArray,
+            parsedData: parsed,
+            error: "Vui lòng mở trang chi tiết của bộ truyện muốn nạp chương này vào."
+          };
+        }
+
+        await this.saveChapterPages(targetSeriesId, targetChapId, pagesArray);
+
+        // Update catalog chapter metadata if series found
+        const seriesObj = customCatalog.find(m => m.id === targetSeriesId);
+        if (seriesObj) {
+          const chaps = seriesObj.chapters || [];
+          const chapIdx = chaps.findIndex(c => c.id === targetChapId);
+          const chapInfo = {
+            id: targetChapId,
+            title: parsed.title || `Chương ${parsed.chapterNumber || chaps.length + 1}`,
+            chapterNumber: parsed.chapterNumber || (chaps.length + 1),
+            subtitle: parsed.subtitle || '',
+            pagesCount: pagesArray.length,
+            releaseDate: parsed.releaseDate || new Date().toISOString().slice(0, 10)
+          };
+
+          if (chapIdx >= 0) {
+            chaps[chapIdx] = { ...chaps[chapIdx], ...chapInfo };
+          } else {
+            chaps.push(chapInfo);
+          }
+          seriesObj.chapters = chaps;
+          localStorage.setItem('edumanga_custom_catalog', JSON.stringify(customCatalog));
+        }
+
+        return {
+          success: true,
+          type: 'chapter',
+          message: `Đã nạp thành công chương "${parsed.title || targetChapId}" (${pagesArray.length} trang)!`,
+          chapTitle: parsed.title || targetChapId,
+          pagesCount: pagesArray.length
+        };
+      }
+
+      throw new Error("Định dạng file JSON không khớp với chuẩn EduManga Hub.");
+    } catch (err) {
+      console.error("Restore backup error:", err);
+      return { success: false, error: err.message };
+    }
   }
 };
 
 // Global Export
 window.dbStorage = dbStorage;
+

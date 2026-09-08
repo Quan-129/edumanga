@@ -482,6 +482,19 @@ function renderHeaderAuthUI(user) {
             ${isAdmin ? `<div class="menu-admin-badge"><i class="fas fa-shield-halved"></i> Toàn quyền Quản Trị</div>` : ''}
           </div>
           <div class="menu-divider"></div>
+          ${isAdmin ? `
+            <div class="menu-section-label"><i class="fas fa-crown" style="color: #facc15;"></i> Quản Trị Dữ Liệu</div>
+            <button type="button" class="menu-item-btn" onclick="adminExportMasterSystemBackup(); toggleUserMenu();">
+              <i class="fas fa-cloud-arrow-down" style="color: #38bdf8;"></i> <span>Sao lưu toàn bộ (Master JSON)</span>
+            </button>
+            <button type="button" class="menu-item-btn" onclick="adminTriggerRestoreBackup(); toggleUserMenu();">
+              <i class="fas fa-file-import" style="color: #a855f7;"></i> <span>Nạp / Khôi phục file Backup</span>
+            </button>
+            <button type="button" class="menu-item-btn" onclick="adminExportMangaJson(); toggleUserMenu();">
+              <i class="fas fa-file-code" style="color: #22c55e;"></i> <span>Xuất danh mục (manga.json)</span>
+            </button>
+            <div class="menu-divider"></div>
+          ` : ''}
           <button type="button" class="menu-item-btn" onclick="openBookmarkModal(); toggleUserMenu();">
             <i class="fas fa-bookmark"></i> <span>Tủ sách cá nhân</span>
           </button>
@@ -512,6 +525,80 @@ function toggleUserMenu(event) {
   }
 }
 
+// Global Admin Backup & Restore Functions
+async function adminExportMasterSystemBackup() {
+  if (!window.authService || !window.authService.isAdmin()) {
+    showToast("⚠️ Chỉ Quản trị viên mới có quyền sao lưu dữ liệu.");
+    return;
+  }
+
+  showToast("⏳ Đang thu thập toàn bộ dữ liệu truyện tranh và kịch bản...");
+  let fullCatalog = [];
+  if (typeof getFullMangaCatalog === 'function') {
+    fullCatalog = await getFullMangaCatalog();
+  } else {
+    try {
+      const raw = localStorage.getItem('edumanga_custom_catalog');
+      if (raw) fullCatalog = JSON.parse(raw);
+    } catch (e) {}
+  }
+
+  const res = await window.dbStorage.exportMasterBackup(fullCatalog);
+  if (res.success) {
+    showToast(`💾 Đã xuất Master Backup: ${res.totalSeries} bộ truyện, ${res.totalChapters} chương!`);
+  } else {
+    showToast(`❌ Lỗi khi xuất Master Backup: ${res.error}`);
+  }
+}
+
+function adminTriggerRestoreBackup() {
+  if (!window.authService || !window.authService.isAdmin()) {
+    showToast("⚠️ Chỉ Quản trị viên mới có quyền nạp bản sao lưu.");
+    return;
+  }
+
+  let fileInput = document.getElementById('adminGlobalRestoreInput');
+  if (!fileInput) {
+    fileInput = document.createElement('input');
+    fileInput.type = 'file';
+    fileInput.id = 'adminGlobalRestoreInput';
+    fileInput.accept = '.json,application/json';
+    fileInput.style.display = 'none';
+    fileInput.onchange = function() {
+      handleAdminGlobalRestoreFile(this);
+    };
+    document.body.appendChild(fileInput);
+  }
+  fileInput.value = '';
+  fileInput.click();
+}
+
+async function handleAdminGlobalRestoreFile(input) {
+  if (!input.files || !input.files[0]) return;
+  const file = input.files[0];
+
+  showToast(`⏳ Đang đọc và kiểm tra tính hợp lệ file "${file.name}"...`);
+
+  const reader = new FileReader();
+  reader.onload = async function(e) {
+    try {
+      const content = e.target.result;
+      const res = await window.dbStorage.restoreBackupData(content);
+      if (res.success) {
+        showToast(`🎉 ${res.message}`);
+        setTimeout(() => {
+          window.location.reload();
+        }, 1200);
+      } else {
+        showToast(`⚠️ Không thể khôi phục: ${res.error}`);
+      }
+    } catch (err) {
+      showToast(`❌ Lỗi phân tích file JSON: ${err.message}`);
+    }
+  };
+  reader.readAsText(file);
+}
+
 // Close dropdown when clicking outside
 document.addEventListener('click', () => {
   const menu = document.getElementById('headerUserMenu');
@@ -527,3 +614,7 @@ document.addEventListener('DOMContentLoaded', () => {
 // Global Export
 window.authService = authService;
 window.checkIsAdmin = () => authService.isAdmin();
+window.adminExportMasterSystemBackup = adminExportMasterSystemBackup;
+window.adminTriggerRestoreBackup = adminTriggerRestoreBackup;
+window.handleAdminGlobalRestoreFile = handleAdminGlobalRestoreFile;
+
