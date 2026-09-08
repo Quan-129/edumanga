@@ -517,6 +517,7 @@ const dbStorage = {
             chapterNumber: parsed.chapterNumber || (chaps.length + 1),
             subtitle: parsed.subtitle || '',
             pagesCount: pagesArray.length,
+            firstPageUrl: (pagesArray.length > 0 && pagesArray[0].imageUrl) ? pagesArray[0].imageUrl : '',
             releaseDate: parsed.releaseDate || new Date().toISOString().slice(0, 10)
           };
 
@@ -526,7 +527,7 @@ const dbStorage = {
             chaps.push(chapInfo);
           }
           seriesObj.chapters = chaps;
-          localStorage.setItem('edumanga_custom_catalog', JSON.stringify(customCatalog));
+          await this.saveCustomSeries(seriesObj);
         }
 
         return {
@@ -801,6 +802,9 @@ const dbStorage = {
         if (firstChap.pages && Array.isArray(firstChap.pages) && firstChap.pages.length > 0 && firstChap.pages[0].imageUrl) {
           return firstChap.pages[0].imageUrl;
         }
+        if (firstChap.firstPageUrl && typeof firstChap.firstPageUrl === 'string' && firstChap.firstPageUrl.trim() !== '') {
+          return firstChap.firstPageUrl.trim();
+        }
         if (series.id && firstChap.id) {
           return `assets/chapters/${series.id}/${firstChap.id}/page_01.jpg`;
         }
@@ -822,6 +826,9 @@ const dbStorage = {
       if (firstChap) {
         if (firstChap.pages && Array.isArray(firstChap.pages) && firstChap.pages.length > 0 && firstChap.pages[0].imageUrl) {
           return firstChap.pages[0].imageUrl;
+        }
+        if (firstChap.firstPageUrl && typeof firstChap.firstPageUrl === 'string' && firstChap.firstPageUrl.trim() !== '') {
+          return firstChap.firstPageUrl.trim();
         }
         try {
           const storedPages = await this.getChapterPages(series.id, firstChap.id);

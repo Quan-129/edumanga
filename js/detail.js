@@ -463,53 +463,47 @@ async function handleAdminSaveChapter(e) {
     await window.dbStorage.saveChapterPages(currentSeries.id, chapId, pagesToSave);
   }
 
-  // 2. Save metadata to custom catalog
+  // 2. Prepare chapter object with firstPageUrl
+  const firstPageUrl = (pagesToSave.length > 0 && pagesToSave[0].imageUrl) ? pagesToSave[0].imageUrl : '';
   const newChapter = {
     id: chapId,
     title: chapTitle,
     subtitle: chapSubtitle || `Nạp lúc ${new Date().toLocaleDateString('vi-VN')}`,
     releaseDate: new Date().toISOString().slice(0, 10),
     pagesCount: pagesToSave.length,
-    pages: pagesToSave,
+    firstPageUrl: firstPageUrl,
     pdfUrl: chapPdf || ''
   };
 
-  let customCatalog = [];
-  try {
-    const raw = localStorage.getItem('edumanga_custom_catalog');
-    if (raw) customCatalog = JSON.parse(raw);
-  } catch (err) {}
-
-  let seriesInCustom = customCatalog.find(m => m.id === currentSeries.id);
-  if (!seriesInCustom) {
-    seriesInCustom = { ...currentSeries, chapters: [...(currentSeries.chapters || [])] };
-    customCatalog.push(seriesInCustom);
-  }
-
-  // Un-blacklist this chapter if it was previously deleted
+  // 3. Un-blacklist this chapter if it was previously deleted
   try {
     let deletedChapterKeys = JSON.parse(localStorage.getItem('edumanga_deleted_chapter_keys') || '[]');
     deletedChapterKeys = deletedChapterKeys.filter(x => x !== `${currentSeries.id}_${chapId}`);
     localStorage.setItem('edumanga_deleted_chapter_keys', JSON.stringify(deletedChapterKeys));
   } catch (e) {}
 
-  // Update or append chapter
-  const existingChaps = seriesInCustom.chapters || [];
+  // 4. Update or append chapter to currentSeries
+  const existingChaps = [...(currentSeries.chapters || [])];
   const chapIdx = existingChaps.findIndex(c => c.id === chapId);
   if (chapIdx >= 0) {
-    existingChaps[chapIdx] = newChapter;
+    existingChaps[chapIdx] = { ...existingChaps[chapIdx], ...newChapter };
   } else {
     existingChaps.push(newChapter);
   }
-  seriesInCustom.chapters = existingChaps;
 
-  saveCustomCatalogToStorage(customCatalog);
+  // 5. Strictly preserve currentSeries cover & metadata
+  const updatedSeries = {
+    ...currentSeries,
+    cover: currentSeries.cover || '',
+    chapters: existingChaps
+  };
+
   if (window.dbStorage && typeof window.dbStorage.saveCustomSeries === 'function') {
-    await window.dbStorage.saveCustomSeries(seriesInCustom);
+    await window.dbStorage.saveCustomSeries(updatedSeries);
   }
 
-  // Update active state
-  currentSeries.chapters = existingChaps;
+  // Update active state and re-render
+  currentSeries = updatedSeries;
   renderChapterList(currentSeries.chapters);
   renderSeriesInfo(currentSeries);
   closeAdminAddChapterModal();
@@ -541,23 +535,19 @@ async function adminDeleteChapter(chapterId, event) {
     await window.dbStorage.deleteChapterPages(currentSeries.id, chapterId);
   }
 
-  // 3. Update in customCatalog
-  let customCatalog = [];
-  try {
-    const raw = localStorage.getItem('edumanga_custom_catalog');
-    if (raw) customCatalog = JSON.parse(raw);
-  } catch (err) {}
+  // 3. Update in customSeries & IndexedDB
+  const remainingChaps = (currentSeries.chapters || []).filter(c => c.id !== chapterId);
+  const updatedSeries = {
+    ...currentSeries,
+    cover: currentSeries.cover || '',
+    chapters: remainingChaps
+  };
 
-  let seriesInCustom = customCatalog.find(m => m.id === currentSeries.id);
-  if (!seriesInCustom) {
-    seriesInCustom = { ...currentSeries, chapters: [...(currentSeries.chapters || [])] };
-    customCatalog.push(seriesInCustom);
+  if (window.dbStorage && typeof window.dbStorage.saveCustomSeries === 'function') {
+    await window.dbStorage.saveCustomSeries(updatedSeries);
   }
 
-  seriesInCustom.chapters = (seriesInCustom.chapters || []).filter(c => c.id !== chapterId);
-  saveCustomCatalogToStorage(customCatalog);
-
-  currentSeries.chapters = (currentSeries.chapters || []).filter(c => c.id !== chapterId);
+  currentSeries = updatedSeries;
   renderChapterList(currentSeries.chapters);
   renderSeriesInfo(currentSeries);
   showToast(`🗑️ Đã xóa vĩnh viễn chương "${chapterId}"`);
