@@ -27,72 +27,26 @@ let practiceModeDirection = 'two_way';
 let currentTypingState = 'input';
 let lastUserTypedInput = '';
 
-// Session result tracker for 2-way mastery: { [cardId]: { k2r: bool|null, m2k: bool|null } }
-// Persistent across sessions via localStorage
+// Session result tracker for 2-way practice: { [cardId]: { k2r: bool|null, m2k: bool|null } }
 let sessionWordResults = {};
 
-// Load persistent 2-way results from localStorage
-function loadTwoWayResults() {
-  if (!currentFlashcardChapterKey) return;
-  try {
-    const raw = localStorage.getItem(`edumanga_2way_${currentFlashcardChapterKey}`);
-    if (raw) sessionWordResults = JSON.parse(raw);
-    else sessionWordResults = {};
-  } catch (e) {
-    sessionWordResults = {};
-  }
+// Progress scale: max 84 (2-way mode, thang 84)
+const PROGRESS_SCALE = 84;
+
+// Tính tiến trình trên thang 84: (mastered / total) * 84
+function calcProgressValue() {
+  const total = currentChapterVocabList.length;
+  if (total === 0) return 0;
+  const mastered = currentChapterVocabList.filter(c => c.mastered).length;
+  return Math.round((mastered / total) * PROGRESS_SCALE);
 }
 
-// Save persistent 2-way results to localStorage
-function saveTwoWayResults() {
-  if (!currentFlashcardChapterKey) return;
-  try {
-    localStorage.setItem(`edumanga_2way_${currentFlashcardChapterKey}`, JSON.stringify(sessionWordResults));
-  } catch (e) {}
-}
-
-// Reset persistent 2-way results (when mastery loop resets)
-function resetTwoWayResults() {
-  sessionWordResults = {};
-  if (!currentFlashcardChapterKey) return;
-  try {
-    localStorage.removeItem(`edumanga_2way_${currentFlashcardChapterKey}`);
-  } catch (e) {}
-}
-
-// Calculate weighted progress for 2-way mode
-// Each vocab card has max 2 points (k2r + m2k)
-// Grammar cards count as 1 point
-// Returns 0-100 percent
-function calcTwoWayProgress() {
-  const list = currentChapterVocabList;
-  if (list.length === 0) return 0;
-
-  let totalPoints = 0;
-  let earnedPoints = 0;
-
-  list.forEach(c => {
-    if (c.type === 'grammar') {
-      totalPoints += 1;
-      if (c.mastered) earnedPoints += 1;
-    } else {
-      totalPoints += 2;
-      const res = sessionWordResults[c.id] || {};
-      if (res.k2r === true) earnedPoints += 1;
-      if (res.m2k === true) earnedPoints += 1;
-    }
-  });
-
-  return totalPoints > 0 ? Math.round((earnedPoints / totalPoints) * 100) : 0;
-}
-
-// Check if all vocab cards have both directions mastered (= ready for loop reset)
-function checkAllTwoWayMastered() {
-  return currentChapterVocabList.every(c => {
-    if (c.type === 'grammar') return c.mastered;
-    const res = sessionWordResults[c.id] || {};
-    return res.k2r === true && res.m2k === true;
-  });
+// Trả về % để fill thanh bar (0-100)
+function calcProgressPercent() {
+  const total = currentChapterVocabList.length;
+  if (total === 0) return 0;
+  const mastered = currentChapterVocabList.filter(c => c.mastered).length;
+  return Math.round((mastered / total) * 100);
 }
 
 // Mastery Loop & Points System (Khi đạt 100% tiến độ -> Nhận 1 điểm tích lũy & Reset về 0)
@@ -107,12 +61,12 @@ function getMasteryPoints() {
 }
 
 function checkAndAwardMasteryLoop() {
-  if (currentChapterVocabList.length === 0) return false;
+  const total = currentChapterVocabList.length;
+  if (total === 0) return false;
+  const masteredCount = currentChapterVocabList.filter(c => c.mastered).length;
 
-  // In 2-way mode: all vocab must have both k2r AND m2k correct to award
-  const allMastered = checkAllTwoWayMastered();
-
-  if (allMastered) {
+  // Khi tất cả thẻ đã thuộc -> Cộng 1 điểm & Reset vòng mới
+  if (masteredCount >= total) {
     const newLoops = getMasteryPoints() + 1;
     try {
       localStorage.setItem(`edumanga_vocab_loops_${currentFlashcardChapterKey}`, newLoops);
@@ -120,13 +74,13 @@ function checkAndAwardMasteryLoop() {
       localStorage.setItem('edumanga_total_mastery_points', totalPoints);
     } catch (e) {}
 
-    // Reset all cards & 2-way results for the next spaced repetition loop
+    // Reset tất cả thẻ về chưa thuộc cho vòng tiếp theo
     currentChapterVocabList.forEach(c => c.mastered = false);
-    resetTwoWayResults();
+    sessionWordResults = {};
     saveCurrentFlashcardsToStorage();
     updateFlashcardBadges();
 
-    showToast(`🏆 HOÀN THÀNH 100%! +1 Điểm tích lũy (Tổng: ${newLoops} ⭐). Tiến độ đã reset để bạn tiếp tục ôn luyện vòng mới!`);
+    showToast(`🏆 HOÀN THÀNH! +1 Điểm tích lũy (Tổng: ${newLoops} ⭐). Tiến độ reset cho vòng ôn luyện mới!`);
     return true;
   }
   return false;
@@ -138,7 +92,7 @@ const flashcardService = {
     currentFlashcardSeriesId = seriesId;
     currentFlashcardChapId = chapId;
     currentFlashcardChapterKey = `${seriesId}_${chapId}`;
-    loadTwoWayResults(); // Load persistent 2-way results for this chapter
+    sessionWordResults = {};
 
     // Extract chapter number from chapId (e.g. 'chap-01', 'chuong-02' -> 1, 2)
     let chapterNum = 1;
@@ -394,7 +348,7 @@ const flashcardService = {
 
   // Build 2-way question items from word list
   generatePracticeQuestions(wordList) {
-    // DO NOT reset sessionWordResults here - they are persistent across sessions!
+    sessionWordResults = {};
     const questions = [];
 
     wordList.forEach(c => {
@@ -557,28 +511,23 @@ const flashcardService = {
     const isCorrect = evaluateAnswer(userInput, card, direction);
     const mainCard = currentChapterVocabList.find(c => c.id === originalId);
 
-    // Update persistent 2-way tracker
+    // Update session tracker cho chiều hiện tại
     if (!sessionWordResults[originalId]) {
       sessionWordResults[originalId] = { k2r: null, m2k: null };
     }
     if (direction === 'kanji_to_reading') {
-      // Only update if current is null or false (don't downgrade from true)
-      if (sessionWordResults[originalId].k2r !== true || !isCorrect) {
-        sessionWordResults[originalId].k2r = isCorrect;
-      }
+      sessionWordResults[originalId].k2r = isCorrect;
     } else if (direction === 'meaning_to_kanji') {
-      if (sessionWordResults[originalId].m2k !== true || !isCorrect) {
-        sessionWordResults[originalId].m2k = isCorrect;
-      }
+      sessionWordResults[originalId].m2k = isCorrect;
     }
-    saveTwoWayResults();
 
     if (isCorrect) {
       currentTypingState = 'correct';
-      
-      // Check overall mastery in 2-way mode: both directions correct = mastered!
+
+      // Trong 2-way mode: đúng cả 2 chiều -> mark mastered
       const res = sessionWordResults[originalId];
-      if (res.k2r === true && res.m2k === true) {
+      const bothCorrect = res.k2r === true && res.m2k === true;
+      if (bothCorrect) {
         if (mainCard) mainCard.mastered = true;
         card.mastered = true;
       }
@@ -589,7 +538,8 @@ const flashcardService = {
       this.speak(card.term);
     } else {
       currentTypingState = 'incorrect';
-      // Don't unmaster the card when wrong - just update tracker
+      if (mainCard) mainCard.mastered = false;
+      card.mastered = false;
       saveCurrentFlashcardsToStorage();
       updateFlashcardBadges();
     }
@@ -609,19 +559,14 @@ const flashcardService = {
       sessionWordResults[originalId] = { k2r: null, m2k: null };
     }
     if (direction === 'kanji_to_reading') {
-      // Only mark false if not already true (don't downgrade a correct answer)
-      if (sessionWordResults[originalId].k2r !== true) {
-        sessionWordResults[originalId].k2r = false;
-      }
+      sessionWordResults[originalId].k2r = false;
     } else if (direction === 'meaning_to_kanji') {
-      if (sessionWordResults[originalId].m2k !== true) {
-        sessionWordResults[originalId].m2k = false;
-      }
+      sessionWordResults[originalId].m2k = false;
     }
-    saveTwoWayResults();
 
     const mainCard = currentChapterVocabList.find(c => c.id === originalId);
-    // Don't unmaster card if it was already mastered from a previous correct answer
+    if (mainCard) mainCard.mastered = false;
+    card.mastered = false;
     saveCurrentFlashcardsToStorage();
     updateFlashcardBadges();
     this.speak(card.term);
@@ -1008,8 +953,8 @@ function renderFlashcardModalContent() {
 function renderOverviewListView(container) {
   const total = currentChapterVocabList.length;
   const mastered = currentChapterVocabList.filter(c => c.mastered).length;
-  // 2-way weighted progress: counts individual k2r and m2k progress
-  const percent = calcTwoWayProgress();
+  const progressVal = calcProgressValue();   // 0 - 84
+  const percent = calcProgressPercent();     // 0 - 100 (để fill bar width)
 
   // Filter Cards
   let filtered = currentChapterVocabList;
@@ -1188,8 +1133,9 @@ function renderOverviewListView(container) {
           <div class="vocab-progress-wrapper">
             <div class="progress-bar-track">
               <div class="progress-bar-fill" style="width: ${percent}%;"></div>
+              <span class="progress-bar-value-label">${progressVal} / 84</span>
             </div>
-            <span class="progress-text">${mastered}/${total} đã thuộc (${percent}%)</span>
+            <span class="progress-text">${mastered}/${total} thẻ đã thuộc &nbsp;·&nbsp; <b>${progressVal}</b> / 84 điểm tiến trình</span>
           </div>
         </div>
 

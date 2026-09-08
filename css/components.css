@@ -1756,24 +1756,46 @@ body.auth-locked {
 
 .progress-bar-track {
   flex: 1;
-  height: 8px;
-  background: rgba(255, 255, 255, 0.15);
+  height: 22px;
+  background: rgba(255, 255, 255, 0.08);
   border-radius: 999px;
   overflow: hidden;
-  max-width: 180px;
+  position: relative;
+  min-width: 160px;
+  border: 1px solid rgba(255,255,255,0.1);
 }
 
 .progress-bar-fill {
   height: 100%;
-  background: linear-gradient(90deg, #38bdf8, #22c55e);
+  background: linear-gradient(90deg, #0ea5e9, #22c55e);
   border-radius: 999px;
-  transition: width 0.3s ease;
+  transition: width 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+}
+
+.progress-bar-value-label {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: rgba(255, 255, 255, 0.9);
+  white-space: nowrap;
+  pointer-events: none;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+  z-index: 2;
 }
 
 .progress-text {
-  font-size: 0.85rem;
-  color: #cbd5e1;
-  font-weight: 700;
+  font-size: 0.82rem;
+  color: #94a3b8;
+  font-weight: 600;
+  margin-top: 5px;
+}
+
+.progress-text b {
+  color: #38bdf8;
 }
 
 .btn-start-practice {
