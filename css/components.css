@@ -3847,3 +3847,193 @@ body.auth-locked {
   background: rgba(250, 204, 21, 0.15);
   border-color: #facc15;
 }
+
+
+/* ==========================================================================
+   HEADER USER DROPDOWN & AUTH UI (FIX OVERLAP & RESPONSIVE LAYOUT)
+   ========================================================================== */
+
+.header-user-dropdown-wrap {
+  position: relative !important;
+  display: inline-flex !important;
+  align-items: center !important;
+}
+
+.header-user-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  background: rgba(255, 255, 255, 0.06) !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.15) !important;
+  padding: 4px 14px 4px 6px !important;
+  border-radius: 999px !important;
+  color: #ffffff !important;
+  cursor: pointer !important;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  text-decoration: none !important;
+}
+
+.header-user-btn:hover {
+  background: rgba(255, 255, 255, 0.12) !important;
+  border-color: rgba(56, 189, 248, 0.5) !important;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.35) !important;
+}
+
+.header-avatar {
+  width: 34px !important;
+  height: 34px !important;
+  border-radius: 50% !important;
+  object-fit: cover !important;
+  border: 1.5px solid #38bdf8 !important;
+  background: #0f172a !important;
+  flex-shrink: 0 !important;
+}
+
+.header-user-info-text {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  max-width: 220px !important;
+}
+
+.header-user-name {
+  font-size: 0.92rem !important;
+  font-weight: 700 !important;
+  color: #ffffff !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+.header-user-arrow {
+  font-size: 0.72rem !important;
+  color: #94a3b8 !important;
+  transition: transform 0.2s ease !important;
+}
+
+/* User Menu Dropdown Card */
+.header-user-menu {
+  position: absolute !important;
+  top: calc(100% + 10px) !important;
+  right: 0 !important;
+  min-width: 260px !important;
+  background: rgba(15, 23, 42, 0.97) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.15) !important;
+  border-radius: 18px !important;
+  padding: 12px !important;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.75), 0 0 30px rgba(2, 132, 199, 0.2) !important;
+  display: none !important;
+  flex-direction: column !important;
+  gap: 6px !important;
+  z-index: 99999 !important;
+  animation: dropdownFadeAnim 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.header-user-menu.active {
+  display: flex !important;
+}
+
+@keyframes dropdownFadeAnim {
+  from {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.menu-user-header {
+  padding: 8px 10px 10px 10px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 3px !important;
+  text-align: left !important;
+}
+
+.menu-user-name {
+  font-size: 1.05rem !important;
+  font-weight: 800 !important;
+  color: #ffffff !important;
+}
+
+.menu-user-email {
+  font-size: 0.8rem !important;
+  color: #94a3b8 !important;
+  word-break: break-all !important;
+}
+
+.menu-admin-badge {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  background: rgba(250, 204, 21, 0.18) !important;
+  border: 1px solid rgba(250, 204, 21, 0.45) !important;
+  color: #facc15 !important;
+  font-size: 0.75rem !important;
+  font-weight: 800 !important;
+  padding: 3px 10px !important;
+  border-radius: 6px !important;
+  margin-top: 6px !important;
+  width: fit-content !important;
+}
+
+.menu-divider {
+  height: 1px !important;
+  background: rgba(255, 255, 255, 0.1) !important;
+  margin: 4px 0 !important;
+}
+
+.menu-item-btn {
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  width: 100% !important;
+  background: transparent !important;
+  border: none !important;
+  color: #cbd5e1 !important;
+  padding: 10px 14px !important;
+  border-radius: 10px !important;
+  font-size: 0.92rem !important;
+  font-weight: 600 !important;
+  cursor: pointer !important;
+  text-align: left !important;
+  transition: all 0.15s ease !important;
+  box-sizing: border-box !important;
+}
+
+.menu-item-btn:hover {
+  background: rgba(255, 255, 255, 0.08) !important;
+  color: #ffffff !important;
+  transform: translateX(4px) !important;
+}
+
+.menu-item-btn i {
+  font-size: 1rem !important;
+  width: 18px !important;
+  text-align: center !important;
+  color: #38bdf8 !important;
+  flex-shrink: 0 !important;
+}
+
+.menu-item-btn.text-danger {
+  color: #f87171 !important;
+}
+
+.menu-item-btn.text-danger i {
+  color: #f87171 !important;
+}
+
+.menu-item-btn.text-danger:hover {
+  background: rgba(239, 68, 68, 0.15) !important;
+  color: #fca5a5 !important;
+}
+
+.btn-header-login {
+  padding: 8px 20px !important;
+  font-size: 0.92rem !important;
+  border-radius: 999px !important;
+}
