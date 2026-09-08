@@ -30,15 +30,11 @@ let lastUserTypedInput = '';
 // Session result tracker for 2-way practice: { [cardId]: { k2r: bool|null, m2k: bool|null } }
 let sessionWordResults = {};
 
-// Progress scale: max 84 (2-way mode, thang 84)
-const PROGRESS_SCALE = 84;
-
-// Tính tiến trình trên thang 84: (mastered / total) * 84
+// Tính tiến trình trên thang total: trả về số thẻ đã thuộc
 function calcProgressValue() {
   const total = currentChapterVocabList.length;
   if (total === 0) return 0;
-  const mastered = currentChapterVocabList.filter(c => c.mastered).length;
-  return Math.round((mastered / total) * PROGRESS_SCALE);
+  return currentChapterVocabList.filter(c => c.mastered).length;
 }
 
 // Trả về % để fill thanh bar (0-100)
@@ -1133,9 +1129,9 @@ function renderOverviewListView(container) {
           <div class="vocab-progress-wrapper">
             <div class="progress-bar-track">
               <div class="progress-bar-fill" style="width: ${percent}%;"></div>
-              <span class="progress-bar-value-label">${progressVal} / 84</span>
+              <span class="progress-bar-value-label">${progressVal} / ${total}</span>
             </div>
-            <span class="progress-text">${mastered}/${total} thẻ đã thuộc &nbsp;·&nbsp; <b>${progressVal}</b> / 84 điểm tiến trình</span>
+            <span class="progress-text"><b>${progressVal}</b> / ${total} thẻ đã thuộc</span>
           </div>
         </div>
 
