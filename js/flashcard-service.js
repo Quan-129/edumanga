@@ -20,8 +20,8 @@ let isPracticeFlipped = false;
 let isPracticeModeActive = false;
 
 // Practice Mode Selection:
-// 'two_way' (Mặc định: Mỗi từ học 2 chiều 2 lần) | 'kanji_only' (Nhìn Kanji) | 'meaning_only' (Nhìn Nghĩa)
-let practiceModeDirection = localStorage.getItem('edumanga_practice_mode_dir') || 'two_way';
+// Cố định 1 chế độ duy nhất: 'two_way' (Mỗi từ học 2 chiều: Nhìn Kanji -> Gõ Đọc/Nghĩa & Nhìn Nghĩa -> Gõ Tiếng Nhật)
+let practiceModeDirection = 'two_way';
 
 // Typing Mode State for current card: 'input' | 'correct' | 'incorrect' | 'revealed'
 let currentTypingState = 'input';
@@ -29,6 +29,42 @@ let lastUserTypedInput = '';
 
 // Session result tracker for 2-way mastery: { [cardId]: { k2r: bool|null, m2k: bool|null } }
 let sessionWordResults = {};
+
+// Mastery Loop & Points System (Khi đạt 100% tiến độ -> Nhận 1 điểm tích lũy & Reset về 0)
+function getMasteryPoints() {
+  if (!currentFlashcardChapterKey) return 0;
+  try {
+    const pts = localStorage.getItem(`edumanga_vocab_loops_${currentFlashcardChapterKey}`);
+    return pts ? parseInt(pts, 10) : 0;
+  } catch (e) {
+    return 0;
+  }
+}
+
+function checkAndAwardMasteryLoop() {
+  const total = currentChapterVocabList.length;
+  if (total === 0) return false;
+  const masteredCount = currentChapterVocabList.filter(c => c.mastered).length;
+
+  // When 100% full progress is reached -> Award 1 point & Reset to 0 for next spaced repetition loop
+  if (masteredCount >= total) {
+    const newLoops = getMasteryPoints() + 1;
+    try {
+      localStorage.setItem(`edumanga_vocab_loops_${currentFlashcardChapterKey}`, newLoops);
+      const totalPoints = (parseInt(localStorage.getItem('edumanga_total_mastery_points') || '0', 10)) + 1;
+      localStorage.setItem('edumanga_total_mastery_points', totalPoints);
+    } catch (e) {}
+
+    // Reset all cards in this chapter to unmastered (0%) for the next loop
+    currentChapterVocabList.forEach(c => c.mastered = false);
+    saveCurrentFlashcardsToStorage();
+    updateFlashcardBadges();
+
+    showToast(`🏆 HOÀN THÀNH 100%! +1 Điểm tích lũy (Tổng: ${newLoops} ⭐). Tiến độ đã reset để bạn tiếp tục ôn luyện vòng mới!`);
+    return true;
+  }
+  return false;
+}
 
 const flashcardService = {
   // Initialize and extract vocabulary for the active chapter
@@ -206,13 +242,19 @@ const flashcardService = {
 
     card.mastered = !card.mastered;
     saveCurrentFlashcardsToStorage();
+    
+    // Check if progress reached 100% -> award point & reset
+    const awarded = checkAndAwardMasteryLoop();
+
     updateFlashcardBadges();
     renderFlashcardModalContent();
 
-    if (card.mastered) {
-      showToast(`✨ Đã đánh dấu thuộc từ "${card.term}"!`);
-    } else {
-      showToast(`📝 Chuyển từ "${card.term}" sang cần ôn tập`);
+    if (!awarded) {
+      if (card.mastered) {
+        showToast(`✨ Đã đánh dấu thuộc từ "${card.term}"!`);
+      } else {
+        showToast(`📝 Chuyển từ "${card.term}" sang cần ôn tập`);
+      }
     }
   },
 
@@ -275,12 +317,7 @@ const flashcardService = {
   // PRACTICE SESSION ACTIONS (2-WAY RECALL SYSTEM)
   // ------------------------------------------------------------------------
   setPracticeModeDirection(dir) {
-    practiceModeDirection = dir || 'two_way';
-    try {
-      localStorage.setItem('edumanga_practice_mode_dir', practiceModeDirection);
-    } catch (e) {}
-
-    // Regenerate practice cards if session is running
+    practiceModeDirection = 'two_way'; // Always 2-way recall
     if (isPracticeModeActive) {
       this.startPractice();
     } else {
@@ -417,6 +454,7 @@ const flashcardService = {
       if (mainCard) {
         mainCard.mastered = mastered;
         saveCurrentFlashcardsToStorage();
+        checkAndAwardMasteryLoop();
         updateFlashcardBadges();
       }
     }
@@ -465,19 +503,15 @@ const flashcardService = {
     if (isCorrect) {
       currentTypingState = 'correct';
       
-      // Check overall mastery in 2-way mode
+      // Check overall mastery in 2-way mode: both directions correct = mastered!
       const res = sessionWordResults[originalId];
-      if (practiceModeDirection === 'two_way') {
-        if (res.k2r === true && res.m2k === true) {
-          if (mainCard) mainCard.mastered = true;
-          card.mastered = true;
-        }
-      } else {
+      if (res.k2r === true && res.m2k === true) {
         if (mainCard) mainCard.mastered = true;
         card.mastered = true;
       }
 
       saveCurrentFlashcardsToStorage();
+      checkAndAwardMasteryLoop();
       updateFlashcardBadges();
       this.speak(card.term);
     } else {
@@ -865,10 +899,11 @@ function saveCurrentFlashcardsToStorage() {
 function updateFlashcardBadges() {
   const total = currentChapterVocabList.length;
   const mastered = currentChapterVocabList.filter(c => c.mastered).length;
+  const masteryPoints = getMasteryPoints();
 
   const countPill = document.getElementById('modalFlashcardCountText');
   if (countPill) {
-    countPill.textContent = `(${mastered}/${total} từ đã thuộc)`;
+    countPill.textContent = `(${mastered}/${total} từ đã thuộc${masteryPoints > 0 ? ` • ⭐ ${masteryPoints} điểm` : ''})`;
   }
 
   const btnBadge = document.getElementById('btnFlashcardsBadge');
@@ -1058,12 +1093,20 @@ function renderOverviewListView(container) {
     }).join('');
   }
 
+  const masteryPoints = getMasteryPoints();
+
   container.innerHTML = `
     <div class="vocab-overview-container">
       <!-- Top Stats & Practice CTA Row -->
       <div class="vocab-stats-cta-box">
         <div class="vocab-stats-left">
-          <div class="vocab-stats-title"><i class="fas fa-chart-pie"></i> Tiến độ ghi nhớ</div>
+          <div class="vocab-stats-title">
+            <i class="fas fa-chart-pie"></i> Tiến độ ghi nhớ
+            ${masteryPoints > 0 ? `
+              <span class="mastery-points-badge" title="Đã hoàn thành ${masteryPoints} vòng ôn tập 100% từ vựng">
+                <i class="fas fa-award"></i> ${masteryPoints} Điểm tích lũy
+              </span>` : ''}
+          </div>
           <div class="vocab-progress-wrapper">
             <div class="progress-bar-track">
               <div class="progress-bar-fill" style="width: ${percent}%;"></div>
@@ -1073,20 +1116,9 @@ function renderOverviewListView(container) {
         </div>
 
         <div class="vocab-cta-actions">
-          <!-- Practice Mode Selector -->
-          <div class="practice-mode-selector-pill">
-            <button type="button" class="btn-mode-opt ${practiceModeDirection === 'two_way' ? 'active' : ''}" 
-                    onclick="flashcardService.setPracticeModeDirection('two_way')" title="Mỗi từ học 2 chiều: Nhìn Kanji -> Gõ Đọc/Nghĩa & Nhìn Nghĩa -> Gõ Tiếng Nhật">
-              <i class="fas fa-rotate"></i> <span>2 Chiều (2x)</span>
-            </button>
-            <button type="button" class="btn-mode-opt ${practiceModeDirection === 'kanji_only' ? 'active' : ''}" 
-                    onclick="flashcardService.setPracticeModeDirection('kanji_only')" title="Chỉ học chiều: Nhìn Kanji -> Gõ Đọc / Nghĩa">
-              <span>🈸 Kanji</span>
-            </button>
-            <button type="button" class="btn-mode-opt ${practiceModeDirection === 'meaning_only' ? 'active' : ''}" 
-                    onclick="flashcardService.setPracticeModeDirection('meaning_only')" title="Chỉ học chiều: Nhìn Nghĩa -> Gõ Tiếng Nhật">
-              <span>🇻🇳 Nghĩa</span>
-            </button>
+          <!-- Single Fixed 2-Way Mode Badge -->
+          <div class="practice-mode-badge-single" title="Chế độ học phản xạ 2 chiều: Nhìn Kanji -> Gõ Đọc/Nghĩa & Nhìn Nghĩa -> Gõ Tiếng Nhật">
+            <i class="fas fa-rotate"></i> <span>2 Chiều (2x)</span>
           </div>
 
           <button type="button" class="btn-start-practice" onclick="flashcardService.startPractice()" ${total === 0 ? 'disabled' : ''}>
@@ -1143,7 +1175,7 @@ function renderPracticeModeView(container) {
           </div>
           <div class="score-details">
             <div class="score-row text-success"><i class="fas fa-check-circle"></i> Đã thuộc hoàn toàn: <b>${masteredWords} / ${totalWords} từ</b></div>
-            <div class="score-row text-muted"><i class="fas fa-rotate"></i> Chế độ: <b>${practiceModeDirection === 'two_way' ? 'Học 2 Chiều (Kanji ⇋ Nghĩa)' : (practiceModeDirection === 'kanji_only' ? 'Nhìn Kanji' : 'Nhìn Nghĩa')}</b></div>
+            <div class="score-row text-muted"><i class="fas fa-rotate"></i> Chế độ: <b>Học 2 Chiều (Kanji ⇋ Nghĩa)</b></div>
             ${unmasteredCount > 0 ? `<div class="score-row text-warning"><i class="fas fa-clock-rotate-left"></i> Còn <b>${unmasteredCount} từ</b> cần củng cố thêm</div>` : '<div class="score-row text-success"><i class="fas fa-star"></i> Tuyệt đối 100%! Bạn đã làm chủ toàn bộ từ vựng chương!</div>'}
           </div>
         </div>
