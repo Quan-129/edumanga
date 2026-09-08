@@ -298,13 +298,20 @@ const dbStorage = {
         let importedSeries = 0;
         let importedChapters = 0;
 
+        let deletedSeriesIds = JSON.parse(localStorage.getItem('edumanga_deleted_series_ids') || '[]');
+        let deletedChapterKeys = JSON.parse(localStorage.getItem('edumanga_deleted_chapter_keys') || '[]');
+
         for (const s of catalogList) {
           if (!s.id) continue;
           
+          // Un-blacklist this series if it was deleted
+          deletedSeriesIds = deletedSeriesIds.filter(x => x !== s.id);
+
           // Separate clean chapters metadata from heavy pages
           const cleanChapters = [];
           for (const chap of (s.chapters || [])) {
             if (!chap.id) continue;
+            deletedChapterKeys = deletedChapterKeys.filter(x => x !== `${s.id}_${chap.id}`);
             if (chap.pages && Array.isArray(chap.pages) && chap.pages.length > 0) {
               await this.saveChapterPages(s.id, chap.id, chap.pages);
               importedChapters++;
@@ -327,6 +334,8 @@ const dbStorage = {
           importedSeries++;
         }
 
+        localStorage.setItem('edumanga_deleted_series_ids', JSON.stringify(deletedSeriesIds));
+        localStorage.setItem('edumanga_deleted_chapter_keys', JSON.stringify(deletedChapterKeys));
         localStorage.setItem('edumanga_custom_catalog', JSON.stringify(customCatalog));
         return {
           success: true,
@@ -342,10 +351,17 @@ const dbStorage = {
         const s = parsed.series || parsed;
         if (!s.id) throw new Error("Không tìm thấy thông tin định danh ID bộ truyện");
 
+        let deletedSeriesIds = JSON.parse(localStorage.getItem('edumanga_deleted_series_ids') || '[]');
+        deletedSeriesIds = deletedSeriesIds.filter(x => x !== s.id);
+        localStorage.setItem('edumanga_deleted_series_ids', JSON.stringify(deletedSeriesIds));
+
+        let deletedChapterKeys = JSON.parse(localStorage.getItem('edumanga_deleted_chapter_keys') || '[]');
+
         let importedChapters = 0;
         const cleanChapters = [];
         for (const chap of (s.chapters || [])) {
           if (!chap.id) continue;
+          deletedChapterKeys = deletedChapterKeys.filter(x => x !== `${s.id}_${chap.id}`);
           if (chap.pages && Array.isArray(chap.pages) && chap.pages.length > 0) {
             await this.saveChapterPages(s.id, chap.id, chap.pages);
             importedChapters++;
@@ -353,6 +369,8 @@ const dbStorage = {
           const { pages, ...cleanChap } = chap;
           cleanChapters.push({ ...cleanChap, pagesCount: (pages || []).length || cleanChap.pagesCount || 0 });
         }
+
+        localStorage.setItem('edumanga_deleted_chapter_keys', JSON.stringify(deletedChapterKeys));
 
         const seriesToStore = {
           ...s,
@@ -399,6 +417,11 @@ const dbStorage = {
           };
         }
 
+        // Un-blacklist this chapter
+        let deletedChapterKeys = JSON.parse(localStorage.getItem('edumanga_deleted_chapter_keys') || '[]');
+        deletedChapterKeys = deletedChapterKeys.filter(x => x !== `${targetSeriesId}_${targetChapId}`);
+        localStorage.setItem('edumanga_deleted_chapter_keys', JSON.stringify(deletedChapterKeys));
+
         await this.saveChapterPages(targetSeriesId, targetChapId, pagesArray);
 
         // Update catalog chapter metadata if series found
@@ -438,9 +461,81 @@ const dbStorage = {
       console.error("Restore backup error:", err);
       return { success: false, error: err.message };
     }
+  },
+
+  // Get full merged manga catalog with deletion blacklist filtering
+  async getFullMangaCatalog() {
+    let baseCatalog = [];
+    try {
+      const response = await fetch('data/manga.json');
+      if (response.ok) {
+        baseCatalog = await response.json();
+      }
+    } catch (err) {
+      console.warn("Could not fetch data/manga.json, fallback to empty list:", err);
+    }
+
+    let deletedSeriesIds = [];
+    try {
+      const raw = localStorage.getItem('edumanga_deleted_series_ids');
+      if (raw) deletedSeriesIds = JSON.parse(raw);
+    } catch (e) {
+      deletedSeriesIds = [];
+    }
+
+    let deletedChapterKeys = [];
+    try {
+      const raw = localStorage.getItem('edumanga_deleted_chapter_keys');
+      if (raw) deletedChapterKeys = JSON.parse(raw);
+    } catch (e) {
+      deletedChapterKeys = [];
+    }
+
+    let customCatalog = [];
+    try {
+      const raw = localStorage.getItem('edumanga_custom_catalog');
+      if (raw) customCatalog = JSON.parse(raw);
+    } catch (e) {
+      customCatalog = [];
+    }
+
+    const mergedMap = new Map();
+
+    // 1. Populate base catalog without deleted series & deleted chapters
+    baseCatalog.forEach(m => {
+      if (!deletedSeriesIds.includes(m.id)) {
+        const cleanChaps = (m.chapters || []).filter(c => !deletedChapterKeys.includes(`${m.id}_${c.id}`));
+        mergedMap.set(m.id, { ...m, chapters: cleanChaps });
+      }
+    });
+
+    // 2. Merge custom additions/overrides
+    customCatalog.forEach(custom => {
+      if (deletedSeriesIds.includes(custom.id)) return;
+
+      const customChaps = (custom.chapters || []).filter(c => !deletedChapterKeys.includes(`${custom.id}_${c.id}`));
+
+      if (mergedMap.has(custom.id)) {
+        const existing = mergedMap.get(custom.id);
+        mergedMap.set(custom.id, {
+          ...existing,
+          ...custom,
+          chapters: customChaps
+        });
+      } else {
+        mergedMap.set(custom.id, {
+          ...custom,
+          chapters: customChaps
+        });
+      }
+    });
+
+    return Array.from(mergedMap.values());
   }
 };
 
 // Global Export
 window.dbStorage = dbStorage;
+window.getFullMangaCatalog = () => dbStorage.getFullMangaCatalog();
+
 

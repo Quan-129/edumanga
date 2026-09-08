@@ -40,49 +40,12 @@ document.addEventListener('DOMContentLoaded', async () => {
   initStudyMode();
 });
 
-// Helper: Get merged manga catalog (Data JSON + Custom Additions from LocalStorage)
+// Helper: Get merged manga catalog (Data JSON + Custom Additions from LocalStorage with Deletion Blacklist)
 async function getFullMangaCatalog() {
-  let baseCatalog = [];
-  try {
-    const response = await fetch('data/manga.json');
-    if (response.ok) {
-      baseCatalog = await response.json();
-    }
-  } catch (err) {
-    console.warn("Could not fetch data/manga.json in reader:", err);
+  if (window.dbStorage && typeof window.dbStorage.getFullMangaCatalog === 'function') {
+    return await window.dbStorage.getFullMangaCatalog();
   }
-
-  let customCatalog = [];
-  try {
-    const raw = localStorage.getItem('edumanga_custom_catalog');
-    if (raw) customCatalog = JSON.parse(raw);
-  } catch (e) {
-    customCatalog = [];
-  }
-
-  const mergedMap = new Map();
-  baseCatalog.forEach(m => mergedMap.set(m.id, { ...m }));
-
-  customCatalog.forEach(custom => {
-    if (mergedMap.has(custom.id)) {
-      const existing = mergedMap.get(custom.id);
-      const existingChaps = existing.chapters || [];
-      const customChaps = custom.chapters || [];
-      const chapMap = new Map();
-      existingChaps.forEach(c => chapMap.set(c.id, c));
-      customChaps.forEach(c => chapMap.set(c.id, c));
-
-      mergedMap.set(custom.id, {
-        ...existing,
-        ...custom,
-        chapters: Array.from(chapMap.values())
-      });
-    } else {
-      mergedMap.set(custom.id, custom);
-    }
-  });
-
-  return Array.from(mergedMap.values());
+  return [];
 }
 
 async function loadChapterData(seriesId, chapId, initialPage = 0) {

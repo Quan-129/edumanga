@@ -25,51 +25,12 @@ document.addEventListener('DOMContentLoaded', async () => {
   });
 });
 
-// Helper: Get merged manga catalog (Data JSON + Custom Additions from LocalStorage)
+// Helper: Get merged manga catalog (Data JSON + Custom Additions from LocalStorage with Deletion Blacklist)
 async function getFullMangaCatalog() {
-  let baseCatalog = [];
-  try {
-    const response = await fetch('data/manga.json');
-    if (response.ok) {
-      baseCatalog = await response.json();
-    }
-  } catch (err) {
-    console.warn("Could not fetch data/manga.json, fallback to empty list:", err);
+  if (window.dbStorage && typeof window.dbStorage.getFullMangaCatalog === 'function') {
+    return await window.dbStorage.getFullMangaCatalog();
   }
-
-  // Load custom additions from LocalStorage
-  let customCatalog = [];
-  try {
-    const raw = localStorage.getItem('edumanga_custom_catalog');
-    if (raw) customCatalog = JSON.parse(raw);
-  } catch (e) {
-    customCatalog = [];
-  }
-
-  // Merge custom into base
-  const mergedMap = new Map();
-  baseCatalog.forEach(m => mergedMap.set(m.id, { ...m }));
-
-  customCatalog.forEach(custom => {
-    if (mergedMap.has(custom.id)) {
-      const existing = mergedMap.get(custom.id);
-      const existingChaps = existing.chapters || [];
-      const customChaps = custom.chapters || [];
-      const chapMap = new Map();
-      existingChaps.forEach(c => chapMap.set(c.id, c));
-      customChaps.forEach(c => chapMap.set(c.id, c));
-
-      mergedMap.set(custom.id, {
-        ...existing,
-        ...custom,
-        chapters: Array.from(chapMap.values())
-      });
-    } else {
-      mergedMap.set(custom.id, custom);
-    }
-  });
-
-  return Array.from(mergedMap.values());
+  return [];
 }
 
 function saveCustomCatalogToStorage(catalog) {
@@ -424,6 +385,13 @@ async function handleAdminCreateSeries(e) {
     customCatalog = [];
   }
 
+  // Un-blacklist this series if previously deleted
+  try {
+    let deletedSeriesIds = JSON.parse(localStorage.getItem('edumanga_deleted_series_ids') || '[]');
+    deletedSeriesIds = deletedSeriesIds.filter(x => x !== id);
+    localStorage.setItem('edumanga_deleted_series_ids', JSON.stringify(deletedSeriesIds));
+  } catch (e) {}
+
   // Remove existing if any, then prepend
   customCatalog = customCatalog.filter(m => m.id !== id);
   customCatalog.unshift(newSeries);
@@ -609,6 +577,16 @@ async function adminDeleteSeries(seriesId, event) {
     return;
   }
 
+  // 1. Add to deleted series blacklist
+  try {
+    let deletedSeriesIds = JSON.parse(localStorage.getItem('edumanga_deleted_series_ids') || '[]');
+    if (!deletedSeriesIds.includes(seriesId)) {
+      deletedSeriesIds.push(seriesId);
+      localStorage.setItem('edumanga_deleted_series_ids', JSON.stringify(deletedSeriesIds));
+    }
+  } catch (err) {}
+
+  // 2. Remove from customCatalog
   let customCatalog = [];
   try {
     const raw = localStorage.getItem('edumanga_custom_catalog');
@@ -618,10 +596,19 @@ async function adminDeleteSeries(seriesId, event) {
   customCatalog = customCatalog.filter(m => m.id !== seriesId);
   saveCustomCatalogToStorage(customCatalog);
 
-  // Also remove from allMangaData locally
+  // 3. Remove all chapter pages in IndexedDB
+  if (series && series.chapters) {
+    for (const chap of series.chapters) {
+      if (window.dbStorage && typeof window.dbStorage.deleteChapterPages === 'function') {
+        await window.dbStorage.deleteChapterPages(seriesId, chap.id);
+      }
+    }
+  }
+
+  // 4. Remove from local memory and refresh UI
   allMangaData = allMangaData.filter(m => m.id !== seriesId);
   renderMangaGrid(getFilteredMangaList());
-  showToast(`🗑️ Đã xóa bộ truyện "${title}"`);
+  showToast(`🗑️ Đã xóa vĩnh viễn bộ truyện "${title}"`);
 }
 
 // Export Catalog as JSON file for repo integration
