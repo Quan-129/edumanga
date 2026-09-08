@@ -531,11 +531,168 @@ const dbStorage = {
     });
 
     return Array.from(mergedMap.values());
+  },
+
+  // 5. Auto-Backup Settings Management
+  getBackupSettings() {
+    const defaultSettings = {
+      enabled: true,
+      targetDir: 'G:\\My Drive\\hk261\\Dự án manga\\backup',
+      frequencyDays: 2,
+      preferredHour: 20,
+      lastBackupTimestamp: 0,
+      lastBackupFolder: '',
+      lastBackupStatus: 'Chưa có bản sao lưu nào'
+    };
+
+    try {
+      const raw = localStorage.getItem('edumanga_backup_settings');
+      if (raw) {
+        return { ...defaultSettings, ...JSON.parse(raw) };
+      }
+    } catch (e) {}
+    return defaultSettings;
+  },
+
+  saveBackupSettings(settings) {
+    try {
+      localStorage.setItem('edumanga_backup_settings', JSON.stringify(settings));
+    } catch (e) {
+      console.error("Failed to save backup settings:", e);
+    }
+  },
+
+  // 6. Perform Backup to Folder (Auto or Manual Trigger)
+  async performAutoBackupToFolder(customTargetDir = null, isAuto = false) {
+    const settings = this.getBackupSettings();
+    const targetDir = customTargetDir || settings.targetDir || 'backup';
+
+    // Format folder date DD-MM-YYYY (e.g. 08-09-2026)
+    const now = new Date();
+    const day = String(now.getDate()).padStart(2, '0');
+    const month = String(now.getMonth() + 1).padStart(2, '0');
+    const year = now.getFullYear();
+    const dateFolder = `${day}-${month}-${year}`;
+
+    try {
+      const fullCatalog = await this.getFullMangaCatalog();
+      const enrichedCatalog = [];
+      const allChaptersList = [];
+
+      for (const series of fullCatalog) {
+        const enrichedChaps = [];
+        for (const chap of (series.chapters || [])) {
+          let pages = await this.getChapterPages(series.id, chap.id);
+          if (!pages && chap.pages) pages = chap.pages;
+          if (!pages) {
+            try {
+              const resp = await fetch(`data/${series.id}/${chap.id}.json`);
+              if (resp.ok) {
+                const staticData = await resp.json();
+                pages = staticData.pages || (Array.isArray(staticData) ? staticData : []);
+              }
+            } catch (e) {}
+          }
+
+          const fullChapData = {
+            ...chap,
+            seriesId: series.id,
+            pagesCount: (pages || []).length,
+            pages: pages || []
+          };
+          enrichedChaps.push(fullChapData);
+          allChaptersList.push(fullChapData);
+        }
+
+        enrichedCatalog.push({
+          ...series,
+          chapters: enrichedChaps
+        });
+      }
+
+      const masterBackup = {
+        exportType: "master_backup",
+        version: "1.0",
+        app: "EduManga Hub",
+        exportedAt: now.toISOString(),
+        totalSeries: enrichedCatalog.length,
+        totalChapters: allChaptersList.length,
+        catalog: enrichedCatalog
+      };
+
+      const payload = {
+        targetDir: targetDir,
+        dateFolder: dateFolder,
+        masterBackup: masterBackup,
+        catalog: fullCatalog,
+        chapters: allChaptersList
+      };
+
+      // Call Dev Server API
+      const resp = await fetch('/api/backup/save', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+
+      if (resp.ok) {
+        const result = await resp.json();
+        if (result.success) {
+          settings.lastBackupTimestamp = Date.now();
+          settings.lastBackupFolder = result.targetFolder;
+          settings.lastBackupStatus = `Thành công (${result.totalFiles} files lúc ${new Date().toLocaleTimeString('vi-VN')})`;
+          this.saveBackupSettings(settings);
+
+          console.log(`[Auto-Backup] ✅ Sao lưu thành công vào: ${result.targetFolder}`);
+          return {
+            success: true,
+            folder: result.targetFolder,
+            dateFolder: dateFolder,
+            totalFiles: result.totalFiles,
+            isAuto: isAuto
+          };
+        }
+      }
+      throw new Error(`Server status: ${resp.status}`);
+
+    } catch (err) {
+      console.warn("[Auto-Backup] Local server API not available, fallback to client-side trigger:", err);
+      // Fallback: If local server offline, update status
+      settings.lastBackupStatus = `Chưa kết nối dev server (Lỗi: ${err.message})`;
+      this.saveBackupSettings(settings);
+      return { success: false, error: err.message };
+    }
+  },
+
+  // 7. Smart Catch-Up Check on Boot
+  async checkAndRunSmartCatchUpBackup() {
+    // Only run if user is admin
+    if (!window.authService || typeof window.authService.isAdmin !== 'function' || !window.authService.isAdmin()) {
+      return;
+    }
+
+    const settings = this.getBackupSettings();
+    if (settings.enabled === false) {
+      return;
+    }
+
+    const frequencyMs = (settings.frequencyDays || 2) * 24 * 60 * 60 * 1000;
+    const elapsed = Date.now() - (settings.lastBackupTimestamp || 0);
+
+    // If never backed up or elapsed >= interval, trigger catch-up backup
+    if (!settings.lastBackupTimestamp || elapsed >= frequencyMs) {
+      console.log(`[Auto-Backup] ⏰ Kích hoạt sao lưu bù thông minh (Lần sao lưu cuối cách đây ${Math.round(elapsed / (24*3600*1000))} ngày)...`);
+      const res = await this.performAutoBackupToFolder(null, true);
+      if (res.success && typeof showToast === 'function') {
+        showToast(`⏰ Tự động sao lưu bù vào thư mục "${res.dateFolder}" thành công!`);
+      }
+    }
   }
 };
 
 // Global Export
 window.dbStorage = dbStorage;
 window.getFullMangaCatalog = () => dbStorage.getFullMangaCatalog();
+
 
 

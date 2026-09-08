@@ -484,14 +484,17 @@ function renderHeaderAuthUI(user) {
           <div class="menu-divider"></div>
           ${isAdmin ? `
             <div class="menu-section-label"><i class="fas fa-crown" style="color: #facc15;"></i> Quản Trị Dữ Liệu</div>
+            <button type="button" class="menu-item-btn" onclick="openAdminBackupConfigModal(); toggleUserMenu();">
+              <i class="fas fa-clock-rotate-left" style="color: #38bdf8;"></i> <span>Cài đặt Sao Lưu Tự Động</span>
+            </button>
             <button type="button" class="menu-item-btn" onclick="adminExportMasterSystemBackup(); toggleUserMenu();">
-              <i class="fas fa-cloud-arrow-down" style="color: #38bdf8;"></i> <span>Sao lưu toàn bộ (Master JSON)</span>
+              <i class="fas fa-cloud-arrow-down" style="color: #22c55e;"></i> <span>Tải Master Backup (JSON)</span>
             </button>
             <button type="button" class="menu-item-btn" onclick="adminTriggerRestoreBackup(); toggleUserMenu();">
               <i class="fas fa-file-import" style="color: #a855f7;"></i> <span>Nạp / Khôi phục file Backup</span>
             </button>
             <button type="button" class="menu-item-btn" onclick="adminExportMangaJson(); toggleUserMenu();">
-              <i class="fas fa-file-code" style="color: #22c55e;"></i> <span>Xuất danh mục (manga.json)</span>
+              <i class="fas fa-file-code" style="color: #facc15;"></i> <span>Xuất danh mục (manga.json)</span>
             </button>
             <div class="menu-divider"></div>
           ` : ''}
@@ -508,6 +511,13 @@ function renderHeaderAuthUI(user) {
         </div>
       </div>
     `;
+
+    // Trigger Smart Catch-Up Backup Check if Admin
+    if (isAdmin && window.dbStorage && typeof window.dbStorage.checkAndRunSmartCatchUpBackup === 'function') {
+      setTimeout(() => {
+        window.dbStorage.checkAndRunSmartCatchUpBackup();
+      }, 1500);
+    }
   } else {
     container.innerHTML = `
       <button class="btn-primary btn-header-login" onclick="showAuthGate()">
@@ -522,6 +532,100 @@ function toggleUserMenu(event) {
   const menu = document.getElementById('headerUserMenu');
   if (menu) {
     menu.classList.toggle('active');
+  }
+}
+
+// --------------------------------------------------------------------------
+// ADMIN AUTO-BACKUP MODAL & HANDLERS
+// --------------------------------------------------------------------------
+
+function openAdminBackupConfigModal() {
+  if (!window.authService || !window.authService.isAdmin()) {
+    showToast("⚠️ Chỉ Quản trị viên mới có quyền cấu hình sao lưu.");
+    return;
+  }
+
+  const modal = document.getElementById('adminBackupConfigModal');
+  if (!modal) return;
+
+  const settings = window.dbStorage ? window.dbStorage.getBackupSettings() : {
+    enabled: true,
+    targetDir: 'G:\\My Drive\\hk261\\Dự án manga\\backup',
+    frequencyDays: 2,
+    preferredHour: 20,
+    lastBackupStatus: 'Chưa có bản sao lưu nào'
+  };
+
+  const targetDirInput = document.getElementById('adminBackupTargetDir');
+  if (targetDirInput) targetDirInput.value = settings.targetDir || 'G:\\My Drive\\hk261\\Dự án manga\\backup';
+
+  const enabledSwitch = document.getElementById('adminBackupEnabled');
+  const enabledLabel = document.getElementById('adminBackupEnabledLabel');
+  if (enabledSwitch) {
+    enabledSwitch.checked = settings.enabled !== false;
+    if (enabledLabel) enabledLabel.textContent = enabledSwitch.checked ? 'Đang bật' : 'Đang tắt';
+    enabledSwitch.onchange = function() {
+      if (enabledLabel) enabledLabel.textContent = this.checked ? 'Đang bật' : 'Đang tắt';
+    };
+  }
+
+  const freqSelect = document.getElementById('adminBackupFrequency');
+  if (freqSelect) freqSelect.value = String(settings.frequencyDays || 2);
+
+  const hourSelect = document.getElementById('adminBackupHour');
+  if (hourSelect) hourSelect.value = String(settings.preferredHour || 20);
+
+  const statusInfo = document.getElementById('adminBackupLastStatusInfo');
+  if (statusInfo) {
+    statusInfo.innerHTML = `<i class="fas fa-info-circle"></i> Trạng thái gần nhất: <strong>${escapeHtml(settings.lastBackupStatus || 'Chưa sao lưu')}</strong>`;
+  }
+
+  modal.classList.add('active');
+}
+
+function closeAdminBackupConfigModal() {
+  const modal = document.getElementById('adminBackupConfigModal');
+  if (modal) modal.classList.remove('active');
+}
+
+function handleAdminSaveBackupConfig(event) {
+  if (event) event.preventDefault();
+
+  const targetDir = (document.getElementById('adminBackupTargetDir')?.value || '').trim() || 'backup';
+  const enabled = document.getElementById('adminBackupEnabled')?.checked ?? true;
+  const frequencyDays = parseInt(document.getElementById('adminBackupFrequency')?.value || '2', 10);
+  const preferredHour = parseInt(document.getElementById('adminBackupHour')?.value || '20', 10);
+
+  if (window.dbStorage) {
+    const current = window.dbStorage.getBackupSettings();
+    const updated = {
+      ...current,
+      targetDir: targetDir,
+      enabled: enabled,
+      frequencyDays: frequencyDays,
+      preferredHour: preferredHour
+    };
+    window.dbStorage.saveBackupSettings(updated);
+    showToast(`✅ Đã lưu cấu hình tự động sao lưu (${frequencyDays} ngày / lần)!`);
+    closeAdminBackupConfigModal();
+  }
+}
+
+async function handleAdminManualTriggerBackup() {
+  const targetDir = (document.getElementById('adminBackupTargetDir')?.value || '').trim() || 'backup';
+  showToast(`⏳ Đang tiến hành sao lưu vào thư mục "${targetDir}"...`);
+
+  if (window.dbStorage) {
+    const res = await window.dbStorage.performAutoBackupToFolder(targetDir, false);
+    if (res.success) {
+      showToast(`🚀 Đã sao lưu thành công vào thư mục "${res.dateFolder}"! (${res.totalFiles} files)`);
+      const statusInfo = document.getElementById('adminBackupLastStatusInfo');
+      if (statusInfo) {
+        statusInfo.innerHTML = `<i class="fas fa-check-circle" style="color: var(--accent-success);"></i> Đã lưu: <strong>${escapeHtml(res.folder)}</strong> (${res.totalFiles} files)`;
+      }
+    } else {
+      showToast(`❌ Lỗi sao lưu: ${res.error}`);
+    }
   }
 }
 
@@ -617,4 +721,9 @@ window.checkIsAdmin = () => authService.isAdmin();
 window.adminExportMasterSystemBackup = adminExportMasterSystemBackup;
 window.adminTriggerRestoreBackup = adminTriggerRestoreBackup;
 window.handleAdminGlobalRestoreFile = handleAdminGlobalRestoreFile;
+window.openAdminBackupConfigModal = openAdminBackupConfigModal;
+window.closeAdminBackupConfigModal = closeAdminBackupConfigModal;
+window.handleAdminSaveBackupConfig = handleAdminSaveBackupConfig;
+window.handleAdminManualTriggerBackup = handleAdminManualTriggerBackup;
+
 
