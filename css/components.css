@@ -2991,3 +2991,313 @@ body.auth-locked {
   color: #ffffff;
 }
 
+
+
+/* ==========================================================================
+   FLASHCARD 2-WAY RECALL & PRACTICE SYSTEM EXTENSIONS
+   ========================================================================== */
+
+/* Mode Selector in List Overview Header */
+.vocab-cta-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.practice-mode-selector-pill {
+  display: inline-flex;
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 999px;
+  padding: 4px;
+  gap: 4px;
+}
+
+.btn-mode-opt {
+  background: transparent;
+  border: none;
+  color: #94a3b8;
+  font-size: 0.82rem;
+  font-weight: 700;
+  padding: 6px 14px;
+  border-radius: 999px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s ease;
+}
+
+.btn-mode-opt:hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.btn-mode-opt.active {
+  background: linear-gradient(135deg, #0284c7, #6366f1);
+  color: #ffffff;
+  box-shadow: 0 2px 10px rgba(2, 132, 199, 0.4);
+}
+
+/* Practice Direction Badge in Practice Card */
+.practice-direction-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  padding: 6px 16px;
+  border-radius: 999px;
+  letter-spacing: 0.4px;
+  margin-bottom: 8px;
+  animation: fadeInDown 0.3s ease;
+}
+
+.practice-direction-badge.kanji-mode {
+  background: rgba(56, 189, 248, 0.15);
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  color: #38bdf8;
+}
+
+.practice-direction-badge.meaning-mode {
+  background: rgba(245, 158, 11, 0.15);
+  border: 1px solid rgba(245, 158, 11, 0.35);
+  color: #fbbf24;
+}
+
+/* Question Prompt for Meaning-to-Kanji Mode */
+.typing-meaning-prompt-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  max-width: 600px;
+  margin: 10px 0;
+}
+
+.typing-hanviet-badge {
+  background: rgba(99, 102, 241, 0.2);
+  border: 1px solid rgba(99, 102, 241, 0.45);
+  color: #a5b4fc;
+  font-size: 0.85rem;
+  font-weight: 800;
+  padding: 3px 12px;
+  border-radius: 999px;
+  letter-spacing: 0.5px;
+}
+
+.typing-meaning-display {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: #ffffff;
+  text-align: center;
+  line-height: 1.3;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.7);
+}
+
+/* Practice Mode Tag on Header Pill */
+.practice-mode-tag {
+  background: rgba(255, 255, 255, 0.12);
+  color: #e2e8f0;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 6px;
+  margin-left: 6px;
+}
+
+/* Action Buttons Row on Incorrect / Revealed States */
+.typing-action-buttons-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.btn-typing-retry {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  padding: 10px 20px;
+  border-radius: 12px;
+  font-size: 0.92rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+}
+
+.btn-typing-retry:hover {
+  background: rgba(255, 255, 255, 0.18);
+  transform: translateY(-2px);
+}
+
+.btn-typing-reveal {
+  background: rgba(245, 158, 11, 0.2);
+  border: 1px solid rgba(245, 158, 11, 0.4);
+  color: #fcd34d;
+  padding: 10px 20px;
+  border-radius: 12px;
+  font-size: 0.92rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+}
+
+.btn-typing-reveal:hover {
+  background: rgba(245, 158, 11, 0.35);
+  transform: translateY(-2px);
+}
+
+.btn-typing-next {
+  background: linear-gradient(135deg, #0284c7, #6366f1);
+  border: none;
+  color: #ffffff;
+  padding: 10px 22px;
+  border-radius: 12px;
+  font-size: 0.95rem;
+  font-weight: 800;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 4px 15px rgba(2, 132, 199, 0.4);
+  transition: all 0.2s ease;
+}
+
+.btn-typing-next:hover {
+  background: linear-gradient(135deg, #0ea5e9, #818cf8);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(2, 132, 199, 0.6);
+}
+
+.btn-typing-next.correct {
+  background: linear-gradient(135deg, #059669, #10b981);
+  box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
+}
+
+.btn-typing-next.correct:hover {
+  background: linear-gradient(135deg, #10b981, #34d399);
+  box-shadow: 0 6px 20px rgba(16, 185, 129, 0.6);
+}
+
+.typing-user-input-echo {
+  background: rgba(239, 68, 68, 0.15);
+  border: 1px solid rgba(239, 68, 68, 0.35);
+  color: #fca5a5;
+  font-size: 0.95rem;
+  padding: 6px 18px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.user-typed-text {
+  font-weight: 800;
+  color: #ffffff;
+  text-decoration: line-through;
+}
+
+.practice-completed-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 30px 20px;
+  gap: 16px;
+  max-width: 620px;
+  margin: 0 auto;
+}
+
+.congrats-trophy {
+  font-size: 3.5rem;
+  color: #facc15;
+  text-shadow: 0 0 25px rgba(250, 204, 21, 0.6);
+  animation: bounce 1.5s infinite;
+}
+
+.congrats-title {
+  font-size: 1.8rem;
+  font-weight: 900;
+  color: #ffffff;
+  margin: 0;
+}
+
+.congrats-sub {
+  color: #94a3b8;
+  font-size: 1rem;
+  margin: 0;
+}
+
+.practice-score-card {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 18px;
+  padding: 20px 24px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.score-circle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background: rgba(2, 132, 199, 0.15);
+  border: 3px solid #38bdf8;
+  box-shadow: 0 0 20px rgba(56, 189, 248, 0.3);
+  flex-shrink: 0;
+}
+
+.score-number {
+  font-size: 1.6rem;
+  font-weight: 900;
+  color: #ffffff;
+}
+
+.score-label {
+  font-size: 0.68rem;
+  color: #94a3b8;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.score-details {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  text-align: left;
+  flex: 1;
+}
+
+.score-row {
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.practice-end-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  max-width: 380px;
+  margin-top: 10px;
+}

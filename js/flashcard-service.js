@@ -1,6 +1,9 @@
 /* ==========================================================================
-   EDUMANGA HUB - CHAPTER VOCABULARY & FLASHCARD SERVICE (V3 - TYPE-TO-CHECK)
-   - Vocabulary Cards: Type-to-Check (Active Recall Typing & Auto-Validation)
+   EDUMANGA HUB - CHAPTER VOCABULARY & FLASHCARD SERVICE (V3.5 - 2-WAY RECALL)
+   - 2-Way Spaced Repetition Practice:
+     * Direction 1: Nhìn Kanji/Từ gốc ➔ Gõ Cách đọc (Hiragana/Romaji) hoặc Nghĩa
+     * Direction 2: Nhìn Nghĩa tiếng Việt ➔ Gõ Từ tiếng Nhật (Kanji/Hiragana/Romaji)
+   - Vocabulary Cards: Type-to-Check (Active Recall Typing & Smart Auto-Validation)
    - Grammar Cards: Interactive 3D Flip Card Scene (Structure & Rules)
    ========================================================================== */
 
@@ -16,9 +19,16 @@ let practiceCurrentIndex = 0;
 let isPracticeFlipped = false;
 let isPracticeModeActive = false;
 
+// Practice Mode Selection:
+// 'two_way' (Mặc định: Mỗi từ học 2 chiều 2 lần) | 'kanji_only' (Nhìn Kanji) | 'meaning_only' (Nhìn Nghĩa)
+let practiceModeDirection = localStorage.getItem('edumanga_practice_mode_dir') || 'two_way';
+
 // Typing Mode State for current card: 'input' | 'correct' | 'incorrect' | 'revealed'
 let currentTypingState = 'input';
 let lastUserTypedInput = '';
+
+// Session result tracker for 2-way mastery: { [cardId]: { k2r: bool|null, m2k: bool|null } }
+let sessionWordResults = {};
 
 const flashcardService = {
   // Initialize and extract vocabulary for the active chapter
@@ -64,7 +74,7 @@ const flashcardService = {
     const extractedMap = new Map();
     extractedVocab.forEach(item => {
       extractedMap.set(item.term.trim().toLowerCase(), item);
-      extractedMap.set(item.term.replace('〜', '').replace('~', '').trim().toLowerCase(), item);
+      extractedMap.set(item.term.replace(/～|~/g, '').trim().toLowerCase(), item);
     });
 
     // 4. Merge master db items into card list with full 13 attributes
@@ -79,19 +89,20 @@ const flashcardService = {
         stt: v.stt,
         chapter: v.chapter,
         term: v.term,
-        reading: v.reading,
-        romaji: v.romaji,
-        hanViet: v.han_viet,
-        meaning: v.meaning,
+        reading: v.reading || '',
+        furigana: v.reading || '',
+        romaji: v.romaji || '',
+        hanViet: v.han_viet || '',
+        meaning: v.meaning || '',
         type: 'vocab',
         pos: v.type || 'Danh từ',
-        examJa: v.exam_ja,
-        examVi: v.exam_vi,
-        kanjiBreakdown: v.kanji_breakdown,
-        pitchHtml: v.pitch_html,
-        pitchLabel: v.pitch_label,
-        pitchShort: v.pitch_short,
-        synonymsAntonyms: v.synonyms_antonyms,
+        examJa: v.exam_ja || '',
+        examVi: v.exam_vi || '',
+        kanjiBreakdown: v.kanji_breakdown || '',
+        pitchHtml: v.pitch_html || '',
+        pitchLabel: v.pitch_label || '',
+        pitchShort: v.pitch_short || '',
+        synonymsAntonyms: v.synonyms_antonyms || '',
         context: ext ? ext.context : '',
         pageIndex: ext ? ext.pageIndex : 1,
         mastered: false,
@@ -103,7 +114,7 @@ const flashcardService = {
     // Add Master Grammar
     dbGrammar.forEach(g => {
       const key = g.pattern.trim().toLowerCase();
-      const ext = extractedMap.get(key) || extractedMap.get(g.pattern.replace('〜', '').replace('~', '').trim().toLowerCase());
+      const ext = extractedMap.get(key) || extractedMap.get(g.pattern.replace(/～|~/g, '').trim().toLowerCase());
       cardMap.set(key, {
         id: `grammar_${g.stt}`,
         stt: g.stt,
@@ -137,6 +148,7 @@ const flashcardService = {
           id: `extracted_${key}_${item.pageIndex || 0}`,
           term: item.term.trim(),
           reading: (item.furigana || '').trim(),
+          furigana: (item.furigana || '').trim(),
           hanViet: (item.hanViet || '').trim(),
           meaning: (item.meaning || '').trim(),
           context: (item.context || '').trim(),
@@ -198,9 +210,9 @@ const flashcardService = {
     renderFlashcardModalContent();
 
     if (card.mastered) {
-      showToast(`✨ Đã thuộc từ "${card.term}"!`);
+      showToast(`✨ Đã đánh dấu thuộc từ "${card.term}"!`);
     } else {
-      showToast(`⏳ Chuyển từ "${card.term}" sang cần ôn tập`);
+      showToast(`📝 Chuyển từ "${card.term}" sang cần ôn tập`);
     }
   },
 
@@ -219,7 +231,7 @@ const flashcardService = {
       saveCurrentFlashcardsToStorage();
       updateFlashcardBadges();
       renderFlashcardModalContent();
-      showToast(`ℹ️ Đã cập nhật thẻ "${cleanTerm}"!`);
+      showToast(`🔄 Đã cập nhật thẻ "${cleanTerm}"!`);
       return;
     }
 
@@ -227,6 +239,7 @@ const flashcardService = {
       id: `custom_${Date.now()}_${Math.random().toString(36).substr(2, 5)}`,
       term: cleanTerm,
       furigana: (cardData.furigana || '').trim(),
+      reading: (cardData.furigana || '').trim(),
       hanViet: (cardData.hanViet || '').trim(),
       meaning: (cardData.meaning || '').trim(),
       context: (cardData.context || '').trim(),
@@ -240,7 +253,7 @@ const flashcardService = {
     saveCurrentFlashcardsToStorage();
     updateFlashcardBadges();
     renderFlashcardModalContent();
-    showToast(`🎴 Đã thêm thẻ "${cleanTerm}" thành công!`);
+    showToast(`🎉 Đã thêm thẻ "${cleanTerm}" thành công!`);
   },
 
   // Delete card
@@ -259,15 +272,104 @@ const flashcardService = {
   },
 
   // ------------------------------------------------------------------------
-  // PRACTICE SESSION ACTIONS
+  // PRACTICE SESSION ACTIONS (2-WAY RECALL SYSTEM)
   // ------------------------------------------------------------------------
+  setPracticeModeDirection(dir) {
+    practiceModeDirection = dir || 'two_way';
+    try {
+      localStorage.setItem('edumanga_practice_mode_dir', practiceModeDirection);
+    } catch (e) {}
+
+    // Regenerate practice cards if session is running
+    if (isPracticeModeActive) {
+      this.startPractice();
+    } else {
+      renderFlashcardModalContent();
+    }
+  },
+
+  // Build 2-way question items from word list
+  generatePracticeQuestions(wordList) {
+    sessionWordResults = {};
+    const questions = [];
+
+    wordList.forEach(c => {
+      sessionWordResults[c.id] = { k2r: null, m2k: null };
+
+      if (c.type === 'grammar') {
+        questions.push({
+          ...c,
+          _direction: 'grammar_flip',
+          _questionId: `${c.id}_grammar`,
+          _originalId: c.id
+        });
+        return;
+      }
+
+      if (practiceModeDirection === 'two_way') {
+        // Generate 2 questions for this vocabulary card
+        // Question A: Nhìn Kanji -> Gõ Đọc / Nghĩa
+        const qA = {
+          ...c,
+          _direction: 'kanji_to_reading',
+          _questionId: `${c.id}_k2r`,
+          _originalId: c.id,
+          _directionLabel: 'Nhìn Kanji ➔ Gõ Cách đọc / Nghĩa'
+        };
+        // Question B: Nhìn Nghĩa -> Gõ Tiếng Nhật (Kanji / Hiragana / Romaji)
+        const qB = {
+          ...c,
+          _direction: 'meaning_to_kanji',
+          _questionId: `${c.id}_m2k`,
+          _originalId: c.id,
+          _directionLabel: 'Nhìn Nghĩa ➔ Gõ Từ tiếng Nhật'
+        };
+        questions.push(qA);
+        questions.push(qB);
+      } else if (practiceModeDirection === 'meaning_only') {
+        questions.push({
+          ...c,
+          _direction: 'meaning_to_kanji',
+          _questionId: `${c.id}_m2k`,
+          _originalId: c.id,
+          _directionLabel: 'Nhìn Nghĩa ➔ Gõ Từ tiếng Nhật'
+        });
+      } else {
+        // Default: kanji_only
+        questions.push({
+          ...c,
+          _direction: 'kanji_to_reading',
+          _questionId: `${c.id}_k2r`,
+          _originalId: c.id,
+          _directionLabel: 'Nhìn Kanji ➔ Gõ Cách đọc / Nghĩa'
+        });
+      }
+    });
+
+    // Intelligent Shuffle: For 2-way mode, separate Question A and Question B of the same card
+    if (practiceModeDirection === 'two_way' && questions.length > 2) {
+      const qAList = questions.filter(q => q._direction === 'kanji_to_reading' || q._direction === 'grammar_flip');
+      const qBList = questions.filter(q => q._direction === 'meaning_to_kanji');
+      
+      // Shuffle both halves separately
+      shuffleArray(qAList);
+      shuffleArray(qBList);
+
+      // Concatenate Round 1 (Kanji recall) followed by Round 2 (Active Japanese recall)
+      return [...qAList, ...qBList];
+    }
+
+    shuffleArray(questions);
+    return questions;
+  },
+
   startPractice() {
     if (currentChapterVocabList.length === 0) {
       showToast("⚠️ Chương này chưa có từ vựng để ôn tập!");
       return;
     }
 
-    practiceSessionCards = [...currentChapterVocabList];
+    practiceSessionCards = this.generatePracticeQuestions(currentChapterVocabList);
     practiceCurrentIndex = 0;
     isPracticeFlipped = false;
     currentTypingState = 'input';
@@ -282,7 +384,8 @@ const flashcardService = {
       this.startPractice();
       return;
     }
-    practiceSessionCards = [...unmastered];
+
+    practiceSessionCards = this.generatePracticeQuestions(unmastered);
     practiceCurrentIndex = 0;
     isPracticeFlipped = false;
     currentTypingState = 'input';
@@ -309,7 +412,8 @@ const flashcardService = {
     if (practiceCurrentIndex >= practiceSessionCards.length) return;
     const card = practiceSessionCards[practiceCurrentIndex];
     if (card) {
-      const mainCard = currentChapterVocabList.find(c => c.id === card.id);
+      const originalId = card._originalId || card.id;
+      const mainCard = currentChapterVocabList.find(c => c.id === originalId);
       if (mainCard) {
         mainCard.mastered = mastered;
         saveCurrentFlashcardsToStorage();
@@ -325,7 +429,7 @@ const flashcardService = {
   },
 
   // ------------------------------------------------------------------------
-  // TYPE-TO-CHECK VOCABULARY ENGINE
+  // TYPE-TO-CHECK VOCABULARY ENGINE (2-WAY SMART VALIDATION)
   // ------------------------------------------------------------------------
   checkTypingAnswer() {
     const inputEl = document.getElementById('practiceTypingInput');
@@ -333,7 +437,7 @@ const flashcardService = {
 
     const userInput = inputEl.value.trim();
     if (!userInput) {
-      showToast("✍️ Vui lòng gõ cách đọc hoặc nghĩa để kiểm tra!");
+      showToast("✍️ Vui lòng gõ đáp án để kiểm tra!");
       inputEl.focus();
       return;
     }
@@ -341,14 +445,38 @@ const flashcardService = {
     const card = practiceSessionCards[practiceCurrentIndex];
     if (!card) return;
 
+    const originalId = card._originalId || card.id;
+    const direction = card._direction || 'kanji_to_reading';
     lastUserTypedInput = userInput;
-    const isCorrect = evaluateAnswer(userInput, card);
 
-    const mainCard = currentChapterVocabList.find(c => c.id === card.id);
+    const isCorrect = evaluateAnswer(userInput, card, direction);
+    const mainCard = currentChapterVocabList.find(c => c.id === originalId);
+
+    // Update session tracker
+    if (!sessionWordResults[originalId]) {
+      sessionWordResults[originalId] = { k2r: null, m2k: null };
+    }
+    if (direction === 'kanji_to_reading') {
+      sessionWordResults[originalId].k2r = isCorrect;
+    } else if (direction === 'meaning_to_kanji') {
+      sessionWordResults[originalId].m2k = isCorrect;
+    }
+
     if (isCorrect) {
       currentTypingState = 'correct';
-      if (mainCard) mainCard.mastered = true;
-      card.mastered = true;
+      
+      // Check overall mastery in 2-way mode
+      const res = sessionWordResults[originalId];
+      if (practiceModeDirection === 'two_way') {
+        if (res.k2r === true && res.m2k === true) {
+          if (mainCard) mainCard.mastered = true;
+          card.mastered = true;
+        }
+      } else {
+        if (mainCard) mainCard.mastered = true;
+        card.mastered = true;
+      }
+
       saveCurrentFlashcardsToStorage();
       updateFlashcardBadges();
       this.speak(card.term);
@@ -367,8 +495,20 @@ const flashcardService = {
     const card = practiceSessionCards[practiceCurrentIndex];
     if (!card) return;
 
+    const originalId = card._originalId || card.id;
+    const direction = card._direction || 'kanji_to_reading';
+
     currentTypingState = 'revealed';
-    const mainCard = currentChapterVocabList.find(c => c.id === card.id);
+    if (!sessionWordResults[originalId]) {
+      sessionWordResults[originalId] = { k2r: null, m2k: null };
+    }
+    if (direction === 'kanji_to_reading') {
+      sessionWordResults[originalId].k2r = false;
+    } else if (direction === 'meaning_to_kanji') {
+      sessionWordResults[originalId].m2k = false;
+    }
+
+    const mainCard = currentChapterVocabList.find(c => c.id === originalId);
     if (mainCard) mainCard.mastered = false;
     card.mastered = false;
     saveCurrentFlashcardsToStorage();
@@ -408,14 +548,14 @@ const flashcardService = {
   },
 
   promptAddCustom() {
-    const term = prompt("Nhập từ vựng hoặc cấu trúc ngữ pháp:");
+    const term = prompt("Nhập từ vựng hoặc mẫu ngữ pháp:");
     if (!term || !term.trim()) return;
 
     const furigana = prompt("Cách đọc Furigana / Hiragana (nếu có):") || "";
     const hanViet = prompt("Âm Hán-Việt (nếu có):") || "";
     const meaning = prompt("Ý nghĩa / Định nghĩa tiếng Việt:") || "";
 
-    const isGrammar = isGrammarTerm(term) || confirm("Đây có phải là thẻ cấu trúc Ngữ Pháp không? (Bấm OK để dùng cơ chế Lật Thẻ, Cancel để dùng cơ chế Gõ Check)");
+    const isGrammar = isGrammarTerm(term) || confirm("Đây có phải là thẻ mẫu Ngữ Pháp không? (Bấm OK để dùng thẻ Lật 3D, Cancel để dùng thẻ Gõ chữ)");
 
     this.addManualCard({
       term: term.trim(),
@@ -434,64 +574,137 @@ const flashcardService = {
 
     window.speechSynthesis.cancel();
     const utter = new SpeechSynthesisUtterance(term);
-    utter.lang = /[\u3040-\u309F\u30A0-\u30FF\u4E00-\u9FAF]/.test(term) ? 'ja-JP' : 'vi-VN';
-    utter.rate = 0.88;
+    utter.lang = 'ja-JP';
+    utter.rate = 0.9;
     window.speechSynthesis.speak(utter);
   }
 };
 
 // --------------------------------------------------------------------------
-// SMART ANSWER EVALUATION (TYPE-TO-CHECK LOGIC)
+// SMART ANSWER EVALUATION (2-WAY RECALL LOGIC)
 // --------------------------------------------------------------------------
-function evaluateAnswer(userInput, card) {
+function cleanStr(s) {
+  if (!s) return '';
+  return String(s)
+    .toLowerCase()
+    .trim()
+    .replace(/[\s\-_~～・\.\,\:\;\!\?\(\)\[\]「」『』\/\\+]+/g, '');
+}
+
+function katakanaToHiragana(src) {
+  if (!src) return '';
+  return src.replace(/[\u30a1-\u30f6]/g, match => {
+    const chr = match.charCodeAt(0) - 0x60;
+    return String.fromCharCode(chr);
+  });
+}
+
+function evaluateAnswer(userInput, card, direction = 'kanji_to_reading') {
   if (!userInput || !card) return false;
 
-  const cleanUser = userInput.toLowerCase().trim();
-  const userNoAccent = removeVietnameseAccents(cleanUser);
-  const userAsHiragana = romajiToHiragana(cleanUser);
+  const rawUser = String(userInput).trim();
+  const cleanUser = cleanStr(rawUser);
+  const userNoAccent = cleanStr(removeVietnameseAccents(rawUser));
+  const userAsHiragana = cleanStr(romajiToHiragana(rawUser));
+  const userFromKana = cleanStr(katakanaToHiragana(rawUser));
 
-  // 1. Match Furigana (Hiragana or Romaji conversion)
-  if (card.furigana) {
-    const cleanFurigana = card.furigana.toLowerCase().trim();
-    if (cleanUser === cleanFurigana || userAsHiragana === cleanFurigana) {
-      return true;
-    }
-  }
+  const targetReading = cleanStr(card.reading || card.furigana);
+  const targetRomaji = cleanStr(card.romaji);
+  const targetTerm = cleanStr(card.term);
+  const targetHanViet = cleanStr(removeVietnameseAccents(card.hanViet || card.han_viet || ''));
+  const targetMeaning = cleanStr(removeVietnameseAccents(card.meaning || ''));
 
-  // 2. Match Exact Term (Kanji or Word)
-  if (card.term) {
-    const cleanTerm = card.term.toLowerCase().trim();
-    if (cleanUser === cleanTerm || userAsHiragana === cleanTerm) {
-      return true;
-    }
-  }
-
-  // 3. Match Vietnamese Meaning (Full or Substring or Accent-Insensitive)
-  if (card.meaning) {
-    const cleanMeaning = card.meaning.toLowerCase().trim();
-    const meaningNoAccent = removeVietnameseAccents(cleanMeaning);
-
-    if (cleanUser === cleanMeaning || userNoAccent === meaningNoAccent) {
-      return true;
-    }
-
-    // Check individual keywords if meaning has multiple phrases (e.g. "tất yếu, bắt buộc")
-    const meaningTokens = cleanMeaning.split(/[,;\-\/]/).map(t => t.trim()).filter(Boolean);
-    for (const tok of meaningTokens) {
-      const tokNoAccent = removeVietnameseAccents(tok);
-      if (cleanUser === tok || userNoAccent === tokNoAccent) {
+  // =========================================================================
+  // DIRECTION 1: KANJI -> READING / MEANING (Nhìn Kanji ➔ Gõ Đọc / Nghĩa)
+  // =========================================================================
+  if (direction === 'kanji_to_reading') {
+    // 1. Match Hiragana / Furigana
+    if (targetReading) {
+      if (cleanUser === targetReading || 
+          userAsHiragana === targetReading || 
+          userFromKana === targetReading) {
         return true;
       }
     }
+
+    // 2. Match Romaji directly
+    if (targetRomaji) {
+      if (cleanUser === targetRomaji || 
+          cleanStr(romajiToHiragana(cleanUser)) === cleanStr(romajiToHiragana(targetRomaji))) {
+        return true;
+      }
+    }
+
+    // 3. Match Exact Kanji / Term (nếu gõ luôn Kanji)
+    if (targetTerm) {
+      if (cleanUser === targetTerm || userAsHiragana === targetTerm) {
+        return true;
+      }
+    }
+
+    // 4. Match Vietnamese Meaning (Full or keyword tokens)
+    if (targetMeaning) {
+      if (userNoAccent === targetMeaning) {
+        return true;
+      }
+      const tokens = (card.meaning || '')
+        .split(/[,;\-\-\(\)]/)
+        .map(t => cleanStr(removeVietnameseAccents(t)))
+        .filter(t => t.length >= 2);
+
+      for (const tok of tokens) {
+        if (userNoAccent === tok || (tok.length >= 4 && userNoAccent.includes(tok)) || (userNoAccent.length >= 4 && tok.includes(userNoAccent))) {
+          return true;
+        }
+      }
+    }
+
+    // 5. Match Sino-Vietnamese (Hán-Việt)
+    if (targetHanViet) {
+      if (userNoAccent === targetHanViet && targetHanViet.length >= 2) {
+        return true;
+      }
+    }
+
+    return false;
   }
 
-  // 4. Match Sino-Vietnamese (Hán-Việt)
-  if (card.hanViet) {
-    const cleanHanViet = card.hanViet.toLowerCase().trim();
-    const hanVietNoAccent = removeVietnameseAccents(cleanHanViet);
-    if (cleanUser === cleanHanViet || userNoAccent === hanVietNoAccent) {
-      return true;
+  // =========================================================================
+  // DIRECTION 2: MEANING -> KANJI / READING (Nhìn Nghĩa ➔ Gõ Kanji / Đọc)
+  // =========================================================================
+  if (direction === 'meaning_to_kanji') {
+    // 1. Match Exact Kanji / Japanese Word
+    if (targetTerm) {
+      if (cleanUser === targetTerm || userAsHiragana === targetTerm || userFromKana === targetTerm) {
+        return true;
+      }
     }
+
+    // 2. Match Hiragana / Furigana
+    if (targetReading) {
+      if (cleanUser === targetReading || 
+          userAsHiragana === targetReading || 
+          userFromKana === targetReading) {
+        return true;
+      }
+    }
+
+    // 3. Match Romaji
+    if (targetRomaji) {
+      if (cleanUser === targetRomaji || 
+          cleanStr(romajiToHiragana(cleanUser)) === cleanStr(romajiToHiragana(targetRomaji))) {
+        return true;
+      }
+    }
+
+    // 4. Match Sino-Vietnamese (Hán-Việt) as fallback
+    if (targetHanViet) {
+      if (userNoAccent === targetHanViet && targetHanViet.length >= 2) {
+        return true;
+      }
+    }
+
+    return false;
   }
 
   return false;
@@ -499,7 +712,7 @@ function evaluateAnswer(userInput, card) {
 
 function isGrammarTerm(term) {
   if (!term) return false;
-  return term.includes('〜') || term.includes('~') || term.includes('cấu trúc') || term.includes('mẫu câu') || term.length > 18;
+  return term.includes('～') || term.includes('~') || term.includes('cấu trúc') || term.includes('mẫu câu') || term.length > 20;
 }
 
 function removeVietnameseAccents(str) {
@@ -510,15 +723,40 @@ function removeVietnameseAccents(str) {
     .toLowerCase().trim();
 }
 
+function shuffleArray(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+}
+
+// Full & Accurate Romaji to Hiragana Converter
 function romajiToHiragana(romaji) {
   if (!romaji) return '';
   let str = romaji.toLowerCase().trim();
+
+  // Double consonants for sokuon (っ)
+  str = str.replace(/([ksthmyrwnzdbpgc])\1/g, 'っ$1');
+  str = str.replace(/tch/g, 'っち');
+
   const map = {
-    'kya':'きゃ','kyu':'きゅ','kyo':'きょ','sha':'しゃ','shu':'しゅ','sho':'しょ','cha':'ちゃ','chu':'ちゅ','cho':'ちょ',
-    'nya':'にゃ','nyu':'にゅ','nyo':'にょ','hya':'ひゃ','hyu':'ひゅ','hyo':'ひょ','mya':'みゃ','myu':'みゅ','myo':'みょ',
-    'rya':'りゃ','ryu':'りゅ','ryo':'りょ','gya':'ぎゃ','gyu':'ぎゅ','gyo':'ぎょ','ja':'じゃ','ju':'じゅ','jo':'じょ',
-    'bya':'びゃ','byu':'びゅ','byo':'びょ','pya':'ぴゃ','pyu':'ぴゅ','pyo':'ぴょ',
-    'tsu':'つ','chi':'ち','shi':'し','fu':'ふ',
+    // 3 letters
+    'kya':'きゃ','kyu':'きゅ','kyo':'きょ',
+    'sha':'しゃ','shu':'しゅ','sho':'しょ','she':'しぇ',
+    'cha':'ちゃ','chu':'ちゅ','cho':'ちょ','che':'ちぇ',
+    'nya':'にゃ','nyu':'にゅ','nyo':'にょ',
+    'hya':'ひゃ','hyu':'ひゅ','hyo':'ひょ',
+    'mya':'みゃ','myu':'みゅ','myo':'みょ',
+    'rya':'りゃ','ryu':'りゅ','ryo':'りょ',
+    'gya':'ぎゃ','gyu':'ぎゅ','gyo':'ぎょ',
+    'jya':'じゃ','jyu':'じゅ','jyo':'じょ',
+    'zya':'じゃ','zyu':'じゅ','zyo':'じょ',
+    'bya':'びゃ','byu':'びゅ','byo':'びょ',
+    'pya':'ぴゃ','pyu':'ぴゅ','pyo':'ぴょ',
+    'tsu':'つ','chi':'ち','shi':'し','fu':'ふ','hu':'ふ',
+    'dzu':'づ','dji':'ぢ',
+    'ja':'じゃ','ju':'じゅ','jo':'じょ','je':'じぇ',
+    // 2 letters
     'ka':'か','ki':'き','ku':'く','ke':'け','ko':'こ',
     'sa':'さ','si':'し','su':'す','se':'せ','so':'そ',
     'ta':'た','ti':'ち','tu':'つ','te':'て','to':'と',
@@ -527,16 +765,18 @@ function romajiToHiragana(romaji) {
     'ma':'ま','mi':'み','mu':'む','me':'め','mo':'も',
     'ya':'や','yu':'ゆ','yo':'よ',
     'ra':'ら','ri':'り','ru':'る','re':'れ','ro':'ろ',
-    'wa':'わ','wo':'を','nn':'ん','n':'ん',
+    'wa':'わ','wo':'を',
     'ga':'が','gi':'ぎ','gu':'ぐ','ge':'げ','go':'ご',
     'za':'ざ','ji':'じ','zi':'じ','zu':'ず','ze':'ぜ','zo':'ぞ',
-    'da':'だ','di':'ぢ','du':'づ','de':'で','do':'ど',
+    'da':'だ','di':'ぢ','du':'づ','de':'de','do':'ど',
     'ba':'ば','bi':'び','bu':'ぶ','be':'べ','bo':'ぼ',
     'pa':'ぱ','pi':'ぴ','pu':'ぷ','pe':'ぺ','po':'ぽ',
-    'a':'あ','i':'い','u':'う','e':'え','o':'お'
+    'nn':'ん',"n'":'ん','n ':'ん',
+    // 1 letter
+    'a':'あ','i':'い','u':'う','e':'え','o':'お',
+    'n':'ん'
   };
 
-  str = str.replace(/([ksthmyrwnzdbp])\1/g, 'っ$1');
   const keys = Object.keys(map).sort((a, b) => b.length - a.length);
   for (const k of keys) {
     str = str.split(k).join(map[k]);
@@ -549,7 +789,7 @@ function romajiToHiragana(romaji) {
 // --------------------------------------------------------------------------
 function extractVocabFromPages(pages) {
   const list = [];
-  const pattern = /([a-zA-Z0-9_\u3040-\u309F\u30A0-\u30FF\u4E00-\u9FAF\u00C0-\u1EF9~／/\.\-]+)\s*[\(（]([^\)）]+)[\)）]/g;
+  const pattern = /([a-zA-Z0-9_\u3040-\u309F\u30A0-\u30FF\u4E00-\u9FAF\u00C0-\u1EF9~～\.\-]+)\s*[\(（]([^\)）]+)[\)）]/g;
 
   pages.forEach((page, pageIdx) => {
     const bubbles = page.bubbles || [];
@@ -563,10 +803,10 @@ function extractVocabFromPages(pages) {
         // Skip 4-digit years
         if (/^\d{4}$/.test(noteContent)) continue;
         const hasJapanese = /[\u3040-\u309F\u30A0-\u30FF\u4E00-\u9FAF]/.test(noteContent);
-        const hasSeparator = /[-–—•:]/.test(noteContent);
+        const hasSeparator = /[-–—:：]/.test(noteContent);
         if (!hasJapanese && !hasSeparator) continue;
 
-        const parts = noteContent.split(/\s*[-–—•:]\s*/).filter(p => p.length > 0);
+        const parts = noteContent.split(/\s*[-–—:：]\s*/).filter(p => p.length > 0);
         let furigana = '';
         let hanViet = '';
         let meaning = '';
@@ -594,6 +834,7 @@ function extractVocabFromPages(pages) {
         list.push({
           term,
           furigana,
+          reading: furigana,
           hanViet,
           meaning,
           pageIndex: pageIdx + 1,
@@ -625,71 +866,59 @@ function updateFlashcardBadges() {
   const total = currentChapterVocabList.length;
   const mastered = currentChapterVocabList.filter(c => c.mastered).length;
 
-  const headerBadge = document.getElementById('headerFlashcardBadge');
-  if (headerBadge) {
-    if (total > 0) {
-      headerBadge.textContent = total;
-      headerBadge.style.display = 'inline-flex';
-    } else {
-      headerBadge.style.display = 'none';
-    }
+  const countPill = document.getElementById('modalFlashcardCountText');
+  if (countPill) {
+    countPill.textContent = `(${mastered}/${total} từ đã thuộc)`;
   }
 
-  const dockBadge = document.getElementById('dockFlashcardBadge');
-  if (dockBadge) {
-    if (total > 0) {
-      dockBadge.textContent = total;
-      dockBadge.style.display = 'inline-flex';
-    } else {
-      dockBadge.style.display = 'none';
-    }
-  }
-
-  const modalTitleCount = document.getElementById('modalFlashcardCountText');
-  if (modalTitleCount) {
-    modalTitleCount.textContent = `(${total} từ • ${mastered} đã nhớ)`;
+  const btnBadge = document.getElementById('btnFlashcardsBadge');
+  if (btnBadge) {
+    btnBadge.textContent = total;
+    btnBadge.style.display = total > 0 ? 'inline-block' : 'none';
   }
 }
 
 // --------------------------------------------------------------------------
-// MODAL RENDERING (SHOW FULL LIST FIRST -> PRACTICE SESSION)
+// DYNAMIC UI RENDERING (VIEW 1: OVERVIEW LIST vs VIEW 2: PRACTICE SESSION)
 // --------------------------------------------------------------------------
-
 function renderFlashcardModalContent() {
-  const bodyEl = document.getElementById('flashcardModalBody');
-  if (!bodyEl) return;
+  const container = document.getElementById('flashcardModalBody');
+  if (!container) return;
 
   if (isPracticeModeActive) {
-    renderPracticeModeView(bodyEl);
+    renderPracticeModeView(container);
   } else {
-    renderOverviewListView(bodyEl);
+    renderOverviewListView(container);
   }
 }
 
-// VIEW 1: SHOW FULL LIST OVERVIEW
+// VIEW 1: VOCABULARY OVERVIEW & MANAGEMENT LIST
 function renderOverviewListView(container) {
   const total = currentChapterVocabList.length;
   const mastered = currentChapterVocabList.filter(c => c.mastered).length;
   const percent = total > 0 ? Math.round((mastered / total) * 100) : 0;
 
-  // Filter list
-  const filtered = currentChapterVocabList.filter(c => {
-    if (!flashcardFilterQuery) return true;
-    const q = flashcardFilterQuery.toLowerCase();
-    return c.term.toLowerCase().includes(q) ||
-           (c.furigana && c.furigana.toLowerCase().includes(q)) ||
-           (c.hanViet && c.hanViet.toLowerCase().includes(q)) ||
-           (c.meaning && c.meaning.toLowerCase().includes(q));
-  });
+  // Filter Cards
+  let filtered = currentChapterVocabList;
+  if (flashcardFilterQuery) {
+    const q = flashcardFilterQuery.toLowerCase().trim();
+    filtered = currentChapterVocabList.filter(c => {
+      return (c.term || '').toLowerCase().includes(q) ||
+             (c.reading || c.furigana || '').toLowerCase().includes(q) ||
+             (c.romaji || '').toLowerCase().includes(q) ||
+             (c.hanViet || '').toLowerCase().includes(q) ||
+             (c.meaning || '').toLowerCase().includes(q);
+    });
+  }
 
   let cardsHtml = '';
   if (filtered.length === 0) {
     if (total === 0) {
       cardsHtml = `
         <div class="flashcard-empty-state">
-          <div class="empty-icon"><i class="fas fa-layer-group"></i></div>
-          <p class="empty-title">Chương này chưa có thẻ từ vựng</p>
-          <p class="empty-desc">Bạn có thể thêm từ mới thủ công hoặc đọc tiếp chương khác!</p>
+          <div class="empty-icon"><i class="fas fa-book-open"></i></div>
+          <p class="empty-title">Chương này chưa có thẻ từ vựng nào</p>
+          <p class="empty-desc">Từ vựng & ngữ pháp trong thoại manga sẽ tự động được trích xuất tại đây.</p>
           <button class="btn-secondary" onclick="flashcardService.promptAddCustom()" style="margin-top: 10px; font-size: 0.9rem;">
             <i class="fas fa-plus"></i> Thêm từ vựng mới
           </button>
@@ -724,20 +953,20 @@ function renderOverviewListView(container) {
                 </div>
                 
                 <div class="vocab-card-details">
-                  <div class="detail-row"><span class="detail-label">📖 Ý nghĩa:</span> <span class="detail-val font-bold text-accent">${escapeHtml(c.meaning || '')}</span></div>
+                  <div class="detail-row"><span class="detail-label">📌 Ý nghĩa:</span> <span class="detail-val font-bold text-accent">${escapeHtml(c.meaning || '')}</span></div>
                   ${c.connection ? `<div class="detail-row"><span class="detail-label">🔗 Công thức nối:</span> <span class="detail-val font-mono code-box">${escapeHtml(c.connection)}</span></div>` : ''}
                   ${c.usageNotes ? `<div class="detail-row"><span class="detail-label">💡 Sắc thái dùng:</span> <span class="detail-val text-muted">${escapeHtml(c.usageNotes)}</span></div>` : ''}
                   
                   ${c.examJa1 ? `
                     <div class="detail-exam-box">
                       <div class="exam-ja-row">
-                        <span>📝 ${escapeHtml(c.examJa1)}</span>
+                        <span>🇯🇵 ${escapeHtml(c.examJa1)}</span>
                         <button type="button" class="btn-mini-speaker" onclick="flashcardService.speak('${escapeHtml(c.examJa1)}', event)"><i class="fas fa-volume-high"></i></button>
                       </div>
-                      ${c.examVi1 ? `<div class="exam-vi-row">➔ ${escapeHtml(c.examVi1)}</div>` : ''}
+                      ${c.examVi1 ? `<div class="exam-vi-row">🇻🇳 ${escapeHtml(c.examVi1)}</div>` : ''}
                     </div>` : ''}
 
-                  ${c.similarPatterns ? `<div class="detail-row text-xs text-muted"><span class="detail-label">🔗 Mở rộng:</span> <span class="detail-val">${escapeHtml(c.similarPatterns)}</span></div>` : ''}
+                  ${c.similarPatterns ? `<div class="detail-row text-xs text-muted"><span class="detail-label">🔍 Mở rộng:</span> <span class="detail-val">${escapeHtml(c.similarPatterns)}</span></div>` : ''}
                   
                   ${c.context ? `
                     <div class="detail-context-row">
@@ -796,13 +1025,13 @@ function renderOverviewListView(container) {
                 ${c.examJa ? `
                   <div class="detail-exam-box">
                     <div class="exam-ja-row">
-                      <span>📝 ${escapeHtml(c.examJa)}</span>
+                      <span>🇯🇵 ${escapeHtml(c.examJa)}</span>
                       <button type="button" class="btn-mini-speaker" onclick="flashcardService.speak('${escapeHtml(c.examJa)}', event)"><i class="fas fa-volume-high"></i></button>
                     </div>
-                    ${c.examVi ? `<div class="exam-vi-row">➔ ${escapeHtml(c.examVi)}</div>` : ''}
+                    ${c.examVi ? `<div class="exam-vi-row">🇻🇳 ${escapeHtml(c.examVi)}</div>` : ''}
                   </div>` : ''}
 
-                ${c.synonymsAntonyms ? `<div class="detail-row text-xs text-muted"><span class="detail-label">🔗 Mở rộng:</span> <span class="detail-val">${escapeHtml(c.synonymsAntonyms)}</span></div>` : ''}
+                ${c.synonymsAntonyms ? `<div class="detail-row text-xs text-muted"><span class="detail-label">🔍 Mở rộng:</span> <span class="detail-val">${escapeHtml(c.synonymsAntonyms)}</span></div>` : ''}
                 
                 ${c.context ? `
                   <div class="detail-context-row">
@@ -830,41 +1059,59 @@ function renderOverviewListView(container) {
   }
 
   container.innerHTML = `
-    <!-- Top Action Banner: Start Practice -->
-    <div class="flashcard-cta-banner">
-      <div class="cta-banner-info">
-        <div class="cta-banner-title">
-          <i class="fas fa-keyboard"></i>
-          <span>Luyện tập từ vựng & ngữ pháp chương này</span>
-        </div>
-        <div class="cta-banner-progress">
-          <div class="progress-bar-track">
-            <div class="progress-bar-fill" style="width: ${percent}%;"></div>
+    <div class="vocab-overview-container">
+      <!-- Top Stats & Practice CTA Row -->
+      <div class="vocab-stats-cta-box">
+        <div class="vocab-stats-left">
+          <div class="vocab-stats-title"><i class="fas fa-chart-pie"></i> Tiến độ ghi nhớ</div>
+          <div class="vocab-progress-wrapper">
+            <div class="progress-bar-track">
+              <div class="progress-bar-fill" style="width: ${percent}%;"></div>
+            </div>
+            <span class="progress-text">${mastered}/${total} đã thuộc (${percent}%)</span>
           </div>
-          <span class="progress-text">${mastered}/${total} đã thuộc (${percent}%)</span>
+        </div>
+
+        <div class="vocab-cta-actions">
+          <!-- Practice Mode Selector -->
+          <div class="practice-mode-selector-pill">
+            <button type="button" class="btn-mode-opt ${practiceModeDirection === 'two_way' ? 'active' : ''}" 
+                    onclick="flashcardService.setPracticeModeDirection('two_way')" title="Mỗi từ học 2 chiều: Nhìn Kanji -> Gõ Đọc/Nghĩa & Nhìn Nghĩa -> Gõ Tiếng Nhật">
+              <i class="fas fa-rotate"></i> <span>2 Chiều (2x)</span>
+            </button>
+            <button type="button" class="btn-mode-opt ${practiceModeDirection === 'kanji_only' ? 'active' : ''}" 
+                    onclick="flashcardService.setPracticeModeDirection('kanji_only')" title="Chỉ học chiều: Nhìn Kanji -> Gõ Đọc / Nghĩa">
+              <span>🈸 Kanji</span>
+            </button>
+            <button type="button" class="btn-mode-opt ${practiceModeDirection === 'meaning_only' ? 'active' : ''}" 
+                    onclick="flashcardService.setPracticeModeDirection('meaning_only')" title="Chỉ học chiều: Nhìn Nghĩa -> Gõ Tiếng Nhật">
+              <span>🇻🇳 Nghĩa</span>
+            </button>
+          </div>
+
+          <button type="button" class="btn-start-practice" onclick="flashcardService.startPractice()" ${total === 0 ? 'disabled' : ''}>
+            <i class="fas fa-play"></i>
+            <span>Bắt Đầu Luyện Tập</span>
+          </button>
         </div>
       </div>
-      <button type="button" class="btn-start-practice" onclick="flashcardService.startPractice()" ${total === 0 ? 'disabled' : ''}>
-        <i class="fas fa-play"></i>
-        <span>Bắt Đầu Luyện Tập</span>
-      </button>
-    </div>
 
-    <!-- Filter & Add Bar -->
-    <div class="vocab-toolbar-row">
-      <div class="vocab-search-box">
-        <i class="fas fa-search"></i>
-        <input type="text" id="vocabFilterInput" placeholder="Tìm kiếm từ vựng, Hán-Việt, ý nghĩa..." value="${escapeHtml(flashcardFilterQuery)}" oninput="flashcardService.handleFilterChange(this.value)">
-        ${flashcardFilterQuery ? `<button type="button" class="btn-clear-search" onclick="flashcardService.handleFilterChange('')"><i class="fas fa-times"></i></button>` : ''}
+      <!-- Filter & Add Bar -->
+      <div class="vocab-toolbar-row">
+        <div class="vocab-search-box">
+          <i class="fas fa-search"></i>
+          <input type="text" id="vocabFilterInput" placeholder="Tìm kiếm từ vựng, Hán-Việt, ý nghĩa..." value="${escapeHtml(flashcardFilterQuery)}" oninput="flashcardService.handleFilterChange(this.value)">
+          ${flashcardFilterQuery ? `<button type="button" class="btn-clear-search" onclick="flashcardService.handleFilterChange('')"><i class="fas fa-times"></i></button>` : ''}
+        </div>
+        <button type="button" class="btn-add-custom-card" onclick="flashcardService.promptAddCustom()" title="Thêm từ vựng hoặc ngữ pháp">
+          <i class="fas fa-plus"></i> <span>Thêm thẻ</span>
+        </button>
       </div>
-      <button type="button" class="btn-add-custom-card" onclick="flashcardService.promptAddCustom()" title="Thêm từ vựng hoặc ngữ pháp">
-        <i class="fas fa-plus"></i> <span>Thêm thẻ</span>
-      </button>
-    </div>
 
-    <!-- Full Vocabulary List -->
-    <div class="vocab-list-scrollable">
-      ${cardsHtml}
+      <!-- Cards List -->
+      <div class="vocab-cards-scrollable">
+        ${cardsHtml}
+      </div>
     </div>
   `;
 }
@@ -878,15 +1125,16 @@ function renderPracticeModeView(container) {
 
   // Completed all cards in session
   if (practiceCurrentIndex >= practiceSessionCards.length) {
-    const total = practiceSessionCards.length;
-    const mastered = practiceSessionCards.filter(c => c.mastered).length;
-    const percent = Math.round((mastered / total) * 100);
+    const totalWords = currentChapterVocabList.length;
+    const masteredWords = currentChapterVocabList.filter(c => c.mastered).length;
+    const unmasteredCount = totalWords - masteredWords;
+    const percent = totalWords > 0 ? Math.round((masteredWords / totalWords) * 100) : 0;
 
     container.innerHTML = `
       <div class="practice-completed-screen">
         <div class="congrats-trophy"><i class="fas fa-award"></i></div>
         <h3 class="congrats-title">🎉 Xuất Sắc! Hoàn Thành Phiên Ôn Tập</h3>
-        <p class="congrats-sub">Bạn đã hoàn thành phiên luyện tập ${total} thẻ trong chương này.</p>
+        <p class="congrats-sub">Bạn đã hoàn thành phiên luyện tập <b>${practiceSessionCards.length} lượt kiểm tra</b> trong chương này.</p>
         
         <div class="practice-score-card">
           <div class="score-circle">
@@ -894,15 +1142,16 @@ function renderPracticeModeView(container) {
             <span class="score-label">Độ chính xác</span>
           </div>
           <div class="score-details">
-            <div class="score-row text-success"><i class="fas fa-check-circle"></i> Đã nhớ: <b>${mastered} từ</b></div>
-            <div class="score-row text-warning"><i class="fas fa-rotate-left"></i> Cần ôn lại: <b>${total - mastered} từ</b></div>
+            <div class="score-row text-success"><i class="fas fa-check-circle"></i> Đã thuộc hoàn toàn: <b>${masteredWords} / ${totalWords} từ</b></div>
+            <div class="score-row text-muted"><i class="fas fa-rotate"></i> Chế độ: <b>${practiceModeDirection === 'two_way' ? 'Học 2 Chiều (Kanji ⇋ Nghĩa)' : (practiceModeDirection === 'kanji_only' ? 'Nhìn Kanji' : 'Nhìn Nghĩa')}</b></div>
+            ${unmasteredCount > 0 ? `<div class="score-row text-warning"><i class="fas fa-clock-rotate-left"></i> Còn <b>${unmasteredCount} từ</b> cần củng cố thêm</div>` : '<div class="score-row text-success"><i class="fas fa-star"></i> Tuyệt đối 100%! Bạn đã làm chủ toàn bộ từ vựng chương!</div>'}
           </div>
         </div>
 
-        <div class="practice-finish-actions">
-          ${(total - mastered > 0) ? `
+        <div class="practice-end-actions">
+          ${(unmasteredCount > 0) ? `
             <button type="button" class="btn-primary" onclick="flashcardService.restartUnmastered()">
-              <i class="fas fa-rotate-left"></i> Ôn lại ${total - mastered} từ chưa nhớ
+              <i class="fas fa-rotate-left"></i> Ôn lại ${unmasteredCount} từ chưa nhớ
             </button>
           ` : ''}
           <button type="button" class="btn-secondary" onclick="flashcardService.startPractice()">
@@ -921,7 +1170,8 @@ function renderPracticeModeView(container) {
   const total = practiceSessionCards.length;
   const currentNum = practiceCurrentIndex + 1;
   const percent = Math.round(((currentNum - 1) / total) * 100);
-  const isGrammar = card.type === 'grammar';
+  const isGrammar = card.type === 'grammar' || card._direction === 'grammar_flip';
+  const direction = card._direction || 'kanji_to_reading';
 
   // Branch A: GRAMMAR CARD -> 3D FLIP CARD
   if (isGrammar) {
@@ -951,7 +1201,7 @@ function renderPracticeModeView(container) {
               </div>
               
               <div class="card-front-content">
-                <div class="card-term-display">${escapeHtml(card.term)}</div>
+                <div class="card-term-display">${escapeHtml(card.pattern || card.term)}</div>
                 ${card.furigana ? `<div class="card-reading-display">【 ${escapeHtml(card.furigana)} 】</div>` : ''}
               </div>
 
@@ -967,9 +1217,10 @@ function renderPracticeModeView(container) {
               <div class="card-face-hint"><i class="fas fa-check-circle"></i> Cấu trúc & Cách dùng</div>
               
               <div class="card-back-content">
-                <div class="card-back-term">${escapeHtml(card.term)}</div>
+                <div class="card-back-term">${escapeHtml(card.pattern || card.term)}</div>
                 ${card.hanViet ? `<div class="card-back-hanviet">Âm Hán-Việt: <b>${escapeHtml(card.hanViet)}</b></div>` : ''}
                 <div class="card-back-meaning">${escapeHtml(card.meaning || 'Chưa có giải nghĩa')}</div>
+                ${card.connection ? `<div class="card-back-connection"><b>Công thức:</b> <code>${escapeHtml(card.connection)}</code></div>` : ''}
                 ${card.context ? `<div class="card-back-context"><b>Ví dụ:</b> <i>"${escapeHtml(card.context)}"</i></div>` : ''}
               </div>
 
@@ -988,7 +1239,7 @@ function renderPracticeModeView(container) {
           <button type="button" class="btn-rate-answer btn-rate-forgot" onclick="flashcardService.ratePracticeCard(false)">
             <i class="fas fa-rotate-left"></i>
             <span>Chưa nhớ</span>
-            <span class="kbd-hint">Phím ←</span>
+            <span class="kbd-hint">Phím 1</span>
           </button>
 
           <button type="button" class="btn-rate-flip" onclick="flashcardService.toggleFlip()">
@@ -1000,7 +1251,7 @@ function renderPracticeModeView(container) {
           <button type="button" class="btn-rate-answer btn-rate-remembered" onclick="flashcardService.ratePracticeCard(true)">
             <i class="fas fa-check"></i>
             <span>Đã thuộc</span>
-            <span class="kbd-hint">Phím →</span>
+            <span class="kbd-hint">Phím 2</span>
           </button>
         </div>
 
@@ -1009,23 +1260,47 @@ function renderPracticeModeView(container) {
     return;
   }
 
-  // Branch B: VOCABULARY CARD -> TYPE-TO-CHECK MODE (GÕ ĐỂ CHECK)
+  // Branch B: VOCABULARY CARD -> TYPE-TO-CHECK MODE (2-WAY)
   let stateContainerHtml = '';
+  const isMeaningToKanji = direction === 'meaning_to_kanji';
+
+  // Question Prompt Direction Badge
+  const directionBadgeHtml = isMeaningToKanji
+    ? `<div class="practice-direction-badge meaning-mode"><i class="fas fa-language"></i> <span>Nhìn Nghĩa ➔ Gõ Từ tiếng Nhật (Kanji / Hiragana / Romaji)</span></div>`
+    : `<div class="practice-direction-badge kanji-mode"><i class="fas fa-eye"></i> <span>Nhìn Kanji ➔ Gõ Cách đọc (Hiragana / Romaji) hoặc Nghĩa</span></div>`;
+
+  // Main Question Display Content
+  const questionCenterHtml = isMeaningToKanji
+    ? `
+      <div class="typing-meaning-prompt-box">
+        ${card.hanViet ? `<div class="typing-hanviet-badge">Hán-Việt: ${escapeHtml(card.hanViet)}</div>` : ''}
+        <div class="typing-meaning-display">${escapeHtml(card.meaning || 'Chưa có định nghĩa')}</div>
+        ${card.pos ? `<span class="tag-pos" style="margin-top: 6px;">${escapeHtml(card.pos)}</span>` : ''}
+      </div>
+    `
+    : `
+      <div class="typing-term-display">${escapeHtml(card.term)}</div>
+      <button type="button" class="btn-vocab-speaker-large" onclick="flashcardService.speakCurrentPractice(event)" title="Nghe phát âm">
+        <i class="fas fa-volume-high"></i>
+      </button>
+    `;
+
+  const inputPlaceholder = isMeaningToKanji
+    ? `✍️ Gõ từ tiếng Nhật (Kanji / Hiragana / Romaji)...`
+    : `✍️ Gõ cách đọc (Hiragana / Romaji) hoặc nghĩa tiếng Việt...`;
 
   if (currentTypingState === 'input') {
     stateContainerHtml = `
       <div class="typing-card-body">
-        <div class="typing-term-display">${escapeHtml(card.term)}</div>
-        <button type="button" class="btn-vocab-speaker-large" onclick="flashcardService.speakCurrentPractice(event)" title="Nghe phát âm">
-          <i class="fas fa-volume-high"></i>
-        </button>
+        ${directionBadgeHtml}
+        ${questionCenterHtml}
 
         <form class="typing-input-box" onsubmit="event.preventDefault(); flashcardService.checkTypingAnswer();">
           <div class="typing-input-wrapper">
             <input type="text" 
                    id="practiceTypingInput" 
                    class="practice-typing-input" 
-                   placeholder="✍️ Gõ cách đọc (Hiragana / Romaji) hoặc nghĩa tiếng Việt..." 
+                   placeholder="${inputPlaceholder}" 
                    autofocus 
                    autocomplete="off" 
                    spellcheck="false">
@@ -1055,7 +1330,12 @@ function renderPracticeModeView(container) {
         <div class="typing-details-card">
           ${card.hanViet ? `<div class="detail-row"><span class="detail-label">Âm Hán-Việt:</span> <b>${escapeHtml(card.hanViet)}</b></div>` : ''}
           <div class="detail-row"><span class="detail-label">Nghĩa tiếng Việt:</span> <span class="detail-meaning">${escapeHtml(card.meaning || 'Chưa có định nghĩa')}</span></div>
-          ${card.context ? `<div class="detail-context"><i>"${escapeHtml(card.context)}"</i></div>` : ''}
+          ${card.examJa ? `
+            <div class="detail-exam-box">
+              <div class="exam-ja-row">🇯🇵 ${escapeHtml(card.examJa)}</div>
+              ${card.examVi ? `<div class="exam-vi-row">🇻🇳 ${escapeHtml(card.examVi)}</div>` : ''}
+            </div>` : ''}
+          ${card.context ? `<div class="detail-context"><i>Manga: "${escapeHtml(card.context)}"</i></div>` : ''}
         </div>
 
         <div class="typing-next-controls">
@@ -1073,24 +1353,21 @@ function renderPracticeModeView(container) {
           <i class="fas fa-circle-xmark"></i> <span>CHƯA CHÍNH XÁC</span>
         </div>
 
-        <div class="typing-term-display">${escapeHtml(card.term)}</div>
-        <div class="typing-user-feedback">
-          <div class="feedback-wrong">Bạn đã nhập: <s>"${escapeHtml(lastUserTypedInput)}"</s></div>
-          <div class="feedback-correct">
-            <span>Đáp án đúng:</span>
-            <b>${card.furigana ? `【 ${escapeHtml(card.furigana)} 】` : ''} ${escapeHtml(card.meaning || '')} ${card.hanViet ? `[${escapeHtml(card.hanViet)}]` : ''}</b>
-          </div>
+        <div class="typing-user-input-echo">
+          <span>Bạn đã gõ:</span> <span class="user-typed-text">${escapeHtml(lastUserTypedInput)}</span>
         </div>
 
-        ${card.context ? `<div class="detail-context"><i>"${escapeHtml(card.context)}"</i></div>` : ''}
+        ${questionCenterHtml}
 
-        <div class="typing-retry-controls">
+        <div class="typing-action-buttons-row">
           <button type="button" class="btn-typing-retry" onclick="flashcardService.retryTyping()">
-            <i class="fas fa-rotate-left"></i> <span>Gõ lại</span>
+            <i class="fas fa-rotate-left"></i> <span>Thử lại</span>
+          </button>
+          <button type="button" class="btn-typing-reveal" onclick="flashcardService.revealAnswer()">
+            <i class="fas fa-lightbulb"></i> <span>Xem đáp án chi tiết (Tab)</span>
           </button>
           <button type="button" id="btnNextPracticeCard" class="btn-typing-next" onclick="flashcardService.nextPracticeCard()" autofocus>
-            <span>Đã hiểu, sang từ tiếp</span> <i class="fas fa-arrow-right"></i>
-            <span class="kbd-hint">(Phím Enter)</span>
+            <span>Bỏ qua</span> <i class="fas fa-arrow-right"></i>
           </button>
         </div>
       </div>
@@ -1099,7 +1376,7 @@ function renderPracticeModeView(container) {
     stateContainerHtml = `
       <div class="typing-card-body state-revealed">
         <div class="typing-badge-result revealed">
-          <i class="fas fa-lightbulb"></i> <span>ĐÁP ÁN TỪ VỰNG</span>
+          <i class="fas fa-lightbulb"></i> <span>ĐÁP ÁN CHI TIẾT</span>
         </div>
 
         <div class="typing-term-display">${escapeHtml(card.term)}</div>
@@ -1108,15 +1385,21 @@ function renderPracticeModeView(container) {
         <div class="typing-details-card">
           ${card.hanViet ? `<div class="detail-row"><span class="detail-label">Âm Hán-Việt:</span> <b>${escapeHtml(card.hanViet)}</b></div>` : ''}
           <div class="detail-row"><span class="detail-label">Nghĩa tiếng Việt:</span> <span class="detail-meaning">${escapeHtml(card.meaning || 'Chưa có định nghĩa')}</span></div>
-          ${card.context ? `<div class="detail-context"><i>"${escapeHtml(card.context)}"</i></div>` : ''}
+          ${card.romaji ? `<div class="detail-row"><span class="detail-label">Romaji:</span> <span class="text-accent">${escapeHtml(card.romaji)}</span></div>` : ''}
+          ${card.examJa ? `
+            <div class="detail-exam-box">
+              <div class="exam-ja-row">🇯🇵 ${escapeHtml(card.examJa)}</div>
+              ${card.examVi ? `<div class="exam-vi-row">🇻🇳 ${escapeHtml(card.examVi)}</div>` : ''}
+            </div>` : ''}
+          ${card.context ? `<div class="detail-context"><i>Manga: "${escapeHtml(card.context)}"</i></div>` : ''}
         </div>
 
-        <div class="typing-retry-controls">
+        <div class="typing-action-buttons-row">
           <button type="button" class="btn-typing-retry" onclick="flashcardService.retryTyping()">
-            <i class="fas fa-keyboard"></i> <span>Thử gõ lại</span>
+            <i class="fas fa-rotate-left"></i> <span>Gõ lại để nhớ</span>
           </button>
           <button type="button" id="btnNextPracticeCard" class="btn-typing-next" onclick="flashcardService.nextPracticeCard()" autofocus>
-            <span>Tiếp tục</span> <i class="fas fa-arrow-right"></i>
+            <span>Sang từ kế tiếp</span> <i class="fas fa-arrow-right"></i>
             <span class="kbd-hint">(Phím Enter)</span>
           </button>
         </div>
@@ -1129,33 +1412,35 @@ function renderPracticeModeView(container) {
       <!-- Subheader -->
       <div class="practice-subheader">
         <button type="button" class="btn-back-to-list" onclick="flashcardService.switchToList()" title="Quay lại danh sách">
-          <i class="fas fa-arrow-left"></i> <span>Quay lại Danh sách</span>
+          <i class="fas fa-arrow-left"></i> <span>Danh sách</span>
         </button>
         <div class="practice-progress-pill">
-          <span>Gõ Check: ${currentNum} / ${total}</span>
+          <span>Câu ${currentNum} / ${total}</span>
+          <span class="practice-mode-tag">${isMeaningToKanji ? '🇻🇳 Nghĩa ➔ Kanji' : '🈸 Kanji ➔ Đọc'}</span>
           <div class="practice-mini-bar"><div class="practice-mini-fill" style="width: ${percent}%;"></div></div>
         </div>
         <button type="button" class="btn-icon" onclick="flashcardService.closeModal()"><i class="fas fa-times"></i></button>
       </div>
 
-      <!-- Main Typing Card -->
-      <div class="typing-card-scene">
+      <!-- Main Typing Scene -->
+      <div class="practice-typing-scene">
         ${stateContainerHtml}
       </div>
     </div>
   `;
 
-  // Auto-focus input or next button
+  // Auto focus on typing input if available
   setTimeout(() => {
     const inputEl = document.getElementById('practiceTypingInput');
-    const nextBtn = document.getElementById('btnNextPracticeCard');
     if (inputEl) inputEl.focus();
-    else if (nextBtn) nextBtn.focus();
-  }, 100);
+    const nextBtn = document.getElementById('btnNextPracticeCard');
+    if (nextBtn && currentTypingState !== 'input') nextBtn.focus();
+  }, 50);
 }
 
+// Simple HTML escaping helper
 function escapeHtml(str) {
-  if (!str) return '';
+  if (str === null || str === undefined) return '';
   return String(str)
     .replace(/&/g, '&amp;')
     .replace(/</g, '&lt;')
@@ -1164,14 +1449,22 @@ function escapeHtml(str) {
     .replace(/'/g, '&#039;');
 }
 
-function jumpToPageAndCloseModal(pageIdx) {
-  if (typeof jumpToPage === 'function') {
-    jumpToPage(pageIdx);
+// Global Toast helper
+function showToast(msg) {
+  let toast = document.getElementById('appToast');
+  if (!toast) {
+    toast = document.createElement('div');
+    toast.id = 'appToast';
+    toast.className = 'app-toast';
+    document.body.appendChild(toast);
   }
-  flashcardService.closeModal();
+  toast.textContent = msg;
+  toast.classList.add('show');
+  clearTimeout(toast._timer);
+  toast._timer = setTimeout(() => {
+    toast.classList.remove('show');
+  }, 2800);
 }
-
-window.jumpToPageAndCloseModal = jumpToPageAndCloseModal;
 
 // Global Export
 window.flashcardService = flashcardService;
