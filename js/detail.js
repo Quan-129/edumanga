@@ -107,7 +107,7 @@ function renderSeriesInfo(s) {
         box-shadow: var(--shadow-neon);
         aspect-ratio: 3/4.2;
       ">
-        <img src="${window.getSeriesCover ? window.getSeriesCover(s) : (s.cover || 'assets/covers/n2_cover.jpg')}" alt="${escapeHtml(s.title)}" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.src='assets/covers/n2_cover.jpg'">
+        <img src="${window.getSeriesCover ? window.getSeriesCover(s) : (s.cover || 'assets/covers/default_cover.jpg')}" alt="${escapeHtml(s.title)}" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.src='assets/covers/default_cover.jpg'">
       </div>
       <div class="series-info-main" style="display: flex; flex-direction: column; justify-content: space-between;">
         <div>

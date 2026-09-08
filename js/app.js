@@ -85,7 +85,7 @@ function renderHeroFeatured(featured) {
       </div>
       <div class="hero-preview">
         <a href="detail.html?id=${featured.id}" class="hero-cover-stack">
-          <img src="${window.getSeriesCover ? window.getSeriesCover(featured) : (featured.cover || 'assets/covers/n2_cover.jpg')}" alt="${featured.title}" onerror="this.src='assets/covers/n2_cover.jpg'">
+          <img src="${window.getSeriesCover ? window.getSeriesCover(featured) : (featured.cover || 'assets/covers/default_cover.jpg')}" alt="${featured.title}" onerror="this.src='assets/covers/default_cover.jpg'">
         </a>
       </div>
     </div>
@@ -143,7 +143,7 @@ function renderMangaGrid(mangaList) {
         <a href="detail.html?id=${m.id}" class="card-cover-wrapper">
           <span class="card-badge">${escapeHtml(m.badge || 'Mới')}</span>
           <span class="card-category">${escapeHtml(m.category)}</span>
-          <img class="card-cover" src="${window.getSeriesCover ? window.getSeriesCover(m) : (m.cover || 'assets/covers/n2_cover.jpg')}" alt="${escapeHtml(m.title)}" loading="lazy" onerror="this.src='assets/covers/n2_cover.jpg'">
+          <img class="card-cover" src="${window.getSeriesCover ? window.getSeriesCover(m) : (m.cover || 'assets/covers/default_cover.jpg')}" alt="${escapeHtml(m.title)}" loading="lazy" onerror="this.src='assets/covers/default_cover.jpg'">
           ${adminActionsHtml}
         </a>
         <div class="card-info">
@@ -217,7 +217,7 @@ function renderSearchDropdown(matches, query) {
 
   searchDropdown.innerHTML = matches.slice(0, 5).map(m => `
     <a href="detail.html?id=${m.id}" class="search-drop-item">
-      <img src="${window.getSeriesCover ? window.getSeriesCover(m) : (m.cover || 'assets/covers/n2_cover.jpg')}" alt="${escapeHtml(m.title)}" onerror="this.src='assets/covers/n2_cover.jpg'">
+      <img src="${window.getSeriesCover ? window.getSeriesCover(m) : (m.cover || 'assets/covers/default_cover.jpg')}" alt="${escapeHtml(m.title)}" onerror="this.src='assets/covers/default_cover.jpg'">
       <div>
         <div style="font-weight: 700; color: #fff;">${escapeHtml(m.title)}</div>
         <div style="font-size: 0.8rem; color: var(--text-muted);">${escapeHtml(m.category)} • ${(m.chapters || []).length} chương</div>

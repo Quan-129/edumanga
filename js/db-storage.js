@@ -712,7 +712,7 @@ const dbStorage = {
 
   // 7. Dynamic Series Cover Resolver (Fallback to First Page of Chapter 1)
   getSeriesCover(series) {
-    if (!series) return 'assets/covers/n2_cover.jpg';
+    if (!series) return 'assets/covers/default_cover.jpg';
     if (series.cover && typeof series.cover === 'string' && series.cover.trim() !== '') {
       return series.cover.trim();
     }
@@ -730,11 +730,11 @@ const dbStorage = {
       }
     }
 
-    return 'assets/covers/n2_cover.jpg';
+    return 'assets/covers/default_cover.jpg';
   },
 
   async getSeriesCoverAsync(series) {
-    if (!series) return 'assets/covers/n2_cover.jpg';
+    if (!series) return 'assets/covers/default_cover.jpg';
     if (series.cover && typeof series.cover === 'string' && series.cover.trim() !== '') {
       return series.cover.trim();
     }
@@ -759,7 +759,7 @@ const dbStorage = {
       }
     }
 
-    return 'assets/covers/n2_cover.jpg';
+    return 'assets/covers/default_cover.jpg';
   }
 };
 
