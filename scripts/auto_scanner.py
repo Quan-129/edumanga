@@ -239,16 +239,33 @@ def process_manga_json_file(json_path, series_slug, chap_slug, cache_registry):
             bubbles = extract_bubbles_from_item(item)
             dialogue = item.get("dialogue", "")
 
-            pages_output.append({
-                "pageNumber": page_idx,
-                "imageUrl": page_rel,
-                "bubbles": bubbles,
-                "dialogue": dialogue
-            })
-            page_idx += 1
+    # Smart Chapter Title formatting
+    chapter_titles_map = {
+        "1": "Chương 1: Quan hệ con người & Gia đình (人間関係と家族)",
+        "2": "Chương 2: Cơ thể, Sức khỏe & Y tế (身体・健康と医療)",
+        "3": "Chương 3: Sinh hoạt hàng ngày & Thói quen (日常生活と習慣)",
+        "4": "Chương 4: Ẩm thực & Nhà hàng (料理・食事とレストラン)",
+        "5": "Chương 5: Nhà cửa, Nơi ở & Bất động sản (住まい・住宅と不動産)",
+        "6": "Chương 6: Giao thông & Đi lại (交通・移動と乗り物)",
+        "7": "Chương 7: Mua sắm & Tiêu dùng (買い物・消費と商業)",
+        "8": "Chương 8: Thách thức công việc, Thiên tai & Khôi phục (仕事の挑戦・災害と復旧)",
+        "9": "Chương 9: Xã hội, Quyền lợi, Bầu cử & Đời sống (社会・権利と選挙)",
+        "10": "Chương 10: Khởi nghiệp & Chinh phục Ước mơ (起業と夢の実現)"
+    }
+    
+    raw_title = raw_data.get("name", "").strip()
+    chap_num_match = re.search(r'\d+', chap_slug)
+    chap_num_str = chap_num_match.group(0).lstrip('0') if chap_num_match else ""
+    
+    if (not raw_title or raw_title == "Manga Project" or raw_title == "Artist") and chap_num_str in chapter_titles_map:
+        clean_chap_title = chapter_titles_map[chap_num_str]
+    elif raw_title and raw_title != "Manga Project":
+        clean_chap_title = raw_title
+    else:
+        clean_chap_title = chap_slug.replace('-', ' ').title()
 
     extracted_result = {
-        "title": raw_data.get("name") or chap_slug.replace('-', ' ').title(),
+        "title": clean_chap_title,
         "author": raw_data.get("author", "TBMQ"),
         "characters": characters_output,
         "pages": pages_output,
@@ -399,10 +416,10 @@ def run_auto_sync():
                 if not any(c["name"] == new_char["name"] for c in existing_series["characters"]):
                     existing_series["characters"].append(new_char)
         else:
-            # Add new series to catalog
+            display_title = "Tiếng Nhật JLPT N2" if series_slug == "n2" else subj["title"]
             manga_catalog.append({
                 "id": series_slug,
-                "title": subj["title"],
+                "title": display_title,
                 "folder": subj["folder_name"],
                 "category": cat_info["category"],
                 "categoryKey": cat_info["categoryKey"],
@@ -412,7 +429,7 @@ def run_auto_sync():
                 "rating": 5.0 if "hồ chí minh" in subj["title"].lower() else 4.9,
                 "views": f"{10 + subj['order'] * 5}.2K",
                 "likes": f"{1 + subj['order'] * 0.8:.1f}K",
-                "description": f"Bộ truyện tranh học tập & chuyên đề kiến thức {subj['title']}. Toàn bộ hình ảnh, dàn nhân vật và bong bóng thoại được tự động cập nhật từ hệ thống kịch bản.",
+                "description": f"Bộ truyện tranh học tập & chuyên đề kiến thức {display_title}. Toàn bộ hình ảnh, dàn nhân vật và bong bóng thoại được tự động cập nhật từ hệ thống kịch bản.",
                 "cover": series_cover_rel,
                 "characters": series_characters,
                 "chapters": series_chapters
