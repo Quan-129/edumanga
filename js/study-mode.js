@@ -332,35 +332,50 @@ function renderPageBubbles(pageData, wrapperElement) {
 
   pageData.bubbles.forEach((b, idx) => {
     const bubbleEl = document.createElement('div');
-    bubbleEl.className = 'bubble-overlay';
+    const bType = (b.bubbleType || 'normal').toLowerCase();
+    bubbleEl.className = `bubble-overlay bubble-${bType}`;
     if (isQuizMode) bubbleEl.classList.add('study-hidden');
     if (!isSpeechBubblesVisible) bubbleEl.style.display = 'none';
 
-    // Position coordinates (percentages normalized)
-    const posX = Math.max(10, Math.min(b.x, 90));
-    const posY = Math.max(5, Math.min(b.y, 95));
-    const widthVal = Math.max(22, Math.min(b.width || 32, 55));
+    // Position coordinates (use exact percentages from JSON without rigid clamping)
+    const posX = typeof b.x === 'number' ? b.x : parseFloat(b.x || 50);
+    const posY = typeof b.y === 'number' ? b.y : parseFloat(b.y || 50);
+    const widthVal = b.width ? (typeof b.width === 'number' ? b.width : parseFloat(b.width)) : null;
 
     bubbleEl.style.left = `${posX}%`;
     bubbleEl.style.top = `${posY}%`;
-    bubbleEl.style.maxWidth = `${widthVal}%`;
+    
+    // Apply width percentages from JSON precisely
+    if (widthVal && widthVal > 0) {
+      bubbleEl.style.width = `${widthVal}%`;
+      bubbleEl.style.maxWidth = `${Math.min(98, Math.max(8, widthVal))}%`;
+    } else {
+      bubbleEl.style.maxWidth = '40%';
+    }
 
     // Smart tooltip positioning: flip down if near top of image
     if (posY < 26) {
       bubbleEl.setAttribute('data-flip', 'down');
     }
     
-    // Proportional font scaling variable (avoids fixed px blowing up on Ctrl + / zoom)
-    const fontScale = b.fontSize ? (b.fontSize / 15.5) : 1;
+    // Proportional font scaling variables from JSON fontSize
+    const baseFontSize = b.fontSize ? (typeof b.fontSize === 'number' ? b.fontSize : parseFloat(b.fontSize)) : 16;
+    const fontScale = (baseFontSize / 16);
+    bubbleEl.style.setProperty('--base-font-size', baseFontSize);
     bubbleEl.style.setProperty('--font-scale', fontScale.toFixed(2));
 
     // Format dialogue text with clean root Kanji and interactive popovers
     const formattedHtml = formatInteractiveDialogue(b.text);
 
+    // Apply custom text alignment, weight and style from JSON
+    const textAlign = b.textAlign || 'center';
+    const fontWeight = b.fontWeight || (bType === 'narration' ? '600' : '700');
+    const fontStyle = b.fontStyle || (bType === 'thought' || bType === 'whisper' ? 'italic' : 'normal');
+
     // Inner content with comic styling
     bubbleEl.innerHTML = `
       <span class="bubble-badge" style="display: ${isKnowledgeBadgeVisible ? 'inline-block' : 'none'};">THOẠI #${idx + 1}</span>
-      <div class="bubble-text">${formattedHtml}</div>
+      <div class="bubble-text" style="text-align: ${textAlign}; font-weight: ${fontWeight}; font-style: ${fontStyle};">${formattedHtml}</div>
       <div class="quiz-tap-hint"><i class="fas fa-magic"></i> Chạm để giải mã</div>
     `;
 
