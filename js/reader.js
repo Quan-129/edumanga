@@ -72,6 +72,10 @@ async function loadChapterData(seriesId, chapId, initialPage = 0) {
       loadChapterNotebook(seriesId, chapId);
     }
 
+    if (window.commentService && typeof window.commentService.initChapterComments === 'function') {
+      window.commentService.initChapterComments(seriesId, currentChapter.id);
+    }
+
     document.title = `${currentChapter.title} - ${currentSeries.title}`;
   } catch (err) {
     console.error('Error loading chapter:', err);
@@ -521,8 +525,10 @@ function initKeyboardNav() {
       prevPage();
     } else if (e.key === 'f' || e.key === 'F') {
       toggleFullscreen();
-    } else if (e.key === 's' || e.key === 'S') {
-      openCurrentPageScript();
+    } else if (e.key === 'c' || e.key === 'C') {
+      if (typeof openCommentModal === 'function') {
+        openCommentModal();
+      }
     } else if (e.key === 'b' || e.key === 'B') {
       const toggle = document.getElementById('bubblesVisibleToggle');
       if (toggle) {

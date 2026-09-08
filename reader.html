@@ -45,8 +45,10 @@
       <!-- User Profile / Login Button -->
       <div id="headerUserContainer"></div>
 
-      <button id="btnOpenScript" class="btn-icon" title="Xem kịch bản lời thoại" onclick="openCurrentPageScript()">
-        <i class="fas fa-comment-alt"></i>
+      <!-- Real-Time Comments Action -->
+      <button id="btnOpenComments" class="btn-icon" title="Bình luận & Thảo luận chương (Phím C)" onclick="openCommentModal()" style="position: relative;">
+        <i class="fas fa-comments"></i>
+        <span id="headerCommentBadge" class="header-comment-badge" style="display: none;">0</span>
       </button>
       <button id="btnFullscreen" class="btn-icon" title="Toàn màn hình (F)">
         <i class="fas fa-expand"></i>
@@ -88,12 +90,10 @@
 
   <!-- Floating HUD Quick Action -->
   <div class="floating-reader-dock" style="position: fixed; right: 20px; bottom: 85px; display: flex; flex-direction: column; gap: 0.6rem; z-index: 1100; transition: right 0.3s cubic-bezier(0.16, 1, 0.3, 1);">
-    <!-- Temporarily disabled notebook toggle button -->
-    <button id="btnNotebookToggle" class="btn-icon" onclick="toggleNotebookSplitView()" title="Vở ghi chép (Đang bảo trì cải tiến)" style="display: none !important; width: 44px; height: 44px; border-radius: var(--radius-full); background: var(--bg-tertiary); box-shadow: var(--shadow-md); border: 1px solid rgba(255,255,255,0.12);">
-      <i class="fas fa-book-open" style="color: var(--accent-secondary);"></i>
-    </button>
-    <button class="btn-icon" onclick="openCurrentPageScript()" title="Xem kịch bản lời thoại trang này" style="width: 44px; height: 44px; border-radius: var(--radius-full); background: var(--bg-tertiary); box-shadow: var(--shadow-md);">
-      <i class="fas fa-file-lines" style="color: var(--accent-tertiary);"></i>
+    <!-- Comments button in dock for mobile & tablet -->
+    <button id="btnDockComments" class="btn-icon" onclick="openCommentModal()" title="Bình luận chương này" style="position: relative; width: 44px; height: 44px; border-radius: var(--radius-full); background: var(--bg-tertiary); box-shadow: var(--shadow-md);">
+      <i class="fas fa-comments" style="color: var(--accent-secondary);"></i>
+      <span id="dockCommentBadge" class="comment-count-badge" style="display: none;">0</span>
     </button>
     <button class="floating-hud-btn" onclick="document.getElementById('readerSettingsModal').classList.add('active')" title="Tùy chọn học tập & Chế độ đọc" style="position: static;">
       <i class="fas fa-graduation-cap"></i>
@@ -433,14 +433,50 @@
     </div>
   </aside>
 
-  <!-- Script Inspector Modal -->
-  <div id="scriptModal" class="reader-modal" onclick="closeScriptModal()">
-    <div class="reader-modal-card" onclick="event.stopPropagation()">
-      <div class="modal-header">
-        <div class="modal-title"><i class="fas fa-comments" style="color: var(--accent-tertiary);"></i> Kịch Bản Lời Thoại</div>
-        <button class="btn-icon" onclick="closeScriptModal()"><i class="fas fa-times"></i></button>
+  <!-- Real-Time Comment & Discussion Modal -->
+  <div id="commentModal" class="reader-modal" onclick="closeCommentModal()">
+    <div class="comment-modal-card" onclick="event.stopPropagation()">
+      
+      <!-- Modal Header -->
+      <div class="comment-modal-header">
+        <div class="comment-modal-title">
+          <i class="fas fa-comments"></i>
+          <span>Bình Luận Chương</span>
+          <span id="modalCommentCountText" class="comment-count-pill">(0)</span>
+        </div>
+        <button class="btn-icon" onclick="closeCommentModal()"><i class="fas fa-times"></i></button>
       </div>
-      <div id="scriptModalContent"></div>
+
+      <!-- Comment Input Box -->
+      <form class="comment-input-box" onsubmit="handleCommentSubmit(event)">
+        <div class="comment-user-pill-row">
+          <img id="commentCurrentAvatar" src="https://api.dicebear.com/7.x/bottts/svg?seed=guest" alt="Avatar" class="comment-input-avatar">
+          <span id="commentCurrentName" class="comment-input-name">Khách vãng lai</span>
+        </div>
+        
+        <textarea id="commentInputTextarea" class="comment-textarea" placeholder="Chia sẻ cảm nghĩ, bài học tâm đắc hoặc thảo luận cùng các bạn..." rows="2" required></textarea>
+
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 6px;">
+          <div class="comment-quick-stickers">
+            <button type="button" class="btn-sticker" onclick="insertQuickSticker('💡 Hay quá!')">💡 Hay quá!</button>
+            <button type="button" class="btn-sticker" onclick="insertQuickSticker('📝 Đã hiểu bài!')">📝 Đã hiểu</button>
+            <button type="button" class="btn-sticker" onclick="insertQuickSticker('🔥 Rất bổ ích!')">🔥 Bổ ích</button>
+            <button type="button" class="btn-sticker" onclick="insertQuickSticker('❓ Cho mình hỏi...')">❓ Thắc mắc</button>
+          </div>
+          
+          <div class="comment-input-actions">
+            <button type="submit" id="btnSubmitComment" class="btn-submit-comment">
+              <i class="fas fa-paper-plane"></i> <span>Gửi Bình Luận</span>
+            </button>
+          </div>
+        </div>
+      </form>
+
+      <!-- Scrollable Comments List -->
+      <div id="commentModalList" class="comment-list-scrollable">
+        <!-- Rendered dynamically by comment-service.js -->
+      </div>
+
     </div>
   </div>
 
@@ -538,7 +574,7 @@
       </div>
 
       <div style="margin-top: 1rem; text-align: center; color: var(--text-muted); font-size: 0.75rem;">
-        Phím tắt: <strong>← / →</strong> chuyển trang • <strong>F</strong> toàn màn hình • <strong>B</strong> bật/tắt thoại • <strong>S</strong> kịch bản • <strong>+/-/0</strong> thu phóng
+        Phím tắt: <strong>← / →</strong> chuyển trang • <strong>F</strong> toàn màn hình • <strong>B</strong> bật/tắt thoại • <strong>C</strong> bình luận
       </div>
     </div>
   </div>
@@ -552,6 +588,7 @@
   <script src="js/firebase-config.js"></script>
   <script src="js/auth-service.js"></script>
   <script src="js/sync-engine.js"></script>
+  <script src="js/comment-service.js"></script>
 
   <!-- Feature Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/hanzi-writer@3.5/dist/hanzi-writer.min.js"></script>
