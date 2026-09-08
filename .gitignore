@@ -1,0 +1,20 @@
+# Operating System files
+.DS_Store
+Thumbs.db
+
+# Python bytecode & cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.log
+
+# Large Raw PDF files & Raw Source Folders (Web app uses optimized assets/chapters/)
+*.pdf
+1. Nhập môn trí tuệ nhân tạo/
+2. Tư tưởng Hồ Chí Minh/
+3. N2/
+4. Pháp luật đại cương/
+
+# Temp files
+*.tmp
+.tempmediaStorage/

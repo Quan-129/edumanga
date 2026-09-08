@@ -1,0 +1,17 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // 1. Phân vùng bảo mật độc lập tuyệt đối cho từng tài khoản
+    // Người dùng chỉ có quyền đọc & ghi dữ liệu bên trong khoang users/{userId}/... của chính mình
+    match /users/{userId}/{document=**} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+    
+    // 2. Dữ liệu công khai hệ thống (nếu có - chỉ cho phép đọc, không cho phép client tự sửa)
+    match /system_metadata/{docId} {
+      allow read: if true;
+      allow write: if false;
+    }
+  }
+}

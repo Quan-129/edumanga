@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>Manga Reader - EduManga Hub</title>
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/reader.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="reader-body theme-oled">
+
+  <!-- Reader Header Navigation -->
+  <header class="reader-header">
+    <div style="display: flex; align-items: center; gap: 0.75rem;">
+      <a id="btnBackDetail" href="detail.html" class="btn-icon" title="Quay lại">
+        <i class="fas fa-arrow-left"></i>
+      </a>
+      <a href="index.html" class="btn-icon" title="Về trang chủ">
+        <i class="fas fa-home"></i>
+      </a>
+    </div>
+
+    <!-- Title & Chapter Selector -->
+    <div class="reader-title-box">
+      <div id="readerSeriesName" class="reader-series-name">Đang tải...</div>
+      <select id="chapterSelect" style="
+        background: var(--bg-secondary);
+        color: var(--text-primary);
+        border: 1px solid var(--border-color);
+        border-radius: var(--radius-sm);
+        padding: 2px 8px;
+        font-size: 0.75rem;
+        outline: none;
+        max-width: 260px;
+        margin-top: 2px;
+      "></select>
+    </div>
+
+    <!-- Actions -->
+    <div class="reader-header-actions">
+      <!-- Zoom Controls Dock -->
+      <div class="header-zoom-controls" title="Phóng to / Thu nhỏ Manga (Ctrl + Cuộn hoặc +/-)">
+        <button id="btnZoomOut" class="btn-icon-sm" title="Thu nhỏ (-)">
+          <i class="fas fa-minus"></i>
+        </button>
+        <button id="btnZoomReset" class="btn-zoom-val" title="Đặt lại kích thước chuẩn (0)">
+          <span id="headerZoomVal">100%</span>
+        </button>
+        <button id="btnZoomIn" class="btn-icon-sm" title="Phóng to (+)">
+          <i class="fas fa-plus"></i>
+        </button>
+        <button id="btnFitWidth" class="btn-icon-sm" title="Khớp tràn chiều ngang màn hình (Fit Width)" style="border-left: 1px solid rgba(255,255,255,0.12); margin-left: 2px; padding-left: 4px;">
+          <i class="fas fa-arrows-alt-h" style="color: var(--accent-secondary);"></i>
+        </button>
+      </div>
+
+      <!-- User Profile / Login Button -->
+      <div id="headerUserContainer"></div>
+
+      <button id="btnOpenScript" class="btn-icon" title="Xem kịch bản lời thoại" onclick="openCurrentPageScript()">
+        <i class="fas fa-comment-alt"></i>
+      </button>
+      <button id="btnFullscreen" class="btn-icon" title="Toàn màn hình (F)">
+        <i class="fas fa-expand"></i>
+      </button>
+      <button id="btnSettings" class="btn-icon" title="Cài đặt đọc truyện">
+        <i class="fas fa-cog"></i>
+      </button>
+    </div>
+  </header>
+
+  <!-- Manga Zoom HUD Overlay Indicator -->
+  <div id="mangaZoomHUD" class="manga-zoom-hud">
+    <i class="fas fa-search-plus" style="color: var(--accent-secondary);"></i>
+    <span id="hudZoomValText">100%</span>
+  </div>
+
+  <!-- Touch Gesture Zones (Mobile Tap Navigation) -->
+  <div class="touch-zone-container">
+    <div class="touch-zone-left"></div>
+    <div class="touch-zone-middle"></div>
+    <div class="touch-zone-right"></div>
+  </div>
+
+  <!-- Main Viewport for Manga Pages -->
+  <main id="readerViewport" class="reader-viewport mode-webtoon">
+    <!-- Rendered dynamically by js/reader.js -->
+  </main>
+
+  <!-- Reader Bottom Navigation Bar -->
+  <footer class="reader-bottom-bar">
+    <button id="btnPrevChap" class="btn-icon" title="Chương trước">
+      <i class="fas fa-step-backward"></i>
+    </button>
+
+    <!-- Page Progress Slider -->
+    <div class="reader-progress-wrapper">
+      <input type="range" id="pageSlider" class="progress-slider" min="1" max="1" value="1">
+      <div id="pageCounter" class="page-counter-badge">1 / 1</div>
+    </div>
+
+    <button id="btnNextChap" class="btn-icon" title="Chương kế tiếp">
+      <i class="fas fa-step-forward"></i>
+    </button>
+  </footer>
+
+  <!-- Floating HUD Quick Action -->
+  <div class="floating-reader-dock" style="position: fixed; right: 20px; bottom: 85px; display: flex; flex-direction: column; gap: 0.6rem; z-index: 1100; transition: right 0.3s cubic-bezier(0.16, 1, 0.3, 1);">
+    <button id="btnNotebookToggle" class="btn-icon" onclick="toggleNotebookSplitView()" title="Mở quyển vở ghi chép & viết tay (Split View - Phím N)" style="width: 44px; height: 44px; border-radius: var(--radius-full); background: var(--bg-tertiary); box-shadow: var(--shadow-md); border: 1px solid rgba(255,255,255,0.12);">
+      <i class="fas fa-book-open" style="color: var(--accent-secondary);"></i>
+    </button>
+    <button class="btn-icon" onclick="openCurrentPageScript()" title="Xem kịch bản lời thoại trang này" style="width: 44px; height: 44px; border-radius: var(--radius-full); background: var(--bg-tertiary); box-shadow: var(--shadow-md);">
+      <i class="fas fa-file-lines" style="color: var(--accent-tertiary);"></i>
+    </button>
+    <button class="floating-hud-btn" onclick="document.getElementById('readerSettingsModal').classList.add('active')" title="Tùy chọn học tập & Chế độ đọc" style="position: static;">
+      <i class="fas fa-graduation-cap"></i>
+    </button>
+  </div>
+
+  <!-- Study Notebook Split-Screen Panel -->
+  <aside id="readerNotebookPanel" class="reader-notebook-panel">
+    <!-- Draggable Resizer Splitter Gutter Handle -->
+    <div id="notebookResizer" class="notebook-resizer" title="Kéo để điều chỉnh độ rộng (Nhấp đúp để đặt lại mặc định)">
+      <div class="resizer-grip">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+
+    <!-- Notebook Header -->
+    <div class="notebook-header">
+      <!-- Header Left: Title & Badge -->
+      <div class="notebook-header-left">
+        <i class="fas fa-book-open" style="color: var(--accent-secondary); font-size: 0.95rem;"></i>
+        <span class="notebook-title-text">Vở Ghi Chép</span>
+        <span id="notebookChapBadge" class="notebook-chap-badge" title="Chương hiện tại">CHAP</span>
+      </div>
+      
+      <!-- Header Center: Tab Switcher (Draw Canvas vs Text Notes vs Flashcards vs Kanji Studio) -->
+      <div class="notebook-header-tabs">
+        <button id="tabNotebookDraw" class="notebook-tab-pill active" onclick="setNotebookMode('draw')">
+          <i class="fas fa-pen-nib"></i>
+          <span>Viết tay</span>
+        </button>
+        <button id="tabNotebookText" class="notebook-tab-pill" onclick="setNotebookMode('text')">
+          <i class="fas fa-keyboard"></i>
+          <span>Ghi chú</span>
+        </button>
+        <button id="tabNotebookCards" class="notebook-tab-pill" onclick="setNotebookMode('cards')">
+          <i class="fas fa-clone"></i>
+          <span>Thẻ từ</span>
+          <span id="notebookCardsBadge" class="tab-badge-counter">0</span>
+        </button>
+        <button id="tabNotebookKanji" class="notebook-tab-pill" onclick="setNotebookMode('kanji')" title="Xưởng luyện viết & giải mã bộ thủ Kanji">
+          <i class="fas fa-shapes"></i>
+          <span>Luyện Kanji</span>
+        </button>
+      </div>
+
+      <!-- Header Right: Action Buttons -->
+      <div class="notebook-header-actions">
+        <button id="btnSwapNotebookSide" class="btn-icon-xs" onclick="swapNotebookSide()" title="Đảo bên: Vở Trái ⇄ Phải (Dành cho người thuận tay trái / Phím Alt+S)">
+          <i class="fas fa-right-left"></i>
+        </button>
+        <button id="btnFocusNotebook" class="btn-icon-xs" onclick="toggleFocusNotebookMode()" title="Toàn màn hình Vở ghi chép (Phím Alt+F)">
+          <i class="fas fa-expand-alt"></i>
+        </button>
+        <button class="btn-icon-xs" onclick="downloadNotebook()" title="Tải ghi chép về máy">
+          <i class="fas fa-download"></i>
+        </button>
+        <button class="btn-icon-xs" onclick="toggleNotebookSplitView()" title="Đóng vở ghi chép (Phím N)">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Drawing Toolbar (Active in Draw mode) -->
+    <div id="notebookDrawToolbar" class="notebook-draw-toolbar">
+      <!-- Row 1: Tools, Color Swatches, Stroke Sizes -->
+      <div class="notebook-toolbar-row">
+        <!-- Tool selection: Pen, Highlighter, Eraser -->
+        <div class="tool-group">
+          <button id="btnToolPen" class="tool-btn active" onclick="setNotebookTool('pen')" title="Bút mực nét rõ">
+            <i class="fas fa-pen"></i>
+          </button>
+          <button id="btnToolHighlighter" class="tool-btn" onclick="setNotebookTool('highlighter')" title="Bút dạ quang tô sáng">
+            <i class="fas fa-highlighter"></i>
+          </button>
+          <button id="btnToolEraser" class="tool-btn" onclick="setNotebookTool('eraser')" title="Tẩy xóa nét vẽ">
+            <i class="fas fa-eraser"></i>
+          </button>
+        </div>
+
+        <!-- Colors palette -->
+        <div class="color-palette">
+          <button class="color-dot active" data-color="#ffffff" style="background: #ffffff;" title="Trắng tinh"></button>
+          <button class="color-dot" data-color="#facc15" style="background: #facc15;" title="Vàng dạ quang"></button>
+          <button class="color-dot" data-color="#f43f5e" style="background: #f43f5e;" title="Đỏ pastel"></button>
+          <button class="color-dot" data-color="#38bdf8" style="background: #38bdf8;" title="Xanh dương"></button>
+          <button class="color-dot" data-color="#a855f7" style="background: #a855f7;" title="Tím neon"></button>
+          <button class="color-dot" data-color="#22c55e" style="background: #22c55e;" title="Xanh lá"></button>
+        </div>
+
+        <!-- Stroke Size -->
+        <div class="stroke-group">
+          <button class="stroke-btn active" data-size="3" title="Nét mảnh (3px)"><span style="width: 4px; height: 4px;"></span></button>
+          <button class="stroke-btn" data-size="6" title="Nét vừa (6px)"><span style="width: 7px; height: 7px;"></span></button>
+          <button class="stroke-btn" data-size="12" title="Nét đậm (12px)"><span style="width: 11px; height: 11px;"></span></button>
+        </div>
+      </div>
+
+      <!-- Row 2: Paper Backgrounds, Undo/Redo/Clear, Status -->
+      <div class="notebook-toolbar-row secondary-row">
+        <!-- Pattern / Paper background -->
+        <div class="paper-group">
+          <button id="btnPaperGrid" class="paper-btn active" onclick="setNotebookPattern('grid')" title="Giấy kẻ ô vuông Kanji / Genkouyoushi">
+            <i class="fas fa-border-all"></i> <span class="btn-label-inline">Ô vuông</span>
+          </button>
+          <button id="btnPaperLines" class="paper-btn" onclick="setNotebookPattern('lines')" title="Giấy kẻ ngang học tập">
+            <i class="fas fa-bars"></i> <span class="btn-label-inline">Kẻ ngang</span>
+          </button>
+          <button id="btnPaperBlank" class="paper-btn" onclick="setNotebookPattern('blank')" title="Nền tối trơn OLED">
+            <i class="fas fa-square"></i> <span class="btn-label-inline">Trơn</span>
+          </button>
+        </div>
+
+        <!-- Undo / Redo / Clear -->
+        <div class="history-group">
+          <button class="tool-btn-sm" onclick="undoNotebookDraw()" title="Hoàn tác nét vẽ (Undo)">
+            <i class="fas fa-undo"></i>
+          </button>
+          <button class="tool-btn-sm" onclick="redoNotebookDraw()" title="Làm lại nét vẽ (Redo)">
+            <i class="fas fa-redo"></i>
+          </button>
+          <button class="tool-btn-sm btn-danger-hover" onclick="clearNotebookCanvas()" title="Xóa toàn bộ nét vẽ">
+            <i class="fas fa-trash-alt"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Text Toolbar (Active in Text mode) -->
+    <div id="notebookTextToolbar" class="notebook-text-toolbar" style="display: none;">
+      <button class="btn-text-action" onclick="insertVocabTemplate()" title="Chèn cấu trúc ghi chép từ vựng mới">
+        <i class="fas fa-plus-circle"></i> <span>Mẫu từ vựng</span>
+      </button>
+      <button class="btn-text-action" onclick="insertGrammarTemplate()" title="Chèn cấu trúc ghi chép ngữ pháp">
+        <i class="fas fa-layer-group"></i> <span>Mẫu ngữ pháp</span>
+      </button>
+      <button class="btn-text-action" onclick="downloadNotebook()" title="Tải file Markdown (.md)">
+        <i class="fas fa-file-arrow-down"></i> <span>Xuất .MD</span>
+      </button>
+    </div>
+
+    <!-- Notebook Body Container -->
+    <div class="notebook-body">
+      <!-- Draw Canvas Area -->
+      <div id="notebookCanvasContainer" class="notebook-canvas-container pattern-grid">
+        <canvas id="notebookCanvas"></canvas>
+      </div>
+
+      <!-- Text Note Area -->
+      <div id="notebookTextContainer" class="notebook-text-container" style="display: none;">
+        <textarea id="notebookTextarea" class="notebook-textarea" placeholder="✍️ Ghi chú từ vựng mới, ngữ pháp, tóm tắt bài học của chương này tại đây... (Hệ thống tự động lưu liên tục)"></textarea>
+      </div>
+
+      <!-- Flashcards Deck Area -->
+      <div id="notebookCardsContainer" class="notebook-cards-container" style="display: none;">
+        <!-- Flashcards Header / Actions Bar -->
+        <div class="cards-deck-header">
+          <div class="cards-deck-summary">
+            <span id="cardsTotalCountText" class="cards-deck-stat">0 thẻ từ</span>
+            <span class="cards-deck-dot">•</span>
+            <span id="cardsMasteredCountText" class="cards-deck-stat text-success">0 đã thuộc</span>
+          </div>
+          <div class="cards-deck-actions">
+            <button class="btn-deck-action btn-deck-study" onclick="startFlashcardPractice()" title="Bắt đầu ôn tập lật thẻ 3D">
+              <i class="fas fa-play"></i> <span>Ôn tập</span>
+            </button>
+            <button class="btn-deck-action" onclick="promptAddManualCard()" title="Thêm thẻ từ mới thủ công">
+              <i class="fas fa-plus"></i>
+            </button>
+            <button class="btn-deck-action" onclick="exportFlashcardsAnki()" title="Xuất file thẻ Anki / CSV">
+              <i class="fas fa-file-export"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Flashcard List Scrollable Area -->
+        <div id="notebookCardsList" class="notebook-cards-list">
+          <!-- Rendered dynamically -->
+        </div>
+
+        <!-- Interactive 3D Practice Overlay inside Notebook Panel -->
+        <div id="flashcardPracticeOverlay" class="flashcard-practice-overlay" style="display: none;">
+          <div class="practice-header">
+            <span id="practiceProgress" class="practice-progress-pill">1 / 5</span>
+            <button class="btn-icon-xs" onclick="closeFlashcardPractice()" title="Thoát chế độ ôn tập">
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+          
+          <div class="practice-card-scene" onclick="flipPracticeCard()">
+            <div id="practiceFlipCard" class="practice-flip-card">
+              <!-- Front Face -->
+              <div class="card-face card-front">
+                <span class="card-face-badge"><i class="fas fa-hand-pointer"></i> Chạm để lật</span>
+                <div id="practiceCardTerm" class="practice-term">--</div>
+                <div id="practiceCardReading" class="practice-reading">--</div>
+                <button class="btn-card-audio" onclick="speakCurrentCard(event)" title="Nghe phát âm">
+                  <i class="fas fa-volume-high"></i>
+                </button>
+              </div>
+              <!-- Back Face -->
+              <div class="card-face card-back">
+                <span class="card-face-badge"><i class="fas fa-check-circle"></i> Giải nghĩa</span>
+                <div id="practiceCardHanViet" class="practice-hanviet">--</div>
+                <div id="practiceCardMeaning" class="practice-meaning">--</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="practice-footer-controls">
+            <button class="btn-practice-rate btn-rate-again" onclick="ratePracticeCard(false)">
+              <i class="fas fa-rotate-left"></i> Chưa thuộc
+            </button>
+            <button class="btn-practice-rate btn-rate-good" onclick="ratePracticeCard(true)">
+              <i class="fas fa-check"></i> Đã nhớ
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Kanji Studio Area -->
+      <div id="notebookKanjiContainer" class="notebook-kanji-container" style="display: none;">
+        <!-- 1. Quick Chapter Kanji & Handwriting Recognizer Section -->
+        <div class="kanji-top-section">
+          <!-- Chapter Quick Tags -->
+          <div class="quick-kanji-header">
+            <span class="quick-kanji-title"><i class="fas fa-layer-group" style="color: var(--accent-secondary);"></i> HÁN TỰ TRONG CHƯƠNG</span>
+            <span class="quick-kanji-hint">Chạm để học ngay:</span>
+          </div>
+          <div id="chapterQuickKanjiList" class="chapter-quick-kanji-list">
+            <!-- Rendered dynamically -->
+          </div>
+
+          <!-- Handwriting Recognition Pad -->
+          <div class="kanji-recog-wrapper">
+            <div class="recog-header-row">
+              <span class="recog-title"><i class="fas fa-pen-fancy" style="color: #38bdf8;"></i> VẼ CHỮ ĐỂ NHẬN DIỆN:</span>
+              <button class="btn-recog-clear" onclick="clearRecogCanvas()" title="Xóa nét vẽ để nhận diện lại">
+                <i class="fas fa-rotate-left"></i> Xóa
+              </button>
+            </div>
+
+            <div class="recog-body-row">
+              <div class="recog-canvas-box">
+                <canvas id="kanjiRecogCanvas"></canvas>
+                <div class="recog-grid-hint">Ô nhận diện</div>
+              </div>
+
+              <div class="recog-results-box">
+                <div class="candidates-title">Chữ Kanji nhận diện được:</div>
+                <div id="kanjiCandidatesList" class="kanji-candidates-list">
+                  <span class="candidate-placeholder">Vẽ nét chữ Hán vào ô bên trái để nhận diện...</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. Kanji Master Card (Meanings, Readings, JLPT) -->
+        <div id="kanjiMasterCard" class="kanji-master-card">
+          <!-- Rendered dynamically -->
+        </div>
+
+        <!-- 3. Radical Breakdown & Fun Mnemonic Story -->
+        <div id="kanjiRadicalBreakdown" class="kanji-radical-section">
+          <!-- Rendered dynamically -->
+        </div>
+
+        <!-- 4. Stroke Order Animator (Real Stroke-by-Stroke Simulation) -->
+        <div id="kanjiStrokeAnimator" class="kanji-stroke-animator-box">
+          <!-- Rendered dynamically by kanji-engine.js -->
+        </div>
+
+        <!-- 5. Interactive Guided Practice Pad (Pixel-Perfect Alignment & Colors) -->
+        <div class="kanji-practice-section">
+          <div class="practice-section-header">
+            <div class="practice-title">
+              <i class="fas fa-pencil-alt" style="color: #22c55e;"></i> KHUNG TẬP VIẾT THỰC HÀNH
+            </div>
+            
+            <div class="practice-mode-pills">
+              <button id="btnPracticeGuided" class="practice-pill active" onclick="setKanjiPracticeMode('guided')" title="Hiện nét mờ căn chuẩn để đồ theo">
+                <i class="fas fa-eye"></i> Tập tô
+              </button>
+              <button id="btnPracticeFree" class="practice-pill" onclick="setKanjiPracticeMode('free')" title="Tự nhớ nét và viết tự do">
+                <i class="fas fa-feather"></i> Tự viết
+              </button>
+            </div>
+          </div>
+
+          <div class="practice-canvas-area">
+            <div id="kanjiPracticeWrapper" class="kanji-practice-box">
+              <canvas id="kanjiPracticeCanvas"></canvas>
+            </div>
+
+            <div class="practice-brush-bar">
+              <span class="brush-label"><i class="fas fa-palette"></i> Màu cọ:</span>
+              <div class="brush-color-picker">
+                <button class="brush-dot-btn active" style="--dot-color: #22c55e;" onclick="setPracticeBrushColor('#22c55e', this)" title="Xanh lục Neon"></button>
+                <button class="brush-dot-btn" style="--dot-color: #38bdf8;" onclick="setPracticeBrushColor('#38bdf8', this)" title="Xanh dương"></button>
+                <button class="brush-dot-btn" style="--dot-color: #ec4899;" onclick="setPracticeBrushColor('#ec4899', this)" title="Hồng thắm"></button>
+                <button class="brush-dot-btn" style="--dot-color: #facc15;" onclick="setPracticeBrushColor('#facc15', this)" title="Vàng hoàng yến"></button>
+                <button class="brush-dot-btn" style="--dot-color: #f8fafc;" onclick="setPracticeBrushColor('#f8fafc', this)" title="Trắng ngọc"></button>
+              </div>
+            </div>
+
+            <div class="practice-actions-row">
+              <button class="btn-practice-act btn-act-check" onclick="checkPracticeAccuracy()" title="Chấm điểm độ chuẩn xác nét vẽ">
+                <i class="fas fa-bullseye"></i> <span>Chấm điểm nét</span>
+              </button>
+              <button class="btn-practice-act" onclick="undoPracticeCanvas()" title="Hoàn tác nét vừa viết">
+                <i class="fas fa-undo"></i> <span>Lùi</span>
+              </button>
+              <button class="btn-practice-act" onclick="clearPracticeCanvas()" title="Xóa khung viết lại">
+                <i class="fas fa-trash-alt"></i> <span>Xóa</span>
+              </button>
+            </div>
+
+            <div id="practiceScoreBadge" class="practice-score-pill" style="display: none;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Notebook Footer -->
+    <div class="notebook-footer">
+      <div class="notebook-status">
+        <span class="status-dot"></span>
+        <span id="notebookSaveStatus">Đã tự động lưu</span>
+      </div>
+      <div style="display: flex; gap: 0.5rem; align-items: center;">
+        <button class="btn-text-sm" onclick="clearNotebookAll()" title="Xóa tất cả ghi chú chương này" style="color: #f87171;">
+          <i class="fas fa-trash-can" style="font-size: 0.68rem; margin-right: 2px;"></i> Xóa hết
+        </button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Script Inspector Modal -->
+  <div id="scriptModal" class="reader-modal" onclick="closeScriptModal()">
+    <div class="reader-modal-card" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <div class="modal-title"><i class="fas fa-comments" style="color: var(--accent-tertiary);"></i> Kịch Bản Lời Thoại</div>
+        <button class="btn-icon" onclick="closeScriptModal()"><i class="fas fa-times"></i></button>
+      </div>
+      <div id="scriptModalContent"></div>
+    </div>
+  </div>
+
+  <!-- Settings & Study Mode Modal -->
+  <div id="readerSettingsModal" class="reader-modal" onclick="document.getElementById('readerSettingsModal').classList.remove('active')">
+    <div class="reader-modal-card" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <div class="modal-title"><i class="fas fa-sliders-h" style="color: var(--accent-primary);"></i> Cài Đặt Trình Đọc</div>
+        <button id="btnCloseSettings" class="btn-icon"><i class="fas fa-times"></i></button>
+      </div>
+
+      <!-- Reader Mode Option -->
+      <div class="modal-section">
+        <label class="modal-label">Kiểu hiển thị (Reader Mode)</label>
+        <div class="mode-toggle-group">
+          <button class="btn-mode-toggle active" data-mode="webtoon">
+            <i class="fas fa-arrows-alt-v"></i>
+            <span>Webtoon</span>
+          </button>
+          <button class="btn-mode-toggle" data-mode="single">
+            <i class="fas fa-file-alt"></i>
+            <span>Trang đơn</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Manga Isolated Zoom Option -->
+      <div class="modal-section">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+          <label class="modal-label" style="margin-bottom: 0;">Kích thước hiển thị tranh (Manga Zoom)</label>
+          <span id="modalZoomValText" style="font-size: 0.82rem; font-weight: 800; color: var(--accent-primary);">100%</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 0.75rem; background: var(--bg-tertiary); padding: 0.6rem 0.85rem; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
+          <i class="fas fa-search-minus" style="color: var(--text-muted); font-size: 0.8rem;"></i>
+          <input type="range" id="modalZoomSlider" min="30" max="250" step="5" value="100" style="flex: 1; accent-color: var(--accent-primary); cursor: pointer; height: 6px;">
+          <i class="fas fa-search-plus" style="color: var(--text-muted); font-size: 0.8rem;"></i>
+        </div>
+      </div>
+
+      <!-- Theme Background Option -->
+      <div class="modal-section">
+        <label class="modal-label">Màu nền đọc truyện</label>
+        <div style="display: flex; gap: 0.5rem;">
+          <button class="btn-secondary" style="flex: 1; padding: 0.5rem;" onclick="setReaderTheme('oled')">
+            <i class="fas fa-circle" style="color: #000;"></i> OLED
+          </button>
+          <button class="btn-secondary" style="flex: 1; padding: 0.5rem;" onclick="setReaderTheme('dark')">
+            <i class="fas fa-circle" style="color: #0f172a;"></i> Dark
+          </button>
+          <button class="btn-secondary" style="flex: 1; padding: 0.5rem;" onclick="setReaderTheme('sepia')">
+            <i class="fas fa-circle" style="color: #cda87a;"></i> Sepia
+          </button>
+        </div>
+      </div>
+
+      <!-- Interactive Study Mode Switches -->
+      <div class="modal-section">
+        <label class="modal-label">Tùy chọn lời thoại & học tập</label>
+        <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+          <!-- Speech Bubbles Toggle -->
+          <div class="study-toggle-box">
+            <div>
+              <div style="font-weight: 600; font-size: 0.9rem; color: #fff;">Hiện lời thoại nhân vật</div>
+              <div style="font-size: 0.75rem; color: var(--text-muted);">Bong bóng thoại trên khung tranh manga</div>
+            </div>
+            <label class="switch-input">
+              <input type="checkbox" id="bubblesVisibleToggle" checked>
+              <span class="switch-slider"></span>
+            </label>
+          </div>
+
+          <!-- Quiz / Flashcard Toggle -->
+          <div class="study-toggle-box">
+            <div>
+              <div style="font-weight: 600; font-size: 0.9rem; color: #fff;">Chế độ đố vui (Flashcard)</div>
+              <div style="font-size: 0.75rem; color: var(--text-muted);">Làm mờ thoại, chạm vào bóng thoại để giải mã</div>
+            </div>
+            <label class="switch-input">
+              <input type="checkbox" id="quizModeToggle">
+              <span class="switch-slider"></span>
+            </label>
+          </div>
+
+          <!-- Auto Page Numbering Toggle -->
+          <div class="study-toggle-box">
+            <div>
+              <div style="font-weight: 600; font-size: 0.9rem; color: #fff;">Tự động đánh số trang</div>
+              <div style="font-size: 0.75rem; color: var(--text-muted);">Hiển thị huy hiệu số trang trên từng khung tranh</div>
+            </div>
+            <label class="switch-input">
+              <input type="checkbox" id="pageNumberVisibleToggle" checked>
+              <span class="switch-slider"></span>
+            </label>
+          </div>
+
+          <!-- Knowledge Badges Toggle -->
+          <div class="study-toggle-box">
+            <div>
+              <div style="font-weight: 600; font-size: 0.9rem; color: #fff;">Hiển thị số thứ tự thoại</div>
+              <div style="font-size: 0.75rem; color: var(--text-muted);">Gắn thẻ #1, #2 phân biệt thứ tự đọc</div>
+            </div>
+            <label class="switch-input">
+              <input type="checkbox" id="knowledgeBadgeToggle">
+              <span class="switch-slider"></span>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Ergonomic Handedness & Layout Workspace Modes -->
+      <div class="modal-section">
+        <label class="modal-label">Bố cục học tập & Vị trí thuận tay</label>
+        <div class="layout-mode-grid">
+          <button id="btnLayoutSplitRight" class="layout-mode-card active" onclick="setLayoutMode('split-right')" title="Manga Trái - Vở Phải (Thuận tay phải)">
+            <div class="layout-card-preview">
+              <span class="preview-mini-pane pane-manga">📖 Manga</span>
+              <span class="preview-mini-pane pane-notebook">📝 Vở</span>
+            </div>
+            <div class="layout-card-title"><i class="fas fa-hand-point-right" style="color: var(--accent-secondary);"></i> Thuận tay phải</div>
+            <div class="layout-card-desc">Manga Trái • Vở Phải</div>
+          </button>
+
+          <button id="btnLayoutSplitLeft" class="layout-mode-card" onclick="setLayoutMode('split-left')" title="Vở Trái - Manga Phải (Thuận tay trái)">
+            <div class="layout-card-preview">
+              <span class="preview-mini-pane pane-notebook">📝 Vở</span>
+              <span class="preview-mini-pane pane-manga">📖 Manga</span>
+            </div>
+            <div class="layout-card-title"><i class="fas fa-hand-point-left" style="color: #ec4899;"></i> Thuận tay trái</div>
+            <div class="layout-card-desc">Vở Trái • Manga Phải</div>
+          </button>
+
+          <button id="btnLayoutFocusManga" class="layout-mode-card" onclick="setLayoutMode('focus-manga')" title="Chỉ đọc Manga toàn màn hình">
+            <div class="layout-card-preview">
+              <span class="preview-mini-pane pane-full">📖 100% Manga</span>
+            </div>
+            <div class="layout-card-title"><i class="fas fa-book-open" style="color: #38bdf8;"></i> Chỉ Manga</div>
+            <div class="layout-card-desc">Đọc truyện tập trung</div>
+          </button>
+
+          <button id="btnLayoutFocusNotebook" class="layout-mode-card" onclick="setLayoutMode('focus-notebook')" title="Chỉ mở Vở ghi chép toàn màn hình">
+            <div class="layout-card-preview">
+              <span class="preview-mini-pane pane-full" style="background: rgba(139, 92, 246, 0.25); border-color: rgba(139, 92, 246, 0.5);">📝 100% Vở & Thẻ</span>
+            </div>
+            <div class="layout-card-title"><i class="fas fa-pen-nib" style="color: #a78bfa;"></i> Chỉ Vở ghi chép</div>
+            <div class="layout-card-desc">Vẽ mindmap • Ôn thẻ từ</div>
+          </button>
+        </div>
+      </div>
+
+      <div style="margin-top: 1rem; text-align: center; color: var(--text-muted); font-size: 0.75rem;">
+        Phím tắt: <strong>← / →</strong> chuyển trang • <strong>F</strong> toàn màn hình • <strong>N</strong> bật/tắt vở • <strong>Alt + S</strong> đổi bên tay trái/phải • <strong>Alt + F</strong> toàn màn hình vở
+      </div>
+    </div>
+  </div>
+
+  <!-- Firebase SDK (v10 compat) -->
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+
+  <!-- Core Services -->
+  <script src="js/firebase-config.js"></script>
+  <script src="js/auth-service.js"></script>
+  <script src="js/sync-engine.js"></script>
+
+  <!-- Feature Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/hanzi-writer@3.5/dist/hanzi-writer.min.js"></script>
+  <script src="js/study-mode.js"></script>
+  <script src="js/kanji-engine.js"></script>
+  <script src="js/notebook.js"></script>
+  <script src="js/reader.js"></script>
+</body>
+</html>

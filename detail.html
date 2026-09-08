@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>Chi Tiết Bộ Truyện - EduManga Hub</title>
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+  <!-- Site Header -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand-logo">
+        <div class="logo-icon">
+          <i class="fas fa-book-open"></i>
+        </div>
+        <span>EDUMANGA</span>
+      </a>
+
+      <div class="header-actions">
+        <!-- User Profile / Login Button -->
+        <div id="headerUserContainer"></div>
+
+        <a href="index.html" class="nav-link">
+          <i class="fas fa-arrow-left"></i> Trang Chủ
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="container" style="padding-top: 2rem;">
+    <div id="detailContent">
+      <!-- Series Header / Hero Card -->
+      <section id="seriesHeader"></section>
+
+      <!-- Character Roster Section -->
+      <section id="characterSection" style="margin-bottom: 3.5rem;">
+        <div class="section-header">
+          <h2 class="section-title">
+            <i class="fas fa-users" style="color: var(--accent-tertiary);"></i> Dàn Nhân Vật Trong Truyện
+          </h2>
+          <span style="color: var(--text-muted); font-size: 0.85rem;">Nhấn vào nhân vật để xem chi tiết</span>
+        </div>
+        <div id="characterGrid" class="character-roster-grid">
+          <!-- Rendered dynamically -->
+        </div>
+      </section>
+
+      <!-- Chapter List Section -->
+      <section id="chapterSection" style="margin-bottom: 4rem;">
+        <div class="section-header">
+          <h2 class="section-title">
+            <i class="fas fa-list-ul" style="color: var(--accent-secondary);"></i> Danh Sách Các Chương
+          </h2>
+          <span style="color: var(--text-muted); font-size: 0.85rem;">Hỗ trợ đọc Webtoon hoặc tải PDF</span>
+        </div>
+        <div id="chapterList" class="chapter-list">
+          <!-- Rendered dynamically -->
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Character Detail Modal -->
+  <div id="charModal" class="reader-modal" onclick="closeCharModal()">
+    <div class="reader-modal-card" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <div class="modal-title">Thông Tin Nhân Vật</div>
+        <button class="btn-icon" onclick="closeCharModal()"><i class="fas fa-times"></i></button>
+      </div>
+      <div id="charModalContent"></div>
+    </div>
+  </div>
+
+  <!-- Mobile Bottom Navigation -->
+  <nav class="mobile-bottom-nav">
+    <a href="index.html" class="mobile-nav-item">
+      <i class="fas fa-home"></i>
+      <span>Trang chủ</span>
+    </a>
+    <a href="index.html#catalogSection" class="mobile-nav-item">
+      <i class="fas fa-compass"></i>
+      <span>Khám phá</span>
+    </a>
+    <a href="#" class="mobile-nav-item active">
+      <i class="fas fa-book"></i>
+      <span>Chi tiết</span>
+    </a>
+  </nav>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p style="font-size: 0.85rem;">EDUMANGA HUB • Ứng dụng đọc truyện tranh học tập đa nền tảng.</p>
+      <a href="index.html" style="color: var(--accent-primary); font-weight: 600;">← Quay lại Trang Chủ</a>
+    </div>
+  </footer>
+
+  <!-- Firebase SDK (v10 compat) -->
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+
+  <!-- Core Services -->
+  <script src="js/firebase-config.js"></script>
+  <script src="js/auth-service.js"></script>
+  <script src="js/sync-engine.js"></script>
+  <script src="js/detail.js"></script>
+</body>
+</html>
