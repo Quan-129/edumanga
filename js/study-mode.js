@@ -127,22 +127,40 @@ function setKnowledgeBadges(enabled) {
 }
 
 /**
+// Load master vocabulary & grammar database from data/vocab_n2_db.json
+let masterVocabDb = null;
+async function loadMasterVocabDatabase() {
+  if (masterVocabDb) return masterVocabDb;
+  try {
+    const res = await fetch('data/vocab_n2_db.json');
+    if (res.ok) {
+      masterVocabDb = await res.json();
+      window.masterVocabDb = masterVocabDb;
+    }
+  } catch (e) {
+    console.warn("Could not load vocab_n2_db.json:", e);
+  }
+  return masterVocabDb;
+}
+
+// Auto-load master db
+loadMasterVocabDatabase();
+
+/**
  * Parses raw dialogue text containing vocabulary annotations like:
- * "必然 (ひつぜん - Tất Nhiên - tất yếu)"
+ * "人生 (じんせい - Nhân Sinh - Đời người, cuộc đời)"
  * and replaces them with an interactive HTML element showing only the root term by default,
- * revealing Furigana, Hán-Việt & Vietnamese meaning on hover or click.
+ * revealing Pitch Accent, Furigana, Hán-Việt & Vietnamese meaning on hover or click.
  */
 function formatInteractiveDialogue(text) {
   if (!text) return '';
 
-  // Regex matching: [Term] [space]? ( [Annotation] )
-  // Supports both standard () and Japanese full-width （）
   const pattern = /([a-zA-Z0-9_\u3040-\u309F\u30A0-\u30FF\u4E00-\u9FAF\u00C0-\u1EF9~／/\.\-]+)\s*[\(（]([^\)）]+)[\)）]/g;
 
   return text.replace(pattern, (match, term, noteContent) => {
     const trimmed = noteContent.trim();
 
-    // Skip pure 4-digit years or non-vocab notes (e.g. (1991), (Narrator))
+    // Skip pure 4-digit years or non-vocab notes
     const isYear = /^\d{4}$/.test(trimmed);
     const hasJapanese = /[\u3040-\u309F\u30A0-\u30FF\u4E00-\u9FAF]/.test(trimmed);
     const hasSeparator = /[-–—•:]/.test(trimmed);
@@ -151,7 +169,6 @@ function formatInteractiveDialogue(text) {
       return match;
     }
 
-    // Split note by separators (hyphen, dash, bullet, colon)
     const parts = trimmed.split(/\s*[-–—•:]\s*/).filter(p => p.length > 0);
     
     let furigana = '';
@@ -178,31 +195,78 @@ function formatInteractiveDialogue(text) {
       }
     }
 
-    let rowsHtml = '';
-    if (hanViet) {
-      rowsHtml += `
-        <div class="popover-row">
-          <span class="popover-tag tag-hv">Hán-Việt</span>
-          <span class="popover-val">${escapeHtml(hanViet)}</span>
-        </div>`;
-    }
-    if (meaning) {
-      rowsHtml += `
-        <div class="popover-row">
-          <span class="popover-tag tag-def">Nghĩa</span>
-          <span class="popover-val">${escapeHtml(meaning)}</span>
-        </div>`;
+    // Direct mapping from master database if available
+    let dbItem = null;
+    let pitchHtml = '';
+    let pitchBadge = '';
+    let connection = '';
+    let isGrammar = isGrammarTerm(term);
+
+    if (window.masterVocabDb && window.masterVocabDb.lookup_map) {
+      dbItem = window.masterVocabDb.lookup_map[term.trim()] || 
+               window.masterVocabDb.lookup_map[term.replace('〜', '').replace('~', '').trim()];
+      if (dbItem) {
+        if (dbItem.card_type === 'grammar') {
+          isGrammar = true;
+          if (dbItem.meaning) meaning = dbItem.meaning;
+          if (dbItem.connection) connection = dbItem.connection;
+        } else {
+          if (dbItem.reading) furigana = dbItem.reading;
+          if (dbItem.han_viet) hanViet = dbItem.han_viet;
+          if (dbItem.meaning) meaning = dbItem.meaning;
+          if (dbItem.pitch_html) pitchHtml = dbItem.pitch_html;
+          if (dbItem.pitch_short) pitchBadge = dbItem.pitch_short;
+        }
+      }
     }
 
-    const readingBadge = furigana ? `<span class="popover-reading">${escapeHtml(furigana)}</span>` : '';
-    const addCardBtn = `<button class="btn-popover-add-card" onclick="addVocabToCards('${escapeHtml(term)}', '${escapeHtml(furigana)}', '${escapeHtml(hanViet)}', '${escapeHtml(meaning)}', event)" title="Thêm vào bộ thẻ ghi nhớ (Flashcards)">` +
+    // Render Clean & Compact Popover
+    let rowsHtml = '';
+    if (isGrammar) {
+      if (meaning) {
+        rowsHtml += `
+          <div class="popover-row">
+            <span class="popover-tag tag-def">Nghĩa</span>
+            <span class="popover-val">${escapeHtml(meaning)}</span>
+          </div>`;
+      }
+      if (connection) {
+        rowsHtml += `
+          <div class="popover-row">
+            <span class="popover-tag tag-hv">Nối</span>
+            <span class="popover-val" style="font-size: 0.78rem; font-family: monospace;">${escapeHtml(connection)}</span>
+          </div>`;
+      }
+    } else {
+      if (hanViet) {
+        rowsHtml += `
+          <div class="popover-row">
+            <span class="popover-tag tag-hv">Hán-Việt</span>
+            <span class="popover-val">${escapeHtml(hanViet)}</span>
+          </div>`;
+      }
+      if (meaning) {
+        rowsHtml += `
+          <div class="popover-row">
+            <span class="popover-tag tag-def">Nghĩa</span>
+            <span class="popover-val">${escapeHtml(meaning)}</span>
+          </div>`;
+      }
+    }
+
+    const pitchDisplay = pitchHtml 
+      ? `<span class="popover-pitch-inline">${pitchHtml} <span class="pitch-badge">${escapeHtml(pitchBadge)}</span></span>`
+      : (furigana ? `<span class="popover-reading">${escapeHtml(furigana)}</span>` : '');
+
+    const grammarBadge = isGrammar ? `<span class="tag-type-grammar" style="font-size: 0.68rem; padding: 2px 6px;"><i class="fas fa-shapes"></i> Ngữ pháp</span>` : '';
+
+    const speakerBtn = `<button type="button" class="btn-popover-speaker" onclick="flashcardService.speak('${escapeHtml(term)}', event)" title="Nghe phát âm chuẩn">` +
+      `<i class="fas fa-volume-high"></i>` +
+    `</button>`;
+
+    const addCardBtn = `<button type="button" class="btn-popover-add-card" onclick="addVocabToCards('${escapeHtml(term)}', '${escapeHtml(furigana)}', '${escapeHtml(hanViet)}', '${escapeHtml(meaning)}', event)" title="Thêm vào bộ thẻ ghi nhớ">` +
       `<i class="fas fa-plus"></i> <span>Thẻ</span>` +
     `</button>`;
-    const kanjiBtn = /[\u4e00-\u9faf\u3400-\u4dbf]/.test(term) 
-      ? `<button class="btn-popover-kanji" onclick="openKanjiStudioFromVocab('${escapeHtml(term)}', event)" title="Mở Xưởng luyện viết & giải mã bộ thủ Kanji này">` +
-          `<i class="fas fa-shapes"></i> <span>Kanji</span>` +
-        `</button>` 
-      : '';
 
     return `<span class="vocab-interactive" tabindex="0" data-vocab="${escapeHtml(term)}">` +
       `<span class="vocab-term">${escapeHtml(term)}</span>` +
@@ -210,10 +274,11 @@ function formatInteractiveDialogue(text) {
         `<span class="popover-header">` +
           `<div class="popover-header-left">` +
             `<span class="popover-term">${escapeHtml(term)}</span>` +
-            `${readingBadge}` +
+            `${grammarBadge}` +
+            `${pitchDisplay}` +
           `</div>` +
           `<div class="popover-header-actions-group">` +
-            `${kanjiBtn}` +
+            `${speakerBtn}` +
             `${addCardBtn}` +
           `</div>` +
         `</span>` +

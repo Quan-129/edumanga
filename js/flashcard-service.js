@@ -22,10 +22,17 @@ let lastUserTypedInput = '';
 
 const flashcardService = {
   // Initialize and extract vocabulary for the active chapter
-  initChapterFlashcards(seriesId, chapId, pagesData) {
+  async initChapterFlashcards(seriesId, chapId, pagesData) {
     currentFlashcardSeriesId = seriesId;
     currentFlashcardChapId = chapId;
     currentFlashcardChapterKey = `${seriesId}_${chapId}`;
+
+    // Extract chapter number from chapId (e.g. 'chap-01', 'chuong-02' -> 1, 2)
+    let chapterNum = 1;
+    const chapMatch = (chapId || '').match(/\d+/);
+    if (chapMatch) {
+      chapterNum = parseInt(chapMatch[0], 10);
+    }
 
     // 1. Load saved cards from LocalStorage
     let savedCards = [];
@@ -36,47 +43,119 @@ const flashcardService = {
       savedCards = [];
     }
 
-    // 2. Extract vocabulary from chapter pages & speech bubbles
-    const extractedVocab = extractVocabFromPages(pagesData || []);
+    // 2. Load Master Database from data/vocab_n2_db.json if available
+    let dbVocab = [];
+    let dbGrammar = [];
+    try {
+      if (!window.masterVocabDb) {
+        const res = await fetch('data/vocab_n2_db.json');
+        if (res.ok) window.masterVocabDb = await res.json();
+      }
+      if (window.masterVocabDb) {
+        dbVocab = (window.masterVocabDb.vocab_list || []).filter(v => v.chapter === chapterNum);
+        dbGrammar = (window.masterVocabDb.grammar_list || []).filter(g => g.chapter === chapterNum);
+      }
+    } catch (e) {
+      console.warn("Could not fetch vocab_n2_db.json in flashcardService:", e);
+    }
 
-    // 3. Merge extracted and saved cards (retaining user's mastered status)
+    // 3. Extract vocabulary from chapter pages & speech bubbles for context matching
+    const extractedVocab = extractVocabFromPages(pagesData || []);
+    const extractedMap = new Map();
+    extractedVocab.forEach(item => {
+      extractedMap.set(item.term.trim().toLowerCase(), item);
+      extractedMap.set(item.term.replace('〜', '').replace('~', '').trim().toLowerCase(), item);
+    });
+
+    // 4. Merge master db items into card list with full 13 attributes
     const cardMap = new Map();
 
-    // Add extracted first
-    extractedVocab.forEach(item => {
-      const key = item.term.trim().toLowerCase();
+    // Add Master Vocab
+    dbVocab.forEach(v => {
+      const key = v.term.trim().toLowerCase();
+      const ext = extractedMap.get(key);
       cardMap.set(key, {
-        id: `extracted_${key}_${item.pageIndex || 0}`,
-        term: item.term.trim(),
-        furigana: (item.furigana || '').trim(),
-        hanViet: (item.hanViet || '').trim(),
-        meaning: (item.meaning || '').trim(),
-        context: (item.context || '').trim(),
-        type: item.type || (isGrammarTerm(item.term) ? 'grammar' : 'vocab'),
+        id: `vocab_${v.stt}`,
+        stt: v.stt,
+        chapter: v.chapter,
+        term: v.term,
+        reading: v.reading,
+        romaji: v.romaji,
+        hanViet: v.han_viet,
+        meaning: v.meaning,
+        type: 'vocab',
+        pos: v.type || 'Danh từ',
+        examJa: v.exam_ja,
+        examVi: v.exam_vi,
+        kanjiBreakdown: v.kanji_breakdown,
+        pitchHtml: v.pitch_html,
+        pitchLabel: v.pitch_label,
+        pitchShort: v.pitch_short,
+        synonymsAntonyms: v.synonyms_antonyms,
+        context: ext ? ext.context : '',
+        pageIndex: ext ? ext.pageIndex : 1,
         mastered: false,
-        source: 'dialogue',
+        source: 'db',
         createdAt: Date.now()
       });
     });
 
-    // Merge saved cards
+    // Add Master Grammar
+    dbGrammar.forEach(g => {
+      const key = g.pattern.trim().toLowerCase();
+      const ext = extractedMap.get(key) || extractedMap.get(g.pattern.replace('〜', '').replace('~', '').trim().toLowerCase());
+      cardMap.set(key, {
+        id: `grammar_${g.stt}`,
+        stt: g.stt,
+        chapter: g.chapter,
+        term: g.pattern,
+        pattern: g.pattern,
+        reading: g.reading,
+        meaning: g.meaning,
+        type: 'grammar',
+        connection: g.connection,
+        usageNotes: g.usage_notes,
+        level: g.level || 'N2',
+        examJa1: g.exam_ja_1,
+        examVi1: g.exam_vi_1,
+        examJa2: g.exam_ja_2,
+        examVi2: g.exam_vi_2,
+        similarPatterns: g.similar_patterns,
+        context: ext ? ext.context : '',
+        pageIndex: ext ? ext.pageIndex : 1,
+        mastered: false,
+        source: 'db',
+        createdAt: Date.now()
+      });
+    });
+
+    // Fallback: If master db not available, add extracted directly
+    if (cardMap.size === 0) {
+      extractedVocab.forEach(item => {
+        const key = item.term.trim().toLowerCase();
+        cardMap.set(key, {
+          id: `extracted_${key}_${item.pageIndex || 0}`,
+          term: item.term.trim(),
+          reading: (item.furigana || '').trim(),
+          hanViet: (item.hanViet || '').trim(),
+          meaning: (item.meaning || '').trim(),
+          context: (item.context || '').trim(),
+          pageIndex: item.pageIndex || 1,
+          type: item.type || (isGrammarTerm(item.term) ? 'grammar' : 'vocab'),
+          mastered: false,
+          source: 'dialogue',
+          createdAt: Date.now()
+        });
+      });
+    }
+
+    // Merge saved cards (retaining user's mastered status)
     savedCards.forEach(saved => {
       if (!saved || !saved.term) return;
       const key = saved.term.trim().toLowerCase();
       if (cardMap.has(key)) {
         const existing = cardMap.get(key);
         existing.mastered = !!saved.mastered;
-        if (saved.meaning) existing.meaning = saved.meaning;
-        if (saved.furigana) existing.furigana = saved.furigana;
-        if (saved.hanViet) existing.hanViet = saved.hanViet;
-        if (saved.context) existing.context = saved.context;
-        if (saved.type) existing.type = saved.type;
-      } else {
-        cardMap.set(key, {
-          ...saved,
-          type: saved.type || (isGrammarTerm(saved.term) ? 'grammar' : 'vocab'),
-          source: saved.source || 'custom'
-        });
       }
     });
 
@@ -630,22 +709,106 @@ function renderOverviewListView(container) {
       const isMastered = !!c.mastered;
       const isGrammar = c.type === 'grammar';
 
+      if (isGrammar) {
+        return `
+          <div class="vocab-overview-item rich-card ${isMastered ? 'is-mastered' : ''}" id="vcard_${c.id}">
+            <div class="vocab-item-left">
+              <span class="vocab-item-idx">#${c.stt || (idx + 1)}</span>
+              <div class="vocab-item-main">
+                <div class="vocab-item-term-row">
+                  <span class="vocab-item-term">${escapeHtml(c.pattern || c.term)}</span>
+                  <span class="tag-type-grammar"><i class="fas fa-shapes"></i> Ngữ pháp ${escapeHtml(c.level || 'N2')}</span>
+                  <button type="button" class="btn-vocab-speaker" onclick="flashcardService.speak('${escapeHtml(c.pattern || c.term)}', event)" title="Nghe phát âm">
+                    <i class="fas fa-volume-high"></i>
+                  </button>
+                </div>
+                
+                <div class="vocab-card-details">
+                  <div class="detail-row"><span class="detail-label">📖 Ý nghĩa:</span> <span class="detail-val font-bold text-accent">${escapeHtml(c.meaning || '')}</span></div>
+                  ${c.connection ? `<div class="detail-row"><span class="detail-label">🔗 Công thức nối:</span> <span class="detail-val font-mono code-box">${escapeHtml(c.connection)}</span></div>` : ''}
+                  ${c.usageNotes ? `<div class="detail-row"><span class="detail-label">💡 Sắc thái dùng:</span> <span class="detail-val text-muted">${escapeHtml(c.usageNotes)}</span></div>` : ''}
+                  
+                  ${c.examJa1 ? `
+                    <div class="detail-exam-box">
+                      <div class="exam-ja-row">
+                        <span>📝 ${escapeHtml(c.examJa1)}</span>
+                        <button type="button" class="btn-mini-speaker" onclick="flashcardService.speak('${escapeHtml(c.examJa1)}', event)"><i class="fas fa-volume-high"></i></button>
+                      </div>
+                      ${c.examVi1 ? `<div class="exam-vi-row">➔ ${escapeHtml(c.examVi1)}</div>` : ''}
+                    </div>` : ''}
+
+                  ${c.similarPatterns ? `<div class="detail-row text-xs text-muted"><span class="detail-label">🔗 Mở rộng:</span> <span class="detail-val">${escapeHtml(c.similarPatterns)}</span></div>` : ''}
+                  
+                  ${c.context ? `
+                    <div class="detail-context-row">
+                      <i class="fas fa-comment-dots"></i> <span>Manga: "${escapeHtml(c.context)}"</span>
+                      ${c.pageIndex ? `<button type="button" class="btn-jump-page" onclick="jumpToPageAndCloseModal(${c.pageIndex - 1})" title="Xem tại trang ${c.pageIndex}"><i class="fas fa-search"></i> Trang ${c.pageIndex}</button>` : ''}
+                    </div>` : ''}
+                </div>
+              </div>
+            </div>
+
+            <div class="vocab-item-actions">
+              <button type="button" class="btn-toggle-mastered ${isMastered ? 'active' : ''}" 
+                      onclick="flashcardService.toggleMastered('${c.id}', event)" 
+                      title="${isMastered ? 'Đã thuộc (Nhấp để ôn lại)' : 'Đánh dấu đã thuộc'}">
+                <i class="fas ${isMastered ? 'fa-check-circle' : 'fa-circle'}"></i>
+                <span>${isMastered ? 'Đã thuộc' : 'Chưa nhớ'}</span>
+              </button>
+              <button type="button" class="btn-vocab-del" onclick="flashcardService.deleteCard('${c.id}', event)" title="Xóa thẻ">
+                <i class="fas fa-trash-can"></i>
+              </button>
+            </div>
+          </div>
+        `;
+      }
+
+      // Vocabulary Rich Card
       return `
-        <div class="vocab-overview-item ${isMastered ? 'is-mastered' : ''}" id="vcard_${c.id}">
+        <div class="vocab-overview-item rich-card ${isMastered ? 'is-mastered' : ''}" id="vcard_${c.id}">
           <div class="vocab-item-left">
-            <span class="vocab-item-idx">#${idx + 1}</span>
+            <span class="vocab-item-idx">#${c.stt || (idx + 1)}</span>
             <div class="vocab-item-main">
               <div class="vocab-item-term-row">
                 <span class="vocab-item-term">${escapeHtml(c.term)}</span>
-                ${isGrammar ? `<span class="tag-type-grammar"><i class="fas fa-shapes"></i> Ngữ pháp</span>` : ''}
-                ${c.furigana ? `<span class="vocab-item-furigana">${escapeHtml(c.furigana)}</span>` : ''}
+                ${c.pos ? `<span class="tag-pos">${escapeHtml(c.pos)}</span>` : ''}
+                
+                ${c.pitchHtml ? `
+                  <div class="pitch-accent-box">
+                    <span class="pitch-mora-line">${c.pitchHtml}</span>
+                    <span class="pitch-badge-tag">${escapeHtml(c.pitchLabel || c.pitchShort || '')}</span>
+                  </div>
+                ` : (c.reading ? `<span class="vocab-item-furigana">【 ${escapeHtml(c.reading)} 】</span>` : '')}
+
                 <button type="button" class="btn-vocab-speaker" onclick="flashcardService.speak('${escapeHtml(c.term)}', event)" title="Nghe phát âm">
                   <i class="fas fa-volume-high"></i>
                 </button>
               </div>
-              <div class="vocab-item-meanings-row">
-                ${c.hanViet ? `<span class="tag-hanviet">HV: ${escapeHtml(c.hanViet)}</span>` : ''}
-                <span class="vocab-item-meaning">${escapeHtml(c.meaning || 'Chưa có định nghĩa')}</span>
+
+              <div class="vocab-card-details">
+                <div class="detail-row">
+                  ${c.hanViet ? `<span class="tag-hanviet-badge">HV: ${escapeHtml(c.hanViet)}</span>` : ''}
+                  <span class="detail-meaning-text font-bold text-accent">${escapeHtml(c.meaning || 'Chưa có định nghĩa')}</span>
+                </div>
+
+                ${c.kanjiBreakdown ? `<div class="detail-row text-xs text-muted"><span class="detail-label">🧩 Chiết tự:</span> <span class="detail-val">${escapeHtml(c.kanjiBreakdown)}</span></div>` : ''}
+                
+                ${c.examJa ? `
+                  <div class="detail-exam-box">
+                    <div class="exam-ja-row">
+                      <span>📝 ${escapeHtml(c.examJa)}</span>
+                      <button type="button" class="btn-mini-speaker" onclick="flashcardService.speak('${escapeHtml(c.examJa)}', event)"><i class="fas fa-volume-high"></i></button>
+                    </div>
+                    ${c.examVi ? `<div class="exam-vi-row">➔ ${escapeHtml(c.examVi)}</div>` : ''}
+                  </div>` : ''}
+
+                ${c.synonymsAntonyms ? `<div class="detail-row text-xs text-muted"><span class="detail-label">🔗 Mở rộng:</span> <span class="detail-val">${escapeHtml(c.synonymsAntonyms)}</span></div>` : ''}
+                
+                ${c.context ? `
+                  <div class="detail-context-row">
+                    <i class="fas fa-comment-dots"></i> <span>Manga: "${escapeHtml(c.context)}"</span>
+                    ${c.pageIndex ? `<button type="button" class="btn-jump-page" onclick="jumpToPageAndCloseModal(${c.pageIndex - 1})" title="Xem tại trang ${c.pageIndex}"><i class="fas fa-search"></i> Trang ${c.pageIndex}</button>` : ''}
+                  </div>` : ''}
               </div>
             </div>
           </div>
@@ -1000,6 +1163,15 @@ function escapeHtml(str) {
     .replace(/"/g, '&quot;')
     .replace(/'/g, '&#039;');
 }
+
+function jumpToPageAndCloseModal(pageIdx) {
+  if (typeof jumpToPage === 'function') {
+    jumpToPage(pageIdx);
+  }
+  flashcardService.closeModal();
+}
+
+window.jumpToPageAndCloseModal = jumpToPageAndCloseModal;
 
 // Global Export
 window.flashcardService = flashcardService;

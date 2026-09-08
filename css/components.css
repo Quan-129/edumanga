@@ -2771,9 +2771,223 @@ body.auth-locked {
   color: #94a3b8;
 }
 
-.flashcard-empty-state .empty-desc {
+/* ==========================================================================
+   PITCH ACCENT & MULTI-TIER LEARNING CARD STYLES
+   ========================================================================== */
+.pitch-accent-box {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(56, 189, 248, 0.1);
+  padding: 2px 8px;
+  border-radius: 6px;
+  border: 1px solid rgba(56, 189, 248, 0.25);
+}
+
+.pitch-mora-line {
+  font-family: 'Inter', 'Noto Sans JP', sans-serif;
+  font-size: 0.92rem;
+  letter-spacing: 0.04em;
+  font-weight: 700;
+}
+
+.pitch-high {
+  color: #38bdf8;
+  border-top: 2.5px solid #38bdf8;
+  padding-top: 1px;
+}
+
+.pitch-low {
+  color: #94a3b8;
+  border-bottom: 2px solid rgba(148, 163, 184, 0.4);
+  padding-bottom: 1px;
+}
+
+.pitch-badge-tag {
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: #f59e0b;
+  background: rgba(245, 158, 11, 0.15);
+  padding: 1px 5px;
+  border-radius: 4px;
+}
+
+.popover-pitch-inline {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
   font-size: 0.88rem;
+  font-weight: 700;
+}
+
+.popover-pitch-inline .pitch-badge {
+  font-size: 0.7rem;
+  color: #fbbf24;
+  font-weight: 800;
+}
+
+.btn-popover-speaker {
+  background: rgba(56, 189, 248, 0.15);
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  color: #38bdf8;
+  padding: 4px 8px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.82rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s ease;
+}
+
+.btn-popover-speaker:hover {
+  background: rgba(56, 189, 248, 0.35);
+  color: #ffffff;
+  transform: scale(1.08);
+}
+
+/* Rich Card Multi-tier Layout */
+.vocab-overview-item.rich-card {
+  padding: 1rem 1.15rem;
+  border-radius: 12px;
+  margin-bottom: 12px;
+  background: rgba(15, 23, 42, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: all 0.2s ease;
+}
+
+.vocab-overview-item.rich-card:hover {
+  border-color: rgba(56, 189, 248, 0.35);
+  background: rgba(15, 23, 42, 0.85);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.35);
+}
+
+.tag-pos {
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 4px;
+  background: rgba(139, 92, 246, 0.2);
+  color: #c4b5fd;
+  border: 1px solid rgba(139, 92, 246, 0.35);
+}
+
+.tag-hanviet-badge {
+  font-size: 0.78rem;
+  font-weight: 800;
+  color: #f59e0b;
+  background: rgba(245, 158, 11, 0.12);
+  padding: 2px 6px;
+  border-radius: 4px;
+  border: 1px solid rgba(245, 158, 11, 0.25);
+  margin-right: 6px;
+}
+
+.vocab-card-details {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 8px;
+  font-size: 0.88rem;
+  line-height: 1.45;
+}
+
+.detail-row {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.detail-label {
+  font-weight: 700;
+  color: #94a3b8;
+  font-size: 0.8rem;
+}
+
+.detail-val {
+  color: #e2e8f0;
+}
+
+.code-box {
+  background: rgba(0, 0, 0, 0.35);
+  padding: 2px 6px;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #38bdf8;
+}
+
+.detail-exam-box {
+  background: rgba(30, 41, 59, 0.55);
+  border-left: 3px solid #38bdf8;
+  padding: 6px 10px;
+  border-radius: 0 6px 6px 0;
+  margin: 4px 0;
+}
+
+.exam-ja-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-weight: 600;
+  color: #f1f5f9;
+  font-size: 0.88rem;
+}
+
+.exam-vi-row {
+  font-size: 0.8rem;
+  color: #94a3b8;
+  margin-top: 2px;
+  padding-left: 18px;
+}
+
+.btn-mini-speaker {
+  background: none;
+  border: none;
+  color: #38bdf8;
+  cursor: pointer;
+  padding: 2px 6px;
+  font-size: 0.78rem;
+  transition: transform 0.15s ease;
+}
+
+.btn-mini-speaker:hover {
+  transform: scale(1.2);
+  color: #7dd3fc;
+}
+
+.detail-context-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.8rem;
   color: #64748b;
-  max-width: 360px;
+  background: rgba(0, 0, 0, 0.25);
+  padding: 4px 8px;
+  border-radius: 6px;
+  margin-top: 4px;
+  gap: 8px;
+}
+
+.btn-jump-page {
+  background: rgba(245, 158, 11, 0.15);
+  border: 1px solid rgba(245, 158, 11, 0.35);
+  color: #fbbf24;
+  padding: 2px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.74rem;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+
+.btn-jump-page:hover {
+  background: rgba(245, 158, 11, 0.35);
+  color: #ffffff;
 }
 

@@ -1,0 +1,176 @@
+﻿STT_Goc,Chuong,Ten_Chuong,Pattern,Reading,Meaning,Connection,Level
+1,1,Chương 1: Quan hệ con người & Gia đình (人間関係と家族),〜げ（な／に）,〜げ（な／に）,"Có vẻ, mang cảm giác...",A-i (bỏ い) / A-na (bỏ な) / V-masu (bỏ ます) + げ,N2
+2,1,Chương 1: Quan hệ con người & Gia đình (人間関係と家族),〜がち,〜がち,"Thường hay, dễ bị (xu hướng xấu)",V-masu (bỏ ます) / N + がち,N2
+3,1,Chương 1: Quan hệ con người & Gia đình (人間関係と家族),〜っぽい,〜っぽい,"Hơi có vẻ, đậm chất, hay (mang tính chất)",N / A-i (bỏ い) / V-masu (bỏ ます) + っぽい,N2
+4,1,Chương 1: Quan hệ con người & Gia đình (人間関係と家族),〜気味,〜ぎみ,"Có vẻ, có triệu chứng nhẹ là...",V-masu (bỏ ます) / N + 気味,N2
+5,1,Chương 1: Quan hệ con người & Gia đình (人間関係と家族),Vれるものなら / Vれるもんなら,Vれるものなら,Nếu như có thể làm được thì...,V-khả năng + ものなら / もんなら,N2
+6,1,Chương 1: Quan hệ con người & Gia đình (人間関係と家族),〜ものだから / 〜もんだから,〜ものだから,"Vì... (biện bạch, giải thích lý do)","V / A / N (thể thông thường, N + な) + ものだから",N2
+7,2,"Chương 2: Cơ thể, Sức khỏe & Y tế (身体・健康と医療)",〜もの / 〜もん,〜もの / 〜もん,"Vì... mà! (nói lý do mang tính nũng nịu, biện bạch)",V / A / N (thể thông thường) + もの / もん,N2
+8,2,"Chương 2: Cơ thể, Sức khỏe & Y tế (身体・健康と医療)",〜ものの,〜ものの,Mặc dù... nhưng...,"V / A / N (thể thông thường, N + である) + ものの",N2
+9,2,"Chương 2: Cơ thể, Sức khỏe & Y tế (身体・健康と医療)",Nはもとより〜も,Nはもとより〜も,Không chỉ N mà ngay cả... cũng (N là đương nhiên),N + はもとより 〜 も,N2
+10,2,"Chương 2: Cơ thể, Sức khỏe & Y tế (身体・健康と医療)",N1はともかく（として）N2は / が,N1はともかく（として）N2は / が,"N1 thì tạm gác lại, trước hết N2...",N + はともかく（として）,N2
+11,2,"Chương 2: Cơ thể, Sức khỏe & Y tế (身体・健康と医療)",N1はまだしもN2...,N1はまだしもN2...,"N1 thì còn châm chước được, chứ N2 thì không thể",N + はまだしも,N2
+12,2,"Chương 2: Cơ thể, Sức khỏe & Y tế (身体・健康と医療)",〜たまらない,〜たまらない,...không chịu nổi / cực kỳ... (cảm xúc không thể kìm nén),A-i (くて) / A-na (で) / V-te + たまらない,N2
+13,3,Chương 3: Sinh hoạt hàng ngày & Thói quen (日常生活と習慣),〜仕方がない / 〜しょうがない,〜しかたがない / 〜しょうがない,...vô cùng / không biết phải làm sao / đành chịu,A-i (くて) / A-na (で) / V-te + 仕方がない,N2
+14,3,Chương 3: Sinh hoạt hàng ngày & Thói quen (日常生活と習慣),〜かなわない,〜かなわない,"Không thể chịu đựng nổi vì... (phiền toái, bực bội)",A-i (くて) / A-na (で) + かなわない,N2
+15,3,Chương 3: Sinh hoạt hàng ngày & Thói quen (日常生活と習慣),〜ならない,〜ならない,Hết sức... / Vô cùng... (cảm xúc tự phát sâu kín),A-i (くて) / A-na (で) / V-te + ならない,N2
+16,3,Chương 3: Sinh hoạt hàng ngày & Thói quen (日常生活と習慣),〜ないことはない,〜ないことはない,Không phải là không... (khẳng định nhẹ / miễn cưỡng),V-nai / A-i (くない) / A-na (ではない) + ことはない,N2
+17,3,Chương 3: Sinh hoạt hàng ngày & Thói quen (日常生活と習慣),〜ないこともない,〜ないこともない,Cũng không hẳn là không... (có thể làm được nếu cố),V-nai / A-i (くない) / A-na (ではない) + こともない,N2
+18,3,Chương 3: Sinh hoạt hàng ngày & Thói quen (日常生活と習慣),Vないではいられない,Vないではいられない,Không thể không làm V / Buộc phải làm V,V-nai (bỏ ない) + ないではいられない (する → せずにはいられない),N2
+19,4,"Chương 4: Ăn uống, Ẩm thực & Nấu nướng (飲食・料理と食事)",Vずにはいられない,Vずにはいられない,"Không kìm lại được, không thể không V",V-nai (bỏ ない) + ずにはいられない (する → せずにはいられない),N2
+20,4,"Chương 4: Ăn uống, Ẩm thực & Nấu nướng (飲食・料理と食事)",Vねばならない,Vねばならない,"Phải làm V (nghĩa vụ, bổn phận trang trọng)",V-nai (bỏ ない) + ねばならない (する → せねばならない),N2
+21,4,"Chương 4: Ăn uống, Ẩm thực & Nấu nướng (飲食・料理と食事)",Vてはならない,Vてはならない,Không được làm V (cấm đoán trang trọng),V-te + はならない,N2
+22,4,"Chương 4: Ăn uống, Ẩm thực & Nấu nướng (飲食・料理と食事)",Vてはいられない / Vてられない,Vてはいられない,Không thể cứ tiếp tục làm V mãi được,V-te + はいられない / られない,N2
+23,4,"Chương 4: Ăn uống, Ẩm thực & Nấu nướng (飲食・料理と食事)",Vてばかりは + いられない / Vてばかりも + いられない,Vてばかりは + いられない / Vてばかりも + いられない,Vてばかりは + いられない / Vてばかりも + いられない,Vてばかりは + いられない,N2
+24,4,"Chương 4: Ăn uống, Ẩm thực & Nấu nướng (飲食・料理と食事)",〜かいがある / 〜かいあって,〜かいがある,"Bõ công, thật đáng công...",V-ta / N + の + かいがある / かいあって,N2
+25,5,"Chương 5: Nhà cửa, Nơi ở & Tiện ích (住まい・住宅と設備)",〜かいがない / かい（も）なく〜,〜かいがない / かい（も）なく〜,〜かいがない / かい（も）なく〜,V (thể thông thường) / N / A + かいがない,N2
+26,5,"Chương 5: Nhà cửa, Nơi ở & Tiện ích (住まい・住宅と設備)",Vがい,Vがい,Vがい,Vがい,N2
+27,5,"Chương 5: Nhà cửa, Nơi ở & Tiện ích (住まい・住宅と設備)",Vてまで（も） / NまでVて,Vてまで（も） / NまでVて,Vてまで（も） / NまでVて,Vてまで（も）,N2
+28,5,"Chương 5: Nhà cửa, Nơi ở & Tiện ích (住まい・住宅と設備)",Vかける / VかけのN / Vかけだ,Vかける,Đang làm dở dang / Suýt nữa thì...,V-masu (bỏ ます) + かける / かけのN / かけだ,N2
+29,5,"Chương 5: Nhà cửa, Nơi ở & Tiện ích (住まい・住宅と設備)",V切る / V切れる / V切れない,Vきる / Vきれる / Vきれない,Làm xong hết toàn bộ / Không thể nào làm hết được,V-masu (bỏ ます) + 切る / 切れる / 切れない,N2
+30,5,"Chương 5: Nhà cửa, Nơi ở & Tiện ích (住まい・住宅と設備)",V得る / V得ない,Vえる・うる / Vえない,Có khả năng xảy ra / Không thể nào xảy ra,V-masu (bỏ ます) + 得る (える/うる) / 得ない (えない),N2
+31,6,Chương 6: Giao thông & Đi lại (交通・移動と乗り物),V抜く,Vぬく,Làm đến cùng vượt qua gian khổ,V-masu (bỏ ます) + 抜く,N2
+32,6,Chương 6: Giao thông & Đi lại (交通・移動と乗り物),〜うちに,〜うちに,Nhân lúc còn... / Trong khi đang... thì biến đổi,V-dict / V-teiru / V-nai / A-i / A-na (な) / N (の) + うちに,N2
+33,6,Chương 6: Giao thông & Đi lại (交通・移動と乗り物),VるかVないかのうちに,VるかVないかのうちに,VるかVないかのうちに,VるかVないかのうちに,N2
+34,6,Chương 6: Giao thông & Đi lại (交通・移動と乗り物),〜限り（は）,〜かぎり（は）,Chừng nào mà còn... thì vẫn...,V-dict / V-nai / A-i / A-na (な/である) / N (である) + 限り,N2
+35,6,Chương 6: Giao thông & Đi lại (交通・移動と乗り物),Vる / Vた / Vている + 限り（では）,Vる / Vた / Vている + かぎり（では）,Vる / Vた / Vている + かぎり（では）,Vる,N2
+36,6,Chương 6: Giao thông & Đi lại (交通・移動と乗り物),Nに限り / Nに限って,Nにかぎり / Nにかぎって,Chỉ riêng N / Đúng vào lúc N thì lại...,N + に限り / に限って,N2
+37,7,Chương 7: Mua sắm & Tiêu dùng (買い物・消費とサービス),Nさえ + Vば / Aければ / Aなら / Nなら。Vさえすれば,Nさえ + Vば / Aければ / Aなら / Nなら。Vさえすれば,Nさえ + Vば / Aければ / Aなら / Nなら。Vさえすれば,Nさえ + Vば,N2
+38,7,Chương 7: Mua sắm & Tiêu dùng (買い物・消費とサービス),〜からこそ,〜からこそ,Chính vì... (nhấn mạnh lý do cốt lõi),V / A / N (thể thông thường) + からこそ,N2
+39,7,Chương 7: Mua sắm & Tiêu dùng (買い物・消費とサービス),Vてこそ,Vてこそ,Chỉ khi làm V thì mới thực sự...,V-te + こそ,N2
+40,7,Chương 7: Mua sắm & Tiêu dùng (買い物・消費とサービス),Vるばかりだ。,Vるばかりだ。,Vるばかりだ。,Vるばかりだ。,N2
+41,7,Chương 7: Mua sắm & Tiêu dùng (買い物・消費とサービス),（ただ）Vる + ばかりだ / のみだ。,（ただ）Vる + ばかりだ / のみだ。,（ただ）Vる + ばかりだ / のみだ。,（ただ）Vる + ばかりだ,N2
+42,7,Chương 7: Mua sắm & Tiêu dùng (買い物・消費とサービス),Nにしたら / すれば / してみたら / してみれば,Nにしたら / すれば / してみたら / してみれば,Nにしたら / すれば / してみたら / してみれば,Nにしたら,N2
+43,8,Chương 8: Cảm xúc & Tâm trạng con người (感情・気分と心理),〜と + したら / すれば,〜と + したら / すれば,〜と + したら / すれば,V (thể thông thường) / N / A + と + したら,N2
+44,8,Chương 8: Cảm xúc & Tâm trạng con người (感情・気分と心理),〜としても / としたって,〜としても / としたって,〜としても / としたって,V (thể thông thường) / N / A + としても,N2
+45,8,Chương 8: Cảm xúc & Tâm trạng con người (感情・気分と心理),N1をN2としてV / するN / したN,N1をN2としてV / するN / したN,N1をN2としてV / するN / したN,N1をN2としてV,N2
+46,8,Chương 8: Cảm xúc & Tâm trạng con người (感情・気分と心理),〜とともに,〜とともに,〜とともに,V (thể thông thường) / N / A + とともに,N2
+47,8,Chương 8: Cảm xúc & Tâm trạng con người (感情・気分と心理),〜ともない / ともなって / ともなうN,〜ともない / ともなって / ともなうN,〜ともない / ともなって / ともなうN,〜ともない,N2
+48,8,Chương 8: Cảm xúc & Tâm trạng con người (感情・気分と心理),〜つれて / つれ,〜つれて / つれ,〜つれて / つれ,V (thể thông thường) / N / A + つれて,N2
+49,9,Chương 9: Tính cách & Thái độ ứng xử (性格・態度と人柄),〜したがって / したがい,〜したがって / したがい,〜したがって / したがい,V (thể thông thường) / N / A + したがって,N2
+50,9,Chương 9: Tính cách & Thái độ ứng xử (性格・態度と人柄),〜とおり / とおりに / とおりだ / とおりのN,〜とおり / とおりに / とおりだ / とおりのN,〜とおり / とおりに / とおりだ / とおりのN,〜とおり,N2
+51,9,Chương 9: Tính cách & Thái độ ứng xử (性格・態度と人柄),Vる / Vられる + ままに,Vる / Vられる + ままに,Vる / Vられる + ままに,Vる,N2
+52,9,Chương 9: Tính cách & Thái độ ứng xử (性格・態度と人柄),〜ことに,〜ことに,〜ことに,V (thể thông thường) / N / A + ことに,N2
+53,9,Chương 9: Tính cách & Thái độ ứng xử (性格・態度と人柄),〜あまり,〜あまり,〜あまり,V (thể thông thường) / N / A + あまり,N2
+54,9,Chương 9: Tính cách & Thái độ ứng xử (性格・態度と人柄),〜わけだ,〜わけだ,"Thảo nào, hèn chi / Đương nhiên là...","V / A / N (thể thông thường, N + な/である) + わけだ",N2
+55,10,Chương 10: Giao tiếp & Mối quan hệ xã hội (コミュニケーションと社交),〜わけではない / 〜わけでもない,〜わけではない,Không hẳn là... / Không nhất thiết là...,"V / A / N (thể thông thường, N + な/である) + わけではない",N2
+56,10,Chương 10: Giao tiếp & Mối quan hệ xã hội (コミュニケーションと社交),〜わけがない / 〜わけはない,〜わけがない,Tuyệt đối không thể... / Lẽ nào lại...,"V / A / N (thể thông thường, N + な/である) + わけがない",N2
+57,10,Chương 10: Giao tiếp & Mối quan hệ xã hội (コミュニケーションと社交),〜わけにはいかない / 〜わけにもいかない,〜わけにはいかない,Không thể làm thế được (do đạo đức/xã hội) / Buộc phải làm,V-dict / V-nai + わけにはいかない,N2
+58,10,Chương 10: Giao tiếp & Mối quan hệ xã hội (コミュニケーションと社交),Vたとたん / とたんに,Vたとたん / とたんに,Vたとたん / とたんに,Vたとたん,N2
+59,10,Chương 10: Giao tiếp & Mối quan hệ xã hội (コミュニケーションと社交),〜あげく / あげくに / あげくのN,〜あげく / あげくに / あげくのN,〜あげく / あげくに / あげくのN,〜あげく,N2
+60,10,Chương 10: Giao tiếp & Mối quan hệ xã hội (コミュニケーションと社交),〜末 / 末に / すえのN,〜末 / 末に / すえのN,〜末 / 末に / すえのN,〜末,N2
+61,11,"Chương 11: Học tập, Thi cử & Trường học (学習・試験と学校教育)",〜思ったら / 思うと,〜思ったら / 思うと,〜思ったら / 思うと,V (thể thông thường) / N / A + 思ったら,N2
+62,11,"Chương 11: Học tập, Thi cử & Trường học (学習・試験と学校教育)",〜ところ（に / へ / を）,〜ところ（に / へ / を）,〜ところ（に / へ / を）,V (thể thông thường) / N / A + ところ（に,N2
+63,11,"Chương 11: Học tập, Thi cử & Trường học (学習・試験と学校教育)",Vたところ,Vたところ,Vたところ,Vたところ,N2
+64,11,"Chương 11: Học tập, Thi cử & Trường học (学習・試験と学校教育)",Vるところ / Nどころ / Vているどころ + ではない / じゃない / ではなく / じゃなく,Vるところ / Nどころ / Vているどころ + ではない / じゃない / ではなく / じゃなく,Vるところ / Nどころ / Vているどころ + ではない / じゃない / ではなく / じゃなく,Vるところ,N2
+65,11,"Chương 11: Học tập, Thi cử & Trường học (学習・試験と学校教育)",〜どころか,〜どころか,"Nói chi đến... / Ngay cả... cũng không được, trái lại...",N / V-thể thông thường + どころか,N2
+66,11,"Chương 11: Học tập, Thi cử & Trường học (学習・試験と学校教育)",Nだらけ,Nだらけ,Nだらけ,Nだらけ,N2
+67,12,Chương 12: Tìm việc & Phỏng vấn tuyển dụng (就職活動・面接と採用),VたきりVない / Vたきりだ / Vたっきりだ,VたきりVない / Vたきりだ / Vたっきりだ,VたきりVない / Vたきりだ / Vたっきりだ,VたきりVない,N2
+68,12,Chương 12: Tìm việc & Phỏng vấn tuyển dụng (就職活動・面接と採用),Vきり / Vっきり,Vきり / Vっきり,Vきり / Vっきり,Vきり,N2
+69,12,Chương 12: Tìm việc & Phỏng vấn tuyển dụng (就職活動・面接と採用),Vっぱなし,Vっぱなし,Vっぱなし,Vっぱなし,N2
+70,12,Chương 12: Tìm việc & Phỏng vấn tuyển dụng (就職活動・面接と採用),Nに反して / Nに反するN,Nにはんして,"Trái ngược với N (dự đoán, kỳ vọng, quy tắc)",N + に反して / に反し / に反するN,N2
+71,12,Chương 12: Tìm việc & Phỏng vấn tuyển dụng (就職活動・面接と採用),〜反面,〜はんめん,"Mặt khác, ngược lại (hai mặt của cùng một vấn đề)","V / A / N (thể thông thường, N + である) + 反面",N2
+72,12,Chương 12: Tìm việc & Phỏng vấn tuyển dụng (就職活動・面接と採用),〜一方（で）,〜いっぽう（で）,Một mặt thì... mặt khác thì...,"V / A / N (thể thông thường, N + である) + 一方（で）",N2
+73,13,Chương 13: Môi trường công sở & Đồng nghiệp (職場環境・同僚と業務),Vる一方だ,Vるいっぽうだ,Ngày càng... (có xu hướng liên tục theo một chiều hướng),"V-dict (chỉ sự biến đổi: 増える, 減る, 悪化する...) + 一方だ",N2
+74,13,Chương 13: Môi trường công sở & Đồng nghiệp (職場環境・同僚と業務),Vるべきだ / Vるべきではない,Vるべきだ,"Nên làm V / Không nên làm V (đạo đức, trách nhiệm xã hội)",V-dict + べきだ / べきではない (する → すべきだ / するべきだ),N2
+75,13,Chương 13: Môi trường công sở & Đồng nghiệp (職場環境・同僚と業務),Vざるを得ない,Vざるをえない,Đành phải làm V / Buộc phải làm V dù không muốn,V-nai (bỏ ない) + ざるを得ない (する → せざるを得ない),N2
+76,13,Chương 13: Môi trường công sở & Đồng nghiệp (職場環境・同僚と業務),Vる / Vない / Nという + ことになっている,Vる / Vない / Nという + ことになっている,Vる / Vない / Nという + ことになっている,Vる,N2
+77,13,Chương 13: Môi trường công sở & Đồng nghiệp (職場環境・同僚と業務),〜にすぎない,〜にすぎない,Chẳng qua chỉ là... / Không quá mức...,"V / A / N (thể thông thường, N + である) + にすぎない",N2
+78,13,Chương 13: Môi trường công sở & Đồng nghiệp (職場環境・同僚と業務),〜にあたって / 〜にあたり,〜にあたって,Nhân dịp... / Vào thời điểm bắt đầu sự kiện quan trọng...,V-dict / N + にあたって / にあたり / にあたっては,N2
+79,14,"Chương 14: Kế hoạch, Họp hành & Đàm phán (計画・会議と交渉)",Nに沿って / Nに沿ったN,Nにそって,"Dọc theo... / Tuân theo, bám sát theo N",N + に沿って / に沿い / に沿ったN,N2
+80,14,"Chương 14: Kế hoạch, Họp hành & Đàm phán (計画・会議と交渉)",〜に先立って / 〜に先立ち,〜にさきだって,Trước khi làm việc lớn... / Chuẩn bị trước khi...,V-dict / N + に先立って / に先立ち / に先立つN,N2
+81,14,"Chương 14: Kế hoạch, Họp hành & Đàm phán (計画・会議と交渉)",Nにわたって / NにわたるN,Nにわたって,"Suốt, trải dài trên diện rộng N (thời gian, không gian)","N (chỉ thời gian, không gian, số lần) + にわたって / にわたり / にわたるN",N2
+82,14,"Chương 14: Kế hoạch, Họp hành & Đàm phán (計画・会議と交渉)",Vっこない,Vっこない,Tuyệt đối không thể nào... / Làm sao mà... được,V-masu (bỏ ます) + っこない,N2
+83,14,"Chương 14: Kế hoạch, Họp hành & Đàm phán (計画・会議と交渉)",Vかねない,Vかねない,Có nguy cơ... / E rằng sẽ... (dẫn đến kết quả xấu),V-masu (bỏ ます) + かねない,N2
+84,14,"Chương 14: Kế hoạch, Họp hành & Đàm phán (計画・会議と交渉)",Vかねる,Vかねる,Khó có thể... / Không thể làm được (từ chối lịch sự),V-masu (bỏ ます) + かねる,N2
+85,15,"Chương 15: Kinh doanh, Thương mại & Thị trường (ビジネス・商業と市場)",Vがたい,Vがたい,"Khó mà làm V được (về mặt tâm lý, cảm xúc)","V-masu (bỏ ます) + がたい (信じがたい, 理解しがたい, 許しがたい)",N2
+86,15,"Chương 15: Kinh doanh, Thương mại & Thị trường (ビジネス・商業と市場)",〜ことから,〜ことから,Vì... nên được gọi là / Do phán đoán từ...,"V / A / N (thể thông thường, N + である) + ことから",N2
+87,15,"Chương 15: Kinh doanh, Thương mại & Thị trường (ビジネス・商業と市場)",Nのことだから,Nのことだから,Vì là N nên chắc chắn...,N (chỉ người quen biết rõ tính cách) + のことだから,N2
+88,15,"Chương 15: Kinh doanh, Thương mại & Thị trường (ビジネス・商業と市場)",Vることなく,Vることなく,Không hề làm V mà cứ thế...,V-dict + ことなく,N2
+89,15,"Chương 15: Kinh doanh, Thương mại & Thị trường (ビジネス・商業と市場)",V1ないことにはV2ない,V1ないことにはV2ない,Nếu không làm V1 thì không thể làm V2,V1-nai + ことには + V2-nai / できない,N2
+90,15,"Chương 15: Kinh doanh, Thương mại & Thị trường (ビジネス・商業と市場)",〜当然だ / 当然のN / 当たり前だ / 当たり前のN,〜とうぜんだ / とうぜんのN / 当たり前だ / 当たり前のN,〜とうぜんだ / とうぜんのN / 当たり前だ / 当たり前のN,〜当然だ,N2
+91,16,"Chương 16: Kinh tế, Tài chính & Đầu tư (経済・金融と投資)",〜もっともだ。,〜もっともだ。,〜もっともだ。,V (thể thông thường) / N / A + もっともだ。,N2
+92,16,"Chương 16: Kinh tế, Tài chính & Đầu tư (経済・金融と投資)",〜同然だ。,〜同然だ。,〜同然だ。,V (thể thông thường) / N / A + 同然だ。,N2
+93,16,"Chương 16: Kinh tế, Tài chính & Đầu tư (経済・金融と投資)",〜だけましだ,〜だけましだ,〜だけましだ,V (thể thông thường) / N / A + だけましだ,N2
+94,16,"Chương 16: Kinh tế, Tài chính & Đầu tư (経済・金融と投資)",〜だけあって / だけに / だけのことはある,〜だけあって / だけに / だけのことはある,〜だけあって / だけに / だけのことはある,V (thể thông thường) / N / A + だけあって,N2
+95,16,"Chương 16: Kinh tế, Tài chính & Đầu tư (経済・金融と投資)",Aばかりか / ばかりでなくBも,Aばかりか / ばかりでなくBも,Aばかりか / ばかりでなくBも,Aばかりか,N2
+96,16,"Chương 16: Kinh tế, Tài chính & Đầu tư (経済・金融と投資)",〜ばかりに,〜ばかりに,〜ばかりに,V (thể thông thường) / N / A + ばかりに,N2
+97,17,"Chương 17: Khoa học, Công nghệ & Kỹ thuật (科学・技術とIT)",〜のみならず / のみか,〜のみならず / のみか,〜のみならず / のみか,V (thể thông thường) / N / A + のみならず,N2
+98,17,"Chương 17: Khoa học, Công nghệ & Kỹ thuật (科学・技術とIT)",Vようではないか / じゃないか,Vようではないか / じゃないか,Vようではないか / じゃないか,Vようではないか,N2
+99,17,"Chương 17: Khoa học, Công nghệ & Kỹ thuật (科学・技術とIT)",Vようがない / ようもない,Vようがない / ようもない,Vようがない / ようもない,Vようがない,N2
+100,17,"Chương 17: Khoa học, Công nghệ & Kỹ thuật (科学・技術とIT)",〜かのようだ / かのように〜,〜かのようだ / かのように〜,〜かのようだ / かのように〜,V (thể thông thường) / N / A + かのようだ,N2
+101,17,"Chương 17: Khoa học, Công nghệ & Kỹ thuật (科学・技術とIT)",〜そうにない / そうもない,〜そうにない / そうもない,〜そうにない / そうもない,V (thể thông thường) / N / A + そうにない,N2
+102,17,"Chương 17: Khoa học, Công nghệ & Kỹ thuật (科学・技術とIT)",〜際して / 際し / 際してのN,〜さいして / さいし / さいしてのN,〜さいして / さいし / さいしてのN,〜際して,N2
+103,18,"Chương 18: Tự nhiên, Môi trường & Khí hậu (自然・環境と気候)",Nに基づいて / 基づき / 基づくN / 基づいたN,Nにもとづいて / 基づき / 基づくN / 基づいたN,Nにもとづいて / 基づき / 基づくN / 基づいたN,Nに基づいて,N2
+104,18,"Chương 18: Tự nhiên, Môi trường & Khí hậu (自然・環境と気候)",Nに応じて / 応じ / 応じたN,Nにおうじて / 応じ / 応じたN,Nにおうじて / 応じ / 応じたN,Nに応じて,N2
+105,18,"Chương 18: Tự nhiên, Môi trường & Khí hậu (自然・環境と気候)",Nの下で / 下 / 下に,Nの下で / 下 / 下に,Nの下で / 下 / 下に,Nの下で,N2
+106,18,"Chương 18: Tự nhiên, Môi trường & Khí hậu (自然・環境と気候)",〜以来,〜いらい,〜いらい,V (thể thông thường) / N / A + 以来,N2
+107,18,"Chương 18: Tự nhiên, Môi trường & Khí hậu (自然・環境と気候)",〜以上,〜いじょう,〜いじょう,V (thể thông thường) / N / A + 以上,N2
+108,18,"Chương 18: Tự nhiên, Môi trường & Khí hậu (自然・環境と気候)",Vるからには / Vたからには,Vるからには / Vたからには,Vるからには / Vたからには,Vるからには,N2
+109,19,"Chương 19: Thời tiết, Thiên tai & Phòng chống (天気・災害と防災)",〜折（に）,〜おり（に）,〜おり（に）,V (thể thông thường) / N / A + 折（に）,N2
+110,19,"Chương 19: Thời tiết, Thiên tai & Phòng chống (天気・災害と防災)",Nから言うと / 言えば,Nから言うと / 言えば,Nから言うと / 言えば,Nから言うと,N2
+111,19,"Chương 19: Thời tiết, Thiên tai & Phòng chống (天気・災害と防災)",Nからすると / すれば / いって,Nからすると / すれば / いって,Nからすると / すれば / いって,Nからすると,N2
+112,19,"Chương 19: Thời tiết, Thiên tai & Phòng chống (天気・災害と防災)",Nからして,Nからして,Nからして,Nからして,N2
+113,19,"Chương 19: Thời tiết, Thiên tai & Phòng chống (天気・災害と防災)",Nから見ると / 見れば / 見ても / 見て,Nから見ると / 見れば / 見ても / 見て,Nから見ると / 見れば / 見ても / 見て,Nから見ると,N2
+114,19,"Chương 19: Thời tiết, Thiên tai & Phòng chống (天気・災害と防災)",〜からといって / からって,〜からといって / からって,〜からといって / からって,V (thể thông thường) / N / A + からといって,N2
+115,20,"Chương 20: Xã hội, Pháp luật & Trật tự (社会・法律と秩序)",Vてからでないと〜できない / Vてからでなければ〜できない,Vてからでないと〜できない / Vてからでなければ〜できない,Vてからでないと〜できない / Vてからでなければ〜できない,Vてからでないと〜できない,N2
+116,20,"Chương 20: Xã hội, Pháp luật & Trật tự (社会・法律と秩序)",N1からN2にかけて,N1からN2にかけて,N1からN2にかけて,N1からN2にかけて,N2
+117,20,"Chương 20: Xã hội, Pháp luật & Trật tự (社会・法律と秩序)",Nに / NのAさに + かけては / かけても,Nに / NのAさに + かけては / かけても,Nに / NのAさに + かけては / かけても,Nに,N2
+118,20,"Chương 20: Xã hội, Pháp luật & Trật tự (社会・法律と秩序)",〜とか,〜とか,〜とか,V (thể thông thường) / N / A + とか,N2
+119,20,"Chương 20: Xã hội, Pháp luật & Trật tự (社会・法律と秩序)",Vるまい,Vるまい,Vるまい,Vるまい,N2
+120,20,"Chương 20: Xã hội, Pháp luật & Trật tự (社会・法律と秩序)",VようかVるまいか,VようかVるまいか,VようかVるまいか,VようかVるまいか,N2
+121,21,"Chương 21: Tin tức, Truyền thông & Báo chí (ニュース・メディアと報道)",〜決まっている / 違いない / 相違ない,〜きまっている / ちがいない / そういない,〜きまっている / ちがいない / そういない,V (thể thông thường) / N / A + 決まっている,N2
+122,21,"Chương 21: Tin tức, Truyền thông & Báo chí (ニュース・メディアと報道)",〜とは限らない,〜とは限らない,〜とは限らない,V (thể thông thường) / N / A + とは限らない,N2
+123,21,"Chương 21: Tin tức, Truyền thông & Báo chí (ニュース・メディアと報道)",Vる / Vるより + ほかない / ほかはない,Vる / Vるより + ほかない / ほかはない,Vる / Vるより + ほかない / ほかはない,Vる,N2
+124,21,"Chương 21: Tin tức, Truyền thông & Báo chí (ニュース・メディアと報道)",Nにほかならない,Nにほかならない,Chính là... / Không gì khác ngoài...,N / V-thể thông thường + から + にほかならない,N2
+125,21,"Chương 21: Tin tức, Truyền thông & Báo chí (ニュース・メディアと報道)",Nをはじめ / はじめとして / はじめとするN,Nをはじめ / はじめとして / はじめとするN,Nをはじめ / はじめとして / はじめとするN,Nをはじめ,N2
+126,21,"Chương 21: Tin tức, Truyền thông & Báo chí (ニュース・メディアと報道)",Nをめぐって / めぐるN,Nをめぐって / めぐるN,Nをめぐって / めぐるN,Nをめぐって,N2
+127,22,"Chương 22: Văn hóa, Nghệ thuật & Truyền thống (文化・芸術と伝統)",Nにおいて / おいては / おいても / おけるN,Nにおいて / おいては / おいても / おけるN,Nにおいて / おいては / おいても / おけるN,Nにおいて,N2
+128,22,"Chương 22: Văn hóa, Nghệ thuật & Truyền thống (文化・芸術と伝統)",Nにて,Nにて,Nにて,Nにて,N2
+129,22,"Chương 22: Văn hóa, Nghệ thuật & Truyền thống (文化・芸術と伝統)",Nも / Vるのも + かまわず,Nも / Vるのも + かまわず,Nも / Vるのも + かまわず,Nも,N2
+130,22,"Chương 22: Văn hóa, Nghệ thuật & Truyền thống (文化・芸術と伝統)",〜にも + かかわらず,〜にも + かかわらず,〜にも + かかわらず,V (thể thông thường) / N / A + にも + かかわらず,N2
+131,22,"Chương 22: Văn hóa, Nghệ thuật & Truyền thống (文化・芸術と伝統)",〜かかわらず / かかわりなく,〜かかわらず / かかわりなく,〜かかわらず / かかわりなく,V (thể thông thường) / N / A + かかわらず,N2
+132,22,"Chương 22: Văn hóa, Nghệ thuật & Truyền thống (文化・芸術と伝統)",Nを問わず,Nをとわず,Nをとわず,Nを問わず,N2
+133,23,"Chương 23: Du lịch, Thể thao & Giải trí (旅行・スポーツと娯楽)",AやらBやら,AやらBやら,AやらBやら,AやらBやら,N2
+134,23,"Chương 23: Du lịch, Thể thao & Giải trí (旅行・スポーツと娯楽)",Aにつけ（Bにつけ）,Aにつけ（Bにつけ）,Aにつけ（Bにつけ）,Aにつけ（Bにつけ）,N2
+135,23,"Chương 23: Du lịch, Thể thao & Giải trí (旅行・スポーツと娯楽)",Aにしろ / Aにせよ（Bにしろ / Bにせよ）,Aにしろ / Aにせよ（Bにしろ / Bにせよ）,Aにしろ / Aにせよ（Bにしろ / Bにせよ）,Aにしろ,N2
+136,23,"Chương 23: Du lịch, Thể thao & Giải trí (旅行・スポーツと娯楽)",N1もVばN2もVる / N1もAければN2もAい / N1もAならN2もAなだ / N1もNならN2もNだ,N1もVばN2もVる / N1もAければN2もAい / N1もAならN2もAなだ / N1もNならN2もNだ,N1もVばN2もVる / N1もAければN2もAい / N1もAならN2もAなだ / N1もNならN2もNだ,N1もVばN2もVる,N2
+137,23,"Chương 23: Du lịch, Thể thao & Giải trí (旅行・スポーツと娯楽)",〜ものだ / もんだ,〜ものだ / もんだ,〜ものだ / もんだ,V (thể thông thường) / N / A + ものだ,N2
+138,23,"Chương 23: Du lịch, Thể thao & Giải trí (旅行・スポーツと娯楽)",Vるものではない / もんじゃない,Vるものではない / もんじゃない,Vるものではない / もんじゃない,Vるものではない,N2
+139,24,"Chương 24: Thời gian, Thay đổi & Quá trình (時間・変化とプロセス)",〜というものだ / というもんだ,〜というものだ / というもんだ,〜というものだ / というもんだ,V (thể thông thường) / N / A + というものだ,N2
+140,24,"Chương 24: Thời gian, Thay đổi & Quá trình (時間・変化とプロセス)",〜ものか / ものですか,〜ものか / ものですか,〜ものか / ものですか,V (thể thông thường) / N / A + ものか,N2
+141,24,"Chương 24: Thời gian, Thay đổi & Quá trình (時間・変化とプロセス)",Nを中心に / 中心にして / 中心にしたN / 中心として,Nをちゅうしんに / ちゅうしんにして / ちゅうしんにしたN / ちゅうしんとして,Nをちゅうしんに / ちゅうしんにして / ちゅうしんにしたN / ちゅうしんとして,Nを中心に,N2
+142,24,"Chương 24: Thời gian, Thay đổi & Quá trình (時間・変化とプロセス)",Nをこめて,Nをこめて,Nをこめて,Nをこめて,N2
+143,24,"Chương 24: Thời gian, Thay đổi & Quá trình (時間・変化とプロセス)",Nを通じて / 通して,Nをつうじて / とおして,Nをつうじて / とおして,Nを通じて,N2
+144,24,"Chương 24: Thời gian, Thay đổi & Quá trình (時間・変化とプロセス)",Nを頼りにV / 頼りとして / 頼りにして,NをたよりにV / たよりとして / たよりにして,NをたよりにV / たよりとして / たよりにして,Nを頼りにV,N2
+145,25,"Chương 25: Đánh giá, Phán đoán & So sánh (評価・判断と比較)",〜恐れがある,〜おそれがある,"Có nguy cơ, e rằng... (xảy ra điều xấu)",V-dict / N + の + 恐れがある,N2
+146,25,"Chương 25: Đánh giá, Phán đoán & So sánh (評価・判断と比較)",〜ものがある,〜ものがある,〜ものがある,V (thể thông thường) / N / A + ものがある,N2
+147,25,"Chương 25: Đánh giá, Phán đoán & So sánh (評価・判断と比較)",Vば / Aければ / Aなら / Nなら + Aいという / Aだ（Nだ）という + ものでもない / ものではない,Vば / Aければ / Aなら / Nなら + Aいという / Aだ（Nだ）という + ものでもない / ものではない,Vば / Aければ / Aなら / Nなら + Aいという / Aだ（Nだ）という + ものでもない / ものではない,Vば,N2
+148,25,"Chương 25: Đánh giá, Phán đoán & So sánh (評価・判断と比較)",どうにか / なんとか + Vないものか / Vれないもの（だろう）か,どうにか / なんとか + Vないものか / Vれないもの（だろう）か,どうにか / なんとか + Vないものか / Vれないもの（だろう）か,どうにか,N2
+149,25,"Chương 25: Đánh giá, Phán đoán & So sánh (評価・判断と比較)",Nをもとに / もとにして,Nをもとに / もとにして,Nをもとに / もとにして,Nをもとに,N2
+150,25,"Chương 25: Đánh giá, Phán đoán & So sánh (評価・判断と比較)",Nにつき,Nにつき,Nにつき,Nにつき,N2
+151,26,"Chương 26: Tranh luận, Lý lẽ & Quan điểm (議論・主張と見解)",〜を契機に / 〜をきっかけに,〜をけいきに / 〜をきっかけに,Nhân dịp... / Kể từ bước ngoặt...,N + を契機に / をきっかけに,N2
+152,26,"Chương 26: Tranh luận, Lý lẽ & Quan điểm (議論・主張と見解)",〜際に,〜さいに,〜さいに,V (thể thông thường) / N / A + 際に,N2
+153,26,"Chương 26: Tranh luận, Lý lẽ & Quan điểm (議論・主張と見解)",A（事実）。それなのにB（予想外の結果）,A（じじつ）。それなのにB（よそうがいのけっか）,A（じじつ）。それなのにB（よそうがいのけっか）,A（事実）。それなのにB（予想外の結果）,N2
+154,26,"Chương 26: Tranh luận, Lý lẽ & Quan điểm (議論・主張と見解)",A（状況）。それでもB（結果）,A（じょうきょう）。それでもB（けっか）,A（じょうきょう）。それでもB（けっか）,A（状況）。それでもB（結果）,N2
+155,26,"Chương 26: Tranh luận, Lý lẽ & Quan điểm (議論・主張と見解)",「A」「それなら（ば）B」,「A」「それなら（ば）B」,「A」「それなら（ば）B」,「A」「それなら（ば）B」,N2
+156,27,"Chương 27: Rắc rối, Thất bại & Khắc phục (トラブル・失敗と克服)",A（理由）。それでB（結果）,A（りゆう）。それでB（けっか）,A（りゆう）。それでB（けっか）,A（理由）。それでB（結果）,N2
+157,27,"Chương 27: Rắc rối, Thất bại & Khắc phục (トラブル・失敗と克服)",「A」「それがB」,「A」「それがB」,「A」「それがB」,「A」「それがB」,N2
+158,27,"Chương 27: Rắc rối, Thất bại & Khắc phục (トラブル・失敗と克服)",A（予定）。それがB（Aと異なる結果）,A（よてい）。それがB（Aと異なるけっか）,A（よてい）。それがB（Aと異なるけっか）,A（予定）。それがB（Aと異なる結果）,N2
+159,27,"Chương 27: Rắc rối, Thất bại & Khắc phục (トラブル・失敗と克服)",A（事情の説明）。そこでB（提案）,A（じじょうのせつめい）。そこでB（ていあん）,A（じじょうのせつめい）。そこでB（ていあん）,A（事情の説明）。そこでB（提案）,N2
+160,27,"Chương 27: Rắc rối, Thất bại & Khắc phục (トラブル・失敗と克服)",A。そういえばB,A。そういえばB,A。そういえばB,Văn bản / Câu A. + A。そういえばB,N2
+161,28,"Chương 28: Khen ngợi, Động viên & Trách móc (称賛・励ましと批判)",A。それはそうとB,A。それはそうとB,A。それはそうとB,Văn bản / Câu A. + A。それはそうとB,N2
+162,28,"Chương 28: Khen ngợi, Động viên & Trách móc (称賛・励ましと批判)",AすなわちA’,AすなわちA’,AすなわちA’,Văn bản / Câu A. + AすなわちA’,N2
+163,28,"Chương 28: Khen ngợi, Động viên & Trách móc (称賛・励ましと批判)",AあるいはB,AあるいはB,AあるいはB,Văn bản / Câu A. + AあるいはB,N2
+164,28,"Chương 28: Khen ngợi, Động viên & Trách móc (称賛・励ましと批判)",A。だがB,A。だがB,A。だがB,Văn bản / Câu A. + A。だがB,N2
+165,28,"Chương 28: Khen ngợi, Động viên & Trách móc (称賛・励ましと批判)",A。だってB,A。だってB,A。だってB,Văn bản / Câu A. + A。だってB,N2
+166,29,"Chương 29: Mong ước, Hy vọng & Tương lai (希望・将来と夢)",A。ということはB,A。ということはB,A。ということはB,Văn bản / Câu A. + A。ということはB,N2
+167,29,"Chương 29: Mong ước, Hy vọng & Tương lai (希望・将来と夢)",A。というのはB,A。というのはB,A。というのはB,Văn bản / Câu A. + A。というのはB,N2
+168,29,"Chương 29: Mong ước, Hy vọng & Tương lai (希望・将来と夢)",A。したがってB,A。したがってB,A。したがってB,Văn bản / Câu A. + A。したがってB,N2
+169,29,"Chương 29: Mong ước, Hy vọng & Tương lai (希望・将来と夢)",A。ただしB,A。ただしB,A。ただしB,Văn bản / Câu A. + A。ただしB,N2
+170,29,"Chương 29: Mong ước, Hy vọng & Tương lai (希望・将来と夢)",A。もっともB,A。もっともB,A。もっともB,Văn bản / Câu A. + A。もっともB,N2
+171,30,"Chương 30: Trưởng thành, Thành công & Đúc kết (成長・成功と総括)",A。なおB,A。なおB,A。なおB,Văn bản / Câu A. + A。なおB,N2
+172,30,"Chương 30: Trưởng thành, Thành công & Đúc kết (成長・成功と総括)",A。さてB,A。さてB,A。さてB,Văn bản / Câu A. + A。さてB,N2
+173,30,"Chương 30: Trưởng thành, Thành công & Đúc kết (成長・成功と総括)",A。するとB,A。するとB,A。するとB,Văn bản / Câu A. + A。するとB,N2
+174,30,"Chương 30: Trưởng thành, Thành công & Đúc kết (成長・成功と総括)",A。要するにA’,A。ようするにA’,A。ようするにA’,Văn bản / Câu A. + A。要するにA’,N2
+175,30,"Chương 30: Trưởng thành, Thành công & Đúc kết (成長・成功と総括)",（Nは）A。しかもB,（Nは）A。しかもB,（Nは）A。しかもB,Văn bản / Câu A. + （Nは）A。しかもB,N2

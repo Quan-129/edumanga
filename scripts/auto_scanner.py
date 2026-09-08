@@ -112,17 +112,30 @@ def extract_bubbles_from_item(item):
         })
     return bubbles
 
-# Discover all subject directories in workspace
+# Discover all subject directories in workspace (including add-manga subfolders)
 def discover_subject_directories():
     subjects = []
+    
+    # 1. Standard Root Folders
     for entry in os.scandir(BASE_DIR):
         if entry.is_dir():
-            # Match folders like '1. Nhập môn trí tuệ nhân tạo' or '2. Tư tưởng...' or custom named folders
-            # Exclude system folders
-            if entry.name in [".git", ".agents", "assets", "css", "data", "js", "scripts", "docs", "brain"]:
+            if entry.name in [".git", ".agents", "assets", "css", "data", "js", "scripts", "docs", "brain", "vocab"]:
                 continue
             
-            # Check if directory contains .json / .pdf files or a '1. Manga' subfolder
+            # Handle add-manga folder specifically
+            if entry.name == "add-manga":
+                for sub in os.scandir(entry.path):
+                    if sub.is_dir():
+                        slug = slugify(sub.name)
+                        subjects.append({
+                            "folder_name": f"add-manga/{sub.name}",
+                            "folder_path": sub.path,
+                            "order": 50,
+                            "title": sub.name.strip(),
+                            "slug": slug
+                        })
+                continue
+            
             match = re.match(r'^(\d+)\.\s*(.+)$', entry.name)
             if match:
                 order_num = int(match.group(1))
@@ -368,24 +381,42 @@ def run_auto_sync():
             else:
                 series_cover_rel = "assets/covers/n2_cover.jpg"
 
-        # Add to catalog
-        manga_catalog.append({
-            "id": series_slug,
-            "title": subj["title"],
-            "folder": subj["folder_name"],
-            "category": cat_info["category"],
-            "categoryKey": cat_info["categoryKey"],
-            "badge": cat_info["badge"],
-            "status": "Đang phát hành",
-            "author": series_author,
-            "rating": 5.0 if "hồ chí minh" in subj["title"].lower() else 4.9,
-            "views": f"{10 + subj['order'] * 5}.2K",
-            "likes": f"{1 + subj['order'] * 0.8:.1f}K",
-            "description": f"Bộ truyện tranh học tập & chuyên đề kiến thức {subj['title']}. Toàn bộ hình ảnh, dàn nhân vật và bong bóng thoại được tự động cập nhật từ hệ thống kịch bản.",
-            "cover": series_cover_rel,
-            "characters": series_characters,
-            "chapters": series_chapters
-        })
+        # Check if series already exists in catalog (e.g. from 3. N2 and add-manga/N2)
+        existing_series = next((m for m in manga_catalog if m["id"] == series_slug), None)
+        
+        if existing_series:
+            # Merge chapters
+            for new_ch in series_chapters:
+                ch_idx = next((i for i, c in enumerate(existing_series["chapters"]) if c["id"] == new_ch["id"]), -1)
+                if ch_idx >= 0:
+                    existing_series["chapters"][ch_idx] = new_ch
+                else:
+                    existing_series["chapters"].append(new_ch)
+            existing_series["chapters"].sort(key=lambda c: natural_sort_key(c["id"]))
+            
+            # Merge characters
+            for new_char in series_characters:
+                if not any(c["name"] == new_char["name"] for c in existing_series["characters"]):
+                    existing_series["characters"].append(new_char)
+        else:
+            # Add new series to catalog
+            manga_catalog.append({
+                "id": series_slug,
+                "title": subj["title"],
+                "folder": subj["folder_name"],
+                "category": cat_info["category"],
+                "categoryKey": cat_info["categoryKey"],
+                "badge": cat_info["badge"],
+                "status": "Đang phát hành",
+                "author": series_author,
+                "rating": 5.0 if "hồ chí minh" in subj["title"].lower() else 4.9,
+                "views": f"{10 + subj['order'] * 5}.2K",
+                "likes": f"{1 + subj['order'] * 0.8:.1f}K",
+                "description": f"Bộ truyện tranh học tập & chuyên đề kiến thức {subj['title']}. Toàn bộ hình ảnh, dàn nhân vật và bong bóng thoại được tự động cập nhật từ hệ thống kịch bản.",
+                "cover": series_cover_rel,
+                "characters": series_characters,
+                "chapters": series_chapters
+            })
 
     # Save cache registry
     save_cache(cache_registry)
