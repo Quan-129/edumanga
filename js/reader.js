@@ -103,8 +103,18 @@ async function loadChapterData(seriesId, chapId, initialPage = 0) {
       return;
     }
 
-    totalPages = currentChapter.pages.length;
-    currentPageIndex = Math.max(0, Math.min(initialPage, totalPages - 1));
+    // If pages are missing in catalog metadata, fetch full pages array from IndexedDB
+    if (!currentChapter.pages || currentChapter.pages.length === 0) {
+      if (window.dbStorage && typeof window.dbStorage.getChapterPages === 'function') {
+        const idbPages = await window.dbStorage.getChapterPages(seriesId, currentChapter.id);
+        if (idbPages && idbPages.length > 0) {
+          currentChapter.pages = idbPages;
+        }
+      }
+    }
+
+    totalPages = (currentChapter.pages || []).length;
+    currentPageIndex = Math.max(0, Math.min(initialPage, Math.max(0, totalPages - 1)));
 
     updateReaderHeader();
     populateChapterDropdown();

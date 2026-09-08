@@ -1,6 +1,7 @@
 /* ==========================================================================
    EDUMANGA HUB - SERIES DETAIL CONTROLLER
    Character Roster, Chapter List, PDF Downloads, Bookmarks & Admin Chapter Creator
+   Supports IndexedDB for Heavy 50MB+ Chapter JSONs & Base64 Images
    ========================================================================== */
 
 let currentSeries = null;
@@ -9,7 +10,7 @@ let parsedChapterPagesData = null;
 
 document.addEventListener('DOMContentLoaded', async () => {
   const urlParams = new URLSearchParams(window.location.search);
-  currentSeriesId = urlParams.get('id') || 'tu-tuong-hcm';
+  currentSeriesId = urlParams.get('id') || 'tu-tuong-ho-chi-minh';
   await loadSeriesDetail(currentSeriesId);
 
   // Re-render admin buttons when auth state changes
@@ -17,6 +18,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     window.authService.onAuthStateChange(() => {
       if (currentSeries) {
         renderChapterList(currentSeries.chapters || []);
+        renderSeriesInfo(currentSeries);
       }
     });
   }
@@ -24,6 +26,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   window.addEventListener('edumanga:auth_changed', () => {
     if (currentSeries) {
       renderChapterList(currentSeries.chapters || []);
+      renderSeriesInfo(currentSeries);
     }
   });
 });
@@ -75,9 +78,21 @@ async function getFullMangaCatalog() {
 
 function saveCustomCatalogToStorage(catalog) {
   try {
-    localStorage.setItem('edumanga_custom_catalog', JSON.stringify(catalog));
+    // Strip heavy base64 pages from metadata before saving to localStorage to prevent QuotaExceededError
+    const lightCatalog = catalog.map(series => ({
+      ...series,
+      chapters: (series.chapters || []).map(ch => ({
+        id: ch.id,
+        title: ch.title,
+        subtitle: ch.subtitle || '',
+        releaseDate: ch.releaseDate || '',
+        pagesCount: (ch.pages || []).length || ch.pagesCount || 0,
+        pdfUrl: ch.pdfUrl || ''
+      }))
+    }));
+    localStorage.setItem('edumanga_custom_catalog', JSON.stringify(lightCatalog));
   } catch (e) {
-    console.error("Error saving custom catalog:", e);
+    console.error("Error saving custom catalog to localStorage:", e);
   }
 }
 
@@ -198,7 +213,6 @@ function renderChapterList(chapters) {
 
   const isAdmin = window.authService && typeof window.authService.isAdmin === 'function' && window.authService.isAdmin();
 
-  // Update Section Header with Admin Add Button if admin
   if (sectionHeader) {
     sectionHeader.innerHTML = `
       <div>
@@ -261,7 +275,7 @@ function renderChapterList(chapters) {
             <div style="font-weight: 700; font-size: 1.05rem; color: #fff; margin-bottom: 0.25rem;">
               ${escapeHtml(chap.title)}
             </div>
-            <div style="font-size: 0.8rem; color: var(--text-muted); display: flex; gap: 1rem;">
+            <div style="font-size: 0.8rem; color: var(--text-muted); display: flex; gap: 1rem; flex-wrap: wrap;">
               <span><i class="fas fa-file-image"></i> ${pagesCount} trang</span>
               ${chap.releaseDate ? `<span><i class="fas fa-calendar-alt"></i> ${escapeHtml(chap.releaseDate)}</span>` : ''}
               ${chap.subtitle ? `<span><i class="fas fa-info-circle"></i> ${escapeHtml(chap.subtitle)}</span>` : ''}
@@ -286,7 +300,7 @@ function renderChapterList(chapters) {
 }
 
 // --------------------------------------------------------------------------
-// ADMIN ADD CHAPTER ACTIONS
+// ADMIN ADD CHAPTER & JSON NORMALIZATION
 // --------------------------------------------------------------------------
 
 function openAdminAddChapterModal() {
@@ -333,6 +347,62 @@ function handleAdminChapterNumChange(val) {
   }
 }
 
+// Normalize any JSON format (Base64, Overlays, Pages, Bubbles)
+function normalizeUploadedPages(rawJson) {
+  let rawPages = [];
+  let detectedTitle = '';
+  let detectedCharacters = [];
+
+  if (Array.isArray(rawJson)) {
+    rawPages = rawJson;
+  } else if (rawJson && typeof rawJson === 'object') {
+    if (rawJson.name) detectedTitle = rawJson.name;
+    if (rawJson.title) detectedTitle = rawJson.title;
+    if (Array.isArray(rawJson.characters)) detectedCharacters = rawJson.characters;
+    if (Array.isArray(rawJson.pages)) {
+      rawPages = rawJson.pages;
+    } else if (Array.isArray(rawJson.chapters) && rawJson.chapters.length > 0) {
+      rawPages = rawJson.chapters[0].pages || [];
+      if (rawJson.chapters[0].title) detectedTitle = rawJson.chapters[0].title;
+    }
+  }
+
+  // Transform each page into EduManga standard
+  const pages = rawPages.map((p, idx) => {
+    let img = p.imageUrl || p.image || p.url || '';
+    if (!img && p.base64) {
+      img = p.base64.startsWith('data:') ? p.base64 : `data:image/jpeg;base64,${p.base64}`;
+    }
+
+    const rawBubbles = p.bubbles || p.overlays || [];
+    const bubbles = rawBubbles.map((b, bIdx) => ({
+      id: b.id || `b_${idx + 1}_${bIdx + 1}`,
+      text: b.text || b.dialogue || '',
+      x: typeof b.x === 'number' ? b.x : parseFloat(b.x || 20),
+      y: typeof b.y === 'number' ? b.y : parseFloat(b.y || 20),
+      fontSize: b.fontSize || b.size || 14,
+      width: b.width || 35,
+      fontWeight: b.fontWeight || 'bold',
+      fontStyle: b.fontStyle || 'normal',
+      textAlign: b.textAlign || 'center',
+      bubbleType: b.bubbleType || 'normal'
+    }));
+
+    return {
+      pageNumber: p.pageNumber || (idx + 1),
+      imageUrl: img,
+      bubbles: bubbles,
+      dialogue: p.dialogue || ''
+    };
+  });
+
+  return {
+    pages,
+    title: detectedTitle,
+    characters: detectedCharacters
+  };
+}
+
 // Parse & Validate JSON File
 function handleAdminChapterJsonUpload(input) {
   const file = input.files && input.files[0];
@@ -342,38 +412,37 @@ function handleAdminChapterJsonUpload(input) {
   const statusText = document.getElementById('adminJsonStatusText');
   const pagesCountBadge = document.getElementById('adminJsonPagesCount');
   const bubblesCountBadge = document.getElementById('adminJsonBubblesCount');
+  const titleInput = document.getElementById('adminChapterTitle');
 
   const reader = new FileReader();
   reader.onload = (e) => {
     try {
       const jsonContent = JSON.parse(e.target.result);
+      const result = normalizeUploadedPages(jsonContent);
 
-      // Support 2 formats: Object with { pages: [...] } OR Array of pages [...]
-      let pages = [];
-      if (Array.isArray(jsonContent)) {
-        pages = jsonContent;
-      } else if (jsonContent && Array.isArray(jsonContent.pages)) {
-        pages = jsonContent.pages;
-      } else {
-        throw new Error("File JSON không chứa danh sách trang 'pages' hợp lệ!");
+      if (!result.pages || result.pages.length === 0) {
+        throw new Error("File JSON không tìm thấy danh sách trang truyện 'pages' hợp lệ!");
+      }
+
+      parsedChapterPagesData = result.pages;
+
+      // Auto-fill title if available from JSON
+      if (result.title && titleInput && !titleInput.dataset.manualEdited) {
+        titleInput.value = result.title;
       }
 
       // Count total bubbles
       let totalBubbles = 0;
-      pages.forEach(p => {
-        if (p.bubbles && Array.isArray(p.bubbles)) {
-          totalBubbles += p.bubbles.length;
-        }
+      result.pages.forEach(p => {
+        totalBubbles += (p.bubbles || []).length;
       });
 
-      parsedChapterPagesData = pages;
-
       if (statusBox) statusBox.style.display = 'block';
-      if (statusText) statusText.innerHTML = `<b>✓ File JSON hợp lệ:</b> ${escapeHtml(file.name)} (${(file.size / 1024).toFixed(1)} KB)`;
-      if (pagesCountBadge) pagesCountBadge.textContent = `${pages.length} trang tranh`;
+      if (statusText) statusText.innerHTML = `<b>✓ File JSON hợp lệ:</b> ${escapeHtml(file.name)} (${(file.size / (1024 * 1024)).toFixed(2)} MB)`;
+      if (pagesCountBadge) pagesCountBadge.textContent = `${result.pages.length} trang tranh`;
       if (bubblesCountBadge) bubblesCountBadge.textContent = `${totalBubbles} bóng thoại`;
 
-      showToast(`✓ Đã nạp JSON thành công: ${pages.length} trang, ${totalBubbles} bóng thoại!`);
+      showToast(`✓ Đã nạp JSON thành công: ${result.pages.length} trang, ${totalBubbles} bóng thoại!`);
     } catch (err) {
       console.error("JSON parse error:", err);
       parsedChapterPagesData = null;
@@ -388,7 +457,7 @@ function handleAdminChapterJsonUpload(input) {
   reader.readAsText(file, 'utf-8');
 }
 
-// Save Chapter
+// Save Chapter using IndexedDB (handles large multi-MB base64 images seamlessly)
 async function handleAdminSaveChapter(e) {
   e.preventDefault();
   if (!currentSeries) return;
@@ -403,23 +472,31 @@ async function handleAdminSaveChapter(e) {
     return;
   }
 
-  if (!parsedChapterPagesData || parsedChapterPagesData.length === 0) {
+  const pagesToSave = parsedChapterPagesData || [];
+  if (pagesToSave.length === 0) {
     if (!confirm("Chưa có file JSON kịch bản trang tranh. Bạn có muốn tạo chương trống không?")) {
       return;
     }
   }
 
+  showToast("⏳ Đang lưu dữ liệu chương vào IndexedDB...");
+
+  // 1. Save heavy pages to IndexedDB
+  if (window.dbStorage && typeof window.dbStorage.saveChapterPages === 'function') {
+    await window.dbStorage.saveChapterPages(currentSeries.id, chapId, pagesToSave);
+  }
+
+  // 2. Save metadata to custom catalog
   const newChapter = {
     id: chapId,
     title: chapTitle,
     subtitle: chapSubtitle || `Nạp lúc ${new Date().toLocaleDateString('vi-VN')}`,
     releaseDate: new Date().toISOString().slice(0, 10),
-    pagesCount: (parsedChapterPagesData || []).length,
-    pages: parsedChapterPagesData || [],
+    pagesCount: pagesToSave.length,
+    pages: pagesToSave,
     pdfUrl: chapPdf || ''
   };
 
-  // Load custom catalog
   let customCatalog = [];
   try {
     const raw = localStorage.getItem('edumanga_custom_catalog');
@@ -450,7 +527,7 @@ async function handleAdminSaveChapter(e) {
   renderSeriesInfo(currentSeries);
   closeAdminAddChapterModal();
 
-  showToast(`🎉 Đã thêm ${chapTitle} vào bộ truyện!`);
+  showToast(`🎉 Đã xuất bản "${chapTitle}" thành công!`);
 }
 
 // Delete Chapter
@@ -461,6 +538,11 @@ async function adminDeleteChapter(chapterId, event) {
   }
 
   if (!confirm(`⚠️ Bạn có chắc muốn xóa chương "${chapterId}"?`)) return;
+
+  // Delete from IndexedDB
+  if (window.dbStorage && typeof window.dbStorage.deleteChapterPages === 'function') {
+    await window.dbStorage.deleteChapterPages(currentSeries.id, chapterId);
+  }
 
   let customCatalog = [];
   try {
