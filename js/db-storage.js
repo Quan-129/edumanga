@@ -111,6 +111,88 @@ const dbStorage = {
     }
   },
 
+  // Save single custom series (including heavy base64 covers) directly to IndexedDB 'catalog'
+  async saveCustomSeries(series) {
+    if (!series || !series.id) return false;
+    try {
+      const db = await this.getDB();
+      await new Promise((resolve, reject) => {
+        const tx = db.transaction('catalog', 'readwrite');
+        const store = tx.objectStore('catalog');
+        store.put(series);
+        tx.oncomplete = () => resolve(true);
+        tx.onerror = () => {
+          console.error("IndexedDB put catalog error:", tx.error);
+          reject(tx.error);
+        };
+      });
+
+      // Sync to localStorage as lightweight fallback
+      try {
+        let customCatalog = [];
+        const raw = localStorage.getItem('edumanga_custom_catalog');
+        if (raw) customCatalog = JSON.parse(raw);
+        const idx = customCatalog.findIndex(m => m.id === series.id);
+        if (idx >= 0) {
+          customCatalog[idx] = series;
+        } else {
+          customCatalog.push(series);
+        }
+        localStorage.setItem('edumanga_custom_catalog', JSON.stringify(customCatalog));
+      } catch (lsErr) {
+        console.warn("LocalStorage quota full, but series is safely persisted in IndexedDB:", lsErr);
+      }
+      return true;
+    } catch (e) {
+      console.error("Failed to save custom series to IndexedDB:", e);
+      return false;
+    }
+  },
+
+  // Retrieve all custom series from IndexedDB (with LocalStorage fallback)
+  async getAllCustomSeries() {
+    let list = [];
+    try {
+      const db = await this.getDB();
+      list = await new Promise((resolve) => {
+        const tx = db.transaction('catalog', 'readonly');
+        const store = tx.objectStore('catalog');
+        const request = store.getAll();
+        request.onsuccess = () => resolve(request.result || []);
+        request.onerror = () => resolve([]);
+      });
+    } catch (e) {
+      list = [];
+    }
+
+    let lsList = [];
+    try {
+      const raw = localStorage.getItem('edumanga_custom_catalog');
+      if (raw) lsList = JSON.parse(raw);
+    } catch (e) {
+      lsList = [];
+    }
+
+    const merged = new Map();
+    lsList.forEach(item => {
+      if (item && item.id) merged.set(item.id, item);
+    });
+    list.forEach(item => {
+      if (item && item.id) merged.set(item.id, { ...merged.get(item.id), ...item });
+    });
+
+    return Array.from(merged.values());
+  },
+
+  // Delete custom series from IndexedDB
+  async deleteCustomSeries(seriesId) {
+    try {
+      const db = await this.getDB();
+      const tx = db.transaction('catalog', 'readwrite');
+      tx.objectStore('catalog').delete(seriesId);
+    } catch (e) {}
+  },
+
   // Helper: Trigger browser file download for JSON object
   triggerDownloadJson(data, filename) {
     try {
@@ -491,13 +573,8 @@ const dbStorage = {
       deletedChapterKeys = [];
     }
 
-    let customCatalog = [];
-    try {
-      const raw = localStorage.getItem('edumanga_custom_catalog');
-      if (raw) customCatalog = JSON.parse(raw);
-    } catch (e) {
-      customCatalog = [];
-    }
+    // Load custom series from IndexedDB (unlimited quota) + LocalStorage
+    const customCatalog = await this.getAllCustomSeries();
 
     const mergedMap = new Map();
 
@@ -520,7 +597,7 @@ const dbStorage = {
         mergedMap.set(custom.id, {
           ...existing,
           ...custom,
-          chapters: customChaps
+          chapters: (customChaps && customChaps.length > 0) ? customChaps : existing.chapters
         });
       } else {
         mergedMap.set(custom.id, {

@@ -424,15 +424,19 @@ async function handleAdminCreateSeries(e) {
     localStorage.setItem('edumanga_deleted_series_ids', JSON.stringify(deletedSeriesIds));
   } catch (e) {}
 
-  // Remove existing if any, then prepend
-  customCatalog = customCatalog.filter(m => m.id !== id);
-  customCatalog.unshift(newSeries);
-  saveCustomCatalogToStorage(customCatalog);
+  // Save to IndexedDB (unlimited storage for base64 covers) + LocalStorage
+  if (window.dbStorage && typeof window.dbStorage.saveCustomSeries === 'function') {
+    await window.dbStorage.saveCustomSeries(newSeries);
+  } else {
+    customCatalog = customCatalog.filter(m => m.id !== id);
+    customCatalog.unshift(newSeries);
+    saveCustomCatalogToStorage(customCatalog);
+  }
 
-  // Reload and refresh
+  // Refresh data & UI
   await loadMangaCatalog();
   closeAdminAddSeriesModal();
-  showToast(`🎉 Đã tạo bộ truyện "${title}" thành công!`);
+  showToast(`🎉 Đã khởi tạo bộ truyện "${title}" thành công!`);
 
   // Redirect to detail page so admin can immediately add Chapter 1
   setTimeout(() => {
@@ -579,16 +583,20 @@ async function handleAdminSaveEditedSeries(event) {
     chapters: currentInMemory.chapters || []
   };
 
-  if (existingCustomIndex >= 0) {
-    customCatalog[existingCustomIndex] = {
-      ...customCatalog[existingCustomIndex],
-      ...updatedSeries
-    };
+  // Save to IndexedDB (unlimited storage for base64 covers) + LocalStorage
+  if (window.dbStorage && typeof window.dbStorage.saveCustomSeries === 'function') {
+    await window.dbStorage.saveCustomSeries(updatedSeries);
   } else {
-    customCatalog.push(updatedSeries);
+    if (existingCustomIndex >= 0) {
+      customCatalog[existingCustomIndex] = {
+        ...customCatalog[existingCustomIndex],
+        ...updatedSeries
+      };
+    } else {
+      customCatalog.push(updatedSeries);
+    }
+    saveCustomCatalogToStorage(customCatalog);
   }
-
-  saveCustomCatalogToStorage(customCatalog);
 
   // Reload catalog and refresh UI
   await loadMangaCatalog();
@@ -628,6 +636,10 @@ async function adminDeleteSeries(seriesId, event) {
 
   customCatalog = customCatalog.filter(m => m.id !== seriesId);
   saveCustomCatalogToStorage(customCatalog);
+
+  if (window.dbStorage && typeof window.dbStorage.deleteCustomSeries === 'function') {
+    await window.dbStorage.deleteCustomSeries(seriesId);
+  }
 
   // 3. Remove all chapter pages in IndexedDB
   if (series && series.chapters) {

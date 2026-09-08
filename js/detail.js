@@ -504,6 +504,9 @@ async function handleAdminSaveChapter(e) {
   seriesInCustom.chapters = existingChaps;
 
   saveCustomCatalogToStorage(customCatalog);
+  if (window.dbStorage && typeof window.dbStorage.saveCustomSeries === 'function') {
+    await window.dbStorage.saveCustomSeries(seriesInCustom);
+  }
 
   // Update active state
   currentSeries.chapters = existingChaps;
@@ -788,6 +791,9 @@ async function handleAdminSaveEditedSeries(event) {
   }
 
   saveCustomCatalogToStorage(customCatalog);
+  if (window.dbStorage && typeof window.dbStorage.saveCustomSeries === 'function') {
+    await window.dbStorage.saveCustomSeries(updatedSeries);
+  }
 
   currentSeries = updatedSeries;
   renderSeriesInfo(currentSeries);
