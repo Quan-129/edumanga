@@ -28,7 +28,72 @@ let currentTypingState = 'input';
 let lastUserTypedInput = '';
 
 // Session result tracker for 2-way mastery: { [cardId]: { k2r: bool|null, m2k: bool|null } }
+// Persistent across sessions via localStorage
 let sessionWordResults = {};
+
+// Load persistent 2-way results from localStorage
+function loadTwoWayResults() {
+  if (!currentFlashcardChapterKey) return;
+  try {
+    const raw = localStorage.getItem(`edumanga_2way_${currentFlashcardChapterKey}`);
+    if (raw) sessionWordResults = JSON.parse(raw);
+    else sessionWordResults = {};
+  } catch (e) {
+    sessionWordResults = {};
+  }
+}
+
+// Save persistent 2-way results to localStorage
+function saveTwoWayResults() {
+  if (!currentFlashcardChapterKey) return;
+  try {
+    localStorage.setItem(`edumanga_2way_${currentFlashcardChapterKey}`, JSON.stringify(sessionWordResults));
+  } catch (e) {}
+}
+
+// Reset persistent 2-way results (when mastery loop resets)
+function resetTwoWayResults() {
+  sessionWordResults = {};
+  if (!currentFlashcardChapterKey) return;
+  try {
+    localStorage.removeItem(`edumanga_2way_${currentFlashcardChapterKey}`);
+  } catch (e) {}
+}
+
+// Calculate weighted progress for 2-way mode
+// Each vocab card has max 2 points (k2r + m2k)
+// Grammar cards count as 1 point
+// Returns 0-100 percent
+function calcTwoWayProgress() {
+  const list = currentChapterVocabList;
+  if (list.length === 0) return 0;
+
+  let totalPoints = 0;
+  let earnedPoints = 0;
+
+  list.forEach(c => {
+    if (c.type === 'grammar') {
+      totalPoints += 1;
+      if (c.mastered) earnedPoints += 1;
+    } else {
+      totalPoints += 2;
+      const res = sessionWordResults[c.id] || {};
+      if (res.k2r === true) earnedPoints += 1;
+      if (res.m2k === true) earnedPoints += 1;
+    }
+  });
+
+  return totalPoints > 0 ? Math.round((earnedPoints / totalPoints) * 100) : 0;
+}
+
+// Check if all vocab cards have both directions mastered (= ready for loop reset)
+function checkAllTwoWayMastered() {
+  return currentChapterVocabList.every(c => {
+    if (c.type === 'grammar') return c.mastered;
+    const res = sessionWordResults[c.id] || {};
+    return res.k2r === true && res.m2k === true;
+  });
+}
 
 // Mastery Loop & Points System (Khi đạt 100% tiến độ -> Nhận 1 điểm tích lũy & Reset về 0)
 function getMasteryPoints() {
@@ -42,12 +107,12 @@ function getMasteryPoints() {
 }
 
 function checkAndAwardMasteryLoop() {
-  const total = currentChapterVocabList.length;
-  if (total === 0) return false;
-  const masteredCount = currentChapterVocabList.filter(c => c.mastered).length;
+  if (currentChapterVocabList.length === 0) return false;
 
-  // When 100% full progress is reached -> Award 1 point & Reset to 0 for next spaced repetition loop
-  if (masteredCount >= total) {
+  // In 2-way mode: all vocab must have both k2r AND m2k correct to award
+  const allMastered = checkAllTwoWayMastered();
+
+  if (allMastered) {
     const newLoops = getMasteryPoints() + 1;
     try {
       localStorage.setItem(`edumanga_vocab_loops_${currentFlashcardChapterKey}`, newLoops);
@@ -55,8 +120,9 @@ function checkAndAwardMasteryLoop() {
       localStorage.setItem('edumanga_total_mastery_points', totalPoints);
     } catch (e) {}
 
-    // Reset all cards in this chapter to unmastered (0%) for the next loop
+    // Reset all cards & 2-way results for the next spaced repetition loop
     currentChapterVocabList.forEach(c => c.mastered = false);
+    resetTwoWayResults();
     saveCurrentFlashcardsToStorage();
     updateFlashcardBadges();
 
@@ -72,6 +138,7 @@ const flashcardService = {
     currentFlashcardSeriesId = seriesId;
     currentFlashcardChapId = chapId;
     currentFlashcardChapterKey = `${seriesId}_${chapId}`;
+    loadTwoWayResults(); // Load persistent 2-way results for this chapter
 
     // Extract chapter number from chapId (e.g. 'chap-01', 'chuong-02' -> 1, 2)
     let chapterNum = 1;
@@ -327,7 +394,7 @@ const flashcardService = {
 
   // Build 2-way question items from word list
   generatePracticeQuestions(wordList) {
-    sessionWordResults = {};
+    // DO NOT reset sessionWordResults here - they are persistent across sessions!
     const questions = [];
 
     wordList.forEach(c => {
@@ -490,15 +557,21 @@ const flashcardService = {
     const isCorrect = evaluateAnswer(userInput, card, direction);
     const mainCard = currentChapterVocabList.find(c => c.id === originalId);
 
-    // Update session tracker
+    // Update persistent 2-way tracker
     if (!sessionWordResults[originalId]) {
       sessionWordResults[originalId] = { k2r: null, m2k: null };
     }
     if (direction === 'kanji_to_reading') {
-      sessionWordResults[originalId].k2r = isCorrect;
+      // Only update if current is null or false (don't downgrade from true)
+      if (sessionWordResults[originalId].k2r !== true || !isCorrect) {
+        sessionWordResults[originalId].k2r = isCorrect;
+      }
     } else if (direction === 'meaning_to_kanji') {
-      sessionWordResults[originalId].m2k = isCorrect;
+      if (sessionWordResults[originalId].m2k !== true || !isCorrect) {
+        sessionWordResults[originalId].m2k = isCorrect;
+      }
     }
+    saveTwoWayResults();
 
     if (isCorrect) {
       currentTypingState = 'correct';
@@ -516,8 +589,7 @@ const flashcardService = {
       this.speak(card.term);
     } else {
       currentTypingState = 'incorrect';
-      if (mainCard) mainCard.mastered = false;
-      card.mastered = false;
+      // Don't unmaster the card when wrong - just update tracker
       saveCurrentFlashcardsToStorage();
       updateFlashcardBadges();
     }
@@ -537,14 +609,19 @@ const flashcardService = {
       sessionWordResults[originalId] = { k2r: null, m2k: null };
     }
     if (direction === 'kanji_to_reading') {
-      sessionWordResults[originalId].k2r = false;
+      // Only mark false if not already true (don't downgrade a correct answer)
+      if (sessionWordResults[originalId].k2r !== true) {
+        sessionWordResults[originalId].k2r = false;
+      }
     } else if (direction === 'meaning_to_kanji') {
-      sessionWordResults[originalId].m2k = false;
+      if (sessionWordResults[originalId].m2k !== true) {
+        sessionWordResults[originalId].m2k = false;
+      }
     }
+    saveTwoWayResults();
 
     const mainCard = currentChapterVocabList.find(c => c.id === originalId);
-    if (mainCard) mainCard.mastered = false;
-    card.mastered = false;
+    // Don't unmaster card if it was already mastered from a previous correct answer
     saveCurrentFlashcardsToStorage();
     updateFlashcardBadges();
     this.speak(card.term);
@@ -931,7 +1008,8 @@ function renderFlashcardModalContent() {
 function renderOverviewListView(container) {
   const total = currentChapterVocabList.length;
   const mastered = currentChapterVocabList.filter(c => c.mastered).length;
-  const percent = total > 0 ? Math.round((mastered / total) * 100) : 0;
+  // 2-way weighted progress: counts individual k2r and m2k progress
+  const percent = calcTwoWayProgress();
 
   // Filter Cards
   let filtered = currentChapterVocabList;
