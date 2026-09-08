@@ -166,10 +166,15 @@ function renderMangaGrid(mangaList) {
 
   const cardsHtml = mangaList.map(m => {
     const chapCount = (m.chapters || []).length;
-    const adminDeleteBtn = isAdmin ? `
-      <button type="button" class="btn-admin-del-series" onclick="adminDeleteSeries('${m.id}', event)" title="Xóa bộ truyện này">
-        <i class="fas fa-trash-can"></i>
-      </button>
+    const adminActionsHtml = isAdmin ? `
+      <div class="admin-card-actions">
+        <button type="button" class="btn-admin-card-action btn-admin-edit" onclick="openAdminEditSeriesModal('${m.id}', event)" title="Chỉnh sửa thông tin bộ truyện">
+          <i class="fas fa-pen"></i>
+        </button>
+        <button type="button" class="btn-admin-card-action btn-admin-del" onclick="adminDeleteSeries('${m.id}', event)" title="Xóa bộ truyện này">
+          <i class="fas fa-trash-can"></i>
+        </button>
+      </div>
     ` : '';
 
     return `
@@ -178,7 +183,7 @@ function renderMangaGrid(mangaList) {
           <span class="card-badge">${escapeHtml(m.badge || 'Mới')}</span>
           <span class="card-category">${escapeHtml(m.category)}</span>
           <img class="card-cover" src="${m.cover}" alt="${escapeHtml(m.title)}" loading="lazy" onerror="this.src='assets/covers/n2_cover.jpg'">
-          ${adminDeleteBtn}
+          ${adminActionsHtml}
         </a>
         <div class="card-info">
           <a href="detail.html?id=${m.id}" class="card-title" title="${escapeHtml(m.title)}">${escapeHtml(m.title)}</a>
@@ -435,6 +440,161 @@ async function handleAdminCreateSeries(e) {
   }, 600);
 }
 
+// Open Admin Edit Series Modal
+function openAdminEditSeriesModal(seriesId, event) {
+  if (event) {
+    event.preventDefault();
+    event.stopPropagation();
+  }
+
+  const series = allMangaData.find(m => m.id === seriesId);
+  if (!series) {
+    showToast("⚠️ Không tìm thấy thông tin bộ truyện!");
+    return;
+  }
+
+  document.getElementById('adminEditSeriesOriginalId').value = series.id;
+  document.getElementById('adminEditSeriesTitle').value = series.title || '';
+  document.getElementById('adminEditSeriesId').value = series.id;
+
+  // Set category dropdown
+  const catSelect = document.getElementById('adminEditSeriesCategory');
+  if (catSelect) {
+    let key = (series.categoryKey || '').toLowerCase();
+    if (!key) {
+      const catStr = (series.category || '').toLowerCase();
+      if (catStr.includes('chính trị') || catStr.includes('tư tưởng')) key = 'tthcm';
+      else if (catStr.includes('ngoại ngữ') || catStr.includes('jlpt') || catStr.includes('tiếng nhật')) key = 'n2';
+      else if (catStr.includes('pháp luật') || catStr.includes('luật')) key = 'pldc';
+      else if (catStr.includes('công nghệ') || catStr.includes('ai')) key = 'ai';
+      else key = 'general';
+    }
+    catSelect.value = key;
+  }
+
+  document.getElementById('adminEditSeriesBadge').value = series.badge || '';
+  document.getElementById('adminEditSeriesAuthor').value = series.author || 'TBMQ';
+
+  const statusSelect = document.getElementById('adminEditSeriesStatus');
+  if (statusSelect) {
+    statusSelect.value = series.status || 'Đang phát hành';
+  }
+
+  document.getElementById('adminEditSeriesDesc').value = series.description || '';
+
+  const coverUrlInput = document.getElementById('adminEditSeriesCoverUrl');
+  if (coverUrlInput) {
+    coverUrlInput.value = series.cover || '';
+  }
+
+  const previewBox = document.getElementById('adminEditCoverPreviewBox');
+  const previewImg = document.getElementById('adminEditCoverPreview');
+  if (previewImg && previewBox) {
+    if (series.cover) {
+      previewImg.src = series.cover;
+      previewBox.style.display = 'block';
+    } else {
+      previewBox.style.display = 'none';
+    }
+  }
+
+  const modal = document.getElementById('adminEditSeriesModal');
+  if (modal) modal.classList.add('active');
+}
+
+function closeAdminEditSeriesModal() {
+  const modal = document.getElementById('adminEditSeriesModal');
+  if (modal) modal.classList.remove('active');
+}
+
+function handleAdminEditCoverUpload(input) {
+  if (input.files && input.files[0]) {
+    const file = input.files[0];
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      const dataUrl = e.target.result;
+      const urlInput = document.getElementById('adminEditSeriesCoverUrl');
+      if (urlInput) urlInput.value = dataUrl;
+      const previewBox = document.getElementById('adminEditCoverPreviewBox');
+      const previewImg = document.getElementById('adminEditCoverPreview');
+      if (previewImg && previewBox) {
+        previewImg.src = dataUrl;
+        previewBox.style.display = 'block';
+      }
+    };
+    reader.readAsDataURL(file);
+  }
+}
+
+async function handleAdminSaveEditedSeries(event) {
+  if (event) event.preventDefault();
+
+  const originalId = document.getElementById('adminEditSeriesOriginalId').value;
+  const title = document.getElementById('adminEditSeriesTitle').value.trim();
+  const categoryKey = document.getElementById('adminEditSeriesCategory').value;
+  const catMap = {
+    'ai': 'Công nghệ & AI',
+    'tthcm': 'Lý luận chính trị',
+    'n2': 'Ngoại ngữ & JLPT',
+    'pldc': 'Pháp luật & Xã hội',
+    'general': 'Kiến thức chuyên đề'
+  };
+  const category = catMap[categoryKey] || 'Kiến thức chuyên đề';
+  const badge = document.getElementById('adminEditSeriesBadge').value.trim() || 'Mới';
+  const author = document.getElementById('adminEditSeriesAuthor').value.trim() || 'TBMQ';
+  const status = document.getElementById('adminEditSeriesStatus').value || 'Đang phát hành';
+  const desc = document.getElementById('adminEditSeriesDesc').value.trim();
+  const coverUrl = document.getElementById('adminEditSeriesCoverUrl').value.trim() || 'assets/covers/n2_cover.jpg';
+
+  if (!title || !originalId) {
+    showToast("⚠️ Vui lòng nhập đầy đủ tên bộ truyện!");
+    return;
+  }
+
+  let customCatalog = [];
+  try {
+    const raw = localStorage.getItem('edumanga_custom_catalog');
+    if (raw) customCatalog = JSON.parse(raw);
+  } catch (err) {
+    customCatalog = [];
+  }
+
+  const existingCustomIndex = customCatalog.findIndex(m => m.id === originalId);
+  const currentInMemory = allMangaData.find(m => m.id === originalId) || {};
+
+  const updatedSeries = {
+    ...currentInMemory,
+    id: originalId,
+    title: title,
+    folder: title,
+    category: category,
+    categoryKey: categoryKey,
+    badge: badge,
+    status: status,
+    author: author,
+    description: desc,
+    cover: coverUrl,
+    characters: currentInMemory.characters || [],
+    chapters: currentInMemory.chapters || []
+  };
+
+  if (existingCustomIndex >= 0) {
+    customCatalog[existingCustomIndex] = {
+      ...customCatalog[existingCustomIndex],
+      ...updatedSeries
+    };
+  } else {
+    customCatalog.push(updatedSeries);
+  }
+
+  saveCustomCatalogToStorage(customCatalog);
+
+  // Reload catalog and refresh UI
+  await loadMangaCatalog();
+  closeAdminEditSeriesModal();
+  showToast(`🎉 Đã cập nhật bộ truyện "${title}" thành công!`);
+}
+
 // Delete Series (Admin Only)
 async function adminDeleteSeries(seriesId, event) {
   if (event) {
@@ -508,6 +668,10 @@ function showToast(msg) {
 // Global Exports
 window.openAdminAddSeriesModal = openAdminAddSeriesModal;
 window.closeAdminAddSeriesModal = closeAdminAddSeriesModal;
+window.openAdminEditSeriesModal = openAdminEditSeriesModal;
+window.closeAdminEditSeriesModal = closeAdminEditSeriesModal;
+window.handleAdminEditCoverUpload = handleAdminEditCoverUpload;
+window.handleAdminSaveEditedSeries = handleAdminSaveEditedSeries;
 window.handleAdminSeriesTitleInput = handleAdminSeriesTitleInput;
 window.handleAdminSeriesSlugManualEdit = handleAdminSeriesSlugManualEdit;
 window.handleAdminSeriesCoverUpload = handleAdminSeriesCoverUpload;

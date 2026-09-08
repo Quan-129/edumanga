@@ -144,6 +144,96 @@
     </div>
   </div>
 
+  <!-- Admin Edit Series Modal -->
+  <div id="adminEditSeriesModal" class="reader-modal" onclick="closeAdminEditSeriesModal()">
+    <div class="reader-modal-card admin-modal-card" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <div class="modal-title">
+          <i class="fas fa-pen-to-square" style="color: #38bdf8;"></i>
+          <span>Chỉnh Sửa Thông Tin Bộ Truyện</span>
+          <span class="admin-modal-pill">Admin</span>
+        </div>
+        <button type="button" class="btn-icon" onclick="closeAdminEditSeriesModal()"><i class="fas fa-times"></i></button>
+      </div>
+
+      <form id="formAdminEditSeries" class="admin-modal-form" onsubmit="handleAdminSaveEditedSeries(event)">
+        <input type="hidden" id="adminEditSeriesOriginalId">
+
+        <!-- Row 1: Title & ID -->
+        <div class="admin-form-row">
+          <div class="admin-form-group flex-2">
+            <label><i class="fas fa-book"></i> Tên Bộ Truyện <span class="text-danger">*</span></label>
+            <input type="text" id="adminEditSeriesTitle" class="gate-input" placeholder="Tên bộ truyện..." required>
+          </div>
+          <div class="admin-form-group flex-1">
+            <label><i class="fas fa-fingerprint"></i> Mã ID / Slug</label>
+            <input type="text" id="adminEditSeriesId" class="gate-input font-mono" readonly style="opacity: 0.75; cursor: not-allowed;" title="Mã ID không nên thay đổi để giữ liên kết chương">
+          </div>
+        </div>
+
+        <!-- Row 2: Category & Badge & Author & Status -->
+        <div class="admin-form-row">
+          <div class="admin-form-group flex-1">
+            <label><i class="fas fa-tags"></i> Danh Mục Môn Học <span class="text-danger">*</span></label>
+            <select id="adminEditSeriesCategory" class="gate-input">
+              <option value="ai">Công nghệ & AI</option>
+              <option value="tthcm">Lý luận chính trị</option>
+              <option value="n2">Ngoại ngữ & JLPT</option>
+              <option value="pldc">Pháp luật & Xã hội</option>
+              <option value="general">Kiến thức chuyên đề</option>
+            </select>
+          </div>
+          <div class="admin-form-group flex-1">
+            <label><i class="fas fa-award"></i> Huy Hiệu (Badge)</label>
+            <input type="text" id="adminEditSeriesBadge" class="gate-input" placeholder="Mới / Hot / Luyện thi">
+          </div>
+          <div class="admin-form-group flex-1">
+            <label><i class="fas fa-user-pen"></i> Tác Giả / Nhóm Dịch</label>
+            <input type="text" id="adminEditSeriesAuthor" class="gate-input" placeholder="TBMQ / Admin">
+          </div>
+          <div class="admin-form-group flex-1">
+            <label><i class="fas fa-clock"></i> Trạng Thái</label>
+            <select id="adminEditSeriesStatus" class="gate-input">
+              <option value="Đang phát hành">Đang phát hành</option>
+              <option value="Hoàn thành">Hoàn thành</option>
+              <option value="Tạm ngưng">Tạm ngưng</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Row 3: Description -->
+        <div class="admin-form-group">
+          <label><i class="fas fa-align-left"></i> Mô Tả / Tóm Tắt Bộ Truyện</label>
+          <textarea id="adminEditSeriesDesc" class="gate-input admin-textarea" rows="3" placeholder="Tóm tắt nội dung kiến thức, cốt truyện và mục tiêu học tập của bộ truyện..."></textarea>
+        </div>
+
+        <!-- Row 4: Cover Image (File Upload or URL) -->
+        <div class="admin-form-group">
+          <label><i class="fas fa-image"></i> Ảnh Bìa (Cover)</label>
+          <div class="admin-cover-upload-box">
+            <input type="file" id="adminEditSeriesCoverFile" accept="image/*" class="admin-file-hidden" onchange="handleAdminEditCoverUpload(this)">
+            <label for="adminEditSeriesCoverFile" class="btn-admin-file-upload">
+              <i class="fas fa-cloud-arrow-up"></i> <span>Tải ảnh bìa mới</span>
+            </label>
+            <span style="color: var(--text-muted); font-size: 0.85rem;">hoặc dán URL:</span>
+            <input type="text" id="adminEditSeriesCoverUrl" class="gate-input flex-1" placeholder="assets/covers/... hoặc URL ảnh https://...">
+          </div>
+          <div id="adminEditCoverPreviewBox" class="admin-cover-preview-wrapper" style="margin-top: 10px;">
+            <img id="adminEditCoverPreview" src="" alt="Cover Preview" class="admin-cover-preview-img">
+          </div>
+        </div>
+
+        <!-- Modal Actions -->
+        <div class="admin-modal-actions">
+          <button type="button" class="btn-secondary" onclick="closeAdminEditSeriesModal()">Hủy Bỏ</button>
+          <button type="submit" class="btn-primary btn-admin-submit" style="background: linear-gradient(135deg, #0284c7, #6366f1);">
+            <i class="fas fa-check"></i> <span>Lưu Thay Đổi</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
   <!-- Character Detail Modal -->
   <div id="charModal" class="reader-modal" onclick="closeCharModal()">
     <div class="reader-modal-card" onclick="event.stopPropagation()">
