@@ -1,7 +1,9 @@
 /* ==========================================================================
    EDUMANGA HUB - AUTHENTICATION SERVICE & MANDATORY ACCESS GATE
-   Google OAuth, Email/Password Auth & Isolated Multi-Tenant Cloud Storage
+   Google OAuth, Email/Password Auth, Admin Role & Isolated Multi-Tenant Cloud Storage
    ========================================================================== */
+
+const ADMIN_EMAIL = 'minhquan12092005@gmail.com';
 
 let currentUserState = null;
 const authStateListeners = [];
@@ -19,6 +21,13 @@ const authService = {
     }
   },
 
+  // Check if current logged in user has Admin Privileges
+  isAdmin() {
+    if (!currentUserState) return false;
+    const email = (currentUserState.email || '').toLowerCase().trim();
+    return email === ADMIN_EMAIL.toLowerCase();
+  },
+
   // Notify all listeners
   _notifyListeners(user) {
     currentUserState = user;
@@ -32,6 +41,8 @@ const authService = {
       showAuthGate();
     }
 
+    const isAdminUser = this.isAdmin();
+
     authStateListeners.forEach(cb => {
       try {
         cb(user);
@@ -39,6 +50,13 @@ const authService = {
         console.error("Auth state listener error:", err);
       }
     });
+
+    // Dispatch global CustomEvent for UI reactivity
+    try {
+      window.dispatchEvent(new CustomEvent('edumanga:auth_changed', {
+        detail: { user, isAdmin: isAdminUser }
+      }));
+    } catch (e) {}
   },
 
   // Get current user object
@@ -54,17 +72,18 @@ const authService = {
   // 1. Google One-Tap / Popup Sign-In
   async loginWithGoogle() {
     if (!checkIsFirebaseConfigured()) {
-      showGateError("⚙️ Firebase chưa được cấu hình. Vui lòng kiểm tra js/firebase-config.js!");
+      showGateError("⚠️ Firebase chưa được cấu hình. Vui lòng kiểm tra js/firebase-config.js!");
       return { success: false, error: 'Firebase config missing' };
     }
 
     try {
-      showGateLoading(true, "Đang kết nối Google Account...");
+      showGateLoading(true, "Đang kết nối tài khoản Google...");
       hideGateError();
       const result = await firebaseAuth.signInWithPopup(googleAuthProvider);
       const user = result.user;
       
-      showToast(`👋 Chào mừng bạn, ${user.displayName || 'Học viên'}!`);
+      const roleText = (user.email || '').toLowerCase() === ADMIN_EMAIL ? ' (Quản trị viên)' : '';
+      showToast(`👋 Chào mừng bạn, ${user.displayName || 'Học viên'}${roleText}!`);
 
       // Trigger sync migration
       if (window.syncEngine && typeof window.syncEngine.onUserLoggedIn === 'function') {
@@ -91,7 +110,7 @@ const authService = {
   // 2. Email & Password Sign-In
   async loginWithEmail(email, password) {
     if (!checkIsFirebaseConfigured()) {
-      showGateError("⚙️ Firebase chưa được cấu hình. Vui lòng kiểm tra js/firebase-config.js!");
+      showGateError("⚠️ Firebase chưa được cấu hình. Vui lòng kiểm tra js/firebase-config.js!");
       return { success: false, error: 'Firebase config missing' };
     }
 
@@ -101,7 +120,8 @@ const authService = {
       const result = await firebaseAuth.signInWithEmailAndPassword(email.trim(), password);
       const user = result.user;
 
-      showToast(`👋 Chào mừng trở lại, ${user.displayName || user.email}!`);
+      const roleText = (user.email || '').toLowerCase() === ADMIN_EMAIL ? ' (Quản trị viên)' : '';
+      showToast(`👋 Chào mừng trở lại, ${user.displayName || user.email}${roleText}!`);
 
       if (window.syncEngine && typeof window.syncEngine.onUserLoggedIn === 'function') {
         window.syncEngine.onUserLoggedIn(user);
@@ -129,7 +149,7 @@ const authService = {
   // 3. Email & Password Sign-Up
   async registerWithEmail(displayName, email, password) {
     if (!checkIsFirebaseConfigured()) {
-      showGateError("⚙️ Firebase chưa được cấu hình. Vui lòng kiểm tra js/firebase-config.js!");
+      showGateError("⚠️ Firebase chưa được cấu hình. Vui lòng kiểm tra js/firebase-config.js!");
       return { success: false, error: 'Firebase config missing' };
     }
 
@@ -158,10 +178,10 @@ const authService = {
       let errMsg = "Đăng ký thất bại. Vui lòng thử lại!";
       if (error.code === 'auth/email-already-in-use') {
         errMsg = "Email này đã được đăng ký tài khoản trước đó.";
-      } else if (error.code === 'auth/weak-password') {
-        errMsg = "Mật khẩu quá ngắn (Cần tối thiểu 6 ký tự).";
       } else if (error.code === 'auth/invalid-email') {
         errMsg = "Địa chỉ email không hợp lệ.";
+      } else if (error.code === 'auth/weak-password') {
+        errMsg = "Mật khẩu quá yếu. Vui lòng đặt tối thiểu 6 ký tự.";
       }
       showGateError(errMsg);
       showToast(`⚠️ ${errMsg}`);
@@ -171,13 +191,13 @@ const authService = {
     }
   },
 
-  // 4. Sign-Out
+  // 4. Sign Out
   async logout() {
     if (firebaseAuth) {
       try {
         await firebaseAuth.signOut();
-      } catch (e) {
-        console.warn("Sign out error:", e);
+      } catch (err) {
+        console.warn("Sign out error:", err);
       }
     }
     
@@ -435,95 +455,75 @@ function injectAuthGateDOM() {
   document.body.insertAdjacentHTML('beforeend', gateHtml);
 }
 
-// --------------------------------------------------------------------------
-// HEADER PROFILE UI
-// --------------------------------------------------------------------------
-
+// Render User Button in Header
 function renderHeaderAuthUI(user) {
   const container = document.getElementById('headerUserContainer');
   if (!container) return;
 
-  if (user && user.uid) {
-    container.innerHTML = `
-      <div class="user-profile-pill" id="userProfileDropdownBtn" onclick="toggleUserDropdown(event)" title="Tài khoản: ${user.displayName}">
-        <img src="${user.photoURL}" alt="Avatar" class="user-avatar-mini" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=${user.uid}'">
-        <span class="user-name-text">${user.displayName}</span>
-        <span class="sync-cloud-badge" id="headerSyncStatus" title="Dữ liệu đã được đồng bộ đám mây"><i class="fas fa-cloud-check"></i></span>
-        <i class="fas fa-chevron-down pill-arrow"></i>
+  if (user) {
+    const isAdmin = (user.email || '').toLowerCase() === ADMIN_EMAIL.toLowerCase();
+    const adminTag = isAdmin ? `<span class="header-admin-pill" title="Tài khoản Quản Trị Viên"><i class="fas fa-crown"></i> Admin</span>` : '';
 
-        <!-- User Dropdown Menu -->
-        <div id="userDropdownMenu" class="user-dropdown-menu">
-          <div class="dropdown-header">
-            <strong>${user.displayName}</strong>
-            <span class="dropdown-email">${user.email || 'Học viên'}</span>
+    container.innerHTML = `
+      <div class="header-user-dropdown-wrap">
+        <button id="btnHeaderUser" class="header-user-btn" onclick="toggleUserMenu(event)">
+          <img src="${user.photoURL}" alt="${user.displayName}" class="header-avatar" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=edumanga'">
+          <div class="header-user-info-text">
+            <span class="header-user-name">${user.displayName || user.email.split('@')[0]}</span>
+            ${adminTag}
           </div>
-          <div class="dropdown-divider"></div>
-          <button class="dropdown-item" onclick="triggerManualCloudSync(event)">
-            <i class="fas fa-sync-alt" style="color: #38bdf8;"></i> <span>Đồng bộ dữ liệu ngay</span>
+          <i class="fas fa-chevron-down header-user-arrow"></i>
+        </button>
+
+        <div id="headerUserMenu" class="header-user-menu" onclick="event.stopPropagation()">
+          <div class="menu-user-header">
+            <div class="menu-user-name">${user.displayName || 'Học viên'}</div>
+            <div class="menu-user-email">${user.email}</div>
+            ${isAdmin ? `<div class="menu-admin-badge"><i class="fas fa-shield-halved"></i> Toàn quyền Quản Trị</div>` : ''}
+          </div>
+          <div class="menu-divider"></div>
+          <button type="button" class="menu-item-btn" onclick="openBookmarkModal(); toggleUserMenu();">
+            <i class="fas fa-bookmark"></i> <span>Tủ sách cá nhân</span>
           </button>
-          <button class="dropdown-item" onclick="openHelpModal(event)">
-            <i class="fas fa-circle-question" style="color: #a78bfa;"></i> <span>Hướng dẫn & Phím tắt</span>
+          <button type="button" class="menu-item-btn" onclick="openHelpModal(); toggleUserMenu();">
+            <i class="fas fa-circle-question"></i> <span>Hướng dẫn & Phím tắt</span>
           </button>
-          <div class="dropdown-divider"></div>
-          <button class="dropdown-item item-logout" onclick="authService.logout()">
-            <i class="fas fa-right-from-bracket" style="color: #f43f5e;"></i> <span>Đăng xuất</span>
+          <div class="menu-divider"></div>
+          <button type="button" class="menu-item-btn text-danger" onclick="authService.logout()">
+            <i class="fas fa-right-from-bracket"></i> <span>Đăng xuất</span>
           </button>
         </div>
       </div>
     `;
   } else {
     container.innerHTML = `
-      <button class="btn-auth-login" onclick="showAuthGate()" title="Đăng nhập để vào hệ thống">
-        <i class="fas fa-user-circle"></i> <span>Đăng Nhập</span>
+      <button class="btn-primary btn-header-login" onclick="showAuthGate()">
+        <i class="fas fa-right-to-bracket"></i> <span>Đăng Nhập</span>
       </button>
     `;
   }
 }
 
-function toggleUserDropdown(event) {
+function toggleUserMenu(event) {
   if (event) event.stopPropagation();
-  const menu = document.getElementById('userDropdownMenu');
+  const menu = document.getElementById('headerUserMenu');
   if (menu) {
     menu.classList.toggle('active');
   }
 }
 
 // Close dropdown when clicking outside
-document.addEventListener('click', (e) => {
-  const dropdown = document.getElementById('userDropdownMenu');
-  if (dropdown && dropdown.classList.contains('active') && !e.target.closest('#userProfileDropdownBtn')) {
-    dropdown.classList.remove('active');
-  }
+document.addEventListener('click', () => {
+  const menu = document.getElementById('headerUserMenu');
+  if (menu) menu.classList.remove('active');
 });
 
-function triggerManualCloudSync(e) {
-  if (e) e.stopPropagation();
-  if (window.syncEngine && typeof window.syncEngine.forceSyncAll === 'function') {
-    window.syncEngine.forceSyncAll();
-  } else {
-    showToast("☁️ Dữ liệu đang được đồng bộ...");
-  }
-}
-
-// Compatibility helper
-function openAuthModal() {
-  showAuthGate();
-}
-
-function closeAuthModal() {
-  if (authService.isLoggedIn()) {
-    hideAuthGate();
-  }
-}
-
-// Initialize on DOM Ready
+// Auto initialize on DOMContentLoaded
 document.addEventListener('DOMContentLoaded', () => {
-  // Lock body and inject gate immediately
-  document.body.classList.add('auth-locked');
   injectAuthGateDOM();
-  showGateLoading(true, "Đang kiểm tra phiên đăng nhập...");
-
-  setTimeout(() => {
-    setupAuthObserver();
-  }, 100);
+  setupAuthObserver();
 });
+
+// Global Export
+window.authService = authService;
+window.checkIsAdmin = () => authService.isAdmin();

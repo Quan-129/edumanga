@@ -143,6 +143,90 @@
     </div>
   </div>
 
+  
+  <!-- Admin Create Series Modal -->
+  <div id="adminAddSeriesModal" class="reader-modal" onclick="closeAdminAddSeriesModal()">
+    <div class="reader-modal-card admin-modal-card" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <div class="modal-title">
+          <i class="fas fa-crown" style="color: #facc15;"></i>
+          <span>Thêm Bộ Truyện Tranh Mới</span>
+          <span class="admin-modal-pill">Admin</span>
+        </div>
+        <button type="button" class="btn-icon" onclick="closeAdminAddSeriesModal()"><i class="fas fa-times"></i></button>
+      </div>
+
+      <form id="formAdminAddSeries" class="admin-modal-form" onsubmit="handleAdminCreateSeries(event)">
+        <!-- Row 1: Title & ID -->
+        <div class="admin-form-row">
+          <div class="admin-form-group flex-2">
+            <label><i class="fas fa-book"></i> Tên Bộ Truyện <span class="text-danger">*</span></label>
+            <input type="text" id="adminSeriesTitle" class="gate-input" placeholder="Ví dụ: Nhập môn Deep Learning" required oninput="handleAdminSeriesTitleInput(this.value)">
+          </div>
+          <div class="admin-form-group flex-1">
+            <label><i class="fas fa-fingerprint"></i> Mã ID / Slug</label>
+            <input type="text" id="adminSeriesId" class="gate-input font-mono" placeholder="nhap-mon-deep-learning" required onchange="handleAdminSeriesSlugManualEdit()">
+          </div>
+        </div>
+
+        <!-- Row 2: Category & Badge & Author -->
+        <div class="admin-form-row">
+          <div class="admin-form-group flex-1">
+            <label><i class="fas fa-tags"></i> Danh Mục Môn Học <span class="text-danger">*</span></label>
+            <select id="adminSeriesCategory" class="gate-input">
+              <option value="ai">Công nghệ & AI</option>
+              <option value="tthcm">Lý luận chính trị</option>
+              <option value="n2">Ngoại ngữ & JLPT</option>
+              <option value="pldc">Pháp luật & Xã hội</option>
+              <option value="general">Kiến thức chuyên đề</option>
+            </select>
+          </div>
+          <div class="admin-form-group flex-1">
+            <label><i class="fas fa-award"></i> Huy Hiệu (Badge)</label>
+            <input type="text" id="adminSeriesBadge" class="gate-input" placeholder="Mới / Hot / Luyện thi" value="Mới">
+          </div>
+          <div class="admin-form-group flex-1">
+            <label><i class="fas fa-user-pen"></i> Tác Giả / Nhóm Dịch</label>
+            <input type="text" id="adminSeriesAuthor" class="gate-input" placeholder="TBMQ / Admin" value="TBMQ">
+          </div>
+        </div>
+
+        <!-- Row 3: Description -->
+        <div class="admin-form-group">
+          <label><i class="fas fa-align-left"></i> Mô Tả / Tóm Tắt Bộ Truyện</label>
+          <textarea id="adminSeriesDesc" class="gate-input admin-textarea" rows="3" placeholder="Tóm tắt nội dung kiến thức, cốt truyện và mục tiêu học tập của bộ truyện..."></textarea>
+        </div>
+
+        <!-- Row 4: Cover Image (File Upload or URL) -->
+        <div class="admin-form-group">
+          <label><i class="fas fa-image"></i> Ảnh Bìa (Cover)</label>
+          <div class="admin-cover-upload-box">
+            <input type="file" id="adminSeriesCoverFile" accept="image/*" class="admin-file-hidden" onchange="handleAdminSeriesCoverUpload(this)">
+            <label for="adminSeriesCoverFile" class="btn-admin-file-upload">
+              <i class="fas fa-cloud-arrow-up"></i> <span>Tải ảnh bìa từ máy tính</span>
+            </label>
+            <span style="color: var(--text-muted); font-size: 0.85rem;">hoặc dán URL:</span>
+            <input type="text" id="adminSeriesCoverUrl" class="gate-input flex-1" placeholder="assets/covers/your_cover.jpg hoặc link https://...">
+          </div>
+          <div id="adminCoverPreviewBox" class="admin-cover-preview-wrapper" style="display: none; margin-top: 10px;">
+            <img id="adminCoverPreview" src="" alt="Cover Preview" class="admin-cover-preview-img">
+          </div>
+        </div>
+
+        <!-- Modal Actions -->
+        <div class="admin-modal-actions">
+          <button type="button" class="btn-secondary" onclick="closeAdminAddSeriesModal()">Hủy Bỏ</button>
+          <button type="button" class="btn-outline-admin" onclick="adminExportMangaJson()" title="Tải file JSON danh mục truyện về máy">
+            <i class="fas fa-download"></i> <span>Xuất file JSON</span>
+          </button>
+          <button type="submit" class="btn-primary btn-admin-submit">
+            <i class="fas fa-plus"></i> <span>Khởi Tạo & Thêm Chương Ngay</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
   <!-- Site Footer -->
   <footer class="site-footer">
     <div class="container footer-inner">

@@ -27,7 +27,7 @@
         <div id="headerUserContainer"></div>
 
         <a href="index.html" class="nav-link">
-          <i class="fas fa-arrow-left"></i> Trang Chủ
+          <i class="fas fa-arrow-left"></i> Trang Chủủ
         </a>
       </div>
     </div>
@@ -67,6 +67,83 @@
     </div>
   </main>
 
+  
+  <!-- Admin Add Chapter Modal -->
+  <div id="adminAddChapterModal" class="reader-modal" onclick="closeAdminAddChapterModal()">
+    <div class="reader-modal-card admin-modal-card" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <div class="modal-title">
+          <i class="fas fa-file-circle-plus" style="color: #38bdf8;"></i>
+          <span>Thêm Chương Mới (Nạp Kịch Bản JSON)</span>
+          <span class="admin-modal-pill">Admin</span>
+        </div>
+        <button type="button" class="btn-icon" onclick="closeAdminAddChapterModal()"><i class="fas fa-times"></i></button>
+      </div>
+
+      <form id="formAdminAddChapter" class="admin-modal-form" onsubmit="handleAdminSaveChapter(event)">
+        <!-- Row 1: Chapter Number, ID, Title -->
+        <div class="admin-form-row">
+          <div class="admin-form-group" style="width: 100px;">
+            <label><i class="fas fa-hashtag"></i> Số Thứ Tự</label>
+            <input type="number" id="adminChapterNumber" class="gate-input font-bold" min="1" value="1" required onchange="handleAdminChapterNumChange(this.value)">
+          </div>
+          <div class="admin-form-group flex-1">
+            <label><i class="fas fa-fingerprint"></i> Mã ID Chương</label>
+            <input type="text" id="adminChapterId" class="gate-input font-mono" placeholder="chap-01" required>
+          </div>
+          <div class="admin-form-group flex-2">
+            <label><i class="fas fa-heading"></i> Tiêu Đề Chương <span class="text-danger">*</span></label>
+            <input type="text" id="adminChapterTitle" class="gate-input" placeholder="Ví dụ: Chương 1: Khởi nguyên" required>
+          </div>
+        </div>
+
+        <!-- Row 2: Subtitle & PDF -->
+        <div class="admin-form-row">
+          <div class="admin-form-group flex-1">
+            <label><i class="fas fa-info-circle"></i> Phụ Đề / Ghi Chú</label>
+            <input type="text" id="adminChapterSubtitle" class="gate-input" placeholder="Ví dụ: Nạp từ kịch bản AI">
+          </div>
+          <div class="admin-form-group flex-1">
+            <label><i class="fas fa-file-pdf"></i> Đường Dẫn PDF (Nếu có)</label>
+            <input type="text" id="adminChapterPdfUrl" class="gate-input" placeholder="assets/pdf/chap-01.pdf hoặc link online">
+          </div>
+        </div>
+
+        <!-- Row 3: JSON Script File Upload -->
+        <div class="admin-form-group">
+          <label><i class="fas fa-code"></i> File Kịch Bản JSON (Trang tranh & Thoại) <span class="text-danger">*</span></label>
+          <div class="admin-json-dropzone">
+            <input type="file" id="adminChapterJsonFile" accept=".json,application/json" class="admin-file-hidden" onchange="handleAdminChapterJsonUpload(this)">
+            <label for="adminChapterJsonFile" class="admin-dropzone-label">
+              <i class="fas fa-file-import admin-dropzone-icon"></i>
+              <div class="admin-dropzone-text">
+                <strong>Bấm vào đây để chọn File JSON</strong> hoặc kéo thả file vào khung
+              </div>
+              <div class="admin-dropzone-sub">Chấp nhận định dạng JSON chuẩn EduManga ({ pages: [...] } hoặc [ { pageNumber, imageUrl, bubbles... } ])</div>
+            </label>
+          </div>
+
+          <!-- JSON Status & Stats Preview Box -->
+          <div id="adminJsonStatusBox" class="admin-json-status-box" style="display: none;">
+            <div id="adminJsonStatusText" class="status-header-line"></div>
+            <div class="status-badges-row">
+              <span id="adminJsonPagesCount" class="status-badge-pill pages"><i class="fas fa-file-image"></i> 0 trang</span>
+              <span id="adminJsonBubblesCount" class="status-badge-pill bubbles"><i class="fas fa-comment-dots"></i> 0 bóng thoại</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Modal Actions -->
+        <div class="admin-modal-actions">
+          <button type="button" class="btn-secondary" onclick="closeAdminAddChapterModal()">Hủy Bỏ</button>
+          <button type="submit" class="btn-primary btn-admin-submit">
+            <i class="fas fa-cloud-arrow-up"></i> <span>Lưu & Xuất Bản Chương</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
   <!-- Character Detail Modal -->
   <div id="charModal" class="reader-modal" onclick="closeCharModal()">
     <div class="reader-modal-card" onclick="event.stopPropagation()">
@@ -98,7 +175,7 @@
   <footer class="site-footer">
     <div class="container footer-inner">
       <p style="font-size: 0.85rem;">EDUMANGA HUB • Ứng dụng đọc truyện tranh học tập đa nền tảng.</p>
-      <a href="index.html" style="color: var(--accent-primary); font-weight: 600;">← Quay lại Trang Chủ</a>
+      <a href="index.html" style="color: var(--accent-primary); font-weight: 600;">← Quay lại Trang Chủủ</a>
     </div>
   </footer>
 

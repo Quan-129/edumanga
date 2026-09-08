@@ -1,20 +1,89 @@
 /* ==========================================================================
    EDUMANGA HUB - SERIES DETAIL CONTROLLER
-   Character Roster, Chapter List, PDF Downloads, Bookmarks
+   Character Roster, Chapter List, PDF Downloads, Bookmarks & Admin Chapter Creator
    ========================================================================== */
 
 let currentSeries = null;
+let currentSeriesId = '';
+let parsedChapterPagesData = null;
 
 document.addEventListener('DOMContentLoaded', async () => {
   const urlParams = new URLSearchParams(window.location.search);
-  const seriesId = urlParams.get('id') || 'tu-tuong-hcm';
-  await loadSeriesDetail(seriesId);
+  currentSeriesId = urlParams.get('id') || 'tu-tuong-hcm';
+  await loadSeriesDetail(currentSeriesId);
+
+  // Re-render admin buttons when auth state changes
+  if (window.authService && typeof window.authService.onAuthStateChange === 'function') {
+    window.authService.onAuthStateChange(() => {
+      if (currentSeries) {
+        renderChapterList(currentSeries.chapters || []);
+      }
+    });
+  }
+
+  window.addEventListener('edumanga:auth_changed', () => {
+    if (currentSeries) {
+      renderChapterList(currentSeries.chapters || []);
+    }
+  });
 });
+
+// Helper: Get merged manga catalog (Data JSON + Custom Additions from LocalStorage)
+async function getFullMangaCatalog() {
+  let baseCatalog = [];
+  try {
+    const response = await fetch('data/manga.json');
+    if (response.ok) {
+      baseCatalog = await response.json();
+    }
+  } catch (err) {
+    console.warn("Could not fetch data/manga.json:", err);
+  }
+
+  let customCatalog = [];
+  try {
+    const raw = localStorage.getItem('edumanga_custom_catalog');
+    if (raw) customCatalog = JSON.parse(raw);
+  } catch (e) {
+    customCatalog = [];
+  }
+
+  const mergedMap = new Map();
+  baseCatalog.forEach(m => mergedMap.set(m.id, { ...m }));
+
+  customCatalog.forEach(custom => {
+    if (mergedMap.has(custom.id)) {
+      const existing = mergedMap.get(custom.id);
+      const existingChaps = existing.chapters || [];
+      const customChaps = custom.chapters || [];
+      const chapMap = new Map();
+      existingChaps.forEach(c => chapMap.set(c.id, c));
+      customChaps.forEach(c => chapMap.set(c.id, c));
+
+      mergedMap.set(custom.id, {
+        ...existing,
+        ...custom,
+        chapters: Array.from(chapMap.values())
+      });
+    } else {
+      mergedMap.set(custom.id, custom);
+    }
+  });
+
+  return Array.from(mergedMap.values());
+}
+
+function saveCustomCatalogToStorage(catalog) {
+  try {
+    localStorage.setItem('edumanga_custom_catalog', JSON.stringify(catalog));
+  } catch (e) {
+    console.error("Error saving custom catalog:", e);
+  }
+}
 
 async function loadSeriesDetail(seriesId) {
   try {
-    const response = await fetch('data/manga.json');
-    const catalog = await response.json();
+    const catalog = await getFullMangaCatalog();
     currentSeries = catalog.find(m => m.id === seriesId) || catalog[0];
 
     if (!currentSeries) {
@@ -40,6 +109,8 @@ function renderSeriesInfo(s) {
   const headerContainer = document.getElementById('seriesHeader');
   if (!headerContainer) return;
 
+  const isAdmin = window.authService && typeof window.authService.isAdmin === 'function' && window.authService.isAdmin();
+
   headerContainer.innerHTML = `
     <div class="series-hero-card" style="
       background: var(--gradient-card);
@@ -58,37 +129,40 @@ function renderSeriesInfo(s) {
         box-shadow: var(--shadow-neon);
         aspect-ratio: 3/4.2;
       ">
-        <img src="${s.cover}" alt="${s.title}" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.src='assets/covers/n2_cover.jpg'">
+        <img src="${s.cover}" alt="${escapeHtml(s.title)}" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.src='assets/covers/n2_cover.jpg'">
       </div>
       <div class="series-info-main" style="display: flex; flex-direction: column; justify-content: space-between;">
         <div>
-          <div style="display: flex; gap: 0.5rem; margin-bottom: 0.75rem; flex-wrap: wrap;">
-            <span class="card-badge" style="position: static;">${s.badge || 'Manga'}</span>
-            <span class="card-category" style="position: static;">${s.category}</span>
+          <div style="display: flex; gap: 0.5rem; margin-bottom: 0.75rem; flex-wrap: wrap; align-items: center;">
+            <span class="card-badge" style="position: static;">${escapeHtml(s.badge || 'Manga')}</span>
+            <span class="card-category" style="position: static;">${escapeHtml(s.category)}</span>
             <span style="background: rgba(16, 185, 129, 0.2); color: var(--accent-success); font-size: 0.72rem; font-weight: 700; padding: 3px 8px; border-radius: var(--radius-sm); border: 1px solid rgba(16, 185, 129, 0.3);">
-              ${s.status}
+              ${escapeHtml(s.status || 'Đang phát hành')}
             </span>
+            ${isAdmin ? `<span class="header-admin-pill" style="margin-left: auto;"><i class="fas fa-crown"></i> Quản Trị Viên</span>` : ''}
           </div>
-          <h1 style="font-size: 2.2rem; font-weight: 800; margin-bottom: 0.75rem; color: var(--text-highlight);">${s.title}</h1>
-          <div style="display: flex; align-items: center; gap: 1.5rem; color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1.25rem;">
-            <span><i class="fas fa-user-edit" style="color: var(--accent-primary);"></i> Tác giả: <strong>${s.author}</strong></span>
-            <span><i class="fas fa-star" style="color: var(--accent-warning);"></i> <strong>${s.rating}</strong> / 5.0</span>
-            <span><i class="fas fa-eye"></i> ${s.views} lượt xem</span>
-            <span><i class="fas fa-heart" style="color: var(--accent-secondary);"></i> ${s.likes} yêu thích</span>
+          <h1 style="font-size: 2.2rem; font-weight: 900; margin-bottom: 0.75rem; color: #fff;">${escapeHtml(s.title)}</h1>
+          <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; margin-bottom: 1.5rem;">
+            ${escapeHtml(s.description || 'Chưa có mô tả tóm tắt.')}
+          </p>
+          <div style="display: flex; gap: 2rem; color: var(--text-secondary); font-size: 0.9rem;">
+            <div><i class="fas fa-user-edit" style="color: var(--accent-primary);"></i> Tác giả: <strong>${escapeHtml(s.author || 'TBMQ')}</strong></div>
+            <div><i class="fas fa-star" style="color: #facc15;"></i> Đánh giá: <strong>${s.rating || '5.0'} / 5</strong></div>
+            <div><i class="fas fa-layer-group" style="color: #38bdf8;"></i> Số chương: <strong>${(s.chapters || []).length} chương</strong></div>
           </div>
-          <p style="color: var(--text-secondary); line-height: 1.7; font-size: 1rem; margin-bottom: 1.5rem;">${s.description}</p>
         </div>
 
-        <div style="display: flex; gap: 1rem; align-items: center; flex-wrap: wrap;">
-          <a href="reader.html?series=${s.id}&chap=${s.chapters[0]?.id || 'chap-01'}" class="btn-primary" style="padding: 0.9rem 2rem; font-size: 1.05rem;">
-            <i class="fas fa-book-open"></i> Bắt Đầu Đọc (Chương 1)
-          </a>
-          <button id="btnBookmark" class="btn-secondary" onclick="toggleBookmark('${s.id}')">
-            <i class="far fa-bookmark"></i> Lưu Vào Tủ Sách
-          </button>
-          <button class="btn-secondary" onclick="shareSeries('${s.title}')">
-            <i class="fas fa-share-alt"></i> Chia Sẻ
-          </button>
+        <div style="display: flex; gap: 1rem; margin-top: 1.5rem; flex-wrap: wrap;">
+          ${(s.chapters && s.chapters.length > 0) ? `
+            <a href="reader.html?series=${s.id}&chap=${s.chapters[0].id}" class="btn-primary" style="padding: 12px 28px; font-size: 1rem;">
+              <i class="fas fa-book-open"></i> Đọc Từ Chương 1
+            </a>
+          ` : ''}
+          ${isAdmin ? `
+            <button type="button" class="btn-primary" onclick="openAdminAddChapterModal()" style="background: linear-gradient(135deg, #0284c7, #6366f1);">
+              <i class="fas fa-plus"></i> Thêm Chương Mới (JSON)
+            </button>
+          ` : ''}
         </div>
       </div>
     </div>
@@ -96,117 +170,383 @@ function renderSeriesInfo(s) {
 }
 
 function renderCharacterRoster(characters) {
+  const container = document.getElementById('characterGrid');
   const section = document.getElementById('characterSection');
-  const grid = document.getElementById('characterGrid');
-  if (!section || !grid) return;
+  if (!container || !section) return;
 
   if (characters.length === 0) {
     section.style.display = 'none';
     return;
   }
-
   section.style.display = 'block';
-  grid.innerHTML = characters.map(c => `
-    <div class="character-card" onclick="showCharacterModal('${encodeURIComponent(JSON.stringify(c))}')">
-      <div class="char-avatar-wrapper">
-        <img class="char-avatar" src="${c.avatar}" alt="${c.name}" onerror="this.src='assets/characters/ai_bachkhoa.jpg'">
+
+  container.innerHTML = characters.map(c => `
+    <div class="character-card" onclick="openCharModal('${c.id}')" style="cursor: pointer;">
+      <div class="character-avatar-wrapper">
+        <img src="${c.avatar}" alt="${escapeHtml(c.name)}" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=${c.id}'">
       </div>
-      <div class="char-name">${c.name}</div>
-      <div class="char-role">${c.role}</div>
+      <div class="character-name">${escapeHtml(c.name)}</div>
+      <div class="character-role">${escapeHtml(c.role || '')}</div>
     </div>
   `).join('');
 }
 
 function renderChapterList(chapters) {
-  const list = document.getElementById('chapterList');
-  if (!list) return;
+  const container = document.getElementById('chapterList');
+  const sectionHeader = document.querySelector('#chapterSection .section-header');
+  if (!container) return;
+
+  const isAdmin = window.authService && typeof window.authService.isAdmin === 'function' && window.authService.isAdmin();
+
+  // Update Section Header with Admin Add Button if admin
+  if (sectionHeader) {
+    sectionHeader.innerHTML = `
+      <div>
+        <h2 class="section-title">
+          <i class="fas fa-list-ul" style="color: var(--accent-secondary);"></i> Danh Sách Các Chương
+        </h2>
+        <span style="color: var(--text-muted); font-size: 0.85rem;">Hỗ trợ đọc Webtoon mượt mà hoặc tải PDF</span>
+      </div>
+      ${isAdmin ? `
+        <button type="button" class="btn-primary" onclick="openAdminAddChapterModal()" style="padding: 8px 18px; font-size: 0.88rem; background: linear-gradient(135deg, #0284c7, #6366f1);">
+          <i class="fas fa-plus"></i> <span>+ Thêm Chương (Nạp JSON)</span>
+        </button>
+      ` : ''}
+    `;
+  }
 
   if (chapters.length === 0) {
-    list.innerHTML = `
-      <div style="text-align: center; padding: 2rem; color: var(--text-muted);">
-        Chưa có chương nào được xuất bản.
+    container.innerHTML = `
+      <div style="text-align: center; padding: 3rem; background: var(--bg-secondary); border-radius: var(--radius-lg); border: 1px dashed var(--border-color);">
+        <i class="fas fa-book-open" style="font-size: 2.5rem; color: var(--text-muted); margin-bottom: 1rem; display: block;"></i>
+        <p style="color: var(--text-secondary); margin-bottom: 1rem;">Bộ truyện này hiện chưa có chương nào được nạp.</p>
+        ${isAdmin ? `
+          <button type="button" class="btn-primary" onclick="openAdminAddChapterModal()">
+            <i class="fas fa-plus"></i> Nạp Chương 1 (File JSON)
+          </button>
+        ` : ''}
       </div>
     `;
     return;
   }
 
-  list.innerHTML = chapters.map((ch, idx) => `
-    <div class="chapter-item">
-      <div class="chapter-left">
-        <div class="chapter-title">${ch.title}</div>
-        <div class="chapter-subtitle">
-          <span>${ch.subtitle || ''}</span> • 
-          <span><i class="far fa-clock"></i> ${ch.releaseDate}</span> • 
-          <span><i class="far fa-file-image"></i> ${ch.pagesCount || ch.pages?.length || 0} trang</span>
+  container.innerHTML = chapters.map((chap, idx) => {
+    const pagesCount = (chap.pages || []).length || chap.pagesCount || 0;
+    const adminDeleteBtn = isAdmin ? `
+      <button type="button" class="btn-icon text-danger" onclick="adminDeleteChapter('${chap.id}', event)" title="Xóa chương này" style="color: #f87171; width: 36px; height: 36px; border-radius: 50%; background: rgba(239, 68, 68, 0.15);">
+        <i class="fas fa-trash-can"></i>
+      </button>
+    ` : '';
+
+    return `
+      <div class="chapter-item" style="
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: var(--bg-secondary);
+        border: 1px solid var(--border-color);
+        padding: 1.25rem 1.75rem;
+        border-radius: var(--radius-md);
+        margin-bottom: 0.85rem;
+        transition: all 0.2s ease;
+      ">
+        <div style="display: flex; align-items: center; gap: 1.5rem;">
+          <div style="
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: var(--accent-primary);
+            width: 36px;
+          ">#${idx + 1}</div>
+          <div>
+            <div style="font-weight: 700; font-size: 1.05rem; color: #fff; margin-bottom: 0.25rem;">
+              ${escapeHtml(chap.title)}
+            </div>
+            <div style="font-size: 0.8rem; color: var(--text-muted); display: flex; gap: 1rem;">
+              <span><i class="fas fa-file-image"></i> ${pagesCount} trang</span>
+              ${chap.releaseDate ? `<span><i class="fas fa-calendar-alt"></i> ${escapeHtml(chap.releaseDate)}</span>` : ''}
+              ${chap.subtitle ? `<span><i class="fas fa-info-circle"></i> ${escapeHtml(chap.subtitle)}</span>` : ''}
+            </div>
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 0.75rem; align-items: center;">
+          <a href="reader.html?series=${currentSeries.id}&chap=${chap.id}" class="btn-primary" style="padding: 9px 20px; font-size: 0.9rem;">
+            <i class="fas fa-play"></i> Đọc Ngay
+          </a>
+          ${chap.pdfUrl ? `
+            <a href="${chap.pdfUrl}" target="_blank" class="btn-icon" title="Tải file PDF chất lượng cao">
+              <i class="fas fa-file-pdf" style="color: #f43f5e;"></i>
+            </a>
+          ` : ''}
+          ${adminDeleteBtn}
         </div>
       </div>
-      <div class="chapter-actions">
-        ${ch.pdfUrl ? `
-          <a href="${ch.pdfUrl}" target="_blank" class="btn-pdf" title="Tải/Xem bản PDF">
-            <i class="fas fa-file-pdf"></i> Tải PDF
-          </a>
-        ` : ''}
-        <a href="reader.html?series=${currentSeries.id}&chap=${ch.id}" class="btn-read">
-          <i class="fas fa-play"></i> Đọc Ngay
-        </a>
-      </div>
-    </div>
-  `).join('');
+    `;
+  }).join('');
 }
 
-function showCharacterModal(charJsonEncoded) {
-  const c = JSON.parse(decodeURIComponent(charJsonEncoded));
-  const modal = document.getElementById('charModal');
-  const modalContent = document.getElementById('charModalContent');
-  if (!modal || !modalContent) return;
+// --------------------------------------------------------------------------
+// ADMIN ADD CHAPTER ACTIONS
+// --------------------------------------------------------------------------
 
-  modalContent.innerHTML = `
-    <div style="display: flex; gap: 1.5rem; align-items: center; margin-bottom: 1.5rem;">
-      <div style="width: 100px; height: 100px; border-radius: var(--radius-full); overflow: hidden; border: 3px solid var(--accent-primary); flex-shrink: 0;">
-        <img src="${c.avatar}" style="width: 100%; height: 100%; object-fit: cover;">
-      </div>
-      <div>
-        <h3 style="font-size: 1.3rem; margin-bottom: 0.3rem;">${c.name}</h3>
-        <p style="color: var(--accent-tertiary); font-size: 0.85rem; font-weight: 600;">${c.role}</p>
-      </div>
-    </div>
-    <div style="display: flex; flex-direction: column; gap: 0.75rem; color: var(--text-secondary); font-size: 0.95rem;">
-      ${c.appearance ? `<div><strong><i class="fas fa-tshirt"></i> Ngoại hình:</strong> ${c.appearance}</div>` : ''}
-      ${c.clothing ? `<div><strong><i class="fas fa-user-tag"></i> Trang phục:</strong> ${c.clothing}</div>` : ''}
-    </div>
-  `;
+function openAdminAddChapterModal() {
+  const modal = document.getElementById('adminAddChapterModal');
+  if (!modal) return;
   modal.classList.add('active');
+
+  const existingChaps = (currentSeries && currentSeries.chapters) ? currentSeries.chapters : [];
+  const nextNum = existingChaps.length + 1;
+
+  const numInput = document.getElementById('adminChapterNumber');
+  const idInput = document.getElementById('adminChapterId');
+  const titleInput = document.getElementById('adminChapterTitle');
+
+  if (numInput) numInput.value = nextNum;
+  if (idInput) idInput.value = `chap-${String(nextNum).padStart(2, '0')}`;
+  if (titleInput) {
+    titleInput.value = `Chương ${nextNum}`;
+    titleInput.focus();
+  }
+
+  // Reset file input & preview
+  parsedChapterPagesData = null;
+  const statusBox = document.getElementById('adminJsonStatusBox');
+  if (statusBox) statusBox.style.display = 'none';
+  const fileInput = document.getElementById('adminChapterJsonFile');
+  if (fileInput) fileInput.value = '';
 }
 
-function closeCharModal() {
-  const modal = document.getElementById('charModal');
+function closeAdminAddChapterModal() {
+  const modal = document.getElementById('adminAddChapterModal');
   if (modal) modal.classList.remove('active');
 }
 
-function toggleBookmark(seriesId) {
-  const bookmarks = JSON.parse(localStorage.getItem('edumanga_bookmarks') || '[]');
-  const index = bookmarks.indexOf(seriesId);
-  const btn = document.getElementById('btnBookmark');
-
-  if (index > -1) {
-    bookmarks.splice(index, 1);
-    if (btn) btn.innerHTML = '<i class="far fa-bookmark"></i> Lưu Vào Tủ Sách';
-  } else {
-    bookmarks.push(seriesId);
-    if (btn) btn.innerHTML = '<i class="fas fa-bookmark" style="color: var(--accent-primary);"></i> Đã Lưu Tủ Sách';
+function handleAdminChapterNumChange(val) {
+  const num = parseInt(val, 10) || 1;
+  const idInput = document.getElementById('adminChapterId');
+  const titleInput = document.getElementById('adminChapterTitle');
+  if (idInput && !idInput.dataset.manualEdited) {
+    idInput.value = `chap-${String(num).padStart(2, '0')}`;
   }
-  localStorage.setItem('edumanga_bookmarks', JSON.stringify(bookmarks));
-}
-
-function shareSeries(title) {
-  if (navigator.share) {
-    navigator.share({
-      title: title,
-      text: `Đọc truyện tranh ${title} trên EduManga Hub!`,
-      url: window.location.href
-    }).catch(console.error);
-  } else {
-    navigator.clipboard.writeText(window.location.href);
-    alert('Đã sao chép liên kết vào bộ nhớ tạm!');
+  if (titleInput && !titleInput.dataset.manualEdited) {
+    titleInput.value = `Chương ${num}`;
   }
 }
+
+// Parse & Validate JSON File
+function handleAdminChapterJsonUpload(input) {
+  const file = input.files && input.files[0];
+  if (!file) return;
+
+  const statusBox = document.getElementById('adminJsonStatusBox');
+  const statusText = document.getElementById('adminJsonStatusText');
+  const pagesCountBadge = document.getElementById('adminJsonPagesCount');
+  const bubblesCountBadge = document.getElementById('adminJsonBubblesCount');
+
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    try {
+      const jsonContent = JSON.parse(e.target.result);
+
+      // Support 2 formats: Object with { pages: [...] } OR Array of pages [...]
+      let pages = [];
+      if (Array.isArray(jsonContent)) {
+        pages = jsonContent;
+      } else if (jsonContent && Array.isArray(jsonContent.pages)) {
+        pages = jsonContent.pages;
+      } else {
+        throw new Error("File JSON không chứa danh sách trang 'pages' hợp lệ!");
+      }
+
+      // Count total bubbles
+      let totalBubbles = 0;
+      pages.forEach(p => {
+        if (p.bubbles && Array.isArray(p.bubbles)) {
+          totalBubbles += p.bubbles.length;
+        }
+      });
+
+      parsedChapterPagesData = pages;
+
+      if (statusBox) statusBox.style.display = 'block';
+      if (statusText) statusText.innerHTML = `<b>✓ File JSON hợp lệ:</b> ${escapeHtml(file.name)} (${(file.size / 1024).toFixed(1)} KB)`;
+      if (pagesCountBadge) pagesCountBadge.textContent = `${pages.length} trang tranh`;
+      if (bubblesCountBadge) bubblesCountBadge.textContent = `${totalBubbles} bóng thoại`;
+
+      showToast(`✓ Đã nạp JSON thành công: ${pages.length} trang, ${totalBubbles} bóng thoại!`);
+    } catch (err) {
+      console.error("JSON parse error:", err);
+      parsedChapterPagesData = null;
+      if (statusBox) statusBox.style.display = 'block';
+      if (statusText) statusText.innerHTML = `<span style="color: #f87171;">⚠️ Lỗi file JSON: ${escapeHtml(err.message)}</span>`;
+      if (pagesCountBadge) pagesCountBadge.textContent = '0 trang';
+      if (bubblesCountBadge) bubblesCountBadge.textContent = '0 bóng thoại';
+      showToast(`⚠️ File JSON không hợp lệ: ${err.message}`);
+    }
+  };
+
+  reader.readAsText(file, 'utf-8');
+}
+
+// Save Chapter
+async function handleAdminSaveChapter(e) {
+  e.preventDefault();
+  if (!currentSeries) return;
+
+  const chapId = document.getElementById('adminChapterId').value.trim();
+  const chapTitle = document.getElementById('adminChapterTitle').value.trim();
+  const chapSubtitle = document.getElementById('adminChapterSubtitle').value.trim();
+  const chapPdf = document.getElementById('adminChapterPdfUrl').value.trim();
+
+  if (!chapId || !chapTitle) {
+    showToast("⚠️ Vui lòng nhập mã ID và tên chương!");
+    return;
+  }
+
+  if (!parsedChapterPagesData || parsedChapterPagesData.length === 0) {
+    if (!confirm("Chưa có file JSON kịch bản trang tranh. Bạn có muốn tạo chương trống không?")) {
+      return;
+    }
+  }
+
+  const newChapter = {
+    id: chapId,
+    title: chapTitle,
+    subtitle: chapSubtitle || `Nạp lúc ${new Date().toLocaleDateString('vi-VN')}`,
+    releaseDate: new Date().toISOString().slice(0, 10),
+    pagesCount: (parsedChapterPagesData || []).length,
+    pages: parsedChapterPagesData || [],
+    pdfUrl: chapPdf || ''
+  };
+
+  // Load custom catalog
+  let customCatalog = [];
+  try {
+    const raw = localStorage.getItem('edumanga_custom_catalog');
+    if (raw) customCatalog = JSON.parse(raw);
+  } catch (err) {}
+
+  let seriesInCustom = customCatalog.find(m => m.id === currentSeries.id);
+  if (!seriesInCustom) {
+    seriesInCustom = { ...currentSeries, chapters: [...(currentSeries.chapters || [])] };
+    customCatalog.push(seriesInCustom);
+  }
+
+  // Update or append chapter
+  const existingChaps = seriesInCustom.chapters || [];
+  const chapIdx = existingChaps.findIndex(c => c.id === chapId);
+  if (chapIdx >= 0) {
+    existingChaps[chapIdx] = newChapter;
+  } else {
+    existingChaps.push(newChapter);
+  }
+  seriesInCustom.chapters = existingChaps;
+
+  saveCustomCatalogToStorage(customCatalog);
+
+  // Update active state
+  currentSeries.chapters = existingChaps;
+  renderChapterList(currentSeries.chapters);
+  renderSeriesInfo(currentSeries);
+  closeAdminAddChapterModal();
+
+  showToast(`🎉 Đã thêm ${chapTitle} vào bộ truyện!`);
+}
+
+// Delete Chapter
+async function adminDeleteChapter(chapterId, event) {
+  if (event) {
+    event.preventDefault();
+    event.stopPropagation();
+  }
+
+  if (!confirm(`⚠️ Bạn có chắc muốn xóa chương "${chapterId}"?`)) return;
+
+  let customCatalog = [];
+  try {
+    const raw = localStorage.getItem('edumanga_custom_catalog');
+    if (raw) customCatalog = JSON.parse(raw);
+  } catch (err) {}
+
+  let seriesInCustom = customCatalog.find(m => m.id === currentSeries.id);
+  if (!seriesInCustom) {
+    seriesInCustom = { ...currentSeries, chapters: [...(currentSeries.chapters || [])] };
+    customCatalog.push(seriesInCustom);
+  }
+
+  seriesInCustom.chapters = (seriesInCustom.chapters || []).filter(c => c.id !== chapterId);
+  saveCustomCatalogToStorage(customCatalog);
+
+  currentSeries.chapters = seriesInCustom.chapters;
+  renderChapterList(currentSeries.chapters);
+  renderSeriesInfo(currentSeries);
+  showToast(`🗑️ Đã xóa chương "${chapterId}"`);
+}
+
+function openCharModal(charId) {
+  const char = (currentSeries.characters || []).find(c => c.id === charId);
+  if (!char) return;
+
+  const content = document.getElementById('charModalContent');
+  if (!content) return;
+
+  content.innerHTML = `
+    <div style="display: flex; gap: 1.5rem; align-items: center; margin-bottom: 1.5rem;">
+      <div style="width: 80px; height: 80px; border-radius: var(--radius-full); overflow: hidden; border: 2px solid var(--accent-primary);">
+        <img src="${char.avatar}" alt="${escapeHtml(char.name)}" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=${char.id}'">
+      </div>
+      <div>
+        <h3 style="font-size: 1.4rem; font-weight: 800; color: #fff;">${escapeHtml(char.name)}</h3>
+        <div style="color: var(--accent-primary); font-weight: 600; font-size: 0.9rem;">${escapeHtml(char.role || '')}</div>
+      </div>
+    </div>
+
+    <div style="background: var(--bg-tertiary); padding: 1.25rem; border-radius: var(--radius-md); font-size: 0.9rem; line-height: 1.6; color: var(--text-secondary);">
+      <div style="margin-bottom: 0.75rem;"><strong style="color: #fff;">Ngoại hình:</strong> ${escapeHtml(char.appearance || 'Đang cập nhật')}</div>
+      ${char.clothing ? `<div style="margin-bottom: 0.75rem;"><strong style="color: #fff;">Trang phục:</strong> ${escapeHtml(char.clothing)}</div>` : ''}
+      <div><strong style="color: #fff;">Vai trò:</strong> ${escapeHtml(char.role || '')}</div>
+    </div>
+  `;
+
+  document.getElementById('charModal')?.classList.add('active');
+}
+
+function closeCharModal() {
+  document.getElementById('charModal')?.classList.remove('active');
+}
+
+function escapeHtml(str) {
+  if (!str) return '';
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+}
+
+function showToast(msg) {
+  let toast = document.getElementById('appToast');
+  if (!toast) {
+    toast = document.createElement('div');
+    toast.id = 'appToast';
+    toast.className = 'app-toast';
+    document.body.appendChild(toast);
+  }
+  toast.textContent = msg;
+  toast.classList.add('show');
+  clearTimeout(toast._timer);
+  toast._timer = setTimeout(() => {
+    toast.classList.remove('show');
+  }, 2800);
+}
+
+// Global Exports
+window.openAdminAddChapterModal = openAdminAddChapterModal;
+window.closeAdminAddChapterModal = closeAdminAddChapterModal;
+window.handleAdminChapterNumChange = handleAdminChapterNumChange;
+window.handleAdminChapterJsonUpload = handleAdminChapterJsonUpload;
+window.handleAdminSaveChapter = handleAdminSaveChapter;
+window.adminDeleteChapter = adminDeleteChapter;
+window.openCharModal = openCharModal;
+window.closeCharModal = closeCharModal;
