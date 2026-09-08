@@ -1328,12 +1328,12 @@ function renderPracticeModeView(container) {
         ${card.furigana ? `<div class="typing-reading-display">【 ${escapeHtml(card.furigana)} 】</div>` : ''}
 
         <div class="typing-details-card">
-          ${card.hanViet ? `<div class="detail-row"><span class="detail-label">Âm Hán-Việt:</span> <b>${escapeHtml(card.hanViet)}</b></div>` : ''}
+          ${card.hanViet ? `<div class="detail-row"><span class="detail-label">Âm Hán-Việt:</span> <b class="detail-hanviet-val">${escapeHtml(card.hanViet)}</b></div>` : ''}
           <div class="detail-row"><span class="detail-label">Nghĩa tiếng Việt:</span> <span class="detail-meaning">${escapeHtml(card.meaning || 'Chưa có định nghĩa')}</span></div>
           ${card.examJa ? `
             <div class="detail-exam-box">
-              <div class="exam-ja-row">🇯🇵 ${escapeHtml(card.examJa)}</div>
-              ${card.examVi ? `<div class="exam-vi-row">🇻🇳 ${escapeHtml(card.examVi)}</div>` : ''}
+              <div class="exam-ja-row"><span class="exam-tag-badge">JP</span> <span>${escapeHtml(card.examJa)}</span></div>
+              ${card.examVi ? `<div class="exam-vi-row"><span class="exam-tag-badge vi">VN</span> <span>${escapeHtml(card.examVi)}</span></div>` : ''}
             </div>` : ''}
           ${card.context ? `<div class="detail-context"><i>Manga: "${escapeHtml(card.context)}"</i></div>` : ''}
         </div>
@@ -1383,13 +1383,13 @@ function renderPracticeModeView(container) {
         ${card.furigana ? `<div class="typing-reading-display">【 ${escapeHtml(card.furigana)} 】</div>` : ''}
 
         <div class="typing-details-card">
-          ${card.hanViet ? `<div class="detail-row"><span class="detail-label">Âm Hán-Việt:</span> <b>${escapeHtml(card.hanViet)}</b></div>` : ''}
+          ${card.hanViet ? `<div class="detail-row"><span class="detail-label">Âm Hán-Việt:</span> <b class="detail-hanviet-val">${escapeHtml(card.hanViet)}</b></div>` : ''}
           <div class="detail-row"><span class="detail-label">Nghĩa tiếng Việt:</span> <span class="detail-meaning">${escapeHtml(card.meaning || 'Chưa có định nghĩa')}</span></div>
           ${card.romaji ? `<div class="detail-row"><span class="detail-label">Romaji:</span> <span class="text-accent">${escapeHtml(card.romaji)}</span></div>` : ''}
           ${card.examJa ? `
             <div class="detail-exam-box">
-              <div class="exam-ja-row">🇯🇵 ${escapeHtml(card.examJa)}</div>
-              ${card.examVi ? `<div class="exam-vi-row">🇻🇳 ${escapeHtml(card.examVi)}</div>` : ''}
+              <div class="exam-ja-row"><span class="exam-tag-badge">JP</span> <span>${escapeHtml(card.examJa)}</span></div>
+              ${card.examVi ? `<div class="exam-vi-row"><span class="exam-tag-badge vi">VN</span> <span>${escapeHtml(card.examVi)}</span></div>` : ''}
             </div>` : ''}
           ${card.context ? `<div class="detail-context"><i>Manga: "${escapeHtml(card.context)}"</i></div>` : ''}
         </div>
