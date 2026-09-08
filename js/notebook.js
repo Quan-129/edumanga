@@ -993,12 +993,12 @@ function exportFlashcardsAnki() {
   showToast('📥 Đã xuất file thẻ Anki (.txt)!');
 }
 
-// 3D Practice Session Engine
+// 3D Practice Session Engine (Internal to notebook)
 let practiceCards = [];
 let practiceCurrentIdx = 0;
 let isPracticeCardFlipped = false;
 
-function startFlashcardPractice() {
+function startNotebookDeckPractice() {
   if (notebookCards.length === 0) {
     showToast('Chưa có thẻ từ nào để ôn tập! Hãy thêm từ mới từ truyện.');
     return;
@@ -1011,12 +1011,12 @@ function startFlashcardPractice() {
   const overlay = document.getElementById('flashcardPracticeOverlay');
   if (overlay) overlay.style.display = 'flex';
 
-  renderCurrentPracticeCard();
+  renderCurrentNotebookPracticeCard();
 }
 
-function renderCurrentPracticeCard() {
+function renderCurrentNotebookPracticeCard() {
   if (practiceCurrentIdx >= practiceCards.length) {
-    closeFlashcardPractice();
+    closeNotebookDeckPractice();
     showToast('🎉 Chúc mừng bạn đã hoàn thành phiên ôn tập!');
     return;
   }
@@ -1039,19 +1039,19 @@ function renderCurrentPracticeCard() {
   if (flipCard) flipCard.classList.remove('flipped');
 }
 
-function flipPracticeCard() {
+function flipNotebookPracticeCard() {
   isPracticeCardFlipped = !isPracticeCardFlipped;
   const flipCard = document.getElementById('practiceFlipCard');
   if (flipCard) flipCard.classList.toggle('flipped', isPracticeCardFlipped);
 }
 
-function speakCurrentCard(e) {
+function speakCurrentNotebookCard(e) {
   if (e) e.stopPropagation();
   const card = practiceCards[practiceCurrentIdx];
   if (card) speakCardTerm(card.term);
 }
 
-function ratePracticeCard(mastered) {
+function rateNotebookPracticeCard(mastered) {
   const card = practiceCards[practiceCurrentIdx];
   if (card) {
     const mainCard = notebookCards.find(c => c.id === card.id);
@@ -1060,10 +1060,10 @@ function ratePracticeCard(mastered) {
   }
 
   practiceCurrentIdx++;
-  renderCurrentPracticeCard();
+  renderCurrentNotebookPracticeCard();
 }
 
-function closeFlashcardPractice() {
+function closeNotebookDeckPractice() {
   const overlay = document.getElementById('flashcardPracticeOverlay');
   if (overlay) overlay.style.display = 'none';
   renderFlashcardsList();

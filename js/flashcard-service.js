@@ -1,5 +1,5 @@
 /* ==========================================================================
-   EDUMANGA HUB - CHAPTER VOCABULARY & FLASHCARD SERVICE
+   EDUMANGA HUB - CHAPTER VOCABULARY & FLASHCARD SERVICE (V2 - EXPANDED HD)
    Overview List First -> 3D Interactive Flip Card Practice Mode
    ========================================================================== */
 
@@ -83,6 +83,22 @@ const flashcardService = {
     return currentChapterVocabList;
   },
 
+  // Modal Controls
+  openModal() {
+    const modal = document.getElementById('flashcardModal');
+    if (!modal) return;
+    modal.classList.add('active');
+    isPracticeModeActive = false;
+    renderFlashcardModalContent();
+  },
+
+  closeModal() {
+    const modal = document.getElementById('flashcardModal');
+    if (!modal) return;
+    modal.classList.remove('active');
+    isPracticeModeActive = false;
+  },
+
   // Toggle mastered status
   toggleMastered(cardId, event) {
     if (event) event.stopPropagation();
@@ -151,6 +167,108 @@ const flashcardService = {
     updateFlashcardBadges();
     renderFlashcardModalContent();
     showToast(`🗑️ Đã xóa thẻ "${card.term}"`);
+  },
+
+  // Practice Mode Actions
+  startPractice() {
+    if (currentChapterVocabList.length === 0) {
+      showToast("⚠️ Chương này chưa có từ vựng để ôn tập!");
+      return;
+    }
+
+    practiceSessionCards = [...currentChapterVocabList];
+    practiceCurrentIndex = 0;
+    isPracticeFlipped = false;
+    isPracticeModeActive = true;
+    renderFlashcardModalContent();
+  },
+
+  restartUnmastered() {
+    const unmastered = currentChapterVocabList.filter(c => !c.mastered);
+    if (unmastered.length === 0) {
+      this.startPractice();
+      return;
+    }
+    practiceSessionCards = [...unmastered];
+    practiceCurrentIndex = 0;
+    isPracticeFlipped = false;
+    isPracticeModeActive = true;
+    renderFlashcardModalContent();
+  },
+
+  switchToList() {
+    isPracticeModeActive = false;
+    renderFlashcardModalContent();
+  },
+
+  toggleFlip() {
+    isPracticeFlipped = !isPracticeFlipped;
+    const cardEl = document.getElementById('flashcard3dBox');
+    if (cardEl) {
+      cardEl.classList.toggle('is-flipped', isPracticeFlipped);
+    }
+  },
+
+  ratePracticeCard(mastered) {
+    if (practiceCurrentIndex >= practiceSessionCards.length) return;
+    const card = practiceSessionCards[practiceCurrentIndex];
+    if (card) {
+      const mainCard = currentChapterVocabList.find(c => c.id === card.id);
+      if (mainCard) {
+        mainCard.mastered = mastered;
+        saveCurrentFlashcardsToStorage();
+        updateFlashcardBadges();
+      }
+    }
+
+    practiceCurrentIndex++;
+    isPracticeFlipped = false;
+    renderFlashcardModalContent();
+  },
+
+  speakCurrentPractice(e) {
+    if (e) e.stopPropagation();
+    if (practiceCurrentIndex < practiceSessionCards.length) {
+      const card = practiceSessionCards[practiceCurrentIndex];
+      if (card) {
+        this.speak(card.term, e);
+      }
+    }
+  },
+
+  handleFilterChange(query) {
+    flashcardFilterQuery = query || '';
+    renderFlashcardModalContent();
+  },
+
+  promptAddCustom() {
+    const term = prompt("Nhập từ vựng / Kanji chính:");
+    if (!term || !term.trim()) return;
+
+    const furigana = prompt("Cách đọc Furigana / Hiragana (nếu có):") || "";
+    const hanViet = prompt("Âm Hán-Việt (nếu có):") || "";
+    const meaning = prompt("Ý nghĩa / Định nghĩa tiếng Việt:") || "";
+
+    this.addManualCard({
+      term: term.trim(),
+      furigana: furigana.trim(),
+      hanViet: hanViet.trim(),
+      meaning: meaning.trim()
+    });
+  },
+
+  speak(term, event) {
+    if (event) event.stopPropagation();
+    if (!term || !('speechSynthesis' in window)) {
+      showToast('Trình duyệt không hỗ trợ giọng đọc');
+      return;
+    }
+
+    window.speechSynthesis.cancel();
+    const utter = new SpeechSynthesisUtterance(term);
+    utter.lang = /[\u3040-\u309F\u30A0-\u30FF\u4E00-\u9FAF]/.test(term) ? 'ja-JP' : 'vi-VN';
+    utter.rate = 0.88;
+    window.speechSynthesis.speak(utter);
   }
 };
 
@@ -261,24 +379,8 @@ function updateFlashcardBadges() {
 }
 
 // --------------------------------------------------------------------------
-// MODAL CONTROLS & RENDERING (SHOW FULL LIST FIRST -> 3D PRACTICE MODE)
+// MODAL RENDERING (SHOW FULL LIST FIRST -> 3D PRACTICE MODE)
 // --------------------------------------------------------------------------
-
-function openFlashcardModal() {
-  const modal = document.getElementById('flashcardModal');
-  if (!modal) return;
-
-  modal.classList.add('active');
-  isPracticeModeActive = false;
-  renderFlashcardModalContent();
-}
-
-function closeFlashcardModal() {
-  const modal = document.getElementById('flashcardModal');
-  if (!modal) return;
-  modal.classList.remove('active');
-  isPracticeModeActive = false;
-}
 
 function renderFlashcardModalContent() {
   const bodyEl = document.getElementById('flashcardModalBody');
@@ -315,7 +417,7 @@ function renderOverviewListView(container) {
           <div class="empty-icon"><i class="fas fa-layer-group"></i></div>
           <p class="empty-title">Chương này chưa có thẻ từ vựng</p>
           <p class="empty-desc">Bạn có thể thêm từ mới thủ công hoặc đọc tiếp chương khác!</p>
-          <button class="btn-secondary" onclick="promptAddCustomFlashcard()" style="margin-top: 10px; font-size: 0.82rem;">
+          <button class="btn-secondary" onclick="flashcardService.promptAddCustom()" style="margin-top: 10px; font-size: 0.9rem;">
             <i class="fas fa-plus"></i> Thêm từ vựng mới
           </button>
         </div>
@@ -340,7 +442,7 @@ function renderOverviewListView(container) {
               <div class="vocab-item-term-row">
                 <span class="vocab-item-term">${escapeHtml(c.term)}</span>
                 ${c.furigana ? `<span class="vocab-item-furigana">${escapeHtml(c.furigana)}</span>` : ''}
-                <button class="btn-vocab-speaker" onclick="speakVocabTerm('${escapeHtml(c.term)}', event)" title="Nghe phát âm">
+                <button class="btn-vocab-speaker" onclick="flashcardService.speak('${escapeHtml(c.term)}', event)" title="Nghe phát âm">
                   <i class="fas fa-volume-high"></i>
                 </button>
               </div>
@@ -382,7 +484,7 @@ function renderOverviewListView(container) {
           <span class="progress-text">${mastered}/${total} đã thuộc (${percent}%)</span>
         </div>
       </div>
-      <button class="btn-start-practice" onclick="startFlashcardPractice()" ${total === 0 ? 'disabled' : ''}>
+      <button type="button" class="btn-start-practice" onclick="flashcardService.startPractice()" ${total === 0 ? 'disabled' : ''}>
         <i class="fas fa-play"></i>
         <span>Luyện Flashcard (3D)</span>
       </button>
@@ -392,10 +494,10 @@ function renderOverviewListView(container) {
     <div class="vocab-toolbar-row">
       <div class="vocab-search-box">
         <i class="fas fa-search"></i>
-        <input type="text" id="vocabFilterInput" placeholder="Tìm kiếm từ vựng, Hán-Việt, ý nghĩa..." value="${escapeHtml(flashcardFilterQuery)}" oninput="handleVocabFilterChange(this.value)">
-        ${flashcardFilterQuery ? `<button class="btn-clear-search" onclick="handleVocabFilterChange('')"><i class="fas fa-times"></i></button>` : ''}
+        <input type="text" id="vocabFilterInput" placeholder="Tìm kiếm từ vựng, Hán-Việt, ý nghĩa..." value="${escapeHtml(flashcardFilterQuery)}" oninput="flashcardService.handleFilterChange(this.value)">
+        ${flashcardFilterQuery ? `<button class="btn-clear-search" onclick="flashcardService.handleFilterChange('')"><i class="fas fa-times"></i></button>` : ''}
       </div>
-      <button class="btn-add-custom-card" onclick="promptAddCustomFlashcard()" title="Thêm từ vựng mới">
+      <button type="button" class="btn-add-custom-card" onclick="flashcardService.promptAddCustom()" title="Thêm từ vựng mới">
         <i class="fas fa-plus"></i> <span>Thêm từ</span>
       </button>
     </div>
@@ -410,7 +512,7 @@ function renderOverviewListView(container) {
 // VIEW 2: 3D INTERACTIVE FLASHCARD PRACTICE MODE (CHẾ ĐỘ LẬT THẺ 3D)
 function renderPracticeModeView(container) {
   if (practiceSessionCards.length === 0) {
-    switchToListView();
+    flashcardService.switchToList();
     return;
   }
 
@@ -439,14 +541,14 @@ function renderPracticeModeView(container) {
 
         <div class="practice-finish-actions">
           ${(total - mastered > 0) ? `
-            <button class="btn-primary" onclick="restartPracticeUnmasteredOnly()">
+            <button class="btn-primary" onclick="flashcardService.restartUnmastered()">
               <i class="fas fa-rotate-left"></i> Ôn lại ${total - mastered} từ chưa nhớ
             </button>
           ` : ''}
-          <button class="btn-secondary" onclick="startFlashcardPractice()">
+          <button class="btn-secondary" onclick="flashcardService.startPractice()">
             <i class="fas fa-redo"></i> Luyện lại từ đầu
           </button>
-          <button class="btn-secondary" onclick="switchToListView()">
+          <button class="btn-secondary" onclick="flashcardService.switchToList()">
             <i class="fas fa-list-ul"></i> Xem lại danh sách đầy đủ
           </button>
         </div>
@@ -465,23 +567,23 @@ function renderPracticeModeView(container) {
       
       <!-- Practice Subheader -->
       <div class="practice-subheader">
-        <button class="btn-back-to-list" onclick="switchToListView()" title="Quay lại danh sách tổng quan">
-          <i class="fas fa-arrow-left"></i> <span>Danh sách</span>
+        <button class="btn-back-to-list" onclick="flashcardService.switchToList()" title="Quay lại danh sách tổng quan">
+          <i class="fas fa-arrow-left"></i> <span>Quay lại Danh sách</span>
         </button>
         <div class="practice-progress-pill">
           <span>Thẻ ${currentNum} / ${total}</span>
           <div class="practice-mini-bar"><div class="practice-mini-fill" style="width: ${percent}%;"></div></div>
         </div>
-        <button class="btn-icon" onclick="closeFlashcardModal()"><i class="fas fa-times"></i></button>
+        <button class="btn-icon" onclick="flashcardService.closeModal()"><i class="fas fa-times"></i></button>
       </div>
 
       <!-- 3D Flip Card Scene -->
-      <div class="practice-card-scene" onclick="toggleFlipPracticeCard()">
+      <div class="practice-card-scene" onclick="flashcardService.toggleFlip()">
         <div id="flashcard3dBox" class="practice-3d-card ${isPracticeFlipped ? 'is-flipped' : ''}">
           
           <!-- FRONT FACE -->
           <div class="card-face card-face-front">
-            <div class="card-face-hint"><i class="fas fa-hand-pointer"></i> Chạm để lật giải nghĩa (Phím Space)</div>
+            <div class="card-face-hint"><i class="fas fa-hand-pointer"></i> Chạm vào thẻ để lật giải nghĩa (hoặc phím Space)</div>
             
             <div class="card-front-content">
               <div class="card-term-display">${escapeHtml(card.term)}</div>
@@ -489,15 +591,15 @@ function renderPracticeModeView(container) {
             </div>
 
             <div class="card-face-footer">
-              <button class="btn-card-audio-play" onclick="speakCurrentPracticeCard(event)" title="Nghe phát âm">
-                <i class="fas fa-volume-high"></i> <span>Phát âm</span>
+              <button type="button" class="btn-card-audio-play" onclick="flashcardService.speakCurrentPractice(event)" title="Nghe phát âm">
+                <i class="fas fa-volume-high"></i> <span>Nghe phát âm</span>
               </button>
             </div>
           </div>
 
           <!-- BACK FACE -->
           <div class="card-face card-face-back">
-            <div class="card-face-hint"><i class="fas fa-check-circle"></i> Giải nghĩa & Ngữ cảnh</div>
+            <div class="card-face-hint"><i class="fas fa-check-circle"></i> Giải nghĩa chi tiết & Ngữ cảnh</div>
             
             <div class="card-back-content">
               <div class="card-back-term">${escapeHtml(card.term)} ${card.furigana ? `<span class="card-back-furigana">(${escapeHtml(card.furigana)})</span>` : ''}</div>
@@ -507,8 +609,8 @@ function renderPracticeModeView(container) {
             </div>
 
             <div class="card-face-footer">
-              <button class="btn-card-audio-play" onclick="speakCurrentPracticeCard(event)" title="Nghe phát âm">
-                <i class="fas fa-volume-high"></i> <span>Phát âm lại</span>
+              <button type="button" class="btn-card-audio-play" onclick="flashcardService.speakCurrentPractice(event)" title="Nghe phát âm">
+                <i class="fas fa-volume-high"></i> <span>Nghe phát âm lại</span>
               </button>
             </div>
           </div>
@@ -518,129 +620,27 @@ function renderPracticeModeView(container) {
 
       <!-- Footer Rating Controls -->
       <div class="practice-controls-row">
-        <button class="btn-rate-answer btn-rate-forgot" onclick="rateCurrentPracticeCard(false)" title="Chưa nhớ từ này (Phím ← hoặc 1)">
+        <button type="button" class="btn-rate-answer btn-rate-forgot" onclick="flashcardService.ratePracticeCard(false)" title="Chưa nhớ từ này (Phím ← hoặc 1)">
           <i class="fas fa-rotate-left"></i>
           <span>Chưa nhớ</span>
-          <span class="kbd-hint">←</span>
+          <span class="kbd-hint">Phím ←</span>
         </button>
 
-        <button class="btn-rate-flip" onclick="toggleFlipPracticeCard()" title="Lật mặt thẻ (Phím Space)">
+        <button type="button" class="btn-rate-flip" onclick="flashcardService.toggleFlip()" title="Lật mặt thẻ (Phím Space)">
           <i class="fas fa-repeat"></i>
           <span>Lật thẻ</span>
-          <span class="kbd-hint">Space</span>
+          <span class="kbd-hint">Phím Space</span>
         </button>
 
-        <button class="btn-rate-answer btn-rate-remembered" onclick="rateCurrentPracticeCard(true)" title="Đã nhớ từ này (Phím → hoặc 2)">
+        <button type="button" class="btn-rate-answer btn-rate-remembered" onclick="flashcardService.ratePracticeCard(true)" title="Đã nhớ từ này (Phím → hoặc 2)">
           <i class="fas fa-check"></i>
-          <span>Đã nhớ</span>
-          <span class="kbd-hint">→</span>
+          <span>Đã thuộc</span>
+          <span class="kbd-hint">Phím →</span>
         </button>
       </div>
 
     </div>
   `;
-}
-
-// --------------------------------------------------------------------------
-// PRACTICE SESSION ACTIONS
-// --------------------------------------------------------------------------
-
-function startFlashcardPractice() {
-  if (currentChapterVocabList.length === 0) {
-    showToast("⚠️ Chương này chưa có từ vựng để ôn tập!");
-    return;
-  }
-
-  practiceSessionCards = [...currentChapterVocabList];
-  practiceCurrentIndex = 0;
-  isPracticeFlipped = false;
-  isPracticeModeActive = true;
-  renderFlashcardModalContent();
-}
-
-function restartPracticeUnmasteredOnly() {
-  const unmastered = currentChapterVocabList.filter(c => !c.mastered);
-  if (unmastered.length === 0) {
-    startFlashcardPractice();
-    return;
-  }
-  practiceSessionCards = [...unmastered];
-  practiceCurrentIndex = 0;
-  isPracticeFlipped = false;
-  isPracticeModeActive = true;
-  renderFlashcardModalContent();
-}
-
-function switchToListView() {
-  isPracticeModeActive = false;
-  renderFlashcardModalContent();
-}
-
-function toggleFlipPracticeCard() {
-  isPracticeFlipped = !isPracticeFlipped;
-  const cardEl = document.getElementById('flashcard3dBox');
-  if (cardEl) {
-    cardEl.classList.toggle('is-flipped', isPracticeFlipped);
-  }
-}
-
-function speakCurrentPracticeCard(e) {
-  if (e) e.stopPropagation();
-  const card = practiceSessionCards[practiceCurrentIndex];
-  if (card) {
-    speakVocabTerm(card.term, e);
-  }
-}
-
-function rateCurrentPracticeCard(mastered) {
-  const card = practiceSessionCards[practiceCurrentIndex];
-  if (card) {
-    const mainCard = currentChapterVocabList.find(c => c.id === card.id);
-    if (mainCard) {
-      mainCard.mastered = mastered;
-      saveCurrentFlashcardsToStorage();
-      updateFlashcardBadges();
-    }
-  }
-
-  practiceCurrentIndex++;
-  isPracticeFlipped = false;
-  renderFlashcardModalContent();
-}
-
-function handleVocabFilterChange(query) {
-  flashcardFilterQuery = query || '';
-  renderFlashcardModalContent();
-}
-
-function promptAddCustomFlashcard() {
-  const term = prompt("Nhập từ vựng / Kanji chính:");
-  if (!term || !term.trim()) return;
-
-  const furigana = prompt("Cách đọc Furigana / Hiragana (nếu có):") || "";
-  const hanViet = prompt("Âm Hán-Việt (nếu có):") || "";
-  const meaning = prompt("Ý nghĩa / Định nghĩa tiếng Việt:") || "";
-
-  flashcardService.addManualCard({
-    term: term.trim(),
-    furigana: furigana.trim(),
-    hanViet: hanViet.trim(),
-    meaning: meaning.trim()
-  });
-}
-
-function speakVocabTerm(term, event) {
-  if (event) event.stopPropagation();
-  if (!term || !('speechSynthesis' in window)) {
-    showToast('Trình duyệt không hỗ trợ giọng đọc');
-    return;
-  }
-
-  window.speechSynthesis.cancel();
-  const utter = new SpeechSynthesisUtterance(term);
-  utter.lang = /[\u3040-\u309F\u30A0-\u30FF\u4E00-\u9FAF]/.test(term) ? 'ja-JP' : 'vi-VN';
-  utter.rate = 0.88;
-  window.speechSynthesis.speak(utter);
 }
 
 function escapeHtml(str) {
@@ -655,14 +655,14 @@ function escapeHtml(str) {
 
 // Global Export
 window.flashcardService = flashcardService;
-window.openFlashcardModal = openFlashcardModal;
-window.closeFlashcardModal = closeFlashcardModal;
-window.startFlashcardPractice = startFlashcardPractice;
-window.restartPracticeUnmasteredOnly = restartPracticeUnmasteredOnly;
-window.switchToListView = switchToListView;
-window.toggleFlipPracticeCard = toggleFlipPracticeCard;
-window.speakCurrentPracticeCard = speakCurrentPracticeCard;
-window.rateCurrentPracticeCard = rateCurrentPracticeCard;
-window.handleVocabFilterChange = handleVocabFilterChange;
-window.promptAddCustomFlashcard = promptAddCustomFlashcard;
-window.speakVocabTerm = speakVocabTerm;
+window.openFlashcardModal = () => flashcardService.openModal();
+window.closeFlashcardModal = () => flashcardService.closeModal();
+window.startFlashcardPractice = () => flashcardService.startPractice();
+window.restartPracticeUnmasteredOnly = () => flashcardService.restartUnmastered();
+window.switchToListView = () => flashcardService.switchToList();
+window.toggleFlipPracticeCard = () => flashcardService.toggleFlip();
+window.speakCurrentPracticeCard = (e) => flashcardService.speakCurrentPractice(e);
+window.rateCurrentPracticeCard = (mastered) => flashcardService.ratePracticeCard(mastered);
+window.handleVocabFilterChange = (q) => flashcardService.handleFilterChange(q);
+window.promptAddCustomFlashcard = () => flashcardService.promptAddCustom();
+window.speakVocabTerm = (term, e) => flashcardService.speak(term, e);
