@@ -1,0 +1,71 @@
+stt,term,reading,romaji,han_viet,meaning,type,exam_ja,exam_vi,kanji_breakdown,pitch_accent,synonyms_antonyms,card_type
+891,人物,じんぶつ,jinbutsu,Nhân Vật,nhân vật,Danh từ,人物について詳しく調査する。,Nghiên cứu kỹ lưỡng về nhân vật.,人 (Nhân: người/nhân loại) + 物 (Vật: đồ vật/sự vật),[1],連: 人物に関する / 類: nhân vật,vocab
+892,者,もの,mono,Giả,người -  kẻ,Danh từ,者について詳しく調査する。,Nghiên cứu kỹ lưỡng về người.,者 (Giả: người/kẻ),[0],連: 者に関する / 類: người,vocab
+893,各自,かくじ,kakuji,Các Tự,mỗi người,Danh từ,各自について詳しく調査する。,Nghiên cứu kỹ lưỡng về mỗi người.,各 (Các: mỗi/từng cái) + 自 (Tự: bản thân/tự mình),[0],連: 各自に関する / 類: mỗi người,vocab
+894,気分,きぶん,kibun,Khí Phân,tâm trạng -  tinh thần -  cảm xúc,Danh từ,気分について詳しく調査する。,Nghiên cứu kỹ lưỡng về tâm trạng.,気 (Khí: không khí/tâm trạng/khí chất) + 分 (Phân: chia/phần/hiểu),[0],連: 気分に関する / 類: tâm trạng,vocab
+895,気配,けはい,kehai,Khí Phối,cảm giác -  linh cảm,Danh từ,気配について詳しく調査する。,Nghiên cứu kỹ lưỡng về cảm giác.,気 (Khí: không khí/tâm trạng/khí chất) + 配 (Phối: phân phát/phối hợp/lo lắng),[0],連: 気配に関する / 類: cảm giác,vocab
+896,生きがい,いきがい,ikigai,Sinh,mục đích sống -  lẽ sống,Danh từ,生きがいについて詳しく調査する。,Nghiên cứu kỹ lưỡng về mục đích sống.,生 (Sinh: sinh sống/sinh đẻ/sống),[1],連: 生きがいに関する / 類: mục đích sống,vocab
+897,行儀,ぎょうぎ,gyougi,Hành Nghi,tác phong -  cách cư xử,Danh từ,行儀について詳しく調査する。,Nghiên cứu kỹ lưỡng về tác phong.,行 (Hành: đi/tiến hành/hàng lối) + 儀 (Nghi: nghi thức/lễ nghi),[1],連: 行儀に関する / 類: tác phong,vocab
+898,品,ひん,hin,Phẩm,phẩm giá -  mặt hàng -  hàng hóa,Danh từ,品について詳しく調査する。,Nghiên cứu kỹ lưỡng về phẩm giá.,品 (Phẩm: sản phẩm/phẩm chất),[0],連: 品に関する / 類: phẩm giá,vocab
+899,姿,すがた,sugata,Tư,bộ dạng -  bóng dáng -  tư thế,Danh từ,姿について詳しく調査する。,Nghiên cứu kỹ lưỡng về bộ dạng.,姿 (Tư: dáng vẻ/tư thế),[0],連: 姿に関する / 類: bộ dạng,vocab
+900,姿勢,しせい,shisei,Tư Thế,tư thế -  thái độ -  lập trường,Danh từ,姿勢について詳しく調査する。,Nghiên cứu kỹ lưỡng về tư thế.,姿 (Tư: dáng vẻ/tư thế) + 勢 (Thế: thế lực/khí thế),[0],連: 姿勢に関する / 類: tư thế,vocab
+901,見かけ,みかけ,mikake,Kiến,nhìn bề ngoài -  diện mạo,Danh từ,見かけについて詳しく調査する。,Nghiên cứu kỹ lưỡng về nhìn bề ngoài.,見 (Kiến: nhìn/quan sát/gặp),[0],連: 見かけに関する / 類: nhìn bề ngoài,vocab
+902,ふり,ふり,furi,-,giả vờ,Danh từ,ふりについて詳しく調査する。,Nghiên cứu kỹ lưỡng về giả vờ.,-,[0],連: ふりに関する / 類: giả vờ,vocab
+903,苦情,くじょう,kujou,Khổ Tình,phàn nàn -  than phiền -  càu nhàu -  khiếu nại,Danh từ,苦情について詳しく調査する。,Nghiên cứu kỹ lưỡng về phàn nàn.,苦 (Khổ: đau khổ/cay đắng) + 情 (Tình: tình cảm/hoàn cảnh),[1],連: 苦情に関する / 類: phàn nàn,vocab
+904,口実,こうじつ,koujitsu,Khẩu Thực,ngụy biện -  viện cớ -  bào chữa,Danh từ,口実について詳しく調査する。,Nghiên cứu kỹ lưỡng về ngụy biện.,口 (Khẩu: miệng/cửa ngõ) + 実 (Thực: sự thật/thực tế/quả),[1],連: 口実に関する / 類: ngụy biện,vocab
+905,動機,どうき,douki,Động Cơ,động cơ -  nguyên nhân -  lý do,Danh từ,動機について詳しく調査する。,Nghiên cứu kỹ lưỡng về động cơ.,動 (Động: hoạt động/chuyển động) + 機 (Cơ: máy móc/cơ hội),[0],連: 動機に関する / 類: động cơ,vocab
+906,皮肉,ひにく,hiniku,Bì Nhục,giễu cợt -  mỉa mai,Danh từ,皮肉について詳しく調査する。,Nghiên cứu kỹ lưỡng về giễu cợt.,皮 (Bì: da/vỏ bọc) + 肉 (Nhục: thịt/cơ bắp),[0],連: 皮肉に関する / 類: giễu cợt,vocab
+907,意義,いぎ,igi,Ý Nghĩa,ý nghĩa,Danh từ,意義について詳しく調査する。,Nghiên cứu kỹ lưỡng về ý nghĩa.,意 (Ý: ý chí/ý nghĩa) + 義 (Nghĩa: ý nghĩa/chính nghĩa),[0],連: 意義に関する / 類: ý nghĩa,vocab
+908,主義,しゅぎ,shugi,Chủ Nghĩa,nguyên tắc -  niềm tin,Danh từ,主義について詳しく調査する。,Nghiên cứu kỹ lưỡng về nguyên tắc.,主 (Chủ: làm chủ/chủ nhân) + 義 (Nghĩa: ý nghĩa/chính nghĩa),[0],連: 主義に関する / 類: nguyên tắc,vocab
+909,精神,せいしん,seishin,Tinh Thần,tinh thần,Danh từ,精神について詳しく調査する。,Nghiên cứu kỹ lưỡng về tinh thần.,精 (Tinh: tinh hoa/tinh thần/tinh lực) + 神 (Thần: thần thánh/tinh thần),[1],連: 精神に関する / 類: tinh thần,vocab
+910,年代,ねんだい,nendai,Niên Đại,số năm -  thời gian -  thế hệ -  cũ kĩ -  lâu đời,Danh từ,年代について詳しく調査する。,Nghiên cứu kỹ lưỡng về số năm.,年 (Niên: năm/tuổi) + 代 (Đại: thay thế/thời đại),[1],連: 年代に関する / 類: số năm,vocab
+911,世代,せだい,sedai,Thế Đại,thời đại -  thế hệ,Danh từ,世代について詳しく調査する。,Nghiên cứu kỹ lưỡng về thời đại.,世 (Thế: thế giới/đời) + 代 (Đại: thay thế/thời đại),[0],連: 世代に関する / 類: thời đại,vocab
+912,基礎,きそ,kiso,Cơ Sở,cơ bản -  gốc -  nền móng,Danh từ,基礎について詳しく調査する。,Nghiên cứu kỹ lưỡng về cơ bản.,基 (Cơ: cơ bản/nền móng) + 礎 (Sở: nền móng/cơ sở),[0],連: 基礎に関する / 類: cơ bản,vocab
+913,基準,きじゅん,kijun,Cơ Chuẩn,tiêu chí -  quy chuẩn,Danh từ,基準について詳しく調査する。,Nghiên cứu kỹ lưỡng về tiêu chí.,基 (Cơ: cơ bản/nền móng) + 準 (Chuẩn: chuẩn mực/chuẩn bị),[1],連: 基準に関する / 類: tiêu chí,vocab
+914,標準,ひょうじゅん,hyoujun,Tiêu Chuẩn,mặc định -  chuẩn,Danh từ,標準について詳しく調査する。,Nghiên cứu kỹ lưỡng về mặc định.,標 (Tiêu: mục tiêu/tiêu chuẩn) + 準 (Chuẩn: chuẩn mực/chuẩn bị),[1],連: 標準に関する / 類: mặc định,vocab
+915,典型,てんけい,tenkei,Điển Hình,điển hình -  kiểu cách,Danh từ,典型について詳しく調査する。,Nghiên cứu kỹ lưỡng về điển hình.,典 (Điển: kinh điển/điển lễ) + 型 (Hình: khuôn mẫu/kiểu dáng),[1],連: 典型に関する / 類: điển hình,vocab
+916,方言,ほうげん,hougen,Phương Ngôn,tiếng địa phương,Danh từ,方言について詳しく調査する。,Nghiên cứu kỹ lưỡng về tiếng địa phương.,方 (Phương: hướng/cách thức/vị) + 言 (Ngôn: nói/ngôn từ),[1],連: 方言に関する / 類: tiếng địa phương,vocab
+917,分布,ぶんぷ,bunpu,Phân Bố,phân bố -  phân phối,Danh từ,分布について詳しく調査する。,Nghiên cứu kỹ lưỡng về phân bố.,分 (Phân: chia/phần/hiểu) + 布 (Bố: vải vóc/phân bố),[0],連: 分布に関する / 類: phân bố,vocab
+918,発展,はってん,hatten,Phát Triển,phát triển -  dẫn đến -  thành ra,Danh từ,発展について詳しく調査する。,Nghiên cứu kỹ lưỡng về phát triển.,発 (Phát: phát triển/xuất phát) + 展 (Triển: phát triển/triển lãm),[1],連: 発展に関する / 類: phát triển,vocab
+919,文明,ぶんめい,bunmei,Văn Minh,văn minh,Danh từ,文明について詳しく調査する。,Nghiên cứu kỹ lưỡng về văn minh.,文 (Văn: câu văn/văn hóa) + 明 (Minh: sáng sủa/rõ ràng),[1],連: 文明に関する / 類: văn minh,vocab
+920,普及,ふきゅう,fukyuu,Phổ Cập,phổ cập -  phổ biến,Danh từ,普及について詳しく調査する。,Nghiên cứu kỹ lưỡng về phổ cập.,普 (Phổ: phổ biến/rộng khắp) + 及 (Cập: lan tới/đạt tới),[1],連: 普及に関する / 類: phổ cập,vocab
+921,制限,せいげん,seigen,Chế Hạn,hạn chế,Danh từ,制限について詳しく調査する。,Nghiên cứu kỹ lưỡng về hạn chế.,制 (Chế: chế tạo/chế độ) + 限 (Hạn: giới hạn/hạn độ),[1],連: 制限に関する / 類: hạn chế,vocab
+922,限度,げんど,gendo,Hạn Độ,giới hạn -  hạn mức,Danh từ,限度について詳しく調査する。,Nghiên cứu kỹ lưỡng về giới hạn.,限 (Hạn: giới hạn/hạn độ) + 度 (Độ: mức độ/lần),[0],連: 限度に関する / 類: giới hạn,vocab
+923,限界,げんかい,genkai,Hạn Giới,giới hạn,Danh từ,限界について詳しく調査する。,Nghiên cứu kỹ lưỡng về giới hạn.,限 (Hạn: giới hạn/hạn độ) + 界 (Giới: thế giới/ranh giới),[1],連: 限界に関する / 類: giới hạn,vocab
+924,検討,けんとう,kentou,Kiểm Thảo,cân nhắc -  xem xét,Danh từ,検討について詳しく調査する。,Nghiên cứu kỹ lưỡng về cân nhắc.,検 (Kiểm: kiểm tra/xem xét) + 討 (Thảo: thảo luận/chinh phạt),[1],連: 検討に関する / 類: cân nhắc,vocab
+925,選択,せんたく,sentaku,Tuyển Trạch,lựa chọn,Động từ nhóm 1,状況に合わせて適切に選択。,Lựa chọn một cách phù hợp theo tình huống.,選 (Tuyển: lựa chọn/tuyển chọn) + 択 (Trạch: lựa chọn/tuyển chọn),[1],連: 選択に関する / 類: lựa chọn,vocab
+926,考慮,こうりょ,kouryo,Khảo Lự,xem xét -  suy tính,Danh từ,考慮について詳しく調査する。,Nghiên cứu kỹ lưỡng về xem xét.,考 (Khảo: suy nghĩ/khảo sát) + 慮 (Lự: lo nghĩ/suy xét),[1],連: 考慮に関する / 類: xem xét,vocab
+927,重視,じゅうし,juushi,Trọng Thị,xem trọng -  coi trọng,Danh từ,重視について詳しく調査する。,Nghiên cứu kỹ lưỡng về xem trọng.,重 (Trọng: nặng nề/quan trọng/chồng chất) + 視 (Thị: thị giác/nhìn nhận),[1],連: 重視に関する / 類: xem trọng,vocab
+928,見当,けんとう,kentou,Kiến Đương,phỏng đoán -  ước tính,Động từ nhóm 1,状況に合わせて適切に見当。,Phỏng đoán một cách phù hợp theo tình huống.,見 (Kiến: nhìn/quan sát/gặp) + 当 (Đương: chính xác/đảm đương),[1],連: 見当に関する / 類: phỏng đoán,vocab
+929,訂正,ていせい,teisei,Đính Chính,đính chính -  sửa lại,Danh từ,訂正について詳しく調査する。,Nghiên cứu kỹ lưỡng về đính chính.,訂 (Đính: đính chính/sửa lại) + 正 (Chính: đúng đắn/chính xác),[1],連: 訂正に関する / 類: đính chính,vocab
+930,修正,しゅうせい,shuusei,Tu Chính,chỉnh sửa -  khắc phục,Danh từ,修正について詳しく調査する。,Nghiên cứu kỹ lưỡng về chỉnh sửa.,修 (Tu: tu sửa/tu học) + 正 (Chính: đúng đắn/chính xác),[1],連: 修正に関する / 類: chỉnh sửa,vocab
+931,反抗,はんこう,hankou,Phản Kháng,phản kháng -  chống đối,Danh từ,反抗について詳しく調査する。,Nghiên cứu kỹ lưỡng về phản kháng.,反 (Phản: phản đối/ngược lại) + 抗 (Kháng: chống cự/đối kháng),[1],連: 反抗に関する / 類: phản kháng,vocab
+932,抵抗,ていこう,teikou,Đề Kháng,đề kháng -  kháng cự,Danh từ,抵抗について詳しく調査する。,Nghiên cứu kỹ lưỡng về đề kháng.,抵 (Đề: chống cự/đối kháng) + 抗 (Kháng: chống cự/đối kháng),[1],連: 抵抗に関する / 類: đề kháng,vocab
+933,災難,さいなん,sainan,Tai Nan,rủi ro -  đen đủi -  thiên tai,Danh từ,災難について詳しく調査する。,Nghiên cứu kỹ lưỡng về rủi ro.,災 (Tai: tai họa/tai nạn) + 難 (Nan: khó khăn/gian nan),[1],連: 災難に関する / 類: rủi ro,vocab
+934,汚染,おせん,osen,Ô Nhiễm,ô nhiễm,Danh từ,汚染について詳しく調査する。,Nghiên cứu kỹ lưỡng về ô nhiễm.,汚 (Ô: ô nhiễm/dơ bẩn) + 染 (Nhiễm: nhiễm/nhuộm màu),[0],連: 汚染に関する / 類: ô nhiễm,vocab
+935,害,がい,gai,Hại,có hại,Danh từ,害について詳しく調査する。,Nghiên cứu kỹ lưỡng về có hại.,害 (Hại: tác hại/thiệt hại),[0],連: 害に関する / 類: có hại,vocab
+936,伝染,でんせん,densen,Truyền Nhiễm,truyền nhiễm -  lan truyền,Danh từ,伝染について詳しく調査する。,Nghiên cứu kỹ lưỡng về truyền nhiễm.,伝 (Truyền: truyền bá/truyền đạt) + 染 (Nhiễm: nhiễm/nhuộm màu),[1],連: 伝染に関する / 類: truyền nhiễm,vocab
+937,対策,たいさく,taisaku,Đối Sách,biện pháp -  đối sách,Danh từ,対策について詳しく調査する。,Nghiên cứu kỹ lưỡng về biện pháp.,対 (Đối: đối diện/đối lập) + 策 (Sách: sách lược/chính sách),[1],連: 対策に関する / 類: biện pháp,vocab
+938,処置,しょち,shochi,Xử Trí,xử lý -  điều trị,Danh từ,処置について詳しく調査する。,Nghiên cứu kỹ lưỡng về xử lý.,処 (Xử: xử lý/nơi chốn) + 置 (Trí: đặt để/bố trí),[0],連: 処置に関する / 類: xử lý,vocab
+939,処分,しょぶん,shobun,Xử Phân,xử lí -  trừng phạt -  vứt bỏ,Danh từ,処分について詳しく調査する。,Nghiên cứu kỹ lưỡng về xử lí.,処 (Xử: xử lý/nơi chốn) + 分 (Phân: chia/phần/hiểu),[1],連: 処分に関する / 類: xử lí,vocab
+940,処理,しょり,shori,Xử Lý,sơ chế -  xử lý,Danh từ,処理について詳しく調査する。,Nghiên cứu kỹ lưỡng về sơ chế.,処 (Xử: xử lý/nơi chốn) + 理 (Lý: lý do/chân lý/xử lý),[0],連: 処理に関する / 類: sơ chế,vocab
+941,輪,わ,wa,Luân,vòng -  lặp,Danh từ,輪について詳しく調査する。,Nghiên cứu kỹ lưỡng về vòng.,輪 (Luân: bánh xe/vòng tròn),[0],連: 輪に関する / 類: vòng,vocab
+942,でこぼこ,でこぼこ,dekoboko,-,lồi lõm,Danh từ,でこぼこについて詳しく調査する。,Nghiên cứu kỹ lưỡng về lồi lõm.,-,[1],連: でこぼこに関する / 類: lồi lõm,vocab
+943,跡,あと,ato,Tích,dấu vết -  vết tích,Danh từ,跡について詳しく調査する。,Nghiên cứu kỹ lưỡng về dấu vết.,跡 (Tích: dấu vết/vết tích),[0],連: 跡に関する / 類: dấu vết,vocab
+944,手間,てま,tema,Thủ Gian,thời gian -  công sức,Danh từ,手間について詳しく調査する。,Nghiên cứu kỹ lưỡng về thời gian.,手 (Thủ: bàn tay/người làm) + 間 (Gian: khoảng cách/thế gian/thời gian),[0],連: 手間に関する / 類: thời gian,vocab
+945,能率,のうりつ,nouritsu,Năng Suất,hiệu quả -  năng suất,Danh từ,能率について詳しく調査する。,Nghiên cứu kỹ lưỡng về hiệu quả.,能 (Năng: khả năng/tài năng) + 率 (Suất: tỷ lệ/dẫn dắt),[1],連: 能率に関する / 類: hiệu quả,vocab
+946,性能,せいのう,seinou,Tính Năng,hiệu năng -  hiệu suất,Danh từ,性能について詳しく調査する。,Nghiên cứu kỹ lưỡng về hiệu năng.,性 (Tính: tính cách/bản tính) + 能 (Năng: khả năng/tài năng),[1],連: 性能に関する / 類: hiệu năng,vocab
+947,操作,そうさ,sousa,Thao Tác,thao tác -  vận hành,Danh từ,操作について詳しく調査する。,Nghiên cứu kỹ lưỡng về thao tác.,操 (Thao: thao tác/điều khiển) + 作 (Tác: làm/chế tác),[0],連: 操作に関する / 類: thao tác,vocab
+948,発揮,はっき,hakki,Phát Huy,phát huy -  gắng sức,Danh từ,発揮について詳しく調査する。,Nghiên cứu kỹ lưỡng về phát huy.,発 (Phát: phát triển/xuất phát) + 揮 (Huy: chỉ huy/phát huy),[0],連: 発揮に関する / 類: phát huy,vocab
+949,頂点,ちょうてん,chouten,Đỉnh Điểm,đỉnh -  đứng đầu -  đứng top,Danh từ,頂点について詳しく調査する。,Nghiên cứu kỹ lưỡng về đỉnh.,頂 (Đỉnh: đỉnh cao/nhận lấy) + 点 (Điểm: điểm số/chấm điểm/vết),[1],連: 頂点に関する / 類: đỉnh,vocab
+950,周辺,しゅうへん,shuuhen,Chu Biên,xung quanh -  ngoại vi,Danh từ,周辺について詳しく調査する。,Nghiên cứu kỹ lưỡng về xung quanh.,周 (Chu: xung quanh/chu vi) + 辺 (Biên: xung quanh/bên cạnh),[1],連: 周辺に関する / 類: xung quanh,vocab
+951,現場,げんば,genba,Hiện Trường,công trường -  nơi làm việc,Danh từ,現場について詳しく調査する。,Nghiên cứu kỹ lưỡng về công trường.,現 (Hiện: hiện tại/xuất hiện) + 場 (Trường: nơi chốn/hội trường),[0],連: 現場に関する / 類: công trường,vocab
+952,状況,じょうきょう,joukyou,Trạng Huống,tình hình -  tình huống,Danh từ,状況について詳しく調査する。,Nghiên cứu kỹ lưỡng về tình hình.,状 (Trạng: hình trạng/trạng thái) + 況 (Huống: tình huống/tình hình),[1],連: 状況に関する / 類: tình hình,vocab
+953,組織,そしき,soshiki,Tổ Chức,tổ chức,Danh từ,組織について詳しく調査する。,Nghiên cứu kỹ lưỡng về tổ chức.,組 (Tổ: tổ chức/kết hợp/nhóm) + 織 (Chức: dệt vải/tổ chức),[0],連: 組織に関する / 類: tổ chức,vocab
+954,制度,せいど,seido,Chế Độ,chế độ -  hệ thống,Danh từ,制度について詳しく調査する。,Nghiên cứu kỹ lưỡng về chế độ.,制 (Chế: chế tạo/chế độ) + 度 (Độ: mức độ/lần),[0],連: 制度に関する / 類: chế độ,vocab
+955,構成,こうせい,kousei,Cấu Thành,cấu trúc,Danh từ,構成について詳しく調査する。,Nghiên cứu kỹ lưỡng về cấu trúc.,構 (Cấu: cấu trúc/xây dựng) + 成 (Thành: hoàn thành/trở thành),[1],連: 構成に関する / 類: cấu trúc,vocab
+956,形式,けいしき,keishiki,Hình Thức,hình thức -  định dạng,Danh từ,形式について詳しく調査する。,Nghiên cứu kỹ lưỡng về hình thức.,形 (Hình: hình dáng/hình thức) + 式 (Thức: nghi thức/công thức),[1],連: 形式に関する / 類: hình thức,vocab
+957,傾向,けいこう,keikou,Khuynh Hướng,xu hướng -  hiện tượng -  khuynh hướng,Danh từ,傾向について詳しく調査する。,Nghiên cứu kỹ lưỡng về xu hướng.,傾 (Khuynh: nghiêng/nghiêng ngả) + 向 (Hướng: hướng về/phía),[1],連: 傾向に関する / 類: xu hướng,vocab
+958,方針,ほうしん,houshin,Phương Châm,phương châm; chính sách,Danh từ,方針について詳しく調査する。,Nghiên cứu kỹ lưỡng về phương châm.,方 (Phương: hướng/cách thức/vị) + 針 (Châm: cây kim/phương châm),[1],連: 方針に関する / 類: phương châm; chính sách,vocab
+959,徹底,てってい,tettei,Triệt Đế,triệt để -  tỉ mỉ -  kỹ lưỡng,Danh từ,徹底について詳しく調査する。,Nghiên cứu kỹ lưỡng về triệt để.,徹 (Triệt: triệt để/thấu suốt) + 底 (Đế: đáy/nền tảng),[1],連: 徹底に関する / 類: triệt để,vocab
+960,分析,ぶんせき,bunseki,Phân Tích,phân tích,Danh từ,分析について詳しく調査する。,Nghiên cứu kỹ lưỡng về phân tích.,分 (Phân: chia/phần/hiểu) + 析 (Tích: phân tích/chia nhỏ),[1],連: 分析に関する / 類: phân tích,vocab

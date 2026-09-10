@@ -1,0 +1,141 @@
+stt,term,reading,romaji,han_viet,meaning,type,exam_ja,exam_vi,kanji_breakdown,pitch_accent,synonyms_antonyms,card_type
+751,膨らむ,ふくらむ,fukuramu,Bành,phồng -  phình -  tăng lên...,Động từ nhóm 1,状況に合わせて適切に膨らむ。,Phồng một cách phù hợp theo tình huống.,膨 (Bành: phình to/phồng lên),[1],連: 膨らむに関する / 類: phồng,vocab
+752,膨らます,ふくらます,fukuramasu,Bành,thổi phồng -  làm phong phú,Tính từ -na,膨らますな態度で対応する。,Ứng phó bằng một thái độ thổi phồng.,膨 (Bành: phình to/phồng lên),[1],連: 膨らますに関する / 類: thổi phồng,vocab
+753,とがる,とがる,togaru,-,nhọn,Danh từ,とがるについて詳しく調査する。,Nghiên cứu kỹ lưỡng về nhọn.,-,[0],連: とがるに関する / 類: nhọn,vocab
+754,当てはまる,あてはまる,atehamaru,Đương,áp dụng -  hợp với -  đúng,Động từ nhóm 1,状況に合わせて適切に当てはまる。,Áp dụng một cách phù hợp theo tình huống.,当 (Đương: chính xác/đảm đương),[1],連: 当てはまるに関する / 類: áp dụng,vocab
+755,就く,つく,tsuku,Tựu,đi theo -  đi cùng -  đảm nhiệm -  nắm giữ -  tiếp nhận,Động từ nhóm 1,状況に合わせて適切に就く。,Đi theo một cách phù hợp theo tình huống.,就 (Tựu: bắt đầu/đạt được/đi làm),[0],連: 就くに関する / 類: đi theo,vocab
+756,受け持つ,うけもつ,ukemotsu,Thụ Trì,đảm nhận,Động từ nhóm 1,状況に合わせて適切に受け持つ。,Đảm nhận một cách phù hợp theo tình huống.,受 (Thụ: nhận/tiếp nhận) + 持 (Trì: cầm/nắm giữ/duy trì),[1],連: 受け持つに関する / 類: đảm nhận,vocab
+757,従う,したがう,shitagau,Tùng,theo -  tuân theo -  tuân thủ,Động từ nhóm 1,状況に合わせて適切に従う。,Theo một cách phù hợp theo tình huống.,従 (Tùng: tuân theo/tùy tùng),[1],連: 従うに関する / 類: theo,vocab
+758,つぶやく,つぶやく,tsubuyaku,-,thì thầm,Danh từ,つぶやくについて詳しく調査する。,Nghiên cứu kỹ lưỡng về thì thầm.,-,[1],連: つぶやくに関する / 類: thì thầm,vocab
+759,述べる,のべる,noberu,Thuật,phát biểu -  bày tỏ -  trình bày,Động từ nhóm 1,状況に合わせて適切に述べる。,Phát biểu một cách phù hợp theo tình huống.,述 (Thuật: trình bày/miêu tả),[0],連: 述べるに関する / 類: phát biểu,vocab
+760,目覚める,めざめる,mezameru,Mục Giác,thức giấc -  quan tâm -  tự nhận thức,Động từ nhóm 2,状況に合わせて適切に目覚める。,Thức giấc một cách phù hợp theo tình huống.,目 (Mục: mắt/mục tiêu) + 覚 (Giác: ghi nhớ/tỉnh giấc/cảm giác),[1],連: 目覚めるに関する / 類: thức giấc,vocab
+761,限る,かぎる,kagiru,Hạn,giới hạn -  hạn chế -  không bắt buộc,Động từ nhóm 1,状況に合わせて適切に限る。,Giới hạn một cách phù hợp theo tình huống.,限 (Hạn: giới hạn/hạn độ),[0],連: 限るに関する / 類: giới hạn,vocab
+762,片寄る,かたよる,katayoru,Phiến Ký,nghiêng -  lệch -  thiếu...,Động từ nhóm 1,状況に合わせて適切に片寄る。,Nghiêng một cách phù hợp theo tình huống.,片 (Phiến: một bên/mảnh vụn) + 寄 (Ký: gửi/ghé qua),[1],連: 片寄るに関する / 類: nghiêng,vocab
+763,薄まる,うすまる,usumaru,Bạc,suy nhược -  nhạt đi -  phai nhòa,Động từ nhóm 1,状況に合わせて適切に薄まる。,Suy nhược một cách phù hợp theo tình huống.,薄 (Bạc: mỏng manh/nhạt nhòa),[1],連: 薄まるに関する / 類: suy nhược,vocab
+764,薄める,うすめる,usumeru,Bạc,làm nhạt đi; làm thưa bớt -  làm loãng,Động từ nhóm 2,状況に合わせて適切に薄める。,Làm nhạt đi một cách phù hợp theo tình huống.,薄 (Bạc: mỏng manh/nhạt nhòa),[1],連: 薄めるに関する / 類: làm nhạt đi; làm thưa bớt,vocab
+765,薄れる,うすれる,usureru,Bạc,nhạt dần -  phai dần,Động từ nhóm 2,状況に合わせて適切に薄れる。,Nhạt dần một cách phù hợp theo tình huống.,薄 (Bạc: mỏng manh/nhạt nhòa),[1],連: 薄れるに関する / 類: nhạt dần,vocab
+766,透き通る,すきとおる,sukitooru,Thấu Thông,trong suốt -  trong vắt,Động từ nhóm 1,状況に合わせて適切に透き通る。,Trong suốt một cách phù hợp theo tình huống.,透 (Thấu: trong suốt/xuyên thấu) + 通 (Thông: thông suốt/đi lại/hiểu biết),[1],連: 透き通るに関する / 類: trong suốt,vocab
+767,静まる・鎮まる,しずまる,shizumaru,Tĩnh Trấn,yên tĩnh -  dịu đi -  im lặng,Động từ nhóm 1,状況に合わせて適切に静まる・鎮まる。,Yên tĩnh một cách phù hợp theo tình huống.,静 (Tĩnh: yên tĩnh/thanh tĩnh) + 鎮 (Trấn: trấn tĩnh/dẹp yên),[1],連: 静まる・鎮まるに関する / 類: yên tĩnh,vocab
+768,静める・鎮める,しずめる,shizumeru,Tĩnh Trấn,trấn tĩnh -  làm bớt đi,Động từ nhóm 2,状況に合わせて適切に静める・鎮める。,Trấn tĩnh một cách phù hợp theo tình huống.,静 (Tĩnh: yên tĩnh/thanh tĩnh) + 鎮 (Trấn: trấn tĩnh/dẹp yên),[1],連: 静める・鎮めるに関する / 類: trấn tĩnh,vocab
+769,優れる,すぐれる,sugureru,Ưu,giỏi -  ưu tú -  hoàn hảo,Động từ nhóm 2,状況に合わせて適切に優れる。,Giỏi một cách phù hợp theo tình huống.,優 (Ưu: ưu tú/dịu dàng),[1],連: 優れるに関する / 類: giỏi,vocab
+770,落ち着く,おちつく,ochitsuku,Lạc Trước,bình tĩnh -  lắng xuống -  quyết định -  đơn giản,Tính từ -na,落ち着くな態度で対応する。,Ứng phó bằng một thái độ bình tĩnh.,落 (Lạc: rơi xuống/rụng) + 着 (Trước: mặc quần áo/đến nơi),[1],連: 落ち着くに関する / 類: bình tĩnh,vocab
+771,長引く,ながびく,nagabiku,Trường Dẫn,kéo dài,Động từ nhóm 1,状況に合わせて適切に長引く。,Kéo dài một cách phù hợp theo tình huống.,長 (Trường: dài/lớn nhất/thủ trưởng) + 引 (Dẫn: kéo/dẫn dắt),[1],連: 長引くに関する / 類: kéo dài,vocab
+772,衰える,おとろえる,otoroeru,Suy,yếu dần đi -  sa sút,Động từ nhóm 2,状況に合わせて適切に衰える。,Yếu dần đi một cách phù hợp theo tình huống.,衰 (Suy: suy yếu/suy thoái),[1],連: 衰えるに関する / 類: yếu dần đi,vocab
+773,備わる,そなわる,sonawaru,Bị,lắp đặt -  sẵn có -  sở hữu..,Động từ nhóm 1,状況に合わせて適切に備わる。,Lắp đặt một cách phù hợp theo tình huống.,備 (Bị: chuẩn bị/trang bị),[1],連: 備わるに関する / 類: lắp đặt,vocab
+774,備える,そなえる,sonaeru,Bị,chuẩn bị -  trang bị -  cung cấp,Động từ nhóm 2,状況に合わせて適切に備える。,Chuẩn bị một cách phù hợp theo tình huống.,備 (Bị: chuẩn bị/trang bị),[1],連: 備えるに関する / 類: chuẩn bị,vocab
+775,蓄える,たくわえる,takuwaeru,Súc,tích lũy -  dự trữ,Động từ nhóm 2,状況に合わせて適切に蓄える。,Tích lũy một cách phù hợp theo tình huống.,蓄 (Súc: tích lũy/chứa chấp),[1],連: 蓄えるに関する / 類: tích lũy,vocab
+776,整う,ととのう,totonou,Chỉnh,Đã sẵn sàng -  chuẩn bị -  sắp đặt,Động từ nhóm 1,状況に合わせて適切に整う。,Đã sẵn sàng một cách phù hợp theo tình huống.,整 (Chỉnh: chỉnh đốn/sắp xếp),[1],連: 整うに関する / 類: Đã sẵn sàng,vocab
+777,整える・調える,ととのえる,totonoeru,Chỉnh Điệu,hoàn thiện -  chỉnh chu -  điều chinh,Động từ nhóm 2,状況に合わせて適切に整える・調える。,Hoàn thiện một cách phù hợp theo tình huống.,整 (Chỉnh: chỉnh đốn/sắp xếp) + 調 (Điệu: điều tra/giai điệu/điều chỉnh),[1],連: 整える・調えるに関する / 類: hoàn thiện,vocab
+778,覆う,おおう,oou,Phúc,phủ -  bao bọc -  bịt,Động từ nhóm 1,状況に合わせて適切に覆う。,Phủ một cách phù hợp theo tình huống.,覆 (Phúc: phủ lên/lật ngược),[0],連: 覆うに関する / 類: phủ,vocab
+779,照る,てる,teru,Chiếu,chiếu sáng,Động từ nhóm 2,状況に合わせて適切に照る。,Chiếu sáng một cách phù hợp theo tình huống.,照 (Chiếu: chiếu sáng/đối chiếu),[0],連: 照るに関する / 類: chiếu sáng,vocab
+780,照らす,てらす,terasu,Chiếu,chiếu theo -  căn cứ vào,Động từ nhóm 1,状況に合わせて適切に照らす。,Chiếu theo một cách phù hợp theo tình huống.,照 (Chiếu: chiếu sáng/đối chiếu),[0],連: 照らすに関する / 類: chiếu theo,vocab
+781,染まる,そまる,somaru,Nhiễm,nhuộm -  nhiễm,Động từ nhóm 1,状況に合わせて適切に染まる。,Nhuộm một cách phù hợp theo tình huống.,染 (Nhiễm: nhiễm/nhuộm màu),[0],連: 染まるに関する / 類: nhuộm,vocab
+782,染める,そめる,someru,Nhiễm,nhuộm -  nhúng tay,Động từ nhóm 2,状況に合わせて適切に染める。,Nhuộm một cách phù hợp theo tình huống.,染 (Nhiễm: nhiễm/nhuộm màu),[0],連: 染めるに関する / 類: nhuộm,vocab
+783,ダブル,だぶる,daburu,-,gấp đôi -  trùng nhau -  nhắc lai,Danh từ,ダブルについて詳しく調査する。,Nghiên cứu kỹ lưỡng về gấp đôi.,-,[0],連: ダブルに関する / 類: gấp đôi,vocab
+784,あこがれる,あこがれる,akogareru,-,mong ước -  mơ ước -  ngưỡng mộ -  khao khát,Danh từ,あこがれるについて詳しく調査する。,Nghiên cứu kỹ lưỡng về mong ước.,-,[1],連: あこがれるに関する / 類: mong ước,vocab
+785,うらやむ,うらやむ,urayamu,-,đố kỵ,Danh từ,うらやむについて詳しく調査する。,Nghiên cứu kỹ lưỡng về đố kỵ.,-,[1],連: うらやむに関する / 類: đố kỵ,vocab
+786,あきらめる,あきらめる,akirameru,-,từ bỏ,Động từ nhóm 2,状況に合わせて適切にあきらめる。,Từ bỏ một cách phù hợp theo tình huống.,-,[1],連: あきらめるに関する / 類: từ bỏ,vocab
+787,あきれる,あきれる,akireru,-,ngạc nhiên -  cạn lời -  bó tay,Danh từ,あきれるについて詳しく調査する。,Nghiên cứu kỹ lưỡng về ngạc nhiên.,-,[1],連: あきれるに関する / 類: ngạc nhiên,vocab
+788,恐れる,おそれる,osoreru,Khủng,sợ -  nguy cơ -  khủng khiếp,Động từ nhóm 2,状況に合わせて適切に恐れる。,Sợ một cách phù hợp theo tình huống.,恐 (Khủng: lo sợ/khủng khiếp),[1],連: 恐れるに関する / 類: sợ,vocab
+789,恨む,うらむ,uramu,Hận,hận -  căm thù -  oán hận,Động từ nhóm 1,状況に合わせて適切に恨む。,Hận một cách phù hợp theo tình huống.,恨 (Hận: oán hận/hận thù),[0],連: 恨むに関する / 類: hận,vocab
+790,慰める,なぐさめる,nagusameru,Úy,an ủi -  động viên,Động từ nhóm 2,状況に合わせて適切に慰める。,An ủi một cách phù hợp theo tình huống.,慰 (Úy: an ủi/động viên),[1],連: 慰めるに関する / 類: an ủi,vocab
+791,インテリア,いんてりあ,interia,-,nội thất,Danh từ,インテリアについて詳しく調査する。,Nghiên cứu kỹ lưỡng về nội thất.,-,[1],連: インテリアに関する / 類: nội thất,vocab
+792,コーナー,こーなー,koonaa,-,góc,Danh từ,コーナーについて詳しく調査する。,Nghiên cứu kỹ lưỡng về góc.,-,[1],連: コーナーに関する / 類: góc,vocab
+793,カウンター,かうんたー,kauntaa,-,quầy tính tiền,Tính từ -na,カウンターな態度で対応する。,Ứng phó bằng một thái độ quầy tính tiền.,-,[1],連: カウンターに関する / 類: quầy tính tiền,vocab
+794,スペース,すぺーす,supeesu,-,khoảng trống,Danh từ,スペースについて詳しく調査する。,Nghiên cứu kỹ lưỡng về khoảng trống.,-,[1],連: スペースに関する / 類: khoảng trống,vocab
+795,オープン,おーぷん,oopun,-,cửa mở,Danh từ,オープンについて詳しく調査する。,Nghiên cứu kỹ lưỡng về cửa mở.,-,[1],連: オープンに関する / 類: cửa mở,vocab
+796,センター,せんたー,sentaa,-,trung tâm,Danh từ,センターについて詳しく調査する。,Nghiên cứu kỹ lưỡng về trung tâm.,-,[1],連: センターに関する / 類: trung tâm,vocab
+797,カルチャー,かるちゃー,karuchaa,-,văn hóa,Danh từ,カルチャーについて詳しく調査する。,Nghiên cứu kỹ lưỡng về văn hóa.,-,[1],連: カルチャーに関する / 類: văn hóa,vocab
+798,ブーム,ぶーむ,buumu,-,bùng nổ,Danh từ,ブームについて詳しく調査する。,Nghiên cứu kỹ lưỡng về bùng nổ.,-,[0],連: ブームに関する / 類: bùng nổ,vocab
+799,$1\times7*-x-$ ション,$1\times7*-x-$ しょん,$1\times7*-x-$shon,-,thông tin,Danh từ,$1\times7*-x-$ ションについて詳しく調査する。,Nghiên cứu kỹ lưỡng về thông tin.,-,[1],連: $1\times7*-x-$ ションに関する / 類: thông tin,vocab
+800,キャッチ,きゃっち,kyatchi,-,bắt lấy,Danh từ,キャッチについて詳しく調査する。,Nghiên cứu kỹ lưỡng về bắt lấy.,-,[1],連: キャッチに関する / 類: bắt lấy,vocab
+801,メディア,めでぃあ,media,-,truyền thông,Danh từ,メディアについて詳しく調査する。,Nghiên cứu kỹ lưỡng về truyền thông.,-,[1],連: メディアに関する / 類: truyền thông,vocab
+802,コメント,こめんと,komento,-,bình luận,Danh từ,コメントについて詳しく調査する。,Nghiên cứu kỹ lưỡng về bình luận.,-,[1],連: コメントに関する / 類: bình luận,vocab
+803,コラム,こらむ,koramu,-,cột,Danh từ,コラムについて詳しく調査する。,Nghiên cứu kỹ lưỡng về cột.,-,[0],連: コラムに関する / 類: cột,vocab
+804,エピソード,えぴそーど,episoodo,-,chương; phần,Danh từ,エピソードについて詳しく調査する。,Nghiên cứu kỹ lưỡng về chương.,-,[1],連: エピソードに関する / 類: chương; phần,vocab
+805,アリバイ,ありばい,aribai,-,chứng cứ ngoại phạm,Danh từ,アリバイについて詳しく調査する。,Nghiên cứu kỹ lưỡng về chứng cứ ngoại phạm.,-,[1],連: アリバイに関する / 類: chứng cứ ngoại phạm,vocab
+806,シリーズ,しりーず,shiriizu,-,loạt,Danh từ,シリーズについて詳しく調査する。,Nghiên cứu kỹ lưỡng về loạt.,-,[1],連: シリーズに関する / 類: loạt,vocab
+807,ポイント,ぽいんと,pointo,-,điểm mấu chốt,Danh từ,ポイントについて詳しく調査する。,Nghiên cứu kỹ lưỡng về điểm mấu chốt.,-,[1],連: ポイントに関する / 類: điểm mấu chốt,vocab
+808,キー,きー,kii,-,chìa khóa,Danh từ,キーについて詳しく調査する。,Nghiên cứu kỹ lưỡng về chìa khóa.,-,[0],連: キーに関する / 類: chìa khóa,vocab
+809,マスター,ますたー,masutaa,-,thuần thục,Danh từ,マスターについて詳しく調査する。,Nghiên cứu kỹ lưỡng về thuần thục.,-,[1],連: マスターに関する / 類: thuần thục,vocab
+810,ビジネス,びじねす,bijinesu,-,business,Danh từ,ビジネスについて詳しく調査する。,Nghiên cứu kỹ lưỡng về business.,-,[1],連: ビジネスに関する / 類: business,vocab
+811,キャリア,きゃりあ,kyaria,-,kinh nghiệm,Danh từ,キャリアについて詳しく調査する。,Nghiên cứu kỹ lưỡng về kinh nghiệm.,-,[1],連: キャリアに関する / 類: kinh nghiệm,vocab
+812,ベテラン,べてらん,beteran,-,chuyên gia,Danh từ,ベテランについて詳しく調査する。,Nghiên cứu kỹ lưỡng về chuyên gia.,-,[1],連: ベテランに関する / 類: chuyên gia,vocab
+813,フリー,ふりー,furii,-,tự do,Danh từ,フリーについて詳しく調査する。,Nghiên cứu kỹ lưỡng về tự do.,-,[0],連: フリーに関する / 類: tự do,vocab
+814,エコノミー,えこのみー,ekonomii,-,kinh tế,Danh từ,エコノミーについて詳しく調査する。,Nghiên cứu kỹ lưỡng về kinh tế.,-,[1],連: エコノミーに関する / 類: kinh tế,vocab
+815,キャッシュ,きゃっしゅ,kyasshu,-,tiền mặt,Danh từ,キャッシュについて詳しく調査する。,Nghiên cứu kỹ lưỡng về tiền mặt.,-,[1],連: キャッシュに関する / 類: tiền mặt,vocab
+816,インフレ,いんふれ,infure,-,lạm phát,Danh từ,インフレについて詳しく調査する。,Nghiên cứu kỹ lưỡng về lạm phát.,-,[1],連: インフレに関する / 類: lạm phát,vocab
+817,デモ,でも,demo,-,cuộc biểu tình,Danh từ,デモについて詳しく調査する。,Nghiên cứu kỹ lưỡng về cuộc biểu tình.,-,[0],連: デモに関する / 類: cuộc biểu tình,vocab
+818,$x-7]-,$x-7]-,$x-7]-,-,nhà chế tạo,Danh từ,$x-7]-について詳しく調査する。,Nghiên cứu kỹ lưỡng về nhà chế tạo.,-,[1],連: $x-7]-に関する / 類: nhà chế tạo,vocab
+819,システム,しすてむ,shisutemu,-,hệ thống,Danh từ,システムについて詳しく調査する。,Nghiên cứu kỹ lưỡng về hệ thống.,-,[1],連: システムに関する / 類: hệ thống,vocab
+820,ケース,けーす,keesu,-,trường hợp,Danh từ,ケースについて詳しく調査する。,Nghiên cứu kỹ lưỡng về trường hợp.,-,[0],連: ケースに関する / 類: trường hợp,vocab
+821,パターン,ぱたーん,pataan,-,mẫu,Danh từ,パターンについて詳しく調査する。,Nghiên cứu kỹ lưỡng về mẫu.,-,[1],連: パターンに関する / 類: mẫu,vocab
+822,プラン,ぷらん,puran,-,kế hoạch,Danh từ,プランについて詳しく調査する。,Nghiên cứu kỹ lưỡng về kế hoạch.,-,[0],連: プランに関する / 類: kế hoạch,vocab
+823,トラブル,とらぶる,toraburu,-,rắc rối,Động từ nhóm 1,状況に合わせて適切にトラブル。,Rắc rối một cách phù hợp theo tình huống.,-,[1],連: トラブルに関する / 類: rắc rối,vocab
+824,エラー,えらー,eraa,-,lỗi,Danh từ,エラーについて詳しく調査する。,Nghiên cứu kỹ lưỡng về lỗi.,-,[0],連: エラーに関する / 類: lỗi,vocab
+825,クレーム,くれーむ,kureemu,-,phàn nàn,Danh từ,クレームについて詳しく調査する。,Nghiên cứu kỹ lưỡng về phàn nàn.,-,[1],連: クレームに関する / 類: phàn nàn,vocab
+826,キャンセル,きゃんせる,kyanseru,-,hủy bỏ,Động từ nhóm 2,状況に合わせて適切にキャンセル。,Hủy bỏ một cách phù hợp theo tình huống.,-,[1],連: キャンセルに関する / 類: hủy bỏ,vocab
+827,ストップ,すとっぷ,sutoppu,-,dừng lại,Danh từ,ストップについて詳しく調査する。,Nghiên cứu kỹ lưỡng về dừng lại.,-,[1],連: ストップに関する / 類: dừng lại,vocab
+828,カット,かっと,katto,-,cắt bớt,Danh từ,カットについて詳しく調査する。,Nghiên cứu kỹ lưỡng về cắt bớt.,-,[0],連: カットに関する / 類: cắt bớt,vocab
+829,カバー,かばー,kabaa,-,bao bọc,Danh từ,カバーについて詳しく調査する。,Nghiên cứu kỹ lưỡng về bao bọc.,-,[0],連: カバーに関する / 類: bao bọc,vocab
+830,リハビリ,りはびり,rihabiri,-,hồi phục chức năng,Danh từ,リハビリについて詳しく調査する。,Nghiên cứu kỹ lưỡng về hồi phục chức năng.,-,[1],連: リハビリに関する / 類: hồi phục chức năng,vocab
+831,プレッシャー,ぷれっしゃー,puresshaa,-,sức ép,Danh từ,プレッシャーについて詳しく調査する。,Nghiên cứu kỹ lưỡng về sức ép.,-,[1],連: プレッシャーに関する / 類: sức ép,vocab
+832,カウンセリング,かうんせりんぐ,kaunseringu,-,tư vấn tâm lý,Danh từ,カウンセリングについて詳しく調査する。,Nghiên cứu kỹ lưỡng về tư vấn tâm lý.,-,[1],連: カウンセリングに関する / 類: tư vấn tâm lý,vocab
+833,キャラクター,きゃらくたー,kyarakutaa,-,nhân vật,Danh từ,キャラクターについて詳しく調査する。,Nghiên cứu kỹ lưỡng về nhân vật.,-,[1],連: キャラクターに関する / 類: nhân vật,vocab
+834,ユニークな,ゆにーくな,yuniikuna,-,độc nhất,Tính từ -na,ユニークな態度で対応する。,Ứng phó bằng một thái độ độc nhất.,-,[1],連: ユニークなに関する / 類: độc nhất,vocab
+835,ルーズな,るーずな,ruuzuna,-,lơ đễnh,Tính từ -na,ルーズな態度で対応する。,Ứng phó bằng một thái độ lơ đễnh.,-,[1],連: ルーズなに関する / 類: lơ đễnh,vocab
+836,ロマンチックな,ろまんちっくな,romanchikkuna,-,lãng mạn,Tính từ -na,ロマンチックな態度で対応する。,Ứng phó bằng một thái độ lãng mạn.,-,[1],連: ロマンチックなに関する / 類: lãng mạn,vocab
+837,センス,せんす,sensu,-,giác quan,Danh từ,センスについて詳しく調査する。,Nghiên cứu kỹ lưỡng về giác quan.,-,[0],連: センスに関する / 類: giác quan,vocab
+838,エコロジー,えころじー,ekorojii,-,sinh thái học,Danh từ,エコロジーについて詳しく調査する。,Nghiên cứu kỹ lưỡng về sinh thái học.,-,[1],連: エコロジーに関する / 類: sinh thái học,vocab
+839,ダム,だむ,damu,-,Đê,Danh từ,ダムについて詳しく調査する。,Nghiên cứu kỹ lưỡng về Đê.,-,[0],連: ダムに関する / 類: Đê,vocab
+840,コンクリート,こんくりーと,konkuriito,-,bê tông,Danh từ,コンクリートについて詳しく調査する。,Nghiên cứu kỹ lưỡng về bê tông.,-,[1],連: コンクリートに関する / 類: bê tông,vocab
+841,単純な,たんじゅんな,tanjunna,Đơn Thuần,đơn giản,Tính từ -na,単純な態度で対応する。,Ứng phó bằng một thái độ đơn giản.,単 (Đơn: đơn giản/đơn độc) + 純 (Thuần: thuần khiết/trong sáng),[1],連: 単純なに関する / 類: đơn giản,vocab
+842,純粋な,じゅんすいな,junsuina,Thuần Túy,trong sáng -  ngây thơ -  tỉnh khôi -  tinh khiết,Tính từ -na,純粋な態度で対応する。,Ứng phó bằng một thái độ trong sáng.,純 (Thuần: thuần khiết/trong sáng) + 粋 (Túy: tinh túy/sành điệu),[1],連: 純粋なに関する / 類: trong sáng,vocab
+843,透明な,とうめいな,toumeina,Thấu Minh,trong suốt -  trong veo,Tính từ -na,透明な態度で対応する。,Ứng phó bằng một thái độ trong suốt.,透 (Thấu: trong suốt/xuyên thấu) + 明 (Minh: sáng sủa/rõ ràng),[1],連: 透明なに関する / 類: trong suốt,vocab
+844,爽やかな,さわやかな,sawayakana,Sảng,sảng khoái -  tươi -  thoáng,Tính từ -na,爽やかな態度で対応する。,Ứng phó bằng một thái độ sảng khoái.,爽 (Sảng: sảng khoái/mát mẻ),[1],連: 爽やかなに関する / 類: sảng khoái,vocab
+845,素直な,すなおな,sunaona,Tố Trực,chân thành -  thật thà -  ngoan ngoãn,Tính từ -na,素直な態度で対応する。,Ứng phó bằng một thái độ chân thành.,素 (Tố: yếu tố/mộc mạc/chất phác) + 直 (Trực: thẳng thắn/trực tiếp/sửa),[1],連: 素直なに関する / 類: chân thành,vocab
+846,率直な,そっちょくな,sotchokuna,Suất Trực,trực tỉnh -  thẳng thắn,Tính từ -na,率直な態度で対応する。,Ứng phó bằng một thái độ trực tỉnh.,率 (Suất: tỷ lệ/dẫn dắt) + 直 (Trực: thẳng thắn/trực tiếp/sửa),[1],連: 率直なに関する / 類: trực tỉnh,vocab
+847,誠実な,せいじつな,seijitsuna,Thành Thực,thật thà -  chân thành,Tính từ -na,誠実な態度で対応する。,Ứng phó bằng một thái độ thật thà.,誠 (Thành: chân thành/thành thật) + 実 (Thực: sự thật/thực tế/quả),[1],連: 誠実なに関する / 類: thật thà,vocab
+848,謙虚な,けんきょな,kenkyona,Khiêm Hư,khiêm tốn,Tính từ -na,謙虚な態度で対応する。,Ứng phó bằng một thái độ khiêm tốn.,謙 (Khiêm: khiêm tốn/khiêm nhường) + 虚 (Hư: hư vô/trống rỗng),[1],連: 謙虚なに関する / 類: khiêm tốn,vocab
+849,賢い,かしこい,kashikoi,Hiền,thông minh -  khôn ngoan,Tính từ -i,この問題は非常に賢い。,Vấn đề này rất thông minh.,賢 (Hiền: thông minh/hiền minh),[1],連: 賢いに関する / 類: thông minh,vocab
+850,慎重な,しんちょうな,shinchouna,Thận Trọng,thận trọng -  cẩn thận,Tính từ -na,慎重な態度で対応する。,Ứng phó bằng một thái độ thận trọng.,慎 (Thận: thận trọng/cẩn thận) + 重 (Trọng: nặng nề/quan trọng/chồng chất),[1],連: 慎重なに関する / 類: thận trọng,vocab
+851,穏やかな,おだやかな,odayakana,Ổn,yên ả -  ôn hòa -  bình yên,Tính từ -na,穏やかな態度で対応する。,Ứng phó bằng một thái độ yên ả.,穏 (Ổn: yên ổn/ôn hòa),[1],連: 穏やかなに関する / 類: yên ả,vocab
+852,真剣な,しんけんな,shinkenna,Chân Kiếm,nghiêm túc -  nghiêm trọng,Tính từ -na,真剣な態度で対応する。,Ứng phó bằng một thái độ nghiêm túc.,真 (Chân: chân thật/đích thực) + 剣 (Kiếm: thanh kiếm),[1],連: 真剣なに関する / 類: nghiêm túc,vocab
+853,正式な,せいしきな,seishikina,Chính Thức,chính thức -  gốc,Tính từ -na,正式な態度で対応する。,Ứng phó bằng một thái độ chính thức.,正 (Chính: đúng đắn/chính xác) + 式 (Thức: nghi thức/công thức),[1],連: 正式なに関する / 類: chính thức,vocab
+854,主な,おもな,omona,Chủ,chính -  chủ yếu,Tính từ -na,主な態度で対応する。,Ứng phó bằng một thái độ chính.,主 (Chủ: làm chủ/chủ nhân),[0],連: 主なに関する / 類: chính,vocab
+855,主要な,しゅような,shuyouna,Chủ Yếu,Mấu chốt,Tính từ -na,主要な態度で対応する。,Ứng phó bằng một thái độ Mấu chốt.,主 (Chủ: làm chủ/chủ nhân) + 要 (Yếu: quan trọng/cần thiết),[1],連: 主要なに関する / 類: Mấu chốt,vocab
+856,貴重な,きちょうな,kichouna,Quý Trọng,quý trọng,Tính từ -na,貴重な態度で対応する。,Ứng phó bằng một thái độ quý trọng.,貴 (Quý: quý giá/cao quý) + 重 (Trọng: nặng nề/quan trọng/chồng chất),[1],連: 貴重なに関する / 類: quý trọng,vocab
+857,偉大な,いだいな,idaina,Vĩ Đại,vĩ đại,Tính từ -na,偉大な態度で対応する。,Ứng phó bằng một thái độ vĩ đại.,偉 (Vĩ: vĩ đại/cao lớn) + 大 (Đại: to lớn/vĩ đại),[1],連: 偉大なに関する / 類: vĩ đại,vocab
+858,偉い,えらい,erai,Vĩ,tuyệt vời -  giỏi -  vĩ đại,Danh từ,偉いについて詳しく調査する。,Nghiên cứu kỹ lưỡng về tuyệt vời.,偉 (Vĩ: vĩ đại/cao lớn),[0],連: 偉いに関する / 類: tuyệt vời,vocab
+859,独特な,どくとくな,dokutokuna,Độc Đặc,riêng biệt -  đặc biệt -  độc đáo,Tính từ -na,独特な態度で対応する。,Ứng phó bằng một thái độ riêng biệt.,独 (Độc: độc nhất/cô độc) + 特 (Đặc: đặc biệt/riêng biệt),[1],連: 独特なに関する / 類: riêng biệt,vocab
+860,特殊な,とくしゅな,tokushuna,Đặc Thù,đặc biệt -  đặc thù,Tính từ -na,特殊な態度で対応する。,Ứng phó bằng một thái độ đặc biệt.,特 (Đặc: đặc biệt/riêng biệt) + 殊 (Thù: đặc thù/khác biệt),[1],連: 特殊なに関する / 類: đặc biệt,vocab
+861,奇妙な,きみょうな,kimyouna,Kỳ Diệu,kỳ lạ -  lạ lùng,Tính từ -na,奇妙な態度で対応する。,Ứng phó bằng một thái độ kỳ lạ.,奇 (Kỳ: kỳ lạ/hiếm có) + 妙 (Diệu: kỳ diệu/khéo léo),[1],連: 奇妙なに関する / 類: kỳ lạ,vocab
+862,妙な,みょうな,myouna,Diệu,lạ thường,Tính từ -na,妙な態度で対応する。,Ứng phó bằng một thái độ lạ thường.,妙 (Diệu: kỳ diệu/khéo léo),[1],連: 妙なに関する / 類: lạ thường,vocab
+863,怪しい,あやしい,ayashii,Quái,đáng nghi -  nghi ngờ,Tính từ -i,この問題は非常に怪しい。,Vấn đề này rất đáng nghi.,怪 (Quái: kỳ quái/quái dị),[1],連: 怪しいに関する / 類: đáng nghi,vocab
+864,異常な,いじょうな,ijouna,Dị Thường,khác thường -  bất thường,Tính từ -na,異常な態度で対応する。,Ứng phó bằng một thái độ khác thường.,異 (Dị: khác thường/dị biệt) + 常 (Thường: thường ngày/bình thường),[1],連: 異常なに関する / 類: khác thường,vocab
+865,高度な,こうどな,koudona,Cao Độ,độ cao -  tiên tiến,Tính từ -na,高度な態度で対応する。,Ứng phó bằng một thái độ độ cao.,高 (Cao: cao quý/đắt đỏ/chiều cao) + 度 (Độ: mức độ/lần),[1],連: 高度なに関する / 類: độ cao,vocab
+866,新たな,あらたな,aratana,Tân,thay mới -  làm mới,Tính từ -na,新たな態度で対応する。,Ứng phó bằng một thái độ thay mới.,新 (Tân: mới mẻ/tươi mới),[1],連: 新たなに関する / 類: thay mới,vocab
+867,合理的な,ごうりてきな,gouritekina,Hợp Lý Đích,hợp lý -  tính logic,Tính từ -na,合理的な態度で対応する。,Ứng phó bằng một thái độ hợp lý.,合 (Hợp: thích hợp/gặp gỡ) + 理 (Lý: lý do/chân lý/xử lý) + 的 (Đích: mục đích/mang tính),[1],連: 合理的なに関する / 類: hợp lý,vocab
+868,器用な,きような,kiyouna,Khí Dụng,tinh xảo -  tài giỏi -  khéo léo,Tính từ -na,器用な態度で対応する。,Ứng phó bằng một thái độ tinh xảo.,器 (Khí: dụng cụ/khí cụ) + 用 (Dụng: sử dụng/công dụng),[1],連: 器用なに関する / 類: tinh xảo,vocab
+869,手軽な,てがるな,tegaruna,Thủ Khinh,nhẹ nhàng -  đơn giản,Tính từ -na,手軽な態度で対応する。,Ứng phó bằng một thái độ nhẹ nhàng.,手 (Thủ: bàn tay/người làm) + 軽 (Khinh: nhẹ nhàng/coi nhẹ),[1],連: 手軽なに関する / 類: nhẹ nhàng,vocab
+870,手ごろな,てごろな,tegorona,Thủ,hợp lý -  phù hợp -  vừa phải,Tính từ -na,手ごろな態度で対応する。,Ứng phó bằng một thái độ hợp lý.,手 (Thủ: bàn tay/người làm),[1],連: 手ごろなに関する / 類: hợp lý,vocab
+871,高価な,こうかな,koukana,Cao Giá,đắt,Tính từ -na,高価な態度で対応する。,Ứng phó bằng một thái độ đắt.,高 (Cao: cao quý/đắt đỏ/chiều cao) + 価 (Giá: giá cả/giá trị),[1],連: 高価なに関する / 類: đắt,vocab
+872,ぜいたくな,ぜいたくな,zeitakuna,-,sang chảnh -  xa hoa -  phung phí (phong cách sống),Tính từ -na,ぜいたくな態度で対応する。,Ứng phó bằng một thái độ sang chảnh.,-,[1],連: ぜいたくなに関する / 類: sang chảnh,vocab
+873,豪華な,ごうかな,goukana,Hào Hoa,hào hoa -  lộng lẫy -  rực rỡ,Tính từ -na,豪華な態度で対応する。,Ứng phó bằng một thái độ hào hoa.,豪 (Hào: hào hiệp/hào nhoáng) + 華 (Hoa: hoa lệ/lộng lẫy),[1],連: 豪華なに関する / 類: hào hoa,vocab
+874,高級な,こうきゅうな,koukyuuna,Cao Cấp,chất lượng cao -  hàng hiệu,Tính từ -na,高級な態度で対応する。,Ứng phó bằng một thái độ chất lượng cao.,高 (Cao: cao quý/đắt đỏ/chiều cao) + 級 (Cấp: cấp bậc/đẳng cấp),[1],連: 高級なに関する / 類: chất lượng cao,vocab
+875,上等な,じょうとうな,joutouna,Thượng Đẳng,cao cấp -  xịn sò,Tính từ -na,上等な態度で対応する。,Ứng phó bằng một thái độ cao cấp.,上 (Thượng: trên/lên) + 等 (Đẳng: bình đẳng/vân vân),[1],連: 上等なに関する / 類: cao cấp,vocab
+876,上品な,じょうひんな,jouhinna,Thượng Phẩm,quý phái -  lịch thiệp,Tính từ -na,上品な態度で対応する。,Ứng phó bằng một thái độ quý phái.,上 (Thượng: trên/lên) + 品 (Phẩm: sản phẩm/phẩm chất),[1],連: 上品なに関する / 類: quý phái,vocab
+877,適度な,てきどな,tekidona,Thích Độ,mức độ thích hợp -  điều độ,Tính từ -na,適度な態度で対応する。,Ứng phó bằng một thái độ mức độ thích hợp.,適 (Thích: thích hợp/phù hợp) + 度 (Độ: mức độ/lần),[1],連: 適度なに関する / 類: mức độ thích hợp,vocab
+878,快適な,かいてきな,kaitekina,Khoái Thích,dễ chịu -  sảng khoái,Tính từ -na,快適な態度で対応する。,Ứng phó bằng một thái độ dễ chịu.,快 (Khoái: sảng khoái/vui vẻ) + 適 (Thích: thích hợp/phù hợp),[1],連: 快適なに関する / 類: dễ chịu,vocab
+879,快い,こころよい,kokoroyoi,Khoái,hài lòng -  dễ chịu -  sẵn lòng,Tính từ -i,この問題は非常に快い。,Vấn đề này rất hài lòng.,快 (Khoái: sảng khoái/vui vẻ),[1],連: 快いに関する / 類: hài lòng,vocab
+880,順調な,じゅんちょうな,junchouna,Thuận Điệu,thuận lợi; tốt; trôi chảy,Tính từ -na,順調な態度で対応する。,Ứng phó bằng một thái độ thuận lợi.,順 (Thuận: thuận tiện/thứ tự) + 調 (Điệu: điều tra/giai điệu/điều chỉnh),[1],連: 順調なに関する / 類: thuận lợi; tốt; trôi chảy,vocab
+881,活発な,かっぱつな,kappatsuna,Hoạt Phát,hoạt bát -  sôi nổi -  nhanh nhẹn -  linh hoạt,Tính từ -na,活発な態度で対応する。,Ứng phó bằng một thái độ hoạt bát.,活 (Hoạt: hoạt động/sinh hoạt) + 発 (Phát: phát triển/xuất phát),[1],連: 活発なに関する / 類: hoạt bát,vocab
+882,的確な,てきかくな,tekikakuna,Đích Xác,chính xác -  rõ ràng,Tính từ -na,的確な態度で対応する。,Ứng phó bằng một thái độ chính xác.,的 (Đích: mục đích/mang tính) + 確 (Xác: chính xác/xác thực),[1],連: 的確なに関する / 類: chính xác,vocab
+883,確実な,かくじつな,kakujitsuna,Xác Thực,Xác thực -  chắc chắn,Tính từ -na,確実な態度で対応する。,Ứng phó bằng một thái độ Xác thực.,確 (Xác: chính xác/xác thực) + 実 (Thực: sự thật/thực tế/quả),[1],連: 確実なに関する / 類: Xác thực,vocab
+884,明らかな,あきらかな,akirakana,Minh,rõ ràng -  sáng tỏ,Tính từ -na,明らかな態度で対応する。,Ứng phó bằng một thái độ rõ ràng.,明 (Minh: sáng sủa/rõ ràng),[1],連: 明らかなに関する / 類: rõ ràng,vocab
+885,あいまいな,あいまいな,aimaina,-,mơ hồ,Tính từ -na,あいまいな態度で対応する。,Ứng phó bằng một thái độ mơ hồ.,-,[1],連: あいまいなに関する / 類: mơ hồ,vocab
+886,具体的な,ぐたいてきな,gutaitekina,Cụ Thể Đích,cụ thể -  rõ ràng,Tính từ -na,具体的な態度で対応する。,Ứng phó bằng một thái độ cụ thể.,具 (Cụ: dụng cụ/công cụ) + 体 (Thể: cơ thể/thân thể) + 的 (Đích: mục đích/mang tính),[1],連: 具体的なに関する / 類: cụ thể,vocab
+887,抽象的な,ちゅうしょうてきな,chuushoutekina,Trừu Tượng Đích,trừu tượng -  viển vông,Tính từ -na,抽象的な態度で対応する。,Ứng phó bằng một thái độ trừu tượng.,抽 (Trừu: rút ra/trừu xuất) + 象 (Tượng: hình tượng/con voi) + 的 (Đích: mục đích/mang tính),[1],連: 抽象的なに関する / 類: trừu tượng,vocab
+888,等しい,ひとしい,hitoshii,Đẳng,giống nhau -  đều đặn,Tính từ -i,この問題は非常に等しい。,Vấn đề này rất giống nhau.,等 (Đẳng: bình đẳng/vân vân),[1],連: 等しいに関する / 類: giống nhau,vocab
+889,平等な,びょうどうな,byoudouna,Bình Đẳng,bình đẳng -  công bằng,Tính từ -na,平等な態度で対応する。,Ứng phó bằng một thái độ bình đẳng.,平 (Bình: bình đẳng/hòa bình) + 等 (Đẳng: bình đẳng/vân vân),[1],連: 平等なに関する / 類: bình đẳng,vocab
+890,公平な,こうへいな,kouheina,Công Bình,công bằng,Tính từ -na,公平な態度で対応する。,Ứng phó bằng một thái độ công bằng.,公 (Công: công cộng/công khai) + 平 (Bình: bình đẳng/hòa bình),[1],連: 公平なに関する / 類: công bằng,vocab

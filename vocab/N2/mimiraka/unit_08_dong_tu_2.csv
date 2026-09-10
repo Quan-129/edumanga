@@ -1,0 +1,116 @@
+stt,term,reading,romaji,han_viet,meaning,type,exam_ja,exam_vi,kanji_breakdown,pitch_accent,synonyms_antonyms,card_type
+636,設定,せってい,settei,Thiết Định,thiết lập -  cài đặt,Danh từ,設定について詳しく調査する。,Nghiên cứu kỹ lưỡng về thiết lập.,設 (Thiết: thiết lập/xây dựng) + 定 (Định: cố định/quy định),[1],連: 設定に関する / 類: thiết lập,vocab
+637,調節,ちょうせつ,chousetsu,Điệu Tiết,Điều chỉnh ( âm lượng -  nhiệt độ ),Động từ nhóm 1,状況に合わせて適切に調節。,Điều chỉnh ( âm lượng một cách phù hợp theo tình huống.,調 (Điệu: điều tra/giai điệu/điều chỉnh) + 節 (Tiết: tiết chế/đốt tre/tiết mục),[1],連: 調節に関する / 類: Điều chỉnh ( âm lượng,vocab
+638,調整,ちょうせい,chousei,Điệu Chỉnh,điều chỉnh -  sắp xếp -  bố trí,Danh từ,調整について詳しく調査する。,Nghiên cứu kỹ lưỡng về điều chỉnh.,調 (Điệu: điều tra/giai điệu/điều chỉnh) + 整 (Chỉnh: chỉnh đốn/sắp xếp),[1],連: 調整に関する / 類: điều chỉnh,vocab
+639,解放,かいほう,kaihou,Giải Phóng,giải phóng -  giải thoát,Danh từ,解放について詳しく調査する。,Nghiên cứu kỹ lưỡng về giải phóng.,解 (Giải: giải thích/giải tỏa/hiểu) + 放 (Phóng: thả ra/phát sóng),[1],連: 解放に関する / 類: giải phóng,vocab
+640,総合,そうごう,sougou,Tổng Hợp,tổng hợp -  cùng nhau,Danh từ,総合について詳しく調査する。,Nghiên cứu kỹ lưỡng về tổng hợp.,総 (Tổng: tổng cộng/toàn bộ) + 合 (Hợp: thích hợp/gặp gỡ),[1],連: 総合に関する / 類: tổng hợp,vocab
+641,連続,れんぞく,renzoku,Liên Tục,liên tục -  dài tập,Danh từ,連続について詳しく調査する。,Nghiên cứu kỹ lưỡng về liên tục.,連 (Liên: kết nối/liên lạc/dẫn theo) + 続 (Tục: tiếp tục/liên tục),[1],連: 連続に関する / 類: liên tục,vocab
+642,持続,じぞく,jizoku,Trì Tục,duy trì -  tiếp tục,Danh từ,持続について詳しく調査する。,Nghiên cứu kỹ lưỡng về duy trì.,持 (Trì: cầm/nắm giữ/duy trì) + 続 (Tục: tiếp tục/liên tục),[0],連: 持続に関する / 類: duy trì,vocab
+643,中断,ちゅうだん,chuudan,Trung Đoạn,gián đoạn -  tạm dừng,Danh từ,中断について詳しく調査する。,Nghiên cứu kỹ lưỡng về gián đoạn.,中 (Trung: trong/ở giữa) + 断 (Đoạn: cắt đứt/từ chối/phán đoán),[1],連: 中断に関する / 類: gián đoạn,vocab
+644,安定,あんてい,antei,An Định,ổn định,Danh từ,安定について詳しく調査する。,Nghiên cứu kỹ lưỡng về ổn định.,安 (An: an toàn/yên ổn/rẻ) + 定 (Định: cố định/quy định),[1],連: 安定に関する / 類: ổn định,vocab
+645,混乱,こんらん,konran,Hỗn Loạn,lúng túng -  hỗn loạn,Danh từ,混乱について詳しく調査する。,Nghiên cứu kỹ lưỡng về lúng túng.,混 (Hỗn: hỗn tạp/pha trộn) + 乱 (Loạn: rối loạn/hỗn loạn),[1],連: 混乱に関する / 類: lúng túng,vocab
+646,上昇,じょうしょう,joushou,Thượng Thăng,tiến lên -  tăng lên -  bốc lên,Động từ nhóm 1,状況に合わせて適切に上昇。,Tiến lên một cách phù hợp theo tình huống.,上 (Thượng: trên/lên) + 昇 (Thăng: lên cao/thăng tiến),[1],連: 上昇に関する / 類: tiến lên,vocab
+647,達成,たっせい,tassei,Đạt Thành,đạt được -  hoàn thành,Danh từ,達成について詳しく調査する。,Nghiên cứu kỹ lưỡng về đạt được.,達 (Đạt: đạt được/thông đạt/nhóm người) + 成 (Thành: hoàn thành/trở thành),[1],連: 達成に関する / 類: đạt được,vocab
+648,事情,じじょう,jijou,Sự Tình,tình hình -  điều kiện,Động từ nhóm 1,状況に合わせて適切に事情。,Tình hình một cách phù hợp theo tình huống.,事 (Sự: sự việc/công việc) + 情 (Tình: tình cảm/hoàn cảnh),[1],連: 事情に関する / 類: tình hình,vocab
+649,事態,じたい,jitai,Sự Thái,tình thế -  tình trạng -  sự tình,Tính từ -i,この問題は非常に事態。,Vấn đề này rất tình thế.,事 (Sự: sự việc/công việc) + 態 (Thái: thái độ/trạng thái),[0],連: 事態に関する / 類: tình thế,vocab
+650,障害,しょうがい,shougai,Chướng Hại,khuyết tật -  tàn tật,Danh từ,障害について詳しく調査する。,Nghiên cứu kỹ lưỡng về khuyết tật.,障 (Chướng: chướng ngại/cản trở) + 害 (Hại: tác hại/thiệt hại),[1],連: 障害に関する / 類: khuyết tật,vocab
+651,福祉,ふくし,fukushi,Phúc Chỉ,phúc lợi,Danh từ,福祉について詳しく調査する。,Nghiên cứu kỹ lưỡng về phúc lợi.,福 (Phúc: hạnh phúc/phúc lành) + 祉 (Chỉ: phúc lợi/hạnh phúc),[0],連: 福祉に関する / 類: phúc lợi,vocab
+652,社会,しゃかい,shakai,Xã Hội,xã hội,Danh từ,社会について詳しく調査する。,Nghiên cứu kỹ lưỡng về xã hội.,社 (Xã: xã hội/công ty) + 会 (Hội: gặp gỡ/hội họp),[1],連: 社会に関する / 類: xã hội,vocab
+653,都会,とかい,tokai,Đô Hội,thành phố -  thành thị,Danh từ,都会について詳しく調査する。,Nghiên cứu kỹ lưỡng về thành phố.,都 (Đô: thủ đô/đô thị/tiện lợi) + 会 (Hội: gặp gỡ/hội họp),[0],連: 都会に関する / 類: thành phố,vocab
+654,世論,よろん,yoron,Thế Luận,dư luận,Danh từ,世論について詳しく調査する。,Nghiên cứu kỹ lưỡng về dư luận.,世 (Thế: thế giới/đời) + 論 (Luận: bàn luận/lý luận),[0],連: 世論に関する / 類: dư luận,vocab
+655,民族,みんぞく,minzoku,Dân Tộc,dân tộc,Danh từ,民族について詳しく調査する。,Nghiên cứu kỹ lưỡng về dân tộc.,民 (Dân: người dân/nhân dân) + 族 (Tộc: gia tộc/chủng tộc),[1],連: 民族に関する / 類: dân tộc,vocab
+656,增大,ぞうだい,zoudai,Tăng Đại,sự mở rộng -  sự tăng thêm,Tính từ -i,この問題は非常に增大。,Vấn đề này rất sự mở rộng.,增 (Tăng: tăng thêm/gia tăng) + 大 (Đại: to lớn/vĩ đại),[1],連: 增大に関する / 類: sự mở rộng,vocab
+657,增量,ぞうりょう,zouryou,Tăng Lượng,tăng thêm lượng,Động từ nhóm 1,状況に合わせて適切に增量。,Tăng thêm lượng một cách phù hợp theo tình huống.,增 (Tăng: tăng thêm/gia tăng) + 量 (Lượng: số lượng/đo lường),[1],連: 增量に関する / 類: tăng thêm lượng,vocab
+658,增税,ぞうぜい,zouzei,Tăng Thuế,tăng thuế,Danh từ,增税について詳しく調査する。,Nghiên cứu kỹ lưỡng về tăng thuế.,增 (Tăng: tăng thêm/gia tăng) + 税 (Thuế: tiền thuế),[1],連: 增税に関する / 類: tăng thuế,vocab
+659,増員,ぞういん,zouin,Tăng Viên,tăng số lượng nhân viên,Danh từ,増員について詳しく調査する。,Nghiên cứu kỹ lưỡng về tăng số lượng nhân viên.,増 (Tăng: tăng thêm/gia tăng) + 員 (Viên: thành viên/nhân viên),[1],連: 増員に関する / 類: tăng số lượng nhân viên,vocab
+660,減点,げんてん,genten,Giảm Điểm,giảm trừ,Danh từ,減点について詳しく調査する。,Nghiên cứu kỹ lưỡng về giảm trừ.,減 (Giảm: giảm bớt/suy giảm) + 点 (Điểm: điểm số/chấm điểm/vết),[1],連: 減点に関する / 類: giảm trừ,vocab
+661,減退,げんたい,gentai,Giảm Thoái,giảm sút -  suy thoái,Tính từ -i,この問題は非常に減退。,Vấn đề này rất giảm sút.,減 (Giảm: giảm bớt/suy giảm) + 退 (Thoái: rút lui/thoái lui),[1],連: 減退に関する / 類: giảm sút,vocab
+662,減量,げんりょう,genryou,Giảm Lượng,giảm cân -  lượng hao hụt,Động từ nhóm 1,状況に合わせて適切に減量。,Giảm cân một cách phù hợp theo tình huống.,減 (Giảm: giảm bớt/suy giảm) + 量 (Lượng: số lượng/đo lường),[1],連: 減量に関する / 類: giảm cân,vocab
+663,開発,かいはつ,kaihatsu,Khai Phát,phát triển -  khai thác,Danh từ,開発について詳しく調査する。,Nghiên cứu kỹ lưỡng về phát triển.,開 (Khai: mở ra/khai trương) + 発 (Phát: phát triển/xuất phát),[1],連: 開発に関する / 類: phát triển,vocab
+664,開店,かいてん,kaiten,Khai Điếm,mở cửa hàng -  khai trương nhà hàng,Danh từ,開店について詳しく調査する。,Nghiên cứu kỹ lưỡng về mở cửa hàng.,開 (Khai: mở ra/khai trương) + 店 (Điếm: cửa hàng/tiệm),[1],連: 開店に関する / 類: mở cửa hàng,vocab
+665,開業,かいぎょう,kaigyou,Khai Nghiệp,khởi nghiệp -  triển khai -  mở,Động từ nhóm 1,状況に合わせて適切に開業。,Khởi nghiệp một cách phù hợp theo tình huống.,開 (Khai: mở ra/khai trương) + 業 (Nghiệp: nghề nghiệp/kinh doanh),[1],連: 開業に関する / 類: khởi nghiệp,vocab
+666,開催,かいさい,kaisai,Khai Thôi,tổ chức -  đăng cai,Danh từ,開催について詳しく調査する。,Nghiên cứu kỹ lưỡng về tổ chức.,開 (Khai: mở ra/khai trương) + 催 (Thôi: tổ chức/thôi thúc),[1],連: 開催に関する / 類: tổ chức,vocab
+667,開放,かいほう,kaihou,Khai Phóng,sự mở cửa; sự tự do hoá,Động từ nhóm 1,状況に合わせて適切に開放。,Sự mở cửa một cách phù hợp theo tình huống.,開 (Khai: mở ra/khai trương) + 放 (Phóng: thả ra/phát sóng),[1],連: 開放に関する / 類: sự mở cửa; sự tự do hoá,vocab
+668,閉鎖,へいさ,heisa,Bế Tỏa,phong tỏa -  đóng lối ra vào -  tạm dừng công việc,Danh từ,閉鎖について詳しく調査する。,Nghiên cứu kỹ lưỡng về phong tỏa.,閉 (Bế: đóng lại/bế mạc) + 鎖 (Tỏa: dây xích/khóa lại),[0],連: 閉鎖に関する / 類: phong tỏa,vocab
+669,密閉,みっぺい,mippei,Mật Bế,kín hơi -  niêm phong,Danh từ,密閉について詳しく調査する。,Nghiên cứu kỹ lưỡng về kín hơi.,密 (Mật: bí mật/chặt chẽ) + 閉 (Bế: đóng lại/bế mạc),[1],連: 密閉に関する / 類: kín hơi,vocab
+670,改善,かいぜん,kaizen,Cải Thiện,cải thiện,Danh từ,改善について詳しく調査する。,Nghiên cứu kỹ lưỡng về cải thiện.,改 (Cải: cải thiện/sửa đổi) + 善 (Thiện: thiện ý/tốt lành),[1],連: 改善に関する / 類: cải thiện,vocab
+671,改良,かいりょう,kairyou,Cải Lương,cải tiến ( vật chất ),Danh từ,改良について詳しく調査する。,Nghiên cứu kỹ lưỡng về cải tiến ( vật chất ).,改 (Cải: cải thiện/sửa đổi) + 良 (Lương: tốt lành/lương thiện),[1],連: 改良に関する / 類: cải tiến ( vật chất ),vocab
+672,改革,かいかく,kaikaku,Cải Cách,Cải cách,Danh từ,改革について詳しく調査する。,Nghiên cứu kỹ lưỡng về Cải cách.,改 (Cải: cải thiện/sửa đổi) + 革 (Cách: da thuộc/cải cách),[1],連: 改革に関する / 類: Cải cách,vocab
+673,改正,かいせい,kaisei,Cải Chính,cải chính -  sửa đổi,Danh từ,改正について詳しく調査する。,Nghiên cứu kỹ lưỡng về cải chính.,改 (Cải: cải thiện/sửa đổi) + 正 (Chính: đúng đắn/chính xác),[1],連: 改正に関する / 類: cải chính,vocab
+674,改定,かいてい,kaitei,Cải Định,Sửa đổi -  thay đổi,Danh từ,改定について詳しく調査する。,Nghiên cứu kỹ lưỡng về Sửa đổi.,改 (Cải: cải thiện/sửa đổi) + 定 (Định: cố định/quy định),[1],連: 改定に関する / 類: Sửa đổi,vocab
+675,改修,かいしゅう,kaishuu,Cải Tu,Cảu tạo -  tu bổ -  nâng cấp,Danh từ,改修について詳しく調査する。,Nghiên cứu kỹ lưỡng về Cảu tạo.,改 (Cải: cải thiện/sửa đổi) + 修 (Tu: tu sửa/tu học),[1],連: 改修に関する / 類: Cảu tạo,vocab
+676,一致,いっち,itchi,Nhất Trí,nhất trí -  thống nhất -  trùng hợp,Danh từ,一致について詳しく調査する。,Nghiên cứu kỹ lưỡng về nhất trí.,一 (Nhất: một/nhất thể) + 致 (Trí: dẫn đến/làm cho),[0],連: 一致に関する / 類: nhất trí,vocab
+677,一方,いっぽう,ippou,Nhất Phương,mặt khác -  ngày càng,Liên từ,努力を重ねた、一方成功を収めた。,"Đã nỗ lực không ngừng, mặt khác đã gặt hái thành công.",一 (Nhất: một/nhất thể) + 方 (Phương: hướng/cách thức/vị),[1],連: 一方に関する / 類: mặt khác,vocab
+678,一定,いってい,ittei,Nhất Định,nhất định -  không thay đổi,Danh từ,一定について詳しく調査する。,Nghiên cứu kỹ lưỡng về nhất định.,一 (Nhất: một/nhất thể) + 定 (Định: cố định/quy định),[1],連: 一定に関する / 類: nhất định,vocab
+679,一人前,いちにんまえ,ichininmae,Nhất Nhân Tiền,Suất ăn -  trưởng thành,Danh từ,一人前について詳しく調査する。,Nghiên cứu kỹ lưỡng về Suất ăn.,一 (Nhất: một/nhất thể) + 人 (Nhân: người/nhân loại) + 前 (Tiền: phía trước/trước đây),[1],連: 一人前に関する / 類: Suất ăn,vocab
+680,一流,いちりゅう,ichiryuu,Nhất Lưu,bậc nhất -  hàng đầu,Danh từ,一流について詳しく調査する。,Nghiên cứu kỹ lưỡng về bậc nhất.,一 (Nhất: một/nhất thể) + 流 (Lưu: chảy/dòng chảy/lan truyền),[1],連: 一流に関する / 類: bậc nhất,vocab
+681,映る,うつる,utsuru,Ánh,phản chiếu -  được chiếu,Động từ nhóm 1,状況に合わせて適切に映る。,Phản chiếu một cách phù hợp theo tình huống.,映 (Ánh: phản chiếu/chiếu phim),[0],連: 映るに関する / 類: phản chiếu,vocab
+682,映す,うつす,utsusu,Ánh,chiếu -  phản chiếu -  soi,Động từ nhóm 1,状況に合わせて適切に映す。,Chiếu một cách phù hợp theo tình huống.,映 (Ánh: phản chiếu/chiếu phim),[0],連: 映すに関する / 類: chiếu,vocab
+683,つかる,つかる,tsukaru,-,Ngâm nước nóng( chân,Danh từ,つかるについて詳しく調査する。,Nghiên cứu kỹ lưỡng về Ngâm nước nóng( chân.,-,[0],連: つかるに関する / 類: Ngâm nước nóng( chân,vocab
+684,つける,つける,tsukeru,-,ngâm -  chấm,Danh từ,つけるについて詳しく調査する。,Nghiên cứu kỹ lưỡng về ngâm.,-,[0],連: つけるに関する / 類: ngâm,vocab
+685,浮かぶ,うかぶ,ukabu,Phù,nổi -  nghĩ ra -  lơ lửng,Động từ nhóm 1,状況に合わせて適切に浮かぶ。,Nổi một cách phù hợp theo tình huống.,浮 (Phù: nổi lên/lơ lửng),[0],連: 浮かぶに関する / 類: nổi,vocab
+686,浮かべる,うかべる,ukaberu,Phù,Làm trôi nổi,Động từ nhóm 1,状況に合わせて適切に浮かべる。,Làm trôi nổi một cách phù hợp theo tình huống.,浮 (Phù: nổi lên/lơ lửng),[1],連: 浮かべるに関する / 類: Làm trôi nổi,vocab
+687,浮く,うく,uku,Phù,Nối; lung lay -  dư ra -  tách biệt -  lấp lửng,Động từ nhóm 1,状況に合わせて適切に浮く。,Nối một cách phù hợp theo tình huống.,浮 (Phù: nổi lên/lơ lửng),[0],連: 浮くに関する / 類: Nối; lung lay,vocab
+688,潜る,もぐる,moguru,Tiềm,Lặn -  chui,Động từ nhóm 1,状況に合わせて適切に潜る。,Lặn một cách phù hợp theo tình huống.,潜 (Tiềm: lặn xuống/tiềm ẩn),[0],連: 潜るに関する / 類: Lặn,vocab
+689,跳ねる,はねる,haneru,Khiêu,bắn ra ( dầu -  mỡ -  bùn - ...) -  nhảy,Động từ nhóm 2,状況に合わせて適切に跳ねる。,Bắn ra ( dầu một cách phù hợp theo tình huống.,跳 (Khiêu: nhảy lên/bật nhảy),[0],連: 跳ねるに関する / 類: bắn ra ( dầu,vocab
+690,背負う,せおう,seou,Bối Phụ,Gánh vác -  cõng -  đảm đương,Động từ nhóm 1,状況に合わせて適切に背負う。,Gánh vác một cách phù hợp theo tình huống.,背 (Bối: lưng/phía sau/quay lưng) + 負 (Phụ: thua cuộc/gánh chịu),[0],連: 背負うに関する / 類: Gánh vác,vocab
+691,追う,おう,ou,Truy,đuổi -  theo đuổi,Động từ nhóm 1,状況に合わせて適切に追う。,Đuổi một cách phù hợp theo tình huống.,追 (Truy: đuổi theo/truy lùng),[0],連: 追うに関する / 類: đuổi,vocab
+692,追いかける,おいかける,oikakeru,Truy,chạy theo -  đuổi theo,Động từ nhóm 2,状況に合わせて適切に追いかける。,Chạy theo một cách phù hợp theo tình huống.,追 (Truy: đuổi theo/truy lùng),[1],連: 追いかけるに関する / 類: chạy theo,vocab
+693,追いつく,おいつく,oitsuku,Truy,đuổi kịp,Động từ nhóm 1,状況に合わせて適切に追いつく。,Đuổi kịp một cách phù hợp theo tình huống.,追 (Truy: đuổi theo/truy lùng),[1],連: 追いつくに関する / 類: đuổi kịp,vocab
+694,追い越す,おいこす,oikosu,Truy Việt,vượt lên,Động từ nhóm 1,状況に合わせて適切に追い越す。,Vượt lên một cách phù hợp theo tình huống.,追 (Truy: đuổi theo/truy lùng) + 越 (Việt: vượt qua/chuyển dời),[1],連: 追い越すに関する / 類: vượt lên,vocab
+695,振り向く,ふりむく,furimuku,Chấn Hướng,ngoảnh lại -  quay lại,Động từ nhóm 1,状況に合わせて適切に振り向く。,Ngoảnh lại một cách phù hợp theo tình huống.,振 (Chấn: vẫy/lắc/chấn hưng) + 向 (Hướng: hướng về/phía),[1],連: 振り向くに関する / 類: ngoảnh lại,vocab
+696,捕る/採る/執る,とる,toru,Bộ Thải Chấp,Bắt -  tuyển dụng -  đảm nhiệm,Động từ nhóm 1,状況に合わせて適切に捕る/採る/執る。,Bắt một cách phù hợp theo tình huống.,捕 (Bộ: bắt giữ/tóm lấy) + 採 (Thải: hái/thu thập/tuyển dụng) + 執 (Chấp: cầm/chấp hành/viết),[0],連: 捕る/採る/執るに関する / 類: Bắt,vocab
+697,取り上げる,とりあげる,toriageru,Thủ Thượng,Bình luận -  cầm lấy -  tịch thu -  giơ lên...,Động từ nhóm 1,状況に合わせて適切に取り上げる。,Bình luận một cách phù hợp theo tình huống.,取 (Thủ: lấy/cầm lấy) + 上 (Thượng: trên/lên),[1],連: 取り上げるに関する / 類: Bình luận,vocab
+698,取り入れる,とりいれる,toriireru,Thủ Nhập,thu hoạch -  áp dụng -  đưa vào,Động từ nhóm 2,状況に合わせて適切に取り入れる。,Thu hoạch một cách phù hợp theo tình huống.,取 (Thủ: lấy/cầm lấy) + 入 (Nhập: vào/nhập vào),[1],連: 取り入れるに関する / 類: thu hoạch,vocab
+699,削る,けずる,kezuru,Tước,cắt giảm -  gọt giũa,Động từ nhóm 1,状況に合わせて適切に削る。,Cắt giảm một cách phù hợp theo tình huống.,削 (Tước: gọt/cắt giảm),[0],連: 削るに関する / 類: cắt giảm,vocab
+700,縛る,しばる,shibaru,Phược,buộc -  thắt,Động từ nhóm 1,状況に合わせて適切に縛る。,Buộc một cách phù hợp theo tình huống.,縛 (Phược: trói buộc/buộc lại),[0],連: 縛るに関する / 類: buộc,vocab
+701,絞る・搾る,しぼる,shiboru,Giảo Tráp,vắt -  bóp,Động từ nhóm 1,状況に合わせて適切に絞る・搾る。,Vắt một cách phù hợp theo tình huống.,絞 (Giảo: vắt kiệt/thắt lại) + 搾 (Tráp: ép/vắt lấy),[0],連: 絞る・搾るに関する / 類: vắt,vocab
+702,回る,まわる,mawaru,Hồi,xoay quanh -  dạo quanh -  chuyển (bóng),Động từ nhóm 1,状況に合わせて適切に回る。,Xoay quanh một cách phù hợp theo tình huống.,回 (Hồi: quay lại/vòng quanh),[0],連: 回るに関する / 類: xoay quanh,vocab
+703,回す,まわす,mawasu,Hồi,xoay -  chuyển -  vặn núm -  truyền tay,Động từ nhóm 1,状況に合わせて適切に回す。,Xoay một cách phù hợp theo tình huống.,回 (Hồi: quay lại/vòng quanh),[0],連: 回すに関する / 類: xoay,vocab
+704,区切る,くぎる,kugiru,Khu Thiết,Phân chia -  chia,Động từ nhóm 1,状況に合わせて適切に区切る。,Phân chia một cách phù hợp theo tình huống.,区 (Khu: khu vực/phân khu) + 切 (Thiết: cắt/sát sườn),[0],連: 区切るに関する / 類: Phân chia,vocab
+705,組む,くむ,kumu,Tổ,Lên lịch -  hợp tác -  lắp ghép,Động từ nhóm 1,状況に合わせて適切に組む。,Lên lịch một cách phù hợp theo tình huống.,組 (Tổ: tổ chức/kết hợp/nhóm),[0],連: 組むに関する / 類: Lên lịch,vocab
+706,組み立てる,くみたてる,kumitateru,Tổ Lập,lắp ráp -  tổ chức,Động từ nhóm 2,状況に合わせて適切に組み立てる。,Lắp ráp một cách phù hợp theo tình huống.,組 (Tổ: tổ chức/kết hợp/nhóm) + 立 (Lập: đứng/thành lập),[1],連: 組み立てるに関する / 類: lắp ráp,vocab
+707,加わる,くわわる,kuwawaru,Gia,Gia nhập -  tăng cường,Động từ nhóm 1,状況に合わせて適切に加わる。,Gia nhập một cách phù hợp theo tình huống.,加 (Gia: thêm vào/tham gia),[1],連: 加わるに関する / 類: Gia nhập,vocab
+708,加える,くわえる,kuwaeru,Gia,thêm vào -  làm tăng lên,Động từ nhóm 2,状況に合わせて適切に加える。,Thêm vào một cách phù hợp theo tình huống.,加 (Gia: thêm vào/tham gia),[1],連: 加えるに関する / 類: thêm vào,vocab
+709,仕上がる,しあがる,shiagaru,Sĩ Thượng,hoàn thiện -  hoàn thành,Động từ nhóm 1,状況に合わせて適切に仕上がる。,Hoàn thiện một cách phù hợp theo tình huống.,仕 (Sĩ: phục vụ/công việc) + 上 (Thượng: trên/lên),[1],連: 仕上がるに関する / 類: hoàn thiện,vocab
+710,仕上げる,しあげる,shiageru,Sĩ Thượng,hoàn thành -  giai đoạn hoàn thiện -  giai đoạn cuối,Động từ nhóm 1,状況に合わせて適切に仕上げる。,Hoàn thành một cách phù hợp theo tình huống.,仕 (Sĩ: phục vụ/công việc) + 上 (Thượng: trên/lên),[1],連: 仕上げるに関する / 類: hoàn thành,vocab
+711,通り掛かる,とおりかかる,toorikakaru,Thông Quải,đi ngang qua,Động từ nhóm 1,状況に合わせて適切に通り掛かる。,Đi ngang qua một cách phù hợp theo tình huống.,通 (Thông: thông suốt/đi lại/hiểu biết) + 掛 (Quải: treo lên/bắt đầu),[1],連: 通り掛かるに関する / 類: đi ngang qua,vocab
+712,飛び回る,とびまわる,tobimawaru,Phi Hồi,chạy tới chạy lui -  bay loanh quanh,Động từ nhóm 1,状況に合わせて適切に飛び回る。,Chạy tới chạy lui một cách phù hợp theo tình huống.,飛 (Phi: bay lượn/phi hành) + 回 (Hồi: quay lại/vòng quanh),[1],連: 飛び回るに関する / 類: chạy tới chạy lui,vocab
+713,巡る,めぐる,meguru,Tuần,lặp lại -  xung quanh ( vấn đề gì đó ) -  vòng quanh,Động từ nhóm 1,状況に合わせて適切に巡る。,Lặp lại một cách phù hợp theo tình huống.,巡 (Tuần: tuần tra/dạo quanh),[0],連: 巡るに関する / 類: lặp lại,vocab
+714,補う,おぎなう,oginau,Bổ,thêm -  bổ sung -  đền bù,Động từ nhóm 1,状況に合わせて適切に補う。,Thêm một cách phù hợp theo tình huống.,補 (Bổ: bổ sung/bù đắp),[1],連: 補うに関する / 類: thêm,vocab
+715,防ぐ,ふせぐ,fusegu,Phòng,phòng -  chống,Động từ nhóm 1,状況に合わせて適切に防ぐ。,Phòng một cách phù hợp theo tình huống.,防 (Phòng: phòng chống/đề phòng),[0],連: 防ぐに関する / 類: phòng,vocab
+716,救う,すくう,sukuu,Cứu,cứu -  giúp,Động từ nhóm 1,状況に合わせて適切に救う。,Cứu một cách phù hợp theo tình huống.,救 (Cứu: cứu giúp/cứu trợ),[0],連: 救うに関する / 類: cứu,vocab
+717,除く,のぞく,nozoku,Trừ,loại trừ -  bỏ qua -  lấy đi,Động từ nhóm 1,状況に合わせて適切に除く。,Loại trừ một cách phù hợp theo tình huống.,除 (Trừ: loại trừ/ngoại trừ),[0],連: 除くに関する / 類: loại trừ,vocab
+718,省く,はぶく,habuku,Tỉnh,loại bỏ -  tiết kiệm,Động từ nhóm 1,状況に合わせて適切に省く。,Loại bỏ một cách phù hợp theo tình huống.,省 (Tỉnh: xem xét lại/tỉnh thành/tiết kiệm),[0],連: 省くに関する / 類: loại bỏ,vocab
+719,誤る,あやまる,ayamaru,Ngộ,mắc lỗi -  lầm lỡ,Động từ nhóm 1,状況に合わせて適切に誤る。,Mắc lỗi một cách phù hợp theo tình huống.,誤 (Ngộ: sai lầm/ngộ nhận),[1],連: 誤るに関する / 類: mắc lỗi,vocab
+720,奪う,うばう,ubau,Đoạt,cướp đoạt -  làm say đắm,Động từ nhóm 1,状況に合わせて適切に奪う。,Cướp đoạt một cách phù hợp theo tình huống.,奪 (Đoạt: cướp đoạt/đoạt lấy),[0],連: 奪うに関する / 類: cướp đoạt,vocab
+721,しまう,しまう,shimau,-,cất đi,Động từ nhóm 1,状況に合わせて適切にしまう。,Cất đi một cách phù hợp theo tình huống.,-,[0],連: しまうに関する / 類: cất đi,vocab
+722,怠ける,なまける,namakeru,Đãi,lười biếng,Động từ nhóm 2,状況に合わせて適切に怠ける。,Lười biếng một cách phù hợp theo tình huống.,怠 (Đãi: lười biếng/chểnh mảng),[1],連: 怠けるに関する / 類: lười biếng,vocab
+723,失う,うしなう,ushinau,Thất,mất,Động từ nhóm 1,状況に合わせて適切に失う。,Mất một cách phù hợp theo tình huống.,失 (Thất: mất/thất bại),[1],連: 失うに関する / 類: mất,vocab
+724,攻める,せめる,semeru,Công,tấn công -  táo bạo,Động từ nhóm 2,状況に合わせて適切に攻める。,Tấn công một cách phù hợp theo tình huống.,攻 (Công: tấn công/công kích),[0],連: 攻めるに関する / 類: tấn công,vocab
+725,にらむ,にらむ,niramu,-,lườm -  liếc -  nhìn chằm chằm,Động từ nhóm 1,状況に合わせて適切ににらむ。,Lườm một cách phù hợp theo tình huống.,-,[0],連: にらむに関する / 類: lườm,vocab
+726,責める,せめる,semeru,Trách,đổ lỗi -  trách móc,Động từ nhóm 2,状況に合わせて適切に責める。,Đổ lỗi một cách phù hợp theo tình huống.,責 (Trách: trách nhiệm/trách móc),[0],連: 責めるに関する / 類: đổ lỗi,vocab
+727,裏切る,うらぎる,uragiru,Lý Thiết,phản bội -  bán đứng,Động từ nhóm 1,状況に合わせて適切に裏切る。,Phản bội một cách phù hợp theo tình huống.,裏 (Lý: mặt trái/phía sau) + 切 (Thiết: cắt/sát sườn),[1],連: 裏切るに関する / 類: phản bội,vocab
+728,頼る,たよる,tayoru,Lại,dựa dẫm -  dựa vào -  nhờ cậy,Động từ nhóm 1,状況に合わせて適切に頼る。,Dựa dẫm một cách phù hợp theo tình huống.,頼 (Lại: nhờ cậy/tin cậy),[0],連: 頼るに関する / 類: dựa dẫm,vocab
+729,遭う,あう,au,Tao,gặp gỡ -  gặp phải,Động từ nhóm 1,状況に合わせて適切に遭う。,Gặp gỡ một cách phù hợp theo tình huống.,遭 (Tao: gặp phải/tao ngộ),[0],連: 遭うに関する / 類: gặp gỡ,vocab
+730,招く,まねく,maneku,Chiêu,mời -  rủ,Động từ nhóm 1,状況に合わせて適切に招く。,Mời một cách phù hợp theo tình huống.,招 (Chiêu: mời gọi/chiêu đãi),[0],連: 招くに関する / 類: mời,vocab
+731,引っ掛かる,ひっかかる,hikkakaru,Dẫn Quải,bị mắc vào -  bị vướng vào,Động từ nhóm 1,状況に合わせて適切に引っ掛かる。,Bị mắc vào một cách phù hợp theo tình huống.,引 (Dẫn: kéo/dẫn dắt) + 掛 (Quải: treo lên/bắt đầu),[1],連: 引っ掛かるに関する / 類: bị mắc vào,vocab
+732,引っ掛ける,ひっかける,hikkakeru,Dẫn Quải,mắc -  vướng -  hất -  bắn...,Động từ nhóm 2,状況に合わせて適切に引っ掛ける。,Mắc một cách phù hợp theo tình huống.,引 (Dẫn: kéo/dẫn dắt) + 掛 (Quải: treo lên/bắt đầu),[1],連: 引っ掛けるに関する / 類: mắc,vocab
+733,ひっくり返る,ひっくりかえる,hikkurikaeru,Phản,đảo lộn -  lật ngược,Động từ nhóm 2,状況に合わせて適切にひっくり返る。,Đảo lộn một cách phù hợp theo tình huống.,返 (Phản: trả lại/đáp lại),[1],連: ひっくり返るに関する / 類: đảo lộn,vocab
+734,ひっくり返す,ひっくりかえす,hikkurikaesu,Phản,đảo ngược -  lật ngửa,Động từ nhóm 1,状況に合わせて適切にひっくり返す。,Đảo ngược một cách phù hợp theo tình huống.,返 (Phản: trả lại/đáp lại),[1],連: ひっくり返すに関する / 類: đảo ngược,vocab
+735,ずれる,ずれる,zureru,-,trượt,Danh từ,ずれるについて詳しく調査する。,Nghiên cứu kỹ lưỡng về trượt.,-,[0],連: ずれるに関する / 類: trượt,vocab
+736,ずらす,ずらす,zurasu,-,lùi lại (lịch trình -  kế hoạch),Danh từ,ずらすについて詳しく調査する。,Nghiên cứu kỹ lưỡng về lùi lại (lịch trình.,-,[0],連: ずらすに関する / 類: lùi lại (lịch trình,vocab
+737,崩れる,くずれる,kuzureru,Băng,sạt lở -  sụp đổ -  lụi tàn,Động từ nhóm 2,状況に合わせて適切に崩れる。,Sạt lở một cách phù hợp theo tình huống.,崩 (Băng: sụp đổ/tan vỡ),[1],連: 崩れるに関する / 類: sạt lở,vocab
+738,崩す,くずす,kuzusu,Băng,thay đổi -  đổi (tiền) -  sụp -  vỡ -  mất đi,Động từ nhóm 1,状況に合わせて適切に崩す。,Thay đổi một cách phù hợp theo tình huống.,崩 (Băng: sụp đổ/tan vỡ),[0],連: 崩すに関する / 類: thay đổi,vocab
+739,荒れる,あれる,areru,Hoang,hỗn loạn -  động trời -  nứt nẻ -  tức giận,Động từ nhóm 2,状況に合わせて適切に荒れる。,Hỗn loạn một cách phù hợp theo tình huống.,荒 (Hoang: hoang vu/hung dữ/bão táp),[0],連: 荒れるに関する / 類: hỗn loạn,vocab
+740,荒らす,あらす,arasu,Hoang,làm lộn xộn -  tung tóe -  phá hoại,Động từ nhóm 1,状況に合わせて適切に荒らす。,Làm lộn xộn một cách phù hợp theo tình huống.,荒 (Hoang: hoang vu/hung dữ/bão táp),[0],連: 荒らすに関する / 類: làm lộn xộn,vocab
+741,認める,みとめる,mitomeru,Nhận,thừa nhận -  thú nhận -  khẳng định,Động từ nhóm 2,状況に合わせて適切に認める。,Thừa nhận một cách phù hợp theo tình huống.,認 (Nhận: thừa nhận/công nhận),[1],連: 認めるに関する / 類: thừa nhận,vocab
+742,見直す,みなおす,minaosu,Kiến Trực,nhìn lại -  rà soát,Động từ nhóm 1,状況に合わせて適切に見直す。,Nhìn lại một cách phù hợp theo tình huống.,見 (Kiến: nhìn/quan sát/gặp) + 直 (Trực: thẳng thắn/trực tiếp/sửa),[1],連: 見直すに関する / 類: nhìn lại,vocab
+743,見慣れる,みなれる,minareru,Kiến Quán,quen -  nhẵn mặt,Động từ nhóm 2,状況に合わせて適切に見慣れる。,Quen một cách phù hợp theo tình huống.,見 (Kiến: nhìn/quan sát/gặp) + 慣 (Quán: quen thuộc/thói quen),[1],連: 見慣れるに関する / 類: quen,vocab
+744,求める,もとめる,motomeru,Cầu,cầu mong -  mong muốn -  hỏi,Động từ nhóm 2,状況に合わせて適切に求める。,Cầu mong một cách phù hợp theo tình huống.,求 (Cầu: yêu cầu/tìm kiếm),[1],連: 求めるに関する / 類: cầu mong,vocab
+745,漏れる,もれる,moreru,Lậu,rò rỉ -  bỏ sót -  thiếu -  thốt ra...,Động từ nhóm 2,状況に合わせて適切に漏れる。,Rò rỉ một cách phù hợp theo tình huống.,漏 (Lậu: rò rỉ/lọt ra),[0],連: 漏れるに関する / 類: rò rỉ,vocab
+746,漏らす,もらす,morasu,Lậu,biểu hiện -  lộ -  bỏ sót,Động từ nhóm 1,状況に合わせて適切に漏らす。,Biểu hiện một cách phù hợp theo tình huống.,漏 (Lậu: rò rỉ/lọt ra),[0],連: 漏らすに関する / 類: biểu hiện,vocab
+747,なる,なる,naru,-,trở nên -  trở thành -  kêu -  gáy -  ra quả,Động từ nhóm 1,状況に合わせて適切になる。,Trở nên một cách phù hợp theo tình huống.,-,[0],連: なるに関する / 類: trở nên,vocab
+748,焦げる,こげる,kogeru,Tiêu,bị cháy,Động từ nhóm 1,状況に合わせて適切に焦げる。,Bị cháy một cách phù hợp theo tình huống.,焦 (Tiêu: cháy sém/sốt ruột),[0],連: 焦げるに関する / 類: bị cháy,vocab
+749,反する,はんする,hansuru,Phản,trái lại,Động từ する,計画を慎重に反する。,Thực hiện trái lại kế hoạch một cách thận trọng.,反 (Phản: phản đối/ngược lại),[1],連: 反するに関する / 類: trái lại,vocab
+750,膨れる,ふくれる,fukureru,Bành,phồng -  sưng -  hơn dỗi,Động từ nhóm 2,状況に合わせて適切に膨れる。,Phồng một cách phù hợp theo tình huống.,膨 (Bành: phình to/phồng lên),[1],連: 膨れるに関する / 類: phồng,vocab

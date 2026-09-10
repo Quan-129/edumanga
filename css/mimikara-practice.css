@@ -1,0 +1,789 @@
+/* ==========================================================================
+   EDUMANGA HUB - MIMIKARA N2 VOCABULARY PRACTICE SYSTEM (1.160 TỪ)
+   3-Step Mastery Funnel: Flashcard -> Matching 5x5 -> 2-Way Typing
+   ========================================================================== */
+
+/* Modal Backdrop & Outer Container */
+.mimikara-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  background: rgba(10, 15, 29, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.3s ease;
+}
+
+.mimikara-modal.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.mimikara-modal-container {
+  width: 100%;
+  max-width: 1050px;
+  max-height: 90vh;
+  background: var(--bg-secondary, #111827);
+  border: 1px solid rgba(168, 85, 247, 0.3);
+  border-radius: 20px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7), 0 0 35px rgba(168, 85, 247, 0.2);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transform: scale(0.95) translateY(10px);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.mimikara-modal.active .mimikara-modal-container {
+  transform: scale(1) translateY(0);
+}
+
+/* Modal Header */
+.mimikara-modal-header {
+  padding: 1.25rem 1.75rem;
+  background: linear-gradient(135deg, rgba(30, 27, 75, 0.8), rgba(17, 24, 39, 0.95));
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.mimikara-header-left {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.mimikara-header-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #a855f7, #6366f1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 1.25rem;
+  box-shadow: 0 4px 15px rgba(168, 85, 247, 0.4);
+}
+
+.mimikara-header-titles h2 {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #fff;
+  margin: 0;
+  letter-spacing: -0.01em;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.mimikara-header-titles p {
+  font-size: 0.8rem;
+  color: var(--text-muted, #94a3b8);
+  margin: 2px 0 0 0;
+}
+
+.mimikara-btn-close {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--text-muted, #94a3b8);
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  transition: all 0.2s ease;
+}
+
+.mimikara-btn-close:hover {
+  background: rgba(239, 68, 68, 0.2);
+  color: #ef4444;
+  border-color: rgba(239, 68, 68, 0.4);
+  transform: rotate(90deg);
+}
+
+/* Modal Body */
+.mimikara-modal-body {
+  padding: 1.5rem;
+  overflow-y: auto;
+  flex: 1;
+}
+
+/* ==========================================================================
+   VIEW 1: UNITS OVERVIEW (TỔNG QUAN 14 UNIT)
+   ========================================================================== */
+.mimikara-stats-banner {
+  background: linear-gradient(135deg, rgba(88, 28, 135, 0.3), rgba(30, 27, 75, 0.4));
+  border: 1px solid rgba(168, 85, 247, 0.25);
+  border-radius: 16px;
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.mimikara-stat-info h3 {
+  font-size: 1.1rem;
+  color: #fff;
+  font-weight: 700;
+  margin: 0 0 0.25rem 0;
+}
+
+.mimikara-stat-info p {
+  font-size: 0.82rem;
+  color: #cbd5e1;
+  margin: 0;
+}
+
+.mimikara-overall-progress {
+  min-width: 260px;
+  flex: 1;
+  max-width: 400px;
+}
+
+.mimikara-progress-bar-bg {
+  height: 10px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  overflow: hidden;
+  position: relative;
+}
+
+.mimikara-progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #a855f7, #38bdf8, #10b981);
+  border-radius: 20px;
+  transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.mimikara-progress-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.78rem;
+  color: #cbd5e1;
+  margin-top: 0.35rem;
+  font-weight: 600;
+}
+
+/* 14 Units Grid */
+.mimikara-units-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1rem;
+}
+
+.mimikara-unit-card {
+  background: rgba(30, 41, 59, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  padding: 1.2rem;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+}
+
+.mimikara-unit-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: linear-gradient(to bottom, #a855f7, #6366f1);
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.mimikara-unit-card:hover {
+  transform: translateY(-3px);
+  background: rgba(30, 41, 59, 0.85);
+  border-color: rgba(168, 85, 247, 0.5);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5), 0 0 15px rgba(168, 85, 247, 0.2);
+}
+
+.mimikara-unit-card:hover::before {
+  opacity: 1;
+}
+
+.mimikara-unit-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.6rem;
+}
+
+.mimikara-unit-tag {
+  background: rgba(168, 85, 247, 0.15);
+  color: #c084fc;
+  border: 1px solid rgba(168, 85, 247, 0.3);
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 6px;
+  text-transform: uppercase;
+}
+
+.mimikara-unit-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #fff;
+  margin: 0.25rem 0 0.15rem 0;
+}
+
+.mimikara-unit-desc {
+  font-size: 0.78rem;
+  color: var(--text-muted, #94a3b8);
+  margin: 0 0 0.85rem 0;
+  line-height: 1.4;
+}
+
+.mimikara-unit-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 0.75rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  font-size: 0.78rem;
+  color: #94a3b8;
+}
+
+.mimikara-unit-count {
+  font-weight: 600;
+  color: #cbd5e1;
+}
+
+.mimikara-unit-badge-done {
+  color: #10b981;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* ==========================================================================
+   VIEW 2: UNIT SESSIONS (CHỌN PHIÊN 5 TỪ)
+   ========================================================================== */
+.mimikara-nav-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.mimikara-btn-back {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #fff;
+  padding: 8px 16px;
+  border-radius: 10px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s ease;
+}
+
+.mimikara-btn-back:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.25);
+  transform: translateX(-2px);
+}
+
+.mimikara-chunks-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1rem;
+}
+
+.mimikara-chunk-card {
+  background: rgba(30, 41, 59, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 14px;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: all 0.25s ease;
+}
+
+.mimikara-chunk-card.completed {
+  border-color: rgba(16, 185, 129, 0.4);
+  background: rgba(6, 78, 59, 0.15);
+}
+
+.mimikara-chunk-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(168, 85, 247, 0.4);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+
+.mimikara-chunk-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.mimikara-chunk-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.mimikara-chunk-badge {
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 6px;
+}
+
+.mimikara-chunk-badge.done {
+  background: rgba(16, 185, 129, 0.2);
+  color: #34d399;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.mimikara-chunk-badge.pending {
+  background: rgba(148, 163, 184, 0.15);
+  color: #94a3b8;
+}
+
+.mimikara-chunk-words-preview {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 1rem;
+}
+
+.mimikara-mini-word-pill {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: #e2e8f0;
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.mimikara-btn-start-chunk {
+  width: 100%;
+  padding: 10px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #a855f7, #6366f1);
+  color: #fff;
+  border: none;
+  font-weight: 700;
+  font-size: 0.85rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  transition: all 0.2s ease;
+}
+
+.mimikara-btn-start-chunk:hover {
+  filter: brightness(1.15);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 15px rgba(168, 85, 247, 0.4);
+}
+
+/* ==========================================================================
+   VIEW 3: 3-STEP PRACTICE WORKFLOW
+   ========================================================================== */
+.mimikara-stepper-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  background: rgba(17, 24, 39, 0.6);
+  padding: 0.85rem 1.25rem;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.mimikara-stepper-pills {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.mimikara-step-pill {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 6px 14px;
+  border-radius: 20px;
+  color: var(--text-muted, #94a3b8);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid transparent;
+  transition: all 0.25s ease;
+}
+
+.mimikara-step-pill.active {
+  color: #fff;
+  background: linear-gradient(135deg, #a855f7, #6366f1);
+  box-shadow: 0 2px 10px rgba(168, 85, 247, 0.4);
+}
+
+.mimikara-step-pill.completed {
+  color: #34d399;
+  background: rgba(16, 185, 129, 0.15);
+  border-color: rgba(16, 185, 129, 0.3);
+}
+
+/* STEP 1: FLASHCARD (5 TỪ) */
+.mimikara-flashcard-box {
+  max-width: 580px;
+  margin: 0 auto;
+  perspective: 1000px;
+}
+
+.mimikara-card-flip {
+  width: 100%;
+  min-height: 320px;
+  background: linear-gradient(135deg, rgba(30, 41, 59, 0.9), rgba(17, 24, 39, 0.95));
+  border: 2px solid rgba(168, 85, 247, 0.3);
+  border-radius: 20px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5), 0 0 20px rgba(168, 85, 247, 0.15);
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.mimikara-card-flip:hover {
+  border-color: rgba(168, 85, 247, 0.6);
+  transform: translateY(-2px);
+}
+
+.mimikara-card-main-word {
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.mimikara-kanji-huge {
+  font-size: 2.75rem;
+  font-weight: 900;
+  color: #fff;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.25rem;
+}
+
+.mimikara-reading-mid {
+  font-size: 1.25rem;
+  color: #38bdf8;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.mimikara-hanviet-tag {
+  display: inline-block;
+  background: rgba(245, 158, 11, 0.15);
+  color: #fbbf24;
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  padding: 3px 10px;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  margin-top: 0.35rem;
+}
+
+.mimikara-card-back-details {
+  margin-top: 0.5rem;
+}
+
+.mimikara-meaning-highlight {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: #34d399;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.mimikara-example-block {
+  background: rgba(0, 0, 0, 0.25);
+  border-left: 3px solid #a855f7;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  margin-bottom: 0.75rem;
+}
+
+.mimikara-example-ja {
+  font-size: 0.95rem;
+  color: #fff;
+  margin-bottom: 0.25rem;
+  font-weight: 600;
+}
+
+.mimikara-example-vi {
+  font-size: 0.82rem;
+  color: #94a3b8;
+}
+
+.mimikara-card-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 1.5rem;
+  max-width: 580px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* STEP 2: MATCHING GAME (5x5) */
+.mimikara-matching-board {
+  max-width: 780px;
+  margin: 0 auto;
+}
+
+.mimikara-matching-desc {
+  text-align: center;
+  font-size: 0.9rem;
+  color: #cbd5e1;
+  margin-bottom: 1.25rem;
+}
+
+.mimikara-match-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.mimikara-match-col {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.mimikara-match-card {
+  background: rgba(30, 41, 59, 0.6);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 1.1rem 1rem;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  user-select: none;
+}
+
+.mimikara-match-card:hover:not(.matched) {
+  border-color: rgba(168, 85, 247, 0.6);
+  background: rgba(30, 41, 59, 0.9);
+  transform: translateY(-2px);
+}
+
+.mimikara-match-card.selected {
+  border-color: #c084fc;
+  background: rgba(168, 85, 247, 0.25);
+  box-shadow: 0 0 15px rgba(168, 85, 247, 0.5);
+  transform: scale(1.02);
+}
+
+.mimikara-match-card.matched {
+  border-color: #10b981;
+  background: rgba(16, 185, 129, 0.15);
+  opacity: 0.35;
+  pointer-events: none;
+  transform: scale(0.98);
+}
+
+.mimikara-match-card.wrong {
+  border-color: #ef4444;
+  background: rgba(239, 68, 68, 0.2);
+  animation: shakeWrong 0.4s ease;
+}
+
+@keyframes shakeWrong {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-6px); }
+  75% { transform: translateX(6px); }
+}
+
+.mimikara-match-term {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #fff;
+}
+
+.mimikara-match-meaning {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #cbd5e1;
+}
+
+/* STEP 3: 2-WAY TYPING (10 LƯỢT) */
+.mimikara-typing-container {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.mimikara-typing-card {
+  background: linear-gradient(135deg, rgba(30, 41, 59, 0.8), rgba(17, 24, 39, 0.95));
+  border: 2px solid rgba(168, 85, 247, 0.3);
+  border-radius: 18px;
+  padding: 2rem;
+  text-align: center;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+  margin-bottom: 1.5rem;
+}
+
+.mimikara-typing-prompt-type {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #38bdf8;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.5rem;
+}
+
+.mimikara-typing-prompt-text {
+  font-size: 2.2rem;
+  font-weight: 900;
+  color: #fff;
+  margin-bottom: 0.5rem;
+}
+
+.mimikara-typing-hint {
+  font-size: 0.85rem;
+  color: #94a3b8;
+  margin-bottom: 1.5rem;
+}
+
+.mimikara-input-group {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.mimikara-typing-input {
+  flex: 1;
+  background: rgba(0, 0, 0, 0.3);
+  border: 2px solid rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  padding: 12px 16px;
+  font-size: 1.1rem;
+  color: #fff;
+  outline: none;
+  text-align: center;
+  transition: all 0.2s ease;
+}
+
+.mimikara-typing-input:focus {
+  border-color: #a855f7;
+  box-shadow: 0 0 15px rgba(168, 85, 247, 0.3);
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.mimikara-typing-input.correct {
+  border-color: #10b981;
+  background: rgba(16, 185, 129, 0.15);
+  color: #34d399;
+}
+
+.mimikara-typing-input.incorrect {
+  border-color: #ef4444;
+  background: rgba(239, 68, 68, 0.15);
+  color: #f87171;
+}
+
+.mimikara-typing-feedback {
+  min-height: 48px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* VICTORY MODAL SCREEN */
+.mimikara-victory-box {
+  text-align: center;
+  max-width: 520px;
+  margin: 2rem auto;
+  padding: 2.5rem;
+  background: linear-gradient(135deg, rgba(88, 28, 135, 0.4), rgba(15, 23, 42, 0.8));
+  border: 2px solid rgba(16, 185, 129, 0.4);
+  border-radius: 24px;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.6), 0 0 30px rgba(16, 185, 129, 0.2);
+}
+
+.mimikara-victory-icon {
+  font-size: 3.5rem;
+  margin-bottom: 1rem;
+  animation: bounceTrophy 1s infinite alternate ease-in-out;
+}
+
+@keyframes bounceTrophy {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-8px); }
+}
+
+.mimikara-victory-title {
+  font-size: 1.6rem;
+  font-weight: 900;
+  color: #fff;
+  margin-bottom: 0.5rem;
+}
+
+.mimikara-victory-desc {
+  font-size: 0.95rem;
+  color: #cbd5e1;
+  margin-bottom: 1.75rem;
+  line-height: 1.5;
+}
+
+.mimikara-victory-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .mimikara-modal {
+    padding: 0.5rem;
+  }
+  .mimikara-modal-container {
+    max-height: 96vh;
+    border-radius: 14px;
+  }
+  .mimikara-match-grid {
+    grid-template-columns: 1fr;
+  }
+  .mimikara-kanji-huge {
+    font-size: 2rem;
+  }
+}

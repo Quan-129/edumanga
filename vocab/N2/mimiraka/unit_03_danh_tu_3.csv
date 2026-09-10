@@ -1,0 +1,91 @@
+stt,term,reading,romaji,han_viet,meaning,type,exam_ja,exam_vi,kanji_breakdown,pitch_accent,synonyms_antonyms,card_type
+171,下げる,さげる,sageru,Hạ,giảm đi -  cúi đầu -  thu dọn bát đĩa,Động từ nhóm 1,状況に合わせて適切に下げる。,Giảm đi một cách phù hợp theo tình huống.,下 (Hạ: dưới/xuống),[0],連: 下げるに関する / 類: giảm đi,vocab
+172,転がる,ころがる,korogaru,Chuyển,(tự) lăn -  bị đổ ngã -  nằm xuống -  rải rác bừa bộn...,Động từ nhóm 1,状況に合わせて適切に転がる。,(tự) lăn một cách phù hợp theo tình huống.,転 (Chuyển: chuyển dịch/ngã lăn),[1],連: 転がるに関する / 類: (tự) lăn,vocab
+173,転がす,ころがす,korogasu,Chuyển,dắt -  lắc -  lăn,Động từ nhóm 1,状況に合わせて適切に転がす。,Dắt một cách phù hợp theo tình huống.,転 (Chuyển: chuyển dịch/ngã lăn),[1],連: 転がすに関する / 類: dắt,vocab
+174,傾く,かたむく,katamuku,Khuynh,nghiêng -  ngả -  hướng về -  đổ,Động từ nhóm 1,状況に合わせて適切に傾く。,Nghiêng một cách phù hợp theo tình huống.,傾 (Khuynh: nghiêng/nghiêng ngả),[1],連: 傾くに関する / 類: nghiêng,vocab
+175,傾ける,かたむける,katamukeru,Khuynh,nghiêng -  làn suy yếu -  phê bình -  chê bai...,Động từ nhóm 2,状況に合わせて適切に傾ける。,Nghiêng một cách phù hợp theo tình huống.,傾 (Khuynh: nghiêng/nghiêng ngả),[1],連: 傾けるに関する / 類: nghiêng,vocab
+176,裏返す,うらがえす,uragaesu,Lý Phản,lật úp -  lộn ngược,Động từ nhóm 1,状況に合わせて適切に裏返す。,Lật úp một cách phù hợp theo tình huống.,裏 (Lý: mặt trái/phía sau) + 返 (Phản: trả lại/đáp lại),[1],連: 裏返すに関する / 類: lật úp,vocab
+177,散らかる,ちらかる,chirakaru,Tán,bừa bộn -  lôi thôi,Động từ nhóm 1,状況に合わせて適切に散らかる。,Bừa bộn một cách phù hợp theo tình huống.,散 (Tán: phân tán/rải rác),[1],連: 散らかるに関する / 類: bừa bộn,vocab
+178,散らかす,ちらかす,chirakasu,Tán,vứt lung tung -  bừa bãi,Động từ nhóm 1,状況に合わせて適切に散らかす。,Vứt lung tung một cách phù hợp theo tình huống.,散 (Tán: phân tán/rải rác),[1],連: 散らかすに関する / 類: vứt lung tung,vocab
+179,散らばる,ちらばる,chirabaru,Tán,văng tứ tung -  rải rác,Động từ nhóm 1,状況に合わせて適切に散らばる。,Văng tứ tung một cách phù hợp theo tình huống.,散 (Tán: phân tán/rải rác),[1],連: 散らばるに関する / 類: văng tứ tung,vocab
+180,刻む,きざむ,kizamu,Khắc,cắt -  chạm khắc -  ghi lại,Động từ nhóm 1,状況に合わせて適切に刻む。,Cắt một cách phù hợp theo tình huống.,刻 (Khắc: khắc/thời khắc),[0],連: 刻むに関する / 類: cắt,vocab
+181,挟まる,はさまる,hasamaru,Hiệp,bị kẹp,Động từ nhóm 1,状況に合わせて適切に挟まる。,Bị kẹp một cách phù hợp theo tình huống.,挟 (Hiệp: kẹp vào/xen vào),[1],連: 挟まるに関する / 類: bị kẹp,vocab
+182,挟む,はさむ,hasamu,Hiệp,kẹp -  nói chen vào,Động từ nhóm 1,状況に合わせて適切に挟む。,Kẹp một cách phù hợp theo tình huống.,挟 (Hiệp: kẹp vào/xen vào),[0],連: 挟むに関する / 類: kẹp,vocab
+183,つぶれる,つぶれる,tsubureru,-,sụp đổ -  xẹp lép -  phá sản,Động từ nhóm 2,不景気で会社がつぶれる。,Do kinh tế suy thoái nên công ty bị sụp đổ.,-,[1],連: つぶれるに関する / 類: sụp đổ,vocab
+184,つぶす,つぶす,tsubusu,-,hạ,Động từ nhóm 1,状況に合わせて適切につぶす。,Hạ một cách phù hợp theo tình huống.,-,[0],連: つぶすに関する / 類: hạ,vocab
+185,へこむ,へこむ,hekomu,-,lõm -  chán nản,Động từ nhóm 1,車がぶつかってドアがへこむ。,Xe va chạm nên cửa bị lõm.,-,[0],連: へこむに関する / 類: lõm,vocab
+186,ほどける,ほどける,hodokeru,-,cởi ra -  giải quyết,Động từ nhóm 2,靴のひもがほどける。,Dây giày đã bị cởi ra.,-,[1],連: ほどけるに関する / 類: cởi ra,vocab
+187,ほどく,ほどく,hodoku,-,cởi,Động từ nhóm 1,状況に合わせて適切にほどく。,Cởi một cách phù hợp theo tình huống.,-,[0],連: ほどくに関する / 類: cởi,vocab
+188,枯れる,かれる,kareru,Khô,bị héo -  cạn khô -  khàn giọng,Động từ nhóm 2,状況に合わせて適切に枯れる。,Bị héo một cách phù hợp theo tình huống.,枯 (Khô: héo tàn/khô cằn),[0],連: 枯れるに関する / 類: bị héo,vocab
+189,枯らす,からす,karasu,Khô,làm cho héo,Động từ nhóm 1,状況に合わせて適切に枯らす。,Làm cho héo một cách phù hợp theo tình huống.,枯 (Khô: héo tàn/khô cằn),[0],連: 枯らすに関する / 類: làm cho héo,vocab
+190,傷む,いたむ,itamu,Thương,hông -  ôi thiu -  tổn thương,Động từ nhóm 1,状況に合わせて適切に傷む。,Hông một cách phù hợp theo tình huống.,傷 (Thương: vết thương/tổn thương),[0],連: 傷むに関する / 類: hông,vocab
+191,湿る,しめる,shimeru,Thấp,bị ẩm -  iu ( đồ ăn ),Động từ nhóm 2,状況に合わせて適切に湿る。,Bị ẩm một cách phù hợp theo tình huống.,湿 (Thấp: ẩm ướt/độ ẩm),[0],連: 湿るに関する / 類: bị ẩm,vocab
+192,凍る,こおる,kooru,Đống,đông băng -  lạnh cóng,Động từ nhóm 1,状況に合わせて適切に凍る。,Đông băng một cách phù hợp theo tình huống.,凍 (Đống: đông đá/đóng băng),[0],連: 凍るに関する / 類: đông băng,vocab
+193,震える,ふるえる,furueru,Chấn,run rẩy,Động từ nhóm 2,状況に合わせて適切に震える。,Run rẩy một cách phù hợp theo tình huống.,震 (Chấn: rung chấn/động đất),[1],連: 震えるに関する / 類: run rẩy,vocab
+194,輝く,かがやく,kagayaku,Huy,tỏa sáng -  huy hoàng,Động từ nhóm 1,状況に合わせて適切に輝く。,Tỏa sáng một cách phù hợp theo tình huống.,輝 (Huy: tỏa sáng/huy hoàng),[1],連: 輝くに関する / 類: tỏa sáng,vocab
+195,あふれる,あふれる,afureru,-,tràn -  đầy -  giàn giụa,Động từ nhóm 2,喜びの涙が目からあふれる。,Nước mắt vui sướng tràn ra khỏi khóe mắt.,-,[1],連: あふれるに関する / 類: tràn,vocab
+196,余る,あまる,amaru,Dư,còn sót lại -  dư thừa,Động từ nhóm 1,状況に合わせて適切に余る。,Còn sót lại một cách phù hợp theo tình huống.,余 (Dư: thừa/dư thừa),[0],連: 余るに関する / 類: còn sót lại,vocab
+197,目立つ,めだつ,medatsu,Mục Lập,nổi bật -  đập vào mắt,Động từ nhóm 1,状況に合わせて適切に目立つ。,Nổi bật một cách phù hợp theo tình huống.,目 (Mục: mắt/mục tiêu) + 立 (Lập: đứng/thành lập),[0],連: 目立つに関する / 類: nổi bật,vocab
+198,見下ろす,みおろす,miorosu,Kiến Hạ,nhìn xuống -  coi khinh,Động từ nhóm 1,状況に合わせて適切に見下ろす。,Nhìn xuống một cách phù hợp theo tình huống.,見 (Kiến: nhìn/quan sát/gặp) + 下 (Hạ: dưới/xuống),[1],連: 見下ろすに関する / 類: nhìn xuống,vocab
+199,戦う/闘う,たたかう,tatakau,Chiến Đấu,đánh nhau -  tranh chấp,Động từ nhóm 1,状況に合わせて適切に戦う/闘う。,Đánh nhau một cách phù hợp theo tình huống.,戦 (Chiến: chiến đấu/chiến tranh) + 闘 (Đấu: chiến đấu/đấu tranh),[1],連: 戦う/闘うに関する / 類: đánh nhau,vocab
+200,敗れる,やぶれる,yabureru,Bại,bị đánh bại -  thua,Động từ nhóm 2,状況に合わせて適切に敗れる。,Bị đánh bại một cách phù hợp theo tình huống.,敗 (Bại: thất bại/thua cuộc),[1],連: 敗れるに関する / 類: bị đánh bại,vocab
+201,逃げる,にげる,nigeru,Đào,chạy trốn -  tránh nạn,Động từ nhóm 1,状況に合わせて適切に逃げる。,Chạy trốn một cách phù hợp theo tình huống.,逃 (Đào: chạy trốn/trốn tránh),[0],連: 逃げるに関する / 類: chạy trốn,vocab
+202,逃がす,にがす,nigasu,Đào,để mất; phóng sinh -  thả,Động từ nhóm 1,状況に合わせて適切に逃がす。,Để mất một cách phù hợp theo tình huống.,逃 (Đào: chạy trốn/trốn tránh),[0],連: 逃がすに関する / 類: để mất; phóng sinh,vocab
+203,戻る,もどる,modoru,Lệ,quay lại,Động từ nhóm 1,状況に合わせて適切に戻る。,Quay lại một cách phù hợp theo tình huống.,戻 (Lệ: quay lại/hoàn trả),[0],連: 戻るに関する / 類: quay lại,vocab
+204,戻す,もどす,modosu,Lệ,để trả lại,Động từ nhóm 1,状況に合わせて適切に戻す。,Để trả lại một cách phù hợp theo tình huống.,戻 (Lệ: quay lại/hoàn trả),[0],連: 戻すに関する / 類: để trả lại,vocab
+205,はまる,はまる,hamaru,-,khớp -  bị kẹt -  nghiện -  bị cuốn theo -  khít -  vừa,Động từ nhóm 1,最近日本のドラマにはまる。,Gần đây tôi rất khớp phim truyền hình Nhật Bản.,-,[0],連: はまるに関する / 類: khớp,vocab
+206,はめる,はめる,hameru,-,đeo ( nhẫn -  găng tay),Động từ nhóm 2,状況に合わせて適切にはめる。,Đeo ( nhẫn một cách phù hợp theo tình huống.,-,[0],連: はめるに関する / 類: đeo ( nhẫn,vocab
+207,扱う,あつかう,atsukau,Tráp,đối xử -  xử lý -  bán -  sử dụng,Động từ nhóm 1,状況に合わせて適切に扱う。,Đối xử một cách phù hợp theo tình huống.,扱 (Tráp: đối xử/xử lý),[1],連: 扱うに関する / 類: đối xử,vocab
+208,関わる,かかわる,kakawaru,Quan,liên quan -  dính dáng,Động từ nhóm 1,状況に合わせて適切に関わる。,Liên quan một cách phù hợp theo tình huống.,関 (Quan: liên quan/quan hệ/cửa ải),[1],連: 関わるに関する / 類: liên quan,vocab
+209,目指す,めざす,mezasu,Mục Chỉ,hướng đến mục tiêu -  nhắm đến,Động từ nhóm 1,状況に合わせて適切に目指す。,Hướng đến mục tiêu một cách phù hợp theo tình huống.,目 (Mục: mắt/mục tiêu) + 指 (Chỉ: ngón tay/chỉ ra),[0],連: 目指すに関する / 類: hướng đến mục tiêu,vocab
+210,立つ・発つ,たつ,tatsu,Lập Phát,khởi hành -  rời khỏi -  xuất phát,Động từ nhóm 1,状況に合わせて適切に立つ・発つ。,Khởi hành một cách phù hợp theo tình huống.,立 (Lập: đứng/thành lập) + 発 (Phát: phát triển/xuất phát),[0],連: 立つ・発つに関する / 類: khởi hành,vocab
+211,迎える,むかえる,mukaeru,Nghênh,đón,Động từ nhóm 2,状況に合わせて適切に迎える。,Đón một cách phù hợp theo tình huống.,迎 (Nghênh: đón tiếp/nghênh đón),[1],連: 迎えるに関する / 類: đón,vocab
+212,持てる,もてる,moteru,Trì,thu hút -  đào hoa -  có duyên,Động từ nhóm 2,状況に合わせて適切に持てる。,Thu hút một cách phù hợp theo tình huống.,持 (Trì: cầm/nắm giữ/duy trì),[0],連: 持てるに関する / 類: thu hút,vocab
+213,たとえる,たとえる,tatoeru,-,ví như -  so với,Động từ nhóm 2,人生を旅にたとえる。,Ví như cuộc đời như một chuyến đi.,-,[1],連: たとえるに関する / 類: ví như,vocab
+214,努める,つとめる,tsutomeru,Nỗ,nỗ lực -  cố gắng,Động từ nhóm 2,状況に合わせて適切に努める。,Nỗ lực một cách phù hợp theo tình huống.,努 (Nỗ: nỗ lực/cố gắng),[1],連: 努めるに関する / 類: nỗ lực,vocab
+215,務まる,つとまる,tsutomaru,Vụ,nghĩa vụ -  nhiệm vụ -  có thê đảm đương -  phù hợp với,Động từ nhóm 1,状況に合わせて適切に務まる。,Nghĩa vụ một cách phù hợp theo tình huống.,務 (Vụ: nhiệm vụ/công vụ),[1],連: 務まるに関する / 類: nghĩa vụ,vocab
+216,務める,つとめる,tsutomeru,Vụ,đảm nhiệm -  đảm đương,Động từ nhóm 2,状況に合わせて適切に務める。,Đảm nhiệm một cách phù hợp theo tình huống.,務 (Vụ: nhiệm vụ/công vụ),[1],連: 務めるに関する / 類: đảm nhiệm,vocab
+217,取り消す,とりけす,torikesu,Thủ Tiêu,hủy bỏ -  xóa bỏ,Động từ nhóm 1,状況に合わせて適切に取り消す。,Hủy bỏ một cách phù hợp theo tình huống.,取 (Thủ: lấy/cầm lấy) + 消 (Tiêu: tiêu biến/tắt/xóa),[1],連: 取り消すに関する / 類: hủy bỏ,vocab
+218,終える,おえる,oeru,Chung,kết thúc,Động từ nhóm 2,状況に合わせて適切に終える。,Kết thúc một cách phù hợp theo tình huống.,終 (Chung: kết thúc/hoàn tất),[0],連: 終えるに関する / 類: kết thúc,vocab
+219,呼びかける,よびかける,yobikakeru,Hô,kêu gọi,Động từ nhóm 2,状況に合わせて適切に呼びかける。,Kêu gọi một cách phù hợp theo tình huống.,呼 (Hô: gọi/kêu lên),[1],連: 呼びかけるに関する / 類: kêu gọi,vocab
+220,呼び出す,よびだす,yobidasu,Hô Xuất,triệu hồi -  triệu tập,Động từ nhóm 1,状況に合わせて適切に呼び出す。,Triệu hồi một cách phù hợp theo tình huống.,呼 (Hô: gọi/kêu lên) + 出 (Xuất: ra ngoài/xuất hiện),[1],連: 呼び出すに関する / 類: triệu hồi,vocab
+221,有難い,ありがたい,arigatai,Hữu Nan,điều đáng quý -  đáng trân trọng -  may quá -  tốt quá,Tính từ -i,この問題は非常に有難い。,Vấn đề này rất điều đáng quý.,有 (Hữu: có/sở hữu) + 難 (Nan: khó khăn/gian nan),[1],連: 有難いに関する / 類: điều đáng quý,vocab
+222,申し訳ない,もうしわけない,moushiwakenai,Thân Dịch,thành thật xin lỗi,Tính từ -i,この問題は非常に申し訳ない。,Vấn đề này rất thành thật xin lỗi.,申 (Thân: báo cáo/trình bày) + 訳 (Dịch: dịch thuật/lý do),[1],連: 申し訳ないに関する / 類: thành thật xin lỗi,vocab
+223,めでたい,めでたい,medetai,-,mừng -  hoan hỉ,Tính từ -i,新年を迎えるのはとてもめでたいことだ。,Đón năm mới là một điều rất đáng mừng.,-,[1],連: めでたいに関する / 類: mừng,vocab
+224,幸いな,さいわいな,saiwaina,Hạnh,cảm kích -  trân trọng -  biết ơn,Tính từ -na,幸いな態度で対応する。,Ứng phó bằng một thái độ cảm kích.,幸 (Hạnh: hạnh phúc/may mắn),[1],連: 幸いなに関する / 類: cảm kích,vocab
+225,恋しい,こいしい,koishii,Luyến,thương nhớ -  nhớ nhung,Tính từ -i,この問題は非常に恋しい。,Vấn đề này rất thương nhớ.,恋 (Luyến: tình yêu/yêu đương),[1],連: 恋しいに関する / 類: thương nhớ,vocab
+226,懐かしい,なつかしい,natsukashii,Hoài,thân thương -  hoài niệm,Tính từ -i,この問題は非常に懐かしい。,Vấn đề này rất thân thương.,懐 (Hoài: hoài niệm/nhớ nhung),[1],連: 懐かしいに関する / 類: thân thương,vocab
+227,幼い,おさない,osanai,Ấu,non nớt -  bé bỏng,Tính từ -i,この問題は非常に幼い。,Vấn đề này rất non nớt.,幼 (Ấu: nhỏ tuổi/thơ ấu),[1],連: 幼いに関する / 類: non nớt,vocab
+228,心細い,こころぼそい,kokorobosoi,Tâm Tế,cô đơn -  tủi thân -  bất an,Tính từ -i,この問題は非常に心細い。,Vấn đề này rất cô đơn.,心 (Tâm: trái tim/tâm hồn) + 細 (Tế: nhỏ bé/chi tiết),[1],連: 心細いに関する / 類: cô đơn,vocab
+229,かわいそうな,かわいそうな,kawaisouna,-,tội nghiệp -  đáng thương,Tính từ -na,かわいそうな態度で対応する。,Ứng phó bằng một thái độ tội nghiệp.,-,[1],連: かわいそうなに関する / 類: tội nghiệp,vocab
+230,気の毒な,きのどくな,kinodokuna,Khí Độc,đáng tiếc -  đáng thương,Tính từ -na,気の毒な態度で対応する。,Ứng phó bằng một thái độ đáng tiếc.,気 (Khí: không khí/tâm trạng/khí chất) + 毒 (Độc: chất độc/độc hại),[1],連: 気の毒なに関する / 類: đáng tiếc,vocab
+231,貧しい,まずしい,mazushii,Bần,nghèo -  thiếu thốn,Tính từ -i,この問題は非常に貧しい。,Vấn đề này rất nghèo.,貧 (Bần: nghèo khó/bần cùng),[1],連: 貧しいに関する / 類: nghèo,vocab
+232,惜しい,おしい,oshii,Tích,đáng tiếc -  lãng phí,Tính từ -i,この問題は非常に惜しい。,Vấn đề này rất đáng tiếc.,惜 (Tích: tiếc nuối/quý tiếc),[0],連: 惜しいに関する / 類: đáng tiếc,vocab
+233,仕方(が)ない,しかた(が)ない,shikata(ga)nai,Sĩ Phương,bó tay -  không còn cách nào khác -  đành chấp nhận,Tính từ -i,この問題は非常に仕方(が)ない。,Vấn đề này rất bó tay.,仕 (Sĩ: phục vụ/công việc) + 方 (Phương: hướng/cách thức/vị),[1],連: 仕方(が)ないに関する / 類: bó tay,vocab
+234,やむを得ない,やむをえない,yamuwoenai,Đắc,bất đắc dĩ -  bất khả kháng,Tính từ -i,この問題は非常にやむを得ない。,Vấn đề này rất bất đắc dĩ.,得 (Đắc: đạt được/đắc lợi),[1],連: やむを得ないに関する / 類: bất đắc dĩ,vocab
+235,面倒臭い,めんどうくさい,mendoukusai,Diện Đảo Khứu,phiền hà -  rắc rối,Tính từ -i,この問題は非常に面倒臭い。,Vấn đề này rất phiền hà.,面 (Diện: mặt/bề mặt/phương diện) + 倒 (Đảo: ngã/đổ/đảo lộn) + 臭 (Khứu: mùi hôi/mùi xú),[1],連: 面倒臭いに関する / 類: phiền hà,vocab
+236,しつこい,しつこい,shitsukoi,-,lằng nhằng -  nói hoài -  cảm ràm,Tính từ -i,この問題は非常にしつこい。,Vấn đề này rất lằng nhằng.,-,[1],連: しつこいに関する / 類: lằng nhằng,vocab
+237,くどい,くどい,kudoi,-,dài dòng -  lắm lời,Tính từ -i,この問題は非常にくどい。,Vấn đề này rất dài dòng.,-,[0],連: くどいに関する / 類: dài dòng,vocab
+238,煙い,けむい,kemui,Yên,khói mù mịt,Tính từ -i,この問題は非常に煙い。,Vấn đề này rất khói mù mịt.,煙 (Yên: khói thuốc/khói bụi),[0],連: 煙いに関する / 類: khói mù mịt,vocab
+239,邪魔な,じゃまな,jamana,Tà Ma,vướng víu -  cản trở,Tính từ -na,邪魔な態度で対応する。,Ứng phó bằng một thái độ vướng víu.,邪 (Tà: tai hại/cảm cúm/tà ma) + 魔 (Ma: ma quỷ/ma thuật),[1],連: 邪魔なに関する / 類: vướng víu,vocab
+240,うるさい,うるさい,urusai,-,dài dòng -  phiền phức -  ồn ào,Tính từ -i,この問題は非常にうるさい。,Vấn đề này rất dài dòng.,-,[1],連: うるさいに関する / 類: dài dòng,vocab
+241,騒々しい,そうぞうしい,souzoushii,Tào,ồn ào -  hỗn loạn -  inh ỏi,Tính từ -i,この問題は非常に騒々しい。,Vấn đề này rất ồn ào.,騒 (Tào: ồn ào/náo loạn),[1],連: 騒々しいに関する / 類: ồn ào,vocab
+242,慌ただしい,あわただしい,awatadashii,Hoảng,bận túi bụi -  không yên ổn,Tính từ -i,この問題は非常に慌ただしい。,Vấn đề này rất bận túi bụi.,慌 (Hoảng: hoảng loạn/bối rối),[1],連: 慌ただしいに関する / 類: bận túi bụi,vocab
+243,そそっかしい,そそっかしい,sosokkashii,-,hấp tấp -  nôn nóng -  cẩu thả,Tính từ -i,この問題は非常にそそっかしい。,Vấn đề này rất hấp tấp.,-,[1],連: そそっかしいに関する / 類: hấp tấp,vocab
+244,思いがけない,おもいがけない,omoigakenai,Tư,không ngờ -  vô tình,Tính từ -i,この問題は非常に思いがけない。,Vấn đề này rất không ngờ.,思 (Tư: suy nghĩ/tư tưởng),[1],連: 思いがけないに関する / 類: không ngờ,vocab
+245,何気ない,なにげない,nanigenai,Hà Khí,ngẫu nhiên -  tình cờ -  không cô ý,Tính từ -i,この問題は非常に何気ない。,Vấn đề này rất ngẫu nhiên.,何 (Hà: cái gì) + 気 (Khí: không khí/tâm trạng/khí chất),[1],連: 何気ないに関する / 類: ngẫu nhiên,vocab
+246,とんでもない,とんでもない,tondemonai,-,ngoài sức tưởng tượng,Tính từ -i,この問題は非常にとんでもない。,Vấn đề này rất ngoài sức tưởng tượng.,-,[1],連: とんでもないに関する / 類: ngoài sức tưởng tượng,vocab
+247,くだらない,くだらない,kudaranai,-,chán phèo -  xàm -  vô tích sự,Tính từ -i,この問題は非常にくだらない。,Vấn đề này rất chán phèo.,-,[1],連: くだらないに関する / 類: chán phèo,vocab
+248,ばかばかしい,ばかばかしい,bakabakashii,-,vớ vẫn -  ngu ngốc,Tính từ -i,この問題は非常にばかばかしい。,Vấn đề này rất vớ vẫn.,-,[1],連: ばかばかしいに関する / 類: vớ vẫn,vocab
+249,でたらめな,でたらめな,detaramena,-,bừa bãi -  không căn cứ,Tính từ -na,でたらめな態度で対応する。,Ứng phó bằng một thái độ bừa bãi.,-,[1],連: でたらめなに関する / 類: bừa bãi,vocab
+250,だらしない,だらしない,darashinai,-,câu thả -  lỏng lẻo -  luộm thuộm -  bất cần,Tính từ -i,この問題は非常にだらしない。,Vấn đề này rất câu thả.,-,[1],連: だらしないに関する / 類: câu thả,vocab
+251,ずうずうしい,ずうずうしい,zuuzuushii,-,vô liêm sỉ -  trơ trẽn,Tính từ -i,この問題は非常にずうずうしい。,Vấn đề này rất vô liêm sỉ.,-,[1],連: ずうずうしいに関する / 類: vô liêm sỉ,vocab
+252,ずるい,ずるい,zurui,-,ranh mãnh -  láu cá -  gian xảo,Tính từ -i,この問題は非常にずるい。,Vấn đề này rất ranh mãnh.,-,[0],連: ずるいに関する / 類: ranh mãnh,vocab
+253,憎らしい,にくらしい,nikurashii,Tăng,đáng ghét -  ghen tị,Tính từ -i,この問題は非常に憎らしい。,Vấn đề này rất đáng ghét.,憎 (Tăng: căm ghét/hận thù),[1],連: 憎らしいに関する / 類: đáng ghét,vocab
+254,憎い,にくい,nikui,Tăng,căm ghét,Tính từ -i,この問題は非常に憎い。,Vấn đề này rất căm ghét.,憎 (Tăng: căm ghét/hận thù),[0],連: 憎いに関する / 類: căm ghét,vocab
+255,険しい,けわしい,kewashii,Hiểm,hiểm trở -  cộc cằn -  nghiêm khắc -  hung dữ,Tính từ -i,この問題は非常に険しい。,Vấn đề này rất hiểm trở.,険 (Hiểm: hiểm trở/nguy hiểm),[1],連: 険しいに関する / 類: hiểm trở,vocab
+256,辛い,つらい,tsurai,Tân,đau đớn -  khổ sở,Tính từ -i,この問題は非常に辛い。,Vấn đề này rất đau đớn.,辛 (Tân: cay đắng/khổ cực),[0],連: 辛いに関する / 類: đau đớn,vocab
+257,きつい,きつい,kitsui,-,chật -  gay go -  khó khăn,Tính từ -i,この問題は非常にきつい。,Vấn đề này rất chật.,-,[0],連: きついに関する / 類: chật,vocab
+258,緩い,ゆるい,yurui,Hoãn,lỏng lẻo -  thoải -  nhẹ nhàng,Tính từ -i,この問題は非常に緩い。,Vấn đề này rất lỏng lẻo.,緩 (Hoãn: nới lỏng/chậm trễ),[0],連: 緩いに関する / 類: lỏng lẻo,vocab
+259,鈍い,にぶい,nibui,Độn,Cùn ( dao ) -  đần độn -  yếu -  chậm -  lờ mờ,Tính từ -i,この問題は非常に鈍い。,Vấn đề này rất Cùn ( dao ).,鈍 (Độn: chậm chạp/cùn),[0],連: 鈍いに関する / 類: Cùn ( dao ),vocab
+260,鋭い,するどい,surudoi,Nhuệ,sắc bén -  sắc sảo -  nhạy bén,Tính từ -i,この問題は非常に鋭い。,Vấn đề này rất sắc bén.,鋭 (Nhuệ: sắc bén/nhanh nhạy),[1],連: 鋭いに関する / 類: sắc bén,vocab

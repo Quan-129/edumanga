@@ -1,0 +1,91 @@
+stt,term,reading,romaji,han_viet,meaning,type,exam_ja,exam_vi,kanji_breakdown,pitch_accent,synonyms_antonyms,card_type
+81,費用,ひよう,hiyou,Phí Dụng,chi phí -  lệ phí,Danh từ,費用について詳しく調査する。,Nghiên cứu kỹ lưỡng về chi phí.,費 (Phí: chi phí/tiêu phí) + 用 (Dụng: sử dụng/công dụng),[0],連: 費用に関する / 類: chi phí,vocab
+82,定価,ていか,teika,Định Giá,giá niêm yết,Danh từ,定価について詳しく調査する。,Nghiên cứu kỹ lưỡng về giá niêm yết.,定 (Định: cố định/quy định) + 価 (Giá: giá cả/giá trị),[0],連: 定価に関する / 類: giá niêm yết,vocab
+83,割引,わりびき,waribiki,Cát Dẫn,giảm giá,Danh từ,割引について詳しく調査する。,Nghiên cứu kỹ lưỡng về giảm giá.,割 (Cát: chia/vỡ/tỷ lệ) + 引 (Dẫn: kéo/dẫn dắt),[1],連: 割引に関する / 類: giảm giá,vocab
+84,おまけ,おまけ,omake,-,quà khuyến mại -  quà kèm theo,Danh từ,おまけについて詳しく調査する。,Nghiên cứu kỹ lưỡng về quà khuyến mại.,-,[0],連: おまけに関する / 類: quà khuyến mại,vocab
+85,無料,むりょう,muryou,Vô Liệu,miễn phí,Danh từ,無料について詳しく調査する。,Nghiên cứu kỹ lưỡng về miễn phí.,無 (Vô: không có/vô hiệu) + 料 (Liệu: nguyên liệu/phí tổn),[1],連: 無料に関する / 類: miễn phí,vocab
+86,現金,げんきん,genkin,Hiện Kim,tiền mặt,Danh từ,現金について詳しく調査する。,Nghiên cứu kỹ lưỡng về tiền mặt.,現 (Hiện: hiện tại/xuất hiện) + 金 (Kim: tiền bạc/vàng),[1],連: 現金に関する / 類: tiền mặt,vocab
+87,合計,ごうけい,goukei,Hợp Kế,tổng cộng,Danh từ,合計について詳しく調査する。,Nghiên cứu kỹ lưỡng về tổng cộng.,合 (Hợp: thích hợp/gặp gỡ) + 計 (Kế: kế hoạch/đo đếm),[1],連: 合計に関する / 類: tổng cộng,vocab
+88,収入,しゅうにゅう,shuunyuu,Thu Nhập,thu nhập,Danh từ,収入について詳しく調査する。,Nghiên cứu kỹ lưỡng về thu nhập.,収 (Thu: thu hoạch/thu nhận) + 入 (Nhập: vào/nhập vào),[1],連: 収入に関する / 類: thu nhập,vocab
+89,支出,ししゅつ,shishutsu,Chi Xuất,chi tiêu,Danh từ,支出について詳しく調査する。,Nghiên cứu kỹ lưỡng về chi tiêu.,支 (Chi: chống đỡ/chi trả) + 出 (Xuất: ra ngoài/xuất hiện),[1],連: 支出に関する / 類: chi tiêu,vocab
+90,予算,よさん,yosan,Dự Toán,ngân sách,Danh từ,予算について詳しく調査する。,Nghiên cứu kỹ lưỡng về ngân sách.,予 (Dự: dự báo/trước) + 算 (Toán: tính toán/dự toán),[0],連: 予算に関する / 類: ngân sách,vocab
+91,利益,りえき,rieki,Lợi Ích,lợi nhuận -  lợi ích,Danh từ,利益について詳しく調査する。,Nghiên cứu kỹ lưỡng về lợi nhuận.,利 (Lợi: lợi ích/tiện lợi) + 益 (Ích: lợi ích/hữu ích),[0],連: 利益に関する / 類: lợi nhuận,vocab
+92,赤字,あかじ,akaji,Xích Tự,lỗ -  thâm hụt,Danh từ,赤字について詳しく調査する。,Nghiên cứu kỹ lưỡng về lỗ.,赤 (Xích: màu đỏ) + 字 (Tự: chữ viết/ký tự),[0],連: 赤字に関する / 類: lỗ,vocab
+93,経費,けいひ,keihi,Kinh Phí,kinh phí,Danh từ,経費について詳しく調査する。,Nghiên cứu kỹ lưỡng về kinh phí.,経 (Kinh: trải qua/kinh tế) + 費 (Phí: chi phí/tiêu phí),[0],連: 経費に関する / 類: kinh phí,vocab
+94,勘定,かんじょう,kanjou,Khám Định,thanh toán -  tính tiền,Tính từ -na,勘定な態度で対応する。,Ứng phó bằng một thái độ thanh toán.,勘 (Khám: trực giác/linh cảm) + 定 (Định: cố định/quy định),[1],連: 勘定に関する / 類: thanh toán,vocab
+95,弁償,べんしょう,benshou,Biện Thường,bồi thường,Danh từ,弁償について詳しく調査する。,Nghiên cứu kỹ lưỡng về bồi thường.,弁 (Biện: hùng biện/biện hộ/tiếng địa phương) + 償 (Thường: bồi thường/đền bù),[1],連: 弁償に関する / 類: bồi thường,vocab
+96,請求,せいきゅう,seikyuu,Thỉnh Cầu,yêu cầu,Động từ nhóm 1,状況に合わせて適切に請求。,Yêu cầu một cách phù hợp theo tình huống.,請 (Thỉnh: yêu cầu/thỉnh cầu) + 求 (Cầu: yêu cầu/tìm kiếm),[1],連: 請求に関する / 類: yêu cầu,vocab
+97,景気,けいき,keiki,Cảnh Khí,tình hình ( thường nói về kinh tế ),Danh từ,景気について詳しく調査する。,Nghiên cứu kỹ lưỡng về tình hình ( thường nói về kinh tế ).,景 (Cảnh: phong cảnh/quang cảnh) + 気 (Khí: không khí/tâm trạng/khí chất),[0],連: 景気に関する / 類: tình hình ( thường nói về kinh tế ),vocab
+98,募金,ぼきん,bokin,Mộ Kim,quyên góp -  gây quỹ,Danh từ,募金について詳しく調査する。,Nghiên cứu kỹ lưỡng về quyên góp.,募 (Mộ: chiêu mộ/tuyển dụng) + 金 (Kim: tiền bạc/vàng),[0],連: 募金に関する / 類: quyên góp,vocab
+99,募集,ぼしゅう,boshuu,Mộ Tập,tuyển dụng,Danh từ,募集について詳しく調査する。,Nghiên cứu kỹ lưỡng về tuyển dụng.,募 (Mộ: chiêu mộ/tuyển dụng) + 集 (Tập: tập hợp/thu thập),[1],連: 募集に関する / 類: tuyển dụng,vocab
+100,価値,かち,kachi,Giá Trị,giá trị,Danh từ,価値について詳しく調査する。,Nghiên cứu kỹ lưỡng về giá trị.,価 (Giá: giá cả/giá trị) + 値 (Trị: giá trị/trị số),[0],連: 価値に関する / 類: giá trị,vocab
+101,好む,このむ,konomu,Hảo,thích,Động từ nhóm 1,状況に合わせて適切に好む。,Thích một cách phù hợp theo tình huống.,好 (Hảo: thích/tốt),[0],連: 好むに関する / 類: thích,vocab
+102,嫌う,きらう,kirau,Hiềm,ghét,Động từ nhóm 1,状況に合わせて適切に嫌う。,Ghét một cách phù hợp theo tình huống.,嫌 (Hiềm: ghét/hiềm khích),[0],連: 嫌うに関する / 類: ghét,vocab
+103,願う,ねがう,negau,Nguyện,ước -  yêu cầu,Động từ nhóm 1,状況に合わせて適切に願う。,Ước một cách phù hợp theo tình huống.,願 (Nguyện: nguyện ước/mong cầu),[0],連: 願うに関する / 類: ước,vocab
+104,甘える,あまえる,amaeru,Cam,nũng nịu,Động từ nhóm 2,状況に合わせて適切に甘える。,Nũng nịu một cách phù hợp theo tình huống.,甘 (Cam: ngọt ngào/chiều chuộng),[1],連: 甘えるに関する / 類: nũng nịu,vocab
+105,かわいがる,かわいがる,kawaigaru,-,yêu chiều -  cưng chiều,Động từ nhóm 1,祖母は孫をとてもかわいがる。,Bà rất yêu chiều đứa cháu.,-,[1],連: かわいがるに関する / 類: yêu chiều,vocab
+106,気付く,きづく,kizuku,Khí Phó,nhận ra -  chú ý đến,Động từ nhóm 1,状況に合わせて適切に気付く。,Nhận ra một cách phù hợp theo tình huống.,気 (Khí: không khí/tâm trạng/khí chất) + 付 (Phó: gắn/dính/kèm),[0],連: 気付くに関する / 類: nhận ra,vocab
+107,疑う,うたがう,utagau,Nghi,nghi ngờ,Động từ nhóm 1,状況に合わせて適切に疑う。,Nghi ngờ một cách phù hợp theo tình huống.,疑 (Nghi: nghi ngờ/thắc mắc),[1],連: 疑うに関する / 類: nghi ngờ,vocab
+108,苦しむ,くるしむ,kurushimu,Khổ,khổ sở,Động từ nhóm 1,状況に合わせて適切に苦しむ。,Khổ sở một cách phù hợp theo tình huống.,苦 (Khổ: đau khổ/cay đắng),[1],連: 苦しむに関する / 類: khổ sở,vocab
+109,悲しむ,かなしむ,kanashimu,Bi,buồn,Động từ nhóm 1,状況に合わせて適切に悲しむ。,Buồn một cách phù hợp theo tình huống.,悲 (Bi: đau buồn/bi thương),[1],連: 悲しむに関する / 類: buồn,vocab
+110,がっかりする,がっかりする,gakkarisuru,-,thất vọng -  chán nản,Động từ する,計画を慎重にがっかりする。,Thực hiện thất vọng kế hoạch một cách thận trọng.,-,[1],連: がっかりするに関する / 類: thất vọng,vocab
+111,励ます,はげます,hagemasu,Lệ,động viên -  khích lệ,Động từ nhóm 1,状況に合わせて適切に励ます。,Động viên một cách phù hợp theo tình huống.,励 (Lệ: khích lệ/động viên),[1],連: 励ますに関する / 類: động viên,vocab
+112,うなずく,うなずく,unazuku,-,gật đầu -  đồng ý,Động từ nhóm 1,彼の意見に深くうなずく。,Gật đầu sâu sắc với ý kiến của anh ấy.,-,[1],連: うなずくに関する / 類: gật đầu,vocab
+113,張り切る,はりきる,harikiru,Trương Thiết,hăng hái -  làm việc chăm chỉ -  cố gắng,Động từ nhóm 2,状況に合わせて適切に張り切る。,Hăng hái một cách phù hợp theo tình huống.,張 (Trương: căng ra/kéo dài) + 切 (Thiết: cắt/sát sườn),[1],連: 張り切るに関する / 類: hăng hái,vocab
+114,威張る,いばる,ibaru,Uy Trương,kiêu ngạo -  ba hoa khoác lác,Động từ nhóm 1,状況に合わせて適切に威張る。,Kiêu ngạo một cách phù hợp theo tình huống.,威 (Uy: uy quyền/uy phong) + 張 (Trương: căng ra/kéo dài),[0],連: 威張るに関する / 類: kiêu ngạo,vocab
+115,怒鳴る,どなる,donaru,Nộ Minh,quát mắng -  phát cáu,Động từ nhóm 1,状況に合わせて適切に怒鳴る。,Quát mắng một cách phù hợp theo tình huống.,怒 (Nộ: tức giận/phẫn nộ) + 鳴 (Minh: tiếng kêu/hót/kêu vang),[0],連: 怒鳴るに関する / 類: quát mắng,vocab
+116,暴れる,あばれる,abareru,Bạo,nổi giận -  quậy phá -  làm ẩm ĩ -  nổi khùng,Động từ nhóm 2,状況に合わせて適切に暴れる。,Nổi giận một cách phù hợp theo tình huống.,暴 (Bạo: bạo lực/hung bạo),[1],連: 暴れるに関する / 類: nổi giận,vocab
+117,しゃがむ,しゃがむ,shagamu,-,ngồi xổm,Động từ nhóm 1,道端にしゃがむ靴紐を結んだ。,Tôi ngồi xổm bên lề đường để buộc dây giày.,-,[1],連: しゃがむに関する / 類: ngồi xổm,vocab
+118,どく,どく,doku,-,ra,Danh từ,どくについて詳しく調査する。,Nghiên cứu kỹ lưỡng về ra.,-,[0],連: どくに関する / 類: ra,vocab
+119,どける,どける,dokeru,-,dịch chuyển -  tránh ra,Động từ nhóm 2,状況に合わせて適切にどける。,Dịch chuyển một cách phù hợp theo tình huống.,-,[0],連: どけるに関する / 類: dịch chuyển,vocab
+120,かぶる,かぶる,kaburu,-,phủ lên -  trùm lên -  đậy,Động từ nhóm 1,状況に合わせて適切にかぶる。,Phủ lên một cách phù hợp theo tình huống.,-,[0],連: かぶるに関する / 類: phủ lên,vocab
+121,かぶせる,かぶせる,kabuseru,-,tránh đội,Động từ nhóm 2,状況に合わせて適切にかぶせる。,Tránh đội một cách phù hợp theo tình huống.,-,[1],連: かぶせるに関する / 類: tránh đội,vocab
+122,かじる,かじる,kajiru,-,nhai -  cắn -  gặm -  xé,Động từ nhóm 1,りんごを丸ごとかじる。,Nhai cả quả táo.,-,[0],連: かじるに関する / 類: nhai,vocab
+123,撃つ,うつ,utsu,Kích,bắn,Động từ nhóm 1,状況に合わせて適切に撃つ。,Bắn một cách phù hợp theo tình huống.,撃 (Kích: tấn công/bắn phá),[0],連: 撃つに関する / 類: bắn,vocab
+124,漕ぐ,こぐ,kogu,Tào,đạp xe -  chèo -  lái,Động từ nhóm 1,状況に合わせて適切に漕ぐ。,Đạp xe một cách phù hợp theo tình huống.,漕 (Tào: chèo thuyền),[0],連: 漕ぐに関する / 類: đạp xe,vocab
+125,敷く,しく,shiku,Phu,trải thảm -  lát,Động từ nhóm 1,状況に合わせて適切に敷く。,Trải thảm một cách phù hợp theo tình huống.,敷 (Phu: trải ra/lát nền),[0],連: 敷くに関する / 類: trải thảm,vocab
+126,つぐ,つぐ,tsugu,-,rót -  dội -  tưới,Động từ nhóm 1,コップにお茶をつぐ。,Rót trà vào cốc.,-,[0],連: つぐに関する / 類: rót,vocab
+127,配る,くばる,kubaru,Phối,phân phát,Động từ nhóm 1,状況に合わせて適切に配る。,Phân phát một cách phù hợp theo tình huống.,配 (Phối: phân phát/phối hợp/lo lắng),[0],連: 配るに関する / 類: phân phát,vocab
+128,放る,ほうる,houru,Phóng,ném -  bỏ mặc,Động từ nhóm 1,状況に合わせて適切に放る。,Ném một cách phù hợp theo tình huống.,放 (Phóng: thả ra/phát sóng),[0],連: 放るに関する / 類: ném,vocab
+129,掘る,ほる,horu,Quật,đào -  khai quật -  ngoáy mũi,Động từ nhóm 1,状況に合わせて適切に掘る。,Đào một cách phù hợp theo tình huống.,掘 (Quật: đào bới/khai quật),[0],連: 掘るに関する / 類: đào,vocab
+130,まく,まく,maku,-,rắc -  rải -  gieo,Động từ nhóm 1,庭に花の種をまく。,Rắc hạt giống hoa trong vườn.,-,[0],連: まくに関する / 類: rắc,vocab
+131,計る,はかる,hakaru,Kế,đếm thời gian -  đo đạc,Động từ nhóm 1,状況に合わせて適切に計る。,Đếm thời gian một cách phù hợp theo tình huống.,計 (Kế: kế hoạch/đo đếm),[0],連: 計るに関する / 類: đếm thời gian,vocab
+132,占う,うらなう,uranau,Chiếm,dự đoán -  bói,Động từ nhóm 1,状況に合わせて適切に占う。,Dự đoán một cách phù hợp theo tình huống.,占 (Chiếm: chiếm cứ/bói toán),[1],連: 占うに関する / 類: dự đoán,vocab
+133,引っ張る,ひっぱる,hipparu,Dẫn Trương,kéo -  lôi kéo -  gây trở ngại,Động từ nhóm 1,状況に合わせて適切に引っ張る。,Kéo một cách phù hợp theo tình huống.,引 (Dẫn: kéo/dẫn dắt) + 張 (Trương: căng ra/kéo dài),[1],連: 引っ張るに関する / 類: kéo,vocab
+134,突く,つく,tsuku,Đột,chọc -  đâm -  chống ( cằm -  tay...),Động từ nhóm 1,状況に合わせて適切に突く。,Chọc một cách phù hợp theo tình huống.,突 (Đột: đột ngột/đâm thẳng),[0],連: 突くに関する / 類: chọc,vocab
+135,突き当たる,つきあたる,tsukiataru,Đột Đương,cuối đường -  đối mặt với,Động từ nhóm 1,状況に合わせて適切に突き当たる。,Cuối đường một cách phù hợp theo tình huống.,突 (Đột: đột ngột/đâm thẳng) + 当 (Đương: chính xác/đảm đương),[1],連: 突き当たるに関する / 類: cuối đường,vocab
+136,立ち止まる,たちどまる,tachidomaru,Lập Chỉ,dừng lại,Động từ nhóm 1,状況に合わせて適切に立ち止まる。,Dừng lại một cách phù hợp theo tình huống.,立 (Lập: đứng/thành lập) + 止 (Chỉ: dừng lại/đình chỉ),[1],連: 立ち止まるに関する / 類: dừng lại,vocab
+137,近寄る,ちかよる,chikayoru,Cận Ký,tiếp cận -  tới gần,Động từ nhóm 1,状況に合わせて適切に近寄る。,Tiếp cận một cách phù hợp theo tình huống.,近 (Cận: gần gũi/tiếp cận) + 寄 (Ký: gửi/ghé qua),[1],連: 近寄るに関する / 類: tiếp cận,vocab
+138,横切る,よこぎる,yokogiru,Hoành Thiết,xuyên qua -  băng ngang qua,Động từ nhóm 1,状況に合わせて適切に横切る。,Xuyên qua một cách phù hợp theo tình huống.,横 (Hoành: nằm ngang/bên cạnh) + 切 (Thiết: cắt/sát sườn),[1],連: 横切るに関する / 類: xuyên qua,vocab
+139,転ぶ,ころぶ,korobu,Chuyển,ngã,Động từ nhóm 1,状況に合わせて適切に転ぶ。,Ngã một cách phù hợp theo tình huống.,転 (Chuyển: chuyển dịch/ngã lăn),[0],連: 転ぶに関する / 類: ngã,vocab
+140,つまずく,つまずく,tsumazuku,-,vấp -  sẩy chân -  vướng,Động từ nhóm 1,石につまずく転んでしまった。,Tôi bị vấp hòn đá và ngã.,-,[1],連: つまずくに関する / 類: vấp,vocab
+141,ひく,ひく,hiku,-,chèn -  cán qua -  tông phải,Động từ nhóm 1,状況に合わせて適切にひく。,Chèn một cách phù hợp theo tình huống.,-,[0],連: ひくに関する / 類: chèn,vocab
+142,おぼれる,おぼれる,oboreru,-,chìm -  đắm -  chết đuổi,Động từ nhóm 2,海でおぼれるそうになった。,Tôi suýt bị chìm ở biển.,-,[1],連: おぼれるに関する / 類: chìm,vocab
+143,痛む,いたむ,itamu,Thống,đau,Động từ nhóm 1,状況に合わせて適切に痛む。,Đau một cách phù hợp theo tình huống.,痛 (Thống: đau đớn/thống khổ),[0],連: 痛むに関する / 類: đau,vocab
+144,かかる,かかる,kakaru,-,mắc bệnh -  lây bệnh,Động từ nhóm 1,状況に合わせて適切にかかる。,Mắc bệnh một cách phù hợp theo tình huống.,-,[0],連: かかるに関する / 類: mắc bệnh,vocab
+145,酔う,よう,you,Túy,say,Động từ nhóm 1,状況に合わせて適切に酔う。,Say một cách phù hợp theo tình huống.,酔 (Túy: say xỉn/say mê),[0],連: 酔うに関する / 類: say,vocab
+146,吐く,はく,haku,Thổ,nôn -  ói,Động từ nhóm 1,状況に合わせて適切に吐く。,Nôn một cách phù hợp theo tình huống.,吐 (Thổ: nôn/nhổ ra),[0],連: 吐くに関する / 類: nôn,vocab
+147,診る,みる,miru,Chẩn,chuẩn đoán -  khám,Động từ nhóm 2,状況に合わせて適切に診る。,Chuẩn đoán một cách phù hợp theo tình huống.,診 (Chẩn: khám bệnh/chẩn đoán),[0],連: 診るに関する / 類: chuẩn đoán,vocab
+148,見舞う,みまう,mimau,Kiến Vũ,đi thăm bệnh -  hứng chịu -  ập đến,Động từ nhóm 1,状況に合わせて適切に見舞う。,Đi thăm bệnh một cách phù hợp theo tình huống.,見 (Kiến: nhìn/quan sát/gặp) + 舞 (Vũ: nhảy múa/vũ đài),[0],連: 見舞うに関する / 類: đi thăm bệnh,vocab
+149,勤める,つとめる,tsutomeru,Cần,làm việc,Động từ nhóm 2,状況に合わせて適切に勤める。,Làm việc một cách phù hợp theo tình huống.,勤 (Cần: cần cù/đi làm),[1],連: 勤めるに関する / 類: làm việc,vocab
+150,稼ぐ,かせぐ,kasegu,Giá,kiếm tiền -  câu giờ,Động từ nhóm 1,状況に合わせて適切に稼ぐ。,Kiếm tiền một cách phù hợp theo tình huống.,稼 (Giá: kiếm tiền/làm việc),[0],連: 稼ぐに関する / 類: kiếm tiền,vocab
+151,支払う,しはらう,shiharau,Chi Phất,trả tiền -  thanh toán,Động từ nhóm 1,状況に合わせて適切に支払う。,Trả tiền một cách phù hợp theo tình huống.,支 (Chi: chống đỡ/chi trả) + 払 (Phất: trả tiền/quét sạch),[1],連: 支払うに関する / 類: trả tiền,vocab
+152,受け取る,うけとる,uketoru,Thụ Thủ,nhận,Động từ nhóm 1,状況に合わせて適切に受け取る。,Nhận một cách phù hợp theo tình huống.,受 (Thụ: nhận/tiếp nhận) + 取 (Thủ: lấy/cầm lấy),[1],連: 受け取るに関する / 類: nhận,vocab
+153,払い込む,はらいこむ,haraikomu,Phất Nhập,đóng -  nộp -  thanh toán,Động từ nhóm 1,状況に合わせて適切に払い込む。,Đóng một cách phù hợp theo tình huống.,払 (Phất: trả tiền/quét sạch) + 込 (Nhập: dồn vào/nạp vào),[1],連: 払い込むに関する / 類: đóng,vocab
+154,払い戻す,はらいもどす,haraimodosu,Phất Lệ,trả lại -  hoàn trả,Động từ nhóm 1,状況に合わせて適切に払い戻す。,Trả lại một cách phù hợp theo tình huống.,払 (Phất: trả tiền/quét sạch) + 戻 (Lệ: quay lại/hoàn trả),[1],連: 払い戻すに関する / 類: trả lại,vocab
+155,引き出す,ひきだす,hikidasu,Dẫn Xuất,rút ra -  tìm ra -  kéo dài,Động từ nhóm 1,状況に合わせて適切に引き出す。,Rút ra một cách phù hợp theo tình huống.,引 (Dẫn: kéo/dẫn dắt) + 出 (Xuất: ra ngoài/xuất hiện),[1],連: 引き出すに関する / 類: rút ra,vocab
+156,もうかる,もうかる,moukaru,-,có lợi nhuận -  sinh lời,Động từ nhóm 1,商売が順調でかなりもうかる。,Kinh doanh thuận lợi nên có lợi nhuận khá nhiều.,-,[1],連: もうかるに関する / 類: có lợi nhuận,vocab
+157,もうける,もうける,moukeru,-,kiếm lợi -  có con,Động từ nhóm 2,状況に合わせて適切にもうける。,Kiếm lợi một cách phù hợp theo tình huống.,-,[1],連: もうけるに関する / 類: kiếm lợi,vocab
+158,落ち込む,おちこむ,ochikomu,Lạc Nhập,thất vọng -  suy sụp,Động từ nhóm 1,状況に合わせて適切に落ち込む。,Thất vọng một cách phù hợp theo tình huống.,落 (Lạc: rơi xuống/rụng) + 込 (Nhập: dồn vào/nạp vào),[1],連: 落ち込むに関する / 類: thất vọng,vocab
+159,売れる,うれる,ureru,Mại,bán chạy,Động từ nhóm 2,状況に合わせて適切に売れる。,Bán chạy một cách phù hợp theo tình huống.,売 (Mại: bán hàng),[0],連: 売れるに関する / 類: bán chạy,vocab
+160,売り切れる,うりきれる,urikireru,Mại Thiết,bán sạch,Động từ nhóm 2,状況に合わせて適切に売り切れる。,Bán sạch một cách phù hợp theo tình huống.,売 (Mại: bán hàng) + 切 (Thiết: cắt/sát sườn),[1],連: 売り切れるに関する / 類: bán sạch,vocab
+161,くっ付く,くっつく,kuttsuku,Phó,bám chặt -  dính chặt -  quân quýt,Động từ nhóm 1,状況に合わせて適切にくっ付く。,Bám chặt một cách phù hợp theo tình huống.,付 (Phó: gắn/dính/kèm),[1],連: くっ付くに関する / 類: bám chặt,vocab
+162,くっ付ける,くっつける,kuttsukeru,Phó,dính vào -  gắn lại,Động từ nhóm 2,状況に合わせて適切にくっ付ける。,Dính vào một cách phù hợp theo tình huống.,付 (Phó: gắn/dính/kèm),[1],連: くっ付けるに関する / 類: dính vào,vocab
+163,固まる,かたまる,katamaru,Cố,cứng lại -  nắm vững -  đông lai,Động từ nhóm 1,状況に合わせて適切に固まる。,Cứng lại một cách phù hợp theo tình huống.,固 (Cố: cố định/kiên cố),[1],連: 固まるに関する / 類: cứng lại,vocab
+164,固める,かためる,katameru,Cố,làm đông cứng -  củng cố,Động từ nhóm 2,状況に合わせて適切に固める。,Làm đông cứng một cách phù hợp theo tình huống.,固 (Cố: cố định/kiên cố),[1],連: 固めるに関する / 類: làm đông cứng,vocab
+165,縮む,ちぢむ,chijimu,Súc,ngắn lại -  co lại,Động từ nhóm 1,状況に合わせて適切に縮む。,Ngắn lại một cách phù hợp theo tình huống.,縮 (Súc: co lại/rút ngắn),[0],連: 縮むに関する / 類: ngắn lại,vocab
+166,縮まる,ちぢまる,chijimaru,Súc,rút ngắn -  giảm bớt -  thu gọn,Động từ nhóm 1,状況に合わせて適切に縮まる。,Rút ngắn một cách phù hợp theo tình huống.,縮 (Súc: co lại/rút ngắn),[1],連: 縮まるに関する / 類: rút ngắn,vocab
+167,縮める,ちぢめる,chijimeru,Súc,thu gọn -  nén lại -  rút ngắn,Động từ nhóm 2,状況に合わせて適切に縮める。,Thu gọn một cách phù hợp theo tình huống.,縮 (Súc: co lại/rút ngắn),[1],連: 縮めるに関する / 類: thu gọn,vocab
+168,沈む,しずむ,shizumu,Trầm,chìm -  lặn -  bị nhấn xuống,Động từ nhóm 1,状況に合わせて適切に沈む。,Chìm một cách phù hợp theo tình huống.,沈 (Trầm: chìm xuống/trầm lặng),[0],連: 沈むに関する / 類: chìm,vocab
+169,沈める,しずめる,shizumeru,Trầm,chìm -  lặn,Động từ nhóm 2,状況に合わせて適切に沈める。,Chìm một cách phù hợp theo tình huống.,沈 (Trầm: chìm xuống/trầm lặng),[1],連: 沈めるに関する / 類: chìm,vocab
+170,下がる,さがる,sagaru,Hạ,hạ xuống -  lùi về -  giảm,Động từ nhóm 1,状況に合わせて適切に下がる。,Hạ xuống một cách phù hợp theo tình huống.,下 (Hạ: dưới/xuống),[0],連: 下がるに関する / 類: hạ xuống,vocab

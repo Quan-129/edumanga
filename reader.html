@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/components.css">
   <link rel="stylesheet" href="css/reader.css">
+  <link rel="stylesheet" href="css/mimikara-practice.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body class="reader-body theme-oled">
@@ -106,8 +107,12 @@
       <i class="fas fa-layer-group" style="color: #38bdf8;"></i>
       <span id="dockFlashcardBadge" class="comment-count-badge" style="display: none; background: #0284c7;">0</span>
     </button>
-    <button class="floating-hud-btn" onclick="document.getElementById('readerSettingsModal').classList.add('active')" title="Tùy chọn học tập & Chế độ đọc" style="position: static;">
+    <!-- Mimikara 14 Units Mastery Button -->
+    <button id="btnDockMimikara" class="floating-hud-btn" onclick="openMimikaraMasterModal()" title="Luyện tập 14 Unit Mimikara N2 (1.160 từ) - Học 3 bước (Phím M)" style="position: static; background: linear-gradient(135deg, #a855f7, #6366f1); color: #fff; box-shadow: 0 0 15px rgba(168, 85, 247, 0.4);">
       <i class="fas fa-graduation-cap"></i>
+    </button>
+    <button class="floating-hud-btn" onclick="document.getElementById('readerSettingsModal').classList.add('active')" title="Tùy chọn đọc truyện & Lời thoại" style="position: static;">
+      <i class="fas fa-sliders-h"></i>
     </button>
   </div>
 
@@ -634,6 +639,7 @@
   <script src="js/sync-engine.js"></script>
   <script src="js/flashcard-service.js"></script>
   <script src="js/comment-service.js"></script>
+  <script src="js/mimikara-practice-service.js"></script>
 
   <!-- Feature Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/hanzi-writer@3.5/dist/hanzi-writer.min.js"></script>

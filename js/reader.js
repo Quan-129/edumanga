@@ -628,7 +628,14 @@ function initKeyboardNav() {
         setBubblesVisibility(toggle.checked);
       }
     } else if (e.key === 'm' || e.key === 'M') {
-      toggleMenuVisibility();
+      const mimikaraModal = document.getElementById('mimikaraMasterModal');
+      if (mimikaraModal && mimikaraModal.classList.contains('active')) {
+        window.mimikaraService.closeModal();
+      } else if (window.mimikaraService) {
+        window.mimikaraService.openModal();
+      } else {
+        toggleMenuVisibility();
+      }
     }
   });
 }

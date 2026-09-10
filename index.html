@@ -9,6 +9,7 @@
   <!-- Stylesheets -->
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/mimikara-practice.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
@@ -38,7 +39,7 @@
       <ul class="nav-links">
         <li><a href="index.html" class="nav-link active"><i class="fas fa-home"></i> Trang Chủ</a></li>
         <li><a href="#catalogSection" class="nav-link"><i class="fas fa-compass"></i> Khám Phá</a></li>
-        <li><a href="#" class="nav-link"><i class="fas fa-graduation-cap"></i> Môn Học</a></li>
+        <li><a href="#" class="nav-link" onclick="if(window.mimikaraService) window.mimikaraService.openModal(); return false;"><i class="fas fa-graduation-cap"></i> Mimikara N2 (1.160 từ)</a></li>
       </ul>
 
       <!-- Actions -->
@@ -452,6 +453,7 @@
   <script src="js/db-storage.js"></script>
   <script src="js/auth-service.js"></script>
   <script src="js/sync-engine.js"></script>
+  <script src="js/mimikara-practice-service.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>

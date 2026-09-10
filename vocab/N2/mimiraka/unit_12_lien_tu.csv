@@ -1,0 +1,41 @@
+stt,term,reading,romaji,han_viet,meaning,type,exam_ja,exam_vi,kanji_breakdown,pitch_accent,synonyms_antonyms,card_type
+1021,匂う,におう,niou,Mùi,có mùi -  đáng nghi,Động từ nhóm 1,状況に合わせて適切に匂う。,Có mùi một cách phù hợp theo tình huống.,匂 (Mùi: mùi hương/mùi vị),[0],連: 匂うに関する / 類: có mùi,vocab
+1022,飢える,うえる,ueru,Cơ,đói -  thèm -  khao khát,Động từ nhóm 2,状況に合わせて適切に飢える。,Đói một cách phù hợp theo tình huống.,飢 (Cơ: đói khát/cơ hàn),[0],連: 飢えるに関する / 類: đói,vocab
+1023,問う,とう,tou,Vấn,đòi hỏi -  yêu cầu,Động từ nhóm 1,状況に合わせて適切に問う。,Đòi hỏi một cách phù hợp theo tình huống.,問 (Vấn: hỏi/vấn đề),[0],連: 問うに関する / 類: đòi hỏi,vocab
+1024,語る,かたる,kataru,Ngữ,kể lại -  thuật lại,Động từ nhóm 1,状況に合わせて適切に語る。,Kể lại một cách phù hợp theo tình huống.,語 (Ngữ: ngôn ngữ/kể chuyện),[0],連: 語るに関する / 類: kể lại,vocab
+1025,誓う,ちかう,chikau,Thệ,thề -  hứa,Động từ nhóm 1,状況に合わせて適切に誓う。,Thề một cách phù hợp theo tình huống.,誓 (Thệ: thề nguyện/tuyên thệ),[0],連: 誓うに関する / 類: thề,vocab
+1026,支える,ささえる,sasaeru,Chi,hỗ trợ -  giữ -  duy trì -  nâng đỡ,Động từ nhóm 2,状況に合わせて適切に支える。,Hỗ trợ một cách phù hợp theo tình huống.,支 (Chi: chống đỡ/chi trả),[1],連: 支えるに関する / 類: hỗ trợ,vocab
+1027,費やす,ついやす,tsuiyasu,Phí,tiêu hao -  hao phí,Động từ nhóm 1,状況に合わせて適切に費やす。,Tiêu hao một cách phù hợp theo tình huống.,費 (Phí: chi phí/tiêu phí),[1],連: 費やすに関する / 類: tiêu hao,vocab
+1028,用いる,もちいる,mochiiru,Dụng,sử dụng -  tiếp nhận -  bổ nhiệm,Động từ nhóm 2,状況に合わせて適切に用いる。,Sử dụng một cách phù hợp theo tình huống.,用 (Dụng: sử dụng/công dụng),[1],連: 用いるに関する / 類: sử dụng,vocab
+1029,改まる,あらたまる,aratamaru,Cải,thay đổi -  khách sáo -  giữ ý,Động từ nhóm 1,状況に合わせて適切に改まる。,Thay đổi một cách phù hợp theo tình huống.,改 (Cải: cải thiện/sửa đổi),[1],連: 改まるに関する / 類: thay đổi,vocab
+1030,改める,あらためる,aratameru,Cải,cải tiến -  thay đổi -  kiểm tra xác nhận -  cải thiện,Động từ nhóm 2,状況に合わせて適切に改める。,Cải tiến một cách phù hợp theo tình huống.,改 (Cải: cải thiện/sửa đổi),[1],連: 改めるに関する / 類: cải tiến,vocab
+1031,収まる・納まる,おさまる,osamaru,Thu Nạp,thỏa lòng -  vừa vặn -  lắng xuống,Động từ nhóm 1,状況に合わせて適切に収まる・納まる。,Thỏa lòng một cách phù hợp theo tình huống.,収 (Thu: thu hoạch/thu nhận) + 納 (Nạp: nộp vào/thu nạp),[1],連: 収まる・納まるに関する / 類: thỏa lòng,vocab
+1032,収める,おさめる,osameru,Thu,giải quyết -  đạt được -  cất giấu -  thu được -  nộp...,Động từ nhóm 2,状況に合わせて適切に収める。,Giải quyết một cách phù hợp theo tình huống.,収 (Thu: thu hoạch/thu nhận),[1],連: 収めるに関する / 類: giải quyết,vocab
+1033,沿う・添う,そう,sou,Duyên Thiêm,dọc theo -  men theo,Động từ nhóm 1,状況に合わせて適切に沿う・添う。,Dọc theo một cách phù hợp theo tình huống.,沿 (Duyên: dọc theo/men theo) + 添 (Thiêm: thêm vào/đính kèm),[0],連: 沿う・添うに関する / 類: dọc theo,vocab
+1034,添える,そえる,soeru,Thiêm,gắn với,Động từ nhóm 2,状況に合わせて適切に添える。,Gắn với một cách phù hợp theo tình huống.,添 (Thiêm: thêm vào/đính kèm),[0],連: 添えるに関する / 類: gắn với,vocab
+1035,兼ねる,かねる,kaneru,Kiêm,kết hợp,Động từ nhóm 2,状況に合わせて適切に兼ねる。,Kết hợp một cách phù hợp theo tình huống.,兼 (Kiêm: kiêm nhiệm/kết hợp),[0],連: 兼ねるに関する / 類: kết hợp,vocab
+1036,適する,てきする,tekisuru,Thích,hợp -  xứng đáng,Động từ する,計画を慎重に適する。,Thực hiện hợp kế hoạch một cách thận trọng.,適 (Thích: thích hợp/phù hợp),[1],連: 適するに関する / 類: hợp,vocab
+1037,相当する,そうとうする,soutousuru,Tương Đương,tương ứng -  tương đương,Động từ する,計画を慎重に相当する。,Thực hiện tương ứng kế hoạch một cách thận trọng.,相 (Tương: tương hỗ/bộ mặt) + 当 (Đương: chính xác/đảm đương),[1],連: 相当するに関する / 類: tương ứng,vocab
+1038,伴う,ともなう,tomonau,Bạn,kéo theo -  dìu dắt -  phát sinh,Động từ nhóm 1,状況に合わせて適切に伴う。,Kéo theo một cách phù hợp theo tình huống.,伴 (Bạn: đi cùng/kèm theo),[1],連: 伴うに関する / 類: kéo theo,vocab
+1039,響く,ひびく,hibiku,Hưởng,vang vọng -  chấn động -  dội lại -  ảnh hưởng đến,Động từ nhóm 1,状況に合わせて適切に響く。,Vang vọng một cách phù hợp theo tình huống.,響 (Hưởng: tiếng vang/ảnh hưởng),[0],連: 響くに関する / 類: vang vọng,vocab
+1040,次ぐ,つぐ,tsugu,Thứ,tiếp theo -  nối tiếp,Động từ nhóm 1,状況に合わせて適切に次ぐ。,Tiếp theo một cách phù hợp theo tình huống.,次 (Thứ: tiếp theo/kế tiếp),[0],連: 次ぐに関する / 類: tiếp theo,vocab
+1041,略す,りゃくす,ryakusu,Lược,lượt bớt -  viết tắt -  tóm gọn,Động từ nhóm 1,状況に合わせて適切に略す。,Lượt bớt một cách phù hợp theo tình huống.,略 (Lược: tóm lược/lược bỏ),[1],連: 略すに関する / 類: lượt bớt,vocab
+1042,迫る,せまる,semaru,Bách,tiến sát -  sức ép -  đến với,Động từ nhóm 1,状況に合わせて適切に迫る。,Tiến sát một cách phù hợp theo tình huống.,迫 (Bách: áp bức/tiến gần/bách bách),[0],連: 迫るに関する / 類: tiến sát,vocab
+1043,狙う,ねらう,nerau,Thư,nhắm đến -  thả thính -  rình rập -  để ý đến,Động từ nhóm 1,状況に合わせて適切に狙う。,Nhắm đến một cách phù hợp theo tình huống.,狙 (Thư: nhắm vào/rình rập),[0],連: 狙うに関する / 類: nhắm đến,vocab
+1044,犯す,おかす,okasu,Phạm,phạm -  phạm phải,Động từ nhóm 1,状況に合わせて適切に犯す。,Phạm một cách phù hợp theo tình huống.,犯 (Phạm: tội phạm/xâm phạm),[0],連: 犯すに関する / 類: phạm,vocab
+1045,侵す,おかす,okasu,Xâm,xâm phạm -  bị bệnh nặng,Động từ nhóm 1,状況に合わせて適切に侵す。,Xâm phạm một cách phù hợp theo tình huống.,侵 (Xâm: xâm phạm/xâm chiếm),[0],連: 侵すに関する / 類: xâm phạm,vocab
+1046,冒す,おかす,okasu,Mạo,can đảm -  đương đầu,Động từ nhóm 1,状況に合わせて適切に冒す。,Can đảm một cách phù hợp theo tình huống.,冒 (Mạo: mạo hiểm/liều lĩnh),[0],連: 冒すに関する / 類: can đảm,vocab
+1047,脅す,おどす,odosu,Hiếp,bắt nạt -  đe dọa,Động từ nhóm 1,状況に合わせて適切に脅す。,Bắt nạt một cách phù hợp theo tình huống.,脅 (Hiếp: đe dọa/uy hiếp),[0],連: 脅すに関する / 類: bắt nạt,vocab
+1048,脅かす,おびやかす,obiyakasu,Hiếp,hù dọa,Động từ nhóm 1,状況に合わせて適切に脅かす。,Hù dọa một cách phù hợp theo tình huống.,脅 (Hiếp: đe dọa/uy hiếp),[1],連: 脅かすに関する / 類: hù dọa,vocab
+1049,逆らう,さからう,sakarau,Nghịch,ngược ý -  ngược dòng,Động từ nhóm 1,状況に合わせて適切に逆らう。,Ngược ý một cách phù hợp theo tình huống.,逆 (Nghịch: ngược lại/nghịch cảnh),[1],連: 逆らうに関する / 類: ngược ý,vocab
+1050,妨げる,さまたげる,samatageru,Phương,ngăn chặn -  gây trở ngại -  cản trở,Động từ nhóm 1,状況に合わせて適切に妨げる。,Ngăn chặn một cách phù hợp theo tình huống.,妨 (Phương: cản trở/phương hại),[1],連: 妨げるに関する / 類: ngăn chặn,vocab
+1051,打ち消す,うちけす,uchikesu,Đả Tiêu,phủ nhận -  bác bỏ,Động từ nhóm 1,状況に合わせて適切に打ち消す。,Phủ nhận một cách phù hợp theo tình huống.,打 (Đả: đánh/đập) + 消 (Tiêu: tiêu biến/tắt/xóa),[1],連: 打ち消すに関する / 類: phủ nhận,vocab
+1052,応じる,おうじる,oujiru,Ứng,chấp nhận -  đáp ứng,Động từ nhóm 1,状況に合わせて適切に応じる。,Chấp nhận một cách phù hợp theo tình huống.,応 (Ứng: đáp ứng/phản ứng),[1],連: 応じるに関する / 類: chấp nhận,vocab
+1053,承る,うけたまわる,uketamawaru,Thừa,nhận -  nghe (Khiêm nhường ngữ của 聞く),Động từ nhóm 1,状況に合わせて適切に承る。,Nhận một cách phù hợp theo tình huống.,承 (Thừa: tiếp nhận/thấu hiểu),[1],連: 承るに関する / 類: nhận,vocab
+1054,頂戴する,ちょうだいする,choudaisuru,Đỉnh Đái,Làm...cho tôi,Động từ する,計画を慎重に頂戴する。,Thực hiện Làm...cho tôi kế hoạch một cách thận trọng.,頂 (Đỉnh: đỉnh cao/nhận lấy) + 戴 (Đái: đội lên đầu/nhận lấy),[1],連: 頂戴するに関する / 類: Làm...cho tôi,vocab
+1055,学ぶ,まなぶ,manabu,Học,học hỏi,Động từ nhóm 1,状況に合わせて適切に学ぶ。,Học hỏi một cách phù hợp theo tình huống.,学 (Học: học tập/khoa học),[0],連: 学ぶに関する / 類: học hỏi,vocab
+1056,練る,ねる,neru,Luyện,nhào trộn -  gọt giũa -  trau chuốt,Động từ nhóm 2,状況に合わせて適切に練る。,Nhào trộn một cách phù hợp theo tình huống.,練 (Luyện: rèn luyện/luyện tập),[0],連: 練るに関する / 類: nhào trộn,vocab
+1057,負う,おう,ou,Phụ,mang -  vác,Động từ nhóm 1,状況に合わせて適切に負う。,Mang một cách phù hợp theo tình huống.,負 (Phụ: thua cuộc/gánh chịu),[0],連: 負うに関する / 類: mang,vocab
+1058,果たす,はたす,hatasu,Quả,hoàn thành,Động từ nhóm 1,状況に合わせて適切に果たす。,Hoàn thành một cách phù hợp theo tình huống.,果 (Quả: kết quả/hoa quả),[0],連: 果たすに関する / 類: hoàn thành,vocab
+1059,引き受ける,ひきうける,hikiukeru,Dẫn Thụ,nhận -  đảm nhiệm,Động từ nhóm 2,状況に合わせて適切に引き受ける。,Nhận một cách phù hợp theo tình huống.,引 (Dẫn: kéo/dẫn dắt) + 受 (Thụ: nhận/tiếp nhận),[1],連: 引き受けるに関する / 類: nhận,vocab
+1060,増す,ます,masu,Tăng,tăng lên,Động từ nhóm 1,状況に合わせて適切に増す。,Tăng lên một cách phù hợp theo tình huống.,増 (Tăng: tăng thêm/gia tăng),[0],連: 増すに関する / 類: tăng lên,vocab

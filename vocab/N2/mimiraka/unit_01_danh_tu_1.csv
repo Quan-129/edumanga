@@ -1,0 +1,81 @@
+stt,term,reading,romaji,han_viet,meaning,type,exam_ja,exam_vi,kanji_breakdown,pitch_accent,synonyms_antonyms,card_type
+1,人生,じんせい,jinsei,Nhân Sinh,Đời người - cuộc đời,Danh từ,幸せな人生を送る。,Sống một cuộc đời hạnh phúc.,人 (Nhân: người) + 生 (Sinh: sống/sinh mệnh),[1],類: 生涯 (cuộc đời) / 対: 死 (cái chết),vocab
+2,人間,にんげん,ningen,Nhân Gian,Con người - nhân loại,Danh từ,人間は皆平等である。,Con người ai cũng bình đẳng.,人 (Nhân: người) + 間 (Gian: khoảng giữa/thế gian),[0],類: 人類 (nhân loại) / 人 (người),vocab
+3,祖先,そせん,sosen,Tổ Tiên,Tổ tiên - tổ tông,Danh từ,人類の祖先はアフリカで生まれた。,Tổ tiên loài người sinh ra ở châu Phi.,祖 (Tổ: ông bà tổ tiên) + 先 (Tiên: trước tiên),[1],類: 先祖 (tiên tổ) / 対: 子孫 (con cháu),vocab
+4,親戚,しんせき,shinseki,Thân Thích,Họ hàng - thân thích,Danh từ,お正月に親戚が集まる。,Họ hàng tập trung lại vào dịp Tết.,親 (Thân: cha mẹ/thân thiết) + 戚 (Thích: họ hàng),[0],類: 親類 (thân quyến) / 親族 (thân tộc),vocab
+5,夫婦,ふうふ,fuufu,Phu Phụ,Vợ chồng,Danh từ,仲のいい夫婦だ。,Họ là cặp vợ chồng rất hòa thuận.,夫 (Phu: chồng) + 婦 (Phụ: đàn bà/vợ),[1],類: 夫妻 (phu thê / vợ chồng),vocab
+6,長男,ちょうなん,chounan,Trưởng Nam,Con trai cả - trưởng nam,Danh từ,長男は大学を卒業した。,Con trai cả đã tốt nghiệp đại học.,長 (Trưởng: lớn nhất) + 男 (Nam: con trai),[1],対: 長女 (trưởng nữ) / 次男 (con thứ),vocab
+7,主人,しゅじん,shujin,Chủ Nhân,Chồng mình - chủ tiệm/người chủ,Danh từ,うちの主人は会社員です。,Chồng tôi là nhân viên công ty.,主 (Chủ: làm chủ) + 人 (Nhân: người),[1],類: 夫 (chồng) / マスター (chủ quán),vocab
+8,双子,ふたご,futago,Song Tử,Sinh đôi - cặp song sinh,Danh từ,彼女は双子を出産した。,Cô ấy đã sinh đôi.,双 (Song: đôi/cặp) + 子 (Tử: đứa con),[0],類: 双生児 (trẻ sinh đôi),vocab
+9,迷子,まいご,maigo,Mê Tử,Trẻ lạc - lạc đường,Danh từ,デパートで迷子になった。,Tôi bị lạc ở trung tâm thương mại.,迷 (Mê: lạc lối/phân vân) + 子 (Tử: con),[1],類: 迷い子 (đứa trẻ bị lạc),vocab
+10,他人,たにん,tanin,Tha Nhân,Người ngoài - người dưng,Danh từ,他人の意見に耳を傾ける。,Lắng nghe ý kiến của người khác.,他 (Tha: khác/người khác) + 人 (Nhân: người),[0],対: 自分 (bản thân) / 家族 (gia đình),vocab
+11,敵,てき,teki,Địch,Kẻ thù - đối thủ,Danh từ,敵と味方に分かれて戦う。,Chia thành phe ta và phe địch để chiến đấu.,敵 (Địch: kẻ thù/đối địch),[0],対: 味方 (đồng minh/bạn bè),vocab
+12,味方,みかた,mikata,Vị Phương,Bạn bè - đồng minh - đứng về phía ai,Danh từ,私はいつでもあなたの味方です。,Tôi luôn luôn đứng về phía bạn.,味 (Vị: nếm/hương vị) + 方 (Phương: hướng/người),[0],対: 敵 (kẻ thù/đối thủ),vocab
+13,筆者,ひっしゃ,hissha,Bút Giả,Tác giả - người viết,Danh từ,筆者の考えに賛成する。,Tôi đồng ý với suy nghĩ của tác giả.,筆 (Bút: cây bút) + 者 (Giả: người),[1],類: 著者 (tác giả) / 作者 (tác giả),vocab
+14,寿命,じゅみょう,jumyou,Thọ Mệnh,Tuổi thọ - đời thọ của đồ vật,Danh từ,日本の平均寿命は延びている。,Tuổi thọ trung bình của Nhật Bản đang tăng lên.,寿 (Thọ: sống lâu) + 命 (Mệnh: tính mạng),[0],類: 命 (sinh mạng),vocab
+15,将来,しょうらい,shourai,Tương Lai,Tương lai gần - triển vọng,Danh từ,将来の夢は医者になることです。,Ước mơ tương lai là trở thành bác sĩ.,将 (Tương: sắp sửa) + 来 (Lai: đến),[1],類: 未来 (tương lai xa / thế giới mai sau),vocab
+16,才能,さいのう,sainou,Tài Năng,Tài năng - năng khiếu,Danh từ,彼女は音楽の才能がある。,Cô ấy có tài năng về âm nhạc.,採/才 (Tài: tài giỏi) + 能 (Năng: khả năng),[0],類: 天才 (thiên tài) / 素質 (tố chất),vocab
+17,能力,のうりょく,nouryoku,Năng Lực,Năng lực - khả năng làm việc,Danh từ,彼の語学能力は素晴らしい。,Khả năng ngôn ngữ của anh ấy thật tuyệt vời.,能 (Năng: có thể) + 力 (Lực: sức lực),[1],類: 実力 (thực lực) / 才能 (tài năng),vocab
+18,長所,ちょうしょ,chousho,Trường Sở,Sở trường - điểm mạnh,Danh từ,自分の長所をアピールする。,Quảng bá thế mạnh của bản thân.,長 (Trường: dài/tốt) + 所 (Sở: nơi/điểm),[1],対: 短所 (sở đoản / điểm yếu),vocab
+19,個性,こせい,kosei,Cá Tính,Cá tính - nét độc đáo riêng,Danh từ,子供の個性を伸ばす。,Phát triển cá tính của trẻ nhỏ.,個 (Cá: từng cá thể) + 性 (Tính: bản tính),[1],類: 持ち味 (nét riêng) / 特徴 (đặc trưng),vocab
+20,遺伝,いでん,iden,Di Truyền,Di truyền,Danh từ / Động từ Suru,私の目はお父さんの遺伝だ。,Mắt tôi là di truyền từ bố.,遺 (Di: để lại) + 伝 (Truyền: truyền lại),[0],類: 遺伝子 (gen di truyền),vocab
+21,動作,どうさ,dousa,Động Tác,Động tác - cử chỉ - hoạt động máy móc,Danh từ / Động từ Suru,優雅な動作に見とれる。,Say đắm trước những động tác thanh lịch.,動 (Động: cử động) + 作 (Tác: tạo tác/hành vi),[1],類: 身振り (cử chỉ điệu bộ) / 挙動 (hành vi),vocab
+22,真似,まね,mane,Chân Tự,Bắt chước - mô phỏng,Danh từ / Động từ Suru,人の真似をするのが得意だ。,Tôi giỏi bắt chước người khác.,真 (Chân: thật) + 似 (Tự: giống nhau),[0],類: 模倣 (mô phỏng) / コピー (copy),vocab
+23,睡眠,すいみん,suimin,Thụy Miên,Giấc ngủ - việc ngủ nghỉ,Danh từ,毎日8時間の睡眠をとる。,Mỗi ngày ngủ đủ 8 tiếng.,睡 (Thụy: ngủ) + 眠 (Miên: nhắm mắt ngủ),[0],類: 眠り (giấc ngủ) / 睡眠不足 (thiếu ngủ),vocab
+24,食欲,しょくよく,shokuyoku,Thực Dục,Sự thèm ăn - cảm giác ngon miệng,Danh từ,風邪で食欲がない。,Bị cảm nên tôi không có cảm giác thèm ăn.,食 (Thực: ăn) + 欲 (Dục: muốn/ham muốn),[2],類: 食欲不振 (chán ăn) / 食欲旺盛 (ăn khỏe),vocab
+25,外食,がいしょく,gaishoku,Ngoại Thực,Đi ăn ngoài - ăn tiệm,Danh từ / Động từ Suru,休日は外食することが多い。,Ngày nghỉ tôi hay đi ăn ngoài.,外 (Ngoại: bên ngoài) + 食 (Thực: ăn uống),[0],対: 自炊 (tự nấu ăn ở nhà),vocab
+26,家事,かじ,kaji,Gia Sự,Việc nhà - nội trợ,Danh từ,夫婦で家事を分担する。,Hai vợ chồng phân chia việc nhà.,家 (Gia: gia đình/nhà) + 事 (Sự: công việc),[1],類: 炊事 (nấu nướng) / 家政 (gia chánh),vocab
+27,出産,しゅっさん,shussan,Xuất Sản,Sinh con - đẻ con,Danh từ / Động từ Suru,無事に男の子を出産した。,Đã hạ sinh mẹ tròn con vuông một bé trai.,出 (Xuất: ra đời) + 産 (Sản: sinh đẻ),[0],類: 産む (sinh đẻ) / 分娩 (phân vãn),vocab
+28,介護,かいご,kaigo,Giới Hộ,Chăm sóc - điều dưỡng người cao tuổi,Danh từ / Động từ Suru,高齢者の介護を担当する。,Phụ trách chăm sóc người cao tuổi.,介 (Giới: xen vào/trợ giúp) + 護 (Hộ: bảo hộ),[1],類: 世話 (chăm sóc) / 看護 (y tá hộ lý),vocab
+29,共働き,ともばたらき,tomobataraki,Cộng Động,Cả hai vợ chồng cùng đi làm kiếm tiền,Danh từ,共働きの家庭が増えている。,Các gia đình cả hai vợ chồng cùng đi làm ngày càng tăng.,共 (Cộng: cùng nhau) + 働 (Động: làm việc),[0],類: 共稼ぎ (cùng kiếm tiền),vocab
+30,出勤,しゅっきん,shukkin,Xuất Cần,Đi làm - có mặt tại nơi làm việc,Danh từ / Động từ Suru,毎朝8時に出勤する。,Mỗi sáng tôi đi làm lúc 8 giờ.,出 (Xuất: ra ngoài) + 勤 (Cần: cần vụ/làm việc),[0],対: 欠勤 (nghỉ làm) / 退勤 (tan làm),vocab
+31,出世,しゅっせ,shusse,Xuất Thế,Thăng tiến - thành đạt trong sự nghiệp,Danh từ / Động từ Suru,同期の中で一番早く出世した。,Anh ấy thăng tiến nhanh nhất trong số những người cùng đợt.,出 (Xuất: vươn ra) + 世 (Thế: xã hội/thế gian),[0],類: 昇進 (thăng chức) / 出世頭 (người thành đạt nhất),vocab
+32,地位,ちい,chii,Địa Vị,Địa vị - vị thế xã hội,Danh từ,社会的な地位を築く。,Xây dựng địa vị trong xã hội.,地 (Địa: đất/vị trí) + 位 (Vị: ngôi vị),[1],類: 身分 (thân phận) / ポジション (vị trí),vocab
+33,受験,じゅけん,juken,Thụ Nghiệm,Dự thi - đi thi,Danh từ / Động từ Suru,大学受験に向けて勉強する。,Học tập hướng tới kỳ thi đại học.,受 (Thụ: nhận/chịu) + 験 (Nghiệm: kiểm tra),[0],類: 受検 (dự thi sát hạch),vocab
+34,専攻,せんこう,senkou,Chuyên Công,Chuyên ngành học tập,Danh từ / Động từ Suru,大学で日本文学を専攻する。,Chuyên ngành văn học Nhật Bản tại đại học.,専 (Chuyên: chuyên môn) + 攻 (Công: nghiên cứu sâu),[0],類: 専門 (chuyên môn),vocab
+35,支度,したく,shitaku,Chi Độ,Chuẩn bị - sửa soạn trang phục hành lý,Danh từ / Động từ Suru,出かける支度をする。,Sửa soạn đồ đạc để ra ngoài.,支 (Chi: chi phối/nâng đỡ) + 度 (Độ: chừng mực),[0],類: 準備 (chuẩn bị) / 用意 (chuẩn bị sẵn),vocab
+36,全身,ぜんしん,zenshin,Toàn Thân,Cả người - toàn thân,Danh từ,全身全霊で取り組む。,Cống hiến toàn tâm toàn ý toàn lực.,全 (Toàn: toàn bộ) + 身 (Thân: thân thể),[0],対: 一部分 (một bộ phận),vocab
+37,しわ,しわ,shiwa,Thao,Nếp nhăn - vết nhăn trên áo quần,Danh từ,洗濯物のしわを伸ばす。,Ủi phẳng nếp nhăn trên quần áo giặt.,皺 (Thao/Trứu: vết gấp nếp),[0],類: 小じわ (vết chân chim) / ひだ (nếp gấp),vocab
+38,服装,ふくそう,fukusou,Phục Trang,Trang phục - quần áo diện mạo,Danh từ,面接にふさわしい服装をする。,Mặc trang phục phù hợp với buổi phỏng vấn.,服 (Phục: y phục) + 装 (Trang: trang sức/diện mạo),[0],類: 身なり (diện mạo) / 衣服 (quần áo),vocab
+39,礼,れい,rei,Lễ,Lễ nghĩa - cảm ơn - cúi chào,Danh từ,お世話になった人にお礼を言う。,Nói lời cảm ơn người đã giúp đỡ mình.,礼 (Lễ: lễ phép/lễ nghi),[1],類: お礼 (lời cảm ơn) / 礼儀 (lễ nghi),vocab
+40,お世辞,おせじ,oseji,Thế Từ,Khen ngợi xã giao - nịnh hót,Danh từ,お世辞でも嬉しいです。,Dù là khen đãi bôi xã giao tôi cũng thấy vui.,世 (Thế: đời) + 辞 (Từ: lời nói),[0],類: おべっか (nịnh nọt) / 社交辞令 (lời nói xã giao),vocab
+41,言い訳,いいわけ,iiwake,Ngôn Dịch,Biện bạch - phân bua - viện cớ,Danh từ / Động từ Suru,失敗の言い訳をするな。,Đừng có viện cớ cho sự thất bại.,言 (Ngôn: nói) + 訳 (Dịch: lý do/giải nghĩa),[0],類: 弁解 (biện giải) / 口実 (cớ),vocab
+42,話題,わだい,wadai,Thoại Đề,Chủ đề câu chuyện - đề tài nóng,Danh từ,最近話題のニュースを見る。,Xem tin tức đang là chủ đề nóng gần đây.,話 (Thoại: nói chuyện) + 題 (Đề: chủ đề),[0],類: トピック (topic) / テーマ (theme),vocab
+43,秘密,ひみつ,himitsu,Bí Mật,Bí mật - điều giấu kín,Danh từ,絶対に秘密を守る。,Tuyệt đối giữ bí mật.,秘 (Bí: giấu kín) + 密 (Mật: kín đáo),[0],対: 公開 (công khai) / 暴露 (vạch trần),vocab
+44,尊敬,そんけい,sonkei,Tôn Kính,Kính trọng - tôn kính,Danh từ / Động từ Suru,先生を心から尊敬している。,Từ đáy lòng tôi rất tôn kính thầy giáo.,尊 (Tôn: quý trọng) + 敬 (Kính: kính nể),[0],対: 軽蔑 (khinh miệt) / 見下す (coi thường),vocab
+45,謙遜,けんそん,kenson,Khiêm Tốn,Khiêm tốn - nhún nhường,Danh từ / Động từ Suru,褒められて謙遜する。,Được khen thì khiêm tốn nhún nhường.,謙 (Khiêm: nhún nhường) + 遜 (Tốn: khiêm nhường),[0],対: 自慢 (khoe khoang) / 傲慢 (ngạo mạn),vocab
+46,期待,きたい,kitai,Kỳ Đãi,Kỳ vọng - mong đợi,Danh từ / Động từ Suru,親の期待に応える。,Đáp ứng kỳ vọng của cha mẹ.,期 (Kỳ: thời kỳ/mong mỏi) + 待 (Đãi: chờ đợi),[0],類: 望み (hy vọng) / 当てにする (trông cậy vào),vocab
+47,苦労,くろう,kurou,Khổ Lao,Gian khổ - vất vả - nhọc nhằn,Danh từ / Động từ Suru,母は苦労して私を育ててくれた。,Mẹ đã vất vả nuôi tôi khôn lớn.,苦 (Khổ: cay đắng) + 労 (Lao: lao lực),[1],類: 苦心 (khổ tâm lao lực) / 骨折り (vất vả),vocab
+48,意志,いし,ishi,Ý Chí,Ý chí - lòng quyết tâm,Danh từ,強い意志を持って挑戦する。,Mang ý chí mạnh mẽ để đương đầu thử thách.,意 (Ý: ý nghĩ) + 志 (Chí: chí hướng),[1],類: 意欲 (ý muốn) / 志 (chí hướng),vocab
+49,感情,かんじょう,kanjou,Cảm Tình,Cảm xúc - tình cảm,Danh từ,感情をコントロールする。,Kiểm soát cảm xúc của bản thân.,感 (Cảm: cảm giác) + 情 (Tình: tình cảm),[0],対: 理性 (lý trí) / 感情的 (dễ xúc động),vocab
+50,〜を契機に,〜をけいきに,wo keiki ni,Khế Cơ,Nhân cơ hội - lấy cớ từ sự kiện,Mẫu ngữ pháp,法改正を契機に社内ルールを見直した。,Nhân cơ hội luật sửa đổi công ty đã rà soát lại quy định nội bộ.,契 (Khế: gắn kết) + 機 (Cơ: cơ hội),[0],類: 〜をきっかけに (nhân dịp/từ sự kiện),[grammar]
+51,材料,ざいりょう,zairyou,Tài Liệu,nguyên liệu -  vật liệu,Danh từ,美味しい料理を作るために新鮮な材料を買う。,Mua nguyên liệu tươi ngon để nấu món ăn ngon.,材 (Tài: vật liệu/tài liệu) + 料 (Liệu: nguyên liệu/phí tổn),[1],連: 材料に関する / 類: nguyên liệu,vocab
+52,石,いし,ishi,Thạch,đá,Danh từ,道に大きな石が落ちている。,Có một hòn đá lớn rơi trên đường.,石 (Thạch: hòn đá),[0],連: 石に関する / 類: đá,vocab
+53,ひも,ひも,himo,-,dây,Danh từ,荷物をひもでしっかり縛る。,Buộc chặt hành lý bằng sợi dây.,-,[0],連: ひもに関する / 類: dây,vocab
+54,券,けん,ken,Khoán,vé,Danh từ,券について詳しく調査する。,Nghiên cứu kỹ lưỡng về vé.,券 (Khoán: vé/phiếu),[0],連: 券に関する / 類: vé,vocab
+55,名簿,めいぼ,meibo,Danh Bộ,danh bạ -  danh sách,Danh từ,出席者の名前を名簿で確認する。,Kiểm tra tên người tham dự trong danh bạ.,名 (Danh: tên/danh tiếng) + 簿 (Bộ: sổ sách/danh bộ),[0],連: 名簿に関する / 類: danh bạ,vocab
+56,表,ひょう,hyou,Biểu,bảng biểu -  mặt trước,Danh từ,データを分かりやすく表にまとめる。,Tổng hợp dữ liệu thành bảng biểu cho dễ hiểu.,表 (Biểu: biểu thị/mặt ngoài/bảng),[0],連: 表に関する / 類: bảng biểu,vocab
+57,針,はり,hari,Châm,kim,Danh từ,時計の針が12時を指している。,Chiếc kim đồng hồ đang chỉ 12 giờ.,針 (Châm: cây kim/phương châm),[0],連: 針に関する / 類: kim,vocab
+58,栓,せん,sen,Xuyên,nút -  nắp ( chai...),Danh từ,ワインのボトルの栓を抜く。,Mở chiếc nút của chai rượu vang.,栓 (Xuyên: cái nút/van khóa),[0],連: 栓に関する / 類: nút,vocab
+59,湯気,ゆげ,yuge,Thang Khí,Hơi nước -  khí,Danh từ,温かいスープから湯気が立っている。,Hơi nước bốc lên từ bát súp nóng.,湯 (Thang: nước nóng/canh) + 気 (Khí: không khí/tâm trạng/khí chất),[0],連: 湯気に関する / 類: Hơi nước,vocab
+60,日当たり,ひあたり,hiatari,Nhật Đương,nơi có ánh sáng chiếu vào,Danh từ,この部屋は南向きで日当たりがいい。,Căn phòng này hướng nam nên nơi có ánh sáng chiếu vào rất tốt.,日 (Nhật: mặt trời/ngày) + 当 (Đương: chính xác/đảm đương),[1],連: 日当たりに関する / 類: nơi có ánh sáng chiếu vào,vocab
+61,空,から,kara,Không,trống rỗng -  bầu trời,Danh từ,空について詳しく調査する。,Nghiên cứu kỹ lưỡng về trống rỗng.,空 (Không: bầu trời/trống rỗng),[0],連: 空に関する / 類: trống rỗng,vocab
+62,斜め,ななめ,naname,Tà,Nghiêng -  chéo -  khác thường,Danh từ,斜めについて詳しく調査する。,Nghiên cứu kỹ lưỡng về Nghiêng.,斜 (Tà: nghiêng/xiên),[0],連: 斜めに関する / 類: Nghiêng,vocab
+63,履歴,りれき,rireki,Lý Lịch,lý lịch -  lịch sử,Danh từ,面接の前に自分の履歴書を作成する。,Viết bản lý lịch trước buổi phỏng vấn.,履 (Lý: mang giày/tiểu sử) + 歴 (Lịch: lịch sử/trải qua),[0],連: 履歴に関する / 類: lý lịch,vocab
+64,娯楽,ごらく,goraku,Ngu Lạc,thú vui -  giải trí,Danh từ,週末は映画などの娯楽を楽しむ。,Cuối tuần tôi tận hưởng các hình thức thú vui như xem phim.,娯 (Ngu: giải trí/vui chơi) + 楽 (Lạc: vui vẻ/âm nhạc),[0],連: 娯楽に関する / 類: thú vui,vocab
+65,司会,しかい,shikai,Ti Hội,chủ trì buổi tiệc -  MC,Danh từ,結婚式の司会を頼まれた。,Tôi được nhờ làm chủ trì buổi tiệc cho lễ cưới.,司 (Ti: chủ trì/quản lý) + 会 (Hội: gặp gỡ/hội họp),[0],連: 司会に関する / 類: chủ trì buổi tiệc,vocab
+66,歓迎,かんげい,kangei,Hoan Nghênh,hoan nghênh,Danh từ,歓迎について詳しく調査する。,Nghiên cứu kỹ lưỡng về hoan nghênh.,歓 (Hoan: hoan nghênh/vui vẻ) + 迎 (Nghênh: đón tiếp/nghênh đón),[1],連: 歓迎に関する / 類: hoan nghênh,vocab
+67,窓口,まどぐち,madoguchi,Song Khẩu,Quầy giao dịch -  quầy tiếp khách,Danh từ,市役所の窓口で手続きを行う。,Làm thủ tục tại Quầy giao dịch của tòa thị chính.,窓 (Song: cửa sổ) + 口 (Khẩu: miệng/cửa ngõ),[1],連: 窓口に関する / 類: Quầy giao dịch,vocab
+68,手続き,てつづき,tetsuzuki,Thủ Tục,thủ tục -  quy trình,Danh từ,手続きについて詳しく調査する。,Nghiên cứu kỹ lưỡng về thủ tục.,手 (Thủ: bàn tay/người làm) + 続 (Tục: tiếp tục/liên tục),[1],連: 手続きに関する / 類: thủ tục,vocab
+69,徒歩,とほ,toho,Đồ Bộ,đi bộ,Danh từ,徒歩について詳しく調査する。,Nghiên cứu kỹ lưỡng về đi bộ.,徒 (Đồ: học trò/người theo) + 歩 (Bộ: bước đi/đi bộ),[0],連: 徒歩に関する / 類: đi bộ,vocab
+70,駐車,ちゅうしゃ,chuusha,Trú Xa,đỗ xe,Danh từ,駐車について詳しく調査する。,Nghiên cứu kỹ lưỡng về đỗ xe.,駐 (Trú: đỗ xe/trú lại) + 車 (Xa: xe cộ/bánh xe),[1],連: 駐車に関する / 類: đỗ xe,vocab
+71,違反,いはん,ihan,Vi Phản,vi phạm,Danh từ,違反について詳しく調査する。,Nghiên cứu kỹ lưỡng về vi phạm.,違 (Vi: khác biệt/sai sót) + 反 (Phản: phản đối/ngược lại),[0],連: 違反に関する / 類: vi phạm,vocab
+72,平日,へいじつ,heijitsu,Bình Nhật,ngày thường,Danh từ,平日について詳しく調査する。,Nghiên cứu kỹ lưỡng về ngày thường.,平 (Bình: bình đẳng/hòa bình) + 日 (Nhật: mặt trời/ngày),[1],連: 平日に関する / 類: ngày thường,vocab
+73,日付,ひづけ,hizuke,Nhật Phó,ngày tháng,Danh từ,日付について詳しく調査する。,Nghiên cứu kỹ lưỡng về ngày tháng.,日 (Nhật: mặt trời/ngày) + 付 (Phó: gắn/dính/kèm),[0],連: 日付に関する / 類: ngày tháng,vocab
+74,日中,にっちゅう,nitchuu,Nhật Trung,Trong ngày,Danh từ,日中について詳しく調査する。,Nghiên cứu kỹ lưỡng về Trong ngày.,日 (Nhật: mặt trời/ngày) + 中 (Trung: trong/ở giữa),[1],連: 日中に関する / 類: Trong ngày,vocab
+75,日程,にってい,nittei,Nhật Trình,lịch trình -  hành trình,Danh từ,日程について詳しく調査する。,Nghiên cứu kỹ lưỡng về lịch trình.,日 (Nhật: mặt trời/ngày) + 程 (Trình: quá trình/mức độ),[1],連: 日程に関する / 類: lịch trình,vocab
+76,日帰り,ひがえり,higaeri,Nhật Quy,đi về trong ngày,Danh từ,日帰りについて詳しく調査する。,Nghiên cứu kỹ lưỡng về đi về trong ngày.,日 (Nhật: mặt trời/ngày) + 帰 (Quy: trở về/quay về),[1],連: 日帰りに関する / 類: đi về trong ngày,vocab
+77,順序,じゅんじょ,junjo,Thuận Tự,thứ tự,Danh từ,順序について詳しく調査する。,Nghiên cứu kỹ lưỡng về thứ tự.,順 (Thuận: thuận tiện/thứ tự) + 序 (Tự: thứ tự/lời mở đầu),[1],連: 順序に関する / 類: thứ tự,vocab
+78,時期,じき,jiki,Thời Kỳ,thời kì -  thời điểm,Danh từ,時期について詳しく調査する。,Nghiên cứu kỹ lưỡng về thời kì.,時 (Thời: thời gian/giờ) + 期 (Kỳ: thời kỳ/kỳ hạn),[0],連: 時期に関する / 類: thời kì,vocab
+79,現在,げんざい,genzai,Hiện Tại,hiện tại,Danh từ,現在について詳しく調査する。,Nghiên cứu kỹ lưỡng về hiện tại.,現 (Hiện: hiện tại/xuất hiện) + 在 (Tại: tồn tại/ở tại),[1],連: 現在に関する / 類: hiện tại,vocab
+80,臨時,りんじ,rinji,Lâm Thời,tạm thời,Phó từ,臨時物事が進んでいる。,Mọi việc đang tiến triển (tạm thời).,臨 (Lâm: đến gần/đối mặt) + 時 (Thời: thời gian/giờ),[0],連: 臨時に関する / 類: tạm thời,vocab

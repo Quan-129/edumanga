@@ -8,6 +8,7 @@
   <!-- Stylesheets -->
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/mimikara-practice.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
@@ -26,8 +27,12 @@
         <!-- User Profile / Login Button -->
         <div id="headerUserContainer"></div>
 
+        <button type="button" class="btn-secondary" onclick="if(window.mimikaraService) window.mimikaraService.openModal();" title="Luyện tập 14 Unit Mimikara N2 (1.160 từ)" style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 8px 16px; font-size: 0.88rem; background: rgba(168, 85, 247, 0.15); border: 1px solid rgba(168, 85, 247, 0.4); color: #c084fc;">
+          <i class="fas fa-graduation-cap"></i> <span>Mimikara N2 (1.160 từ)</span>
+        </button>
+
         <a href="index.html" class="nav-link">
-          <i class="fas fa-arrow-left"></i> Trang Chủủ
+          <i class="fas fa-arrow-left"></i> Trang Chủ
         </a>
       </div>
     </div>
@@ -364,6 +369,7 @@
   <script src="js/db-storage.js"></script>
   <script src="js/auth-service.js"></script>
   <script src="js/sync-engine.js"></script>
+  <script src="js/mimikara-practice-service.js"></script>
   <script src="js/detail.js"></script>
 </body>
 </html>
