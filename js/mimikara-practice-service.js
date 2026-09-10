@@ -31,6 +31,8 @@ class MimikaraPracticeService {
     this.typingQuestions = [];
     this.typingIndex = 0;
     this.typingState = 'input'; // 'input' | 'correct' | 'incorrect'
+
+    this.initKeyboardEvents();
   }
 
   // Load progress from localStorage
@@ -79,6 +81,34 @@ class MimikaraPracticeService {
       utter.rate = 0.9;
       window.speechSynthesis.speak(utter);
     } catch (e) {}
+  }
+
+  // Keyboard Shortcuts Handler
+  initKeyboardEvents() {
+    window.addEventListener('keydown', (e) => {
+      const modal = document.getElementById('mimikaraMasterModal');
+      if (!modal || !modal.classList.contains('active')) return;
+
+      // Không can thiệp nếu đang nhập liệu trong ô input
+      if (e.target && (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA')) return;
+
+      if (this.currentStep === 1) {
+        if (e.code === 'Space' || e.code === 'Enter') {
+          e.preventDefault();
+          this.toggleCardFlip();
+        } else if (e.code === 'ArrowRight' || e.code === 'KeyN') {
+          e.preventDefault();
+          this.nextFlashcard();
+        } else if (e.code === 'ArrowLeft' || e.code === 'KeyP') {
+          e.preventDefault();
+          this.prevFlashcard();
+        } else if (e.code === 'KeyR') {
+          e.preventDefault();
+          const w = this.currentChunkWords && this.currentChunkWords[this.flashcardIndex];
+          if (w) this.speak(w.term);
+        }
+      }
+    });
   }
 
   // Open Modal
@@ -358,10 +388,10 @@ class MimikaraPracticeService {
         <div class="mimikara-card-flip" onclick="window.mimikaraService.toggleCardFlip()">
           <!-- Top Card Meta -->
           <div style="display: flex; justify-content: space-between; align-items: center;">
-            <span style="font-size: 0.8rem; font-weight: 700; color: #a855f7;">
+            <span style="font-size: 1.15rem; font-weight: 800; color: #c084fc; letter-spacing: 0.05em;">
               THẺ ${this.flashcardIndex + 1} / ${this.currentChunkWords.length} (STT #${w.stt})
             </span>
-            <button type="button" class="btn-icon-xs" onclick="event.stopPropagation(); window.mimikaraService.speak('${escapeJs(w.term)}')" title="Nghe phát âm" style="background: rgba(168,85,247,0.2); color: #c084fc; width: 34px; height: 34px; border-radius: 8px;">
+            <button type="button" class="btn-icon-xs" onclick="event.stopPropagation(); window.mimikaraService.speak('${escapeJs(w.term)}')" title="Nghe phát âm từ vựng (Phím R)" style="background: rgba(168,85,247,0.25); color: #e9d5ff; width: 46px; height: 46px; border-radius: 12px; font-size: 1.35rem; border: 1.5px solid rgba(168,85,247,0.4); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s ease;">
               <i class="fas fa-volume-high"></i>
             </button>
           </div>
@@ -371,61 +401,76 @@ class MimikaraPracticeService {
             <!-- FRONT -->
             <div class="mimikara-card-main-word">
               <div class="mimikara-kanji-huge">${escapeHtml(w.term)}</div>
-              <div class="mimikara-reading-mid">${escapeHtml(w.reading)} ${w.pitch_accent ? `<span style="font-size: 0.85rem; color: #94a3b8;">${escapeHtml(w.pitch_accent)}</span>` : ''}</div>
+              <div class="mimikara-reading-mid">
+                <span>${escapeHtml(w.reading)}</span>
+                ${w.pitch_accent ? `<span class="mimikara-pitch-chip" title="Trọng âm Pitch Accent">${escapeHtml(w.pitch_accent)}</span>` : ''}
+              </div>
               ${w.han_viet ? `<span class="mimikara-hanviet-tag">[ ${escapeHtml(w.han_viet)} ]</span>` : ''}
-              <div style="margin-top: 1.5rem; font-size: 0.82rem; color: var(--text-muted); display: flex; align-items: center; justify-content: center; gap: 6px;">
-                <i class="fas fa-rotate"></i> Chạm vào thẻ để xem nghĩa & ví dụ
+              <div style="margin-top: 2.5rem; font-size: 1.15rem; color: #cbd5e1; display: flex; align-items: center; justify-content: center; gap: 10px; font-weight: 600;">
+                <i class="fas fa-rotate" style="color: #c084fc;"></i> Chạm vào thẻ hoặc nhấn <b>Phím Cách</b> để xem nghĩa & ví dụ
               </div>
             </div>
           ` : `
             <!-- BACK -->
             <div class="mimikara-card-back-details">
               <div class="mimikara-meaning-highlight">${escapeHtml(w.meaning)}</div>
-              ${w.type ? `<div style="text-align: center; margin-bottom: 0.75rem;"><span style="font-size: 0.75rem; background: rgba(56,189,248,0.15); color: #38bdf8; padding: 2px 8px; border-radius: 4px;">${escapeHtml(w.type)}</span></div>` : ''}
+              ${w.type ? `<div style="text-align: center; margin-bottom: 1.25rem;"><span class="mimikara-type-badge">${escapeHtml(w.type)}</span></div>` : ''}
               
               ${w.exam_ja ? `
                 <div class="mimikara-example-block">
-                  <div class="mimikara-example-ja">${escapeHtml(w.exam_ja)}</div>
+                  <div class="mimikara-example-ja">
+                    <span>${escapeHtml(w.exam_ja)}</span>
+                    <button type="button" onclick="event.stopPropagation(); window.mimikaraService.speak('${escapeJs(w.exam_ja)}')" title="Nghe câu ví dụ" style="background: rgba(168,85,247,0.3); color: #e9d5ff; width: 40px; height: 40px; border-radius: 10px; font-size: 1.15rem; border: 1px solid rgba(168,85,247,0.5); cursor: pointer; flex-shrink: 0; display: inline-flex; align-items: center; justify-content: center; transition: all 0.2s ease;">
+                      <i class="fas fa-volume-high"></i>
+                    </button>
+                  </div>
                   <div class="mimikara-example-vi">${escapeHtml(w.exam_vi || '')}</div>
                 </div>
               ` : ''}
 
               ${w.kanji_breakdown ? `
-                <div style="font-size: 0.8rem; color: #cbd5e1; margin-top: 0.5rem; background: rgba(255,255,255,0.04); padding: 6px 10px; border-radius: 6px;">
-                  <b>Chiết tự Kanji:</b> ${escapeHtml(w.kanji_breakdown)}
+                <div class="mimikara-breakdown-block">
+                  <b style="color: #c084fc;"><i class="fas fa-puzzle-piece" style="color: #38bdf8;"></i> Chiết tự Kanji:</b> ${escapeHtml(w.kanji_breakdown)}
                 </div>
               ` : ''}
 
               ${w.synonyms_antonyms ? `
-                <div style="font-size: 0.78rem; color: #94a3b8; margin-top: 0.35rem;">
-                  ${escapeHtml(w.synonyms_antonyms)}
+                <div class="mimikara-related-block">
+                  <b style="color: #fbbf24;"><i class="fas fa-link"></i> Từ liên quan / Chú thích:</b> ${escapeHtml(w.synonyms_antonyms)}
                 </div>
               ` : ''}
             </div>
           `}
 
           <!-- Bottom Footer -->
-          <div style="display: flex; justify-content: space-between; align-items: center; padding-top: 0.75rem; border-top: 1px solid rgba(255,255,255,0.06); font-size: 0.75rem; color: #94a3b8;">
-            <span>Chạm để lật mặt thẻ</span>
-            <span style="color: #38bdf8;">${this.isCardFlipped ? 'Mặt sau (Nghĩa)' : 'Mặt trước (Kanji)'}</span>
+          <div style="display: flex; justify-content: space-between; align-items: center; padding-top: 1.1rem; border-top: 1px solid rgba(255,255,255,0.1); font-size: 1rem; color: #cbd5e1; font-weight: 600;">
+            <span><i class="fas fa-hand-pointer" style="color: #c084fc;"></i> Chạm để lật mặt thẻ</span>
+            <span style="color: #38bdf8; font-weight: 800; font-size: 1.05rem;">${this.isCardFlipped ? 'Mặt sau (Nghĩa)' : 'Mặt trước (Kanji)'}</span>
           </div>
         </div>
 
         <!-- Controls Below Card -->
         <div class="mimikara-card-controls">
-          <button type="button" class="mimikara-btn-back" onclick="window.mimikaraService.prevFlashcard()" ${this.flashcardIndex === 0 ? 'disabled style="opacity:0.4; cursor:not-allowed;"' : ''}>
-            <i class="fas fa-chevron-left"></i> Từ trước
+          <button type="button" class="mimikara-btn-back" onclick="window.mimikaraService.prevFlashcard()" ${this.flashcardIndex === 0 ? 'disabled style="opacity:0.4; cursor:not-allowed;"' : ''} style="padding: 14px 28px; font-size: 1.05rem; font-weight: 700; border-radius: 12px;">
+            <i class="fas fa-chevron-left"></i> Từ trước (←)
           </button>
 
           ${isLastCard ? `
-            <button type="button" class="btn-primary" onclick="window.mimikaraService.startStep2Matching()" style="background: linear-gradient(135deg, #a855f7, #6366f1); padding: 10px 22px; font-weight: 700; border-radius: 10px;">
+            <button type="button" class="btn-primary" onclick="window.mimikaraService.startStep2Matching()" style="background: linear-gradient(135deg, #a855f7, #6366f1); padding: 14px 34px; font-weight: 800; font-size: 1.1rem; border-radius: 14px; box-shadow: 0 6px 25px rgba(168,85,247,0.5);">
               <span>Sẵn Sàng Sang Bước 2: Ghép Cặp ➔</span>
             </button>
           ` : `
-            <button type="button" class="btn-primary" onclick="window.mimikaraService.nextFlashcard()" style="background: linear-gradient(135deg, #0284c7, #6366f1); padding: 10px 22px; font-weight: 700; border-radius: 10px;">
-              <span>Từ tiếp theo ➔</span>
+            <button type="button" class="btn-primary" onclick="window.mimikaraService.nextFlashcard()" style="background: linear-gradient(135deg, #0284c7, #6366f1); padding: 14px 34px; font-weight: 800; font-size: 1.1rem; border-radius: 14px; box-shadow: 0 6px 25px rgba(2,132,199,0.5);">
+              <span>Từ tiếp theo (→) ➔</span>
             </button>
           `}
+        </div>
+
+        <!-- Shortcuts guide -->
+        <div class="mimikara-shortcuts-guide">
+          <span><span class="mimikara-kbd">Space</span> Lật mặt</span>
+          <span><span class="mimikara-kbd">←</span> / <span class="mimikara-kbd">→</span> Đổi từ</span>
+          <span><span class="mimikara-kbd">R</span> Nghe phát âm</span>
         </div>
       </div>
     `;
@@ -502,14 +547,14 @@ class MimikaraPracticeService {
     const leftCardsHtml = this.leftMatchCards.map(c => `
       <div id="${c.id}" class="mimikara-match-card ${c.matched ? 'matched' : ''} ${this.selectedLeftCard && this.selectedLeftCard.id === c.id ? 'selected' : ''}" onclick="window.mimikaraService.selectMatchCard('${c.id}', 'left')">
         <div class="mimikara-match-term">${escapeHtml(c.term)}</div>
-        <div style="font-size: 0.82rem; color: #38bdf8;">${escapeHtml(c.reading)}</div>
+        <div class="mimikara-match-reading">${escapeHtml(c.reading)}</div>
       </div>
     `).join('');
 
     const rightCardsHtml = this.rightMatchCards.map(c => `
       <div id="${c.id}" class="mimikara-match-card ${c.matched ? 'matched' : ''} ${this.selectedRightCard && this.selectedRightCard.id === c.id ? 'selected' : ''}" onclick="window.mimikaraService.selectMatchCard('${c.id}', 'right')">
         <div class="mimikara-match-meaning">${escapeHtml(c.meaning)}</div>
-        ${c.han_viet ? `<div style="font-size: 0.78rem; color: #fbbf24; margin-top: 3px;">[ ${escapeHtml(c.han_viet)} ]</div>` : ''}
+        ${c.han_viet ? `<div class="mimikara-match-hanviet">[ ${escapeHtml(c.han_viet)} ]</div>` : ''}
       </div>
     `).join('');
 
@@ -654,9 +699,9 @@ class MimikaraPracticeService {
 
       <div class="mimikara-typing-container">
         <div class="mimikara-typing-card">
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
-            <span style="font-size: 0.8rem; font-weight: 700; color: #a855f7;">LƯỢT ${this.typingIndex + 1} / ${this.typingQuestions.length}</span>
-            <button type="button" class="btn-icon-xs" onclick="window.mimikaraService.speak('${escapeJs(q.word.term)}')" title="Nghe phát âm" style="background: rgba(168,85,247,0.2); color: #c084fc; width: 30px; height: 30px; border-radius: 6px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+            <span style="font-size: 1.15rem; font-weight: 800; color: #c084fc; letter-spacing: 0.05em;">LƯỢT ${this.typingIndex + 1} / ${this.typingQuestions.length}</span>
+            <button type="button" class="btn-icon-xs" onclick="window.mimikaraService.speak('${escapeJs(q.word.term)}')" title="Nghe phát âm" style="background: rgba(168,85,247,0.25); color: #e9d5ff; width: 44px; height: 44px; border-radius: 12px; font-size: 1.25rem; border: 1.5px solid rgba(168,85,247,0.4); cursor: pointer; display: flex; align-items: center; justify-content: center;">
               <i class="fas fa-volume-high"></i>
             </button>
           </div>
@@ -667,7 +712,7 @@ class MimikaraPracticeService {
 
           <form onsubmit="window.mimikaraService.checkTypingAnswer(event)" class="mimikara-input-group">
             <input type="text" id="mimikaraTypingInput" class="mimikara-typing-input ${this.typingState}" placeholder="Gõ đáp án của bạn và nhấn Enter..." autocomplete="off" autofocus>
-            <button type="submit" class="btn-primary" style="background: linear-gradient(135deg, #a855f7, #6366f1); padding: 0 24px; font-weight: 700; border-radius: 12px;">
+            <button type="submit" class="btn-primary" style="background: linear-gradient(135deg, #a855f7, #6366f1); padding: 0 32px; font-weight: 800; font-size: 1.15rem; border-radius: 16px; cursor: pointer; box-shadow: 0 4px 20px rgba(168,85,247,0.4);">
               Kiểm Tra
             </button>
           </form>
@@ -677,11 +722,11 @@ class MimikaraPracticeService {
           </div>
         </div>
 
-        <div style="display: flex; justify-content: space-between; align-items: center;">
-          <button type="button" class="btn-secondary" onclick="window.mimikaraService.revealAnswer()" style="font-size: 0.85rem; padding: 8px 16px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+          <button type="button" class="btn-secondary" onclick="window.mimikaraService.revealAnswer()" style="font-size: 1.05rem; font-weight: 700; padding: 12px 22px; border-radius: 12px;">
             <i class="fas fa-eye"></i> Xem đáp án gợi ý
           </button>
-          <span style="font-size: 0.8rem; color: #94a3b8;">Nhấn <b>Enter</b> để kiểm tra / chuyển câu</span>
+          <span style="font-size: 1rem; color: #cbd5e1; font-weight: 600;">Nhấn <b>Enter</b> để kiểm tra / chuyển câu</span>
         </div>
       </div>
     `;
@@ -694,14 +739,14 @@ class MimikaraPracticeService {
 
   renderTypingFeedbackHTML(q) {
     if (this.typingState === 'correct') {
-      return `<div style="color: #34d399;"><i class="fas fa-check-circle"></i> <b>Chính xác!</b> Đang chuyển lượt tiếp theo...</div>`;
+      return `<div style="color: #34d399; font-size: 1.25rem;"><i class="fas fa-check-circle"></i> <b>Chính xác!</b> Tuyệt vời!</div>`;
     }
     if (this.typingState === 'incorrect') {
       return `
-        <div style="color: #f87171; text-align: center;">
-          <div><i class="fas fa-times-circle"></i> Chưa chính xác!</div>
-          <div style="font-size: 0.85rem; color: #cbd5e1; margin-top: 4px;">
-            Đáp án chuẩn: <b>${escapeHtml(q.word.term)}</b> (${escapeHtml(q.word.reading)}) = <i>${escapeHtml(q.word.meaning)}</i>
+        <div style="color: #f87171; text-align: center; font-size: 1.15rem;">
+          <div><i class="fas fa-times-circle"></i> Chưa chính xác, hãy thử lại hoặc xem gợi ý!</div>
+          <div style="font-size: 1.15rem; color: #cbd5e1; margin-top: 6px;">
+            Đáp án chuẩn: <b style="color: #38bdf8;">${escapeHtml(q.word.term)}</b> (<span style="color: #fde047;">${escapeHtml(q.word.reading)}</span>) = <i>${escapeHtml(q.word.meaning)}</i>
           </div>
         </div>
       `;
@@ -742,8 +787,8 @@ class MimikaraPracticeService {
     const feedback = document.getElementById('mimikaraTypingFeedback');
     if (feedback) {
       feedback.innerHTML = `
-        <div style="color: #fbbf24;">
-          💡 <b>Gợi ý đáp án:</b> Từ: <b>${escapeHtml(q.word.term)}</b> (${escapeHtml(q.word.reading)}) | Nghĩa: <i>${escapeHtml(q.word.meaning)}</i>
+        <div style="color: #fbbf24; font-size: 1.15rem; line-height: 1.6;">
+          💡 <b>Gợi ý đáp án:</b> Từ: <b style="color: #38bdf8;">${escapeHtml(q.word.term)}</b> (<span style="color: #fde047;">${escapeHtml(q.word.reading)}</span>) | Nghĩa: <i style="color: #34d399;">${escapeHtml(q.word.meaning)}</i>
         </div>
       `;
     }
