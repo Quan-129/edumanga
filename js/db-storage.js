@@ -684,9 +684,40 @@ const dbStorage = {
     }
   },
 
+  // Helper: Ping check if Python dev server is alive without loading heavy catalog
+  async isBackupServerAvailable() {
+    const isHttps = window.location.protocol === 'https:';
+    if (isHttps) return false;
+
+    try {
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 600);
+      const resp = await fetch('http://127.0.0.1:8080/api/backup/save', {
+        method: 'OPTIONS',
+        signal: controller.signal
+      });
+      clearTimeout(timeoutId);
+      return resp.ok;
+    } catch (e) {
+      return false;
+    }
+  },
+
   // 6. Perform Backup to Folder (Auto or Manual Trigger)
   async performAutoBackupToFolder(customTargetDir = null, isAuto = false) {
     const settings = this.getBackupSettings();
+
+    // 1. Kiểm tra nhanh xem Python Server có online không trước khi làm việc nặng
+    const serverAlive = await this.isBackupServerAvailable();
+    if (!serverAlive) {
+      settings.lastBackupStatus = 'Python Dev Server chưa chạy (Bỏ qua sao lưu ổ cứng)';
+      this.saveBackupSettings(settings);
+      if (!isAuto && typeof alert === 'function') {
+        alert("Không thể kết nối Python Dev Server. Hãy mở terminal và chạy:\npython scripts/dev_server.py\nđể sử dụng tính năng sao lưu vào thư mục máy tính!");
+      }
+      return { success: false, error: 'Server offline' };
+    }
+
     const targetDir = customTargetDir || settings.targetDir || 'backup';
 
     // Format folder date DD-MM-YYYY (e.g. 08-09-2026)
@@ -750,15 +781,7 @@ const dbStorage = {
         chapters: allChaptersList
       };
 
-      // Try multiple endpoints in case app is served on VS Code Live Server or python dev server
-      const isHttps = window.location.protocol === 'https:';
-      const isLocal = ['localhost', '127.0.0.1', ''].includes(window.location.hostname);
-
-      const candidateEndpoints = ['/api/backup/save'];
-      if (!isHttps || isLocal) {
-        candidateEndpoints.push('http://localhost:8080/api/backup/save', 'http://127.0.0.1:8080/api/backup/save');
-      }
-
+      const candidateEndpoints = ['/api/backup/save', 'http://127.0.0.1:8080/api/backup/save'];
       let lastErr = null;
       let result = null;
 
@@ -819,8 +842,25 @@ const dbStorage = {
       return;
     }
 
+    // Tránh spam kiểm tra liên tục giữa các lần chuyển trang (tối thiểu 12 tiếng mới check lại một lần)
+    const now = Date.now();
+    const lastAttempt = settings.lastAttemptTimestamp || 0;
+    if (now - lastAttempt < 12 * 60 * 60 * 1000) {
+      return;
+    }
+
+    // Đánh dấu thời điểm kiểm tra ngay
+    settings.lastAttemptTimestamp = now;
+    this.saveBackupSettings(settings);
+
+    // Kiểm tra ping server cực nhẹ (600ms) trước, không nạp bất kỳ dữ liệu nặng nào vào RAM nếu server offline
+    const serverAlive = await this.isBackupServerAvailable();
+    if (!serverAlive) {
+      return;
+    }
+
     const frequencyMs = (settings.frequencyDays || 2) * 24 * 60 * 60 * 1000;
-    const elapsed = Date.now() - (settings.lastBackupTimestamp || 0);
+    const elapsed = now - (settings.lastBackupTimestamp || 0);
 
     // If never backed up or elapsed >= interval, trigger catch-up backup
     if (!settings.lastBackupTimestamp || elapsed >= frequencyMs) {

@@ -9,6 +9,17 @@ let currentChapId = '';
 let activeCommentsList = [];
 let commentUnsubscribe = null;
 
+function getFirestoreDb() {
+  if (typeof window !== 'undefined' && (window.firestoreDb || window.firebaseFirestore)) {
+    return window.firestoreDb || window.firebaseFirestore;
+  }
+  if (typeof firestoreDb !== 'undefined') return firestoreDb;
+  if (typeof firebase !== 'undefined' && firebase.firestore && typeof firebase.firestore === 'function') {
+    try { return firebase.firestore(); } catch (e) { return null; }
+  }
+  return null;
+}
+
 const commentService = {
   // Initialize and load comments for chapter
   initChapterComments(seriesId, chapId) {
@@ -21,9 +32,12 @@ const commentService = {
       commentUnsubscribe = null;
     }
 
-    if (typeof firebase !== 'undefined' && firebaseFirestore && checkIsFirebaseConfigured()) {
+    const db = getFirestoreDb();
+    const isConfigured = typeof checkIsFirebaseConfigured === 'function' ? checkIsFirebaseConfigured() : false;
+
+    if (db && isConfigured) {
       try {
-        commentUnsubscribe = firebaseFirestore.collection('comments')
+        commentUnsubscribe = db.collection('comments')
           .where('chapterKey', '==', currentCommentChapterKey)
           .onSnapshot((snapshot) => {
             const comments = [];
@@ -81,10 +95,13 @@ const commentService = {
       likedUsers: []
     };
 
-    if (typeof firebase !== 'undefined' && firebaseFirestore && checkIsFirebaseConfigured()) {
+    const db = getFirestoreDb();
+    const isConfigured = typeof checkIsFirebaseConfigured === 'function' ? checkIsFirebaseConfigured() : false;
+
+    if (db && isConfigured) {
       try {
         showCommentLoading(true);
-        await firebaseFirestore.collection('comments').add(newCommentData);
+        await db.collection('comments').add(newCommentData);
         showToast("💬 Đã đăng bình luận!");
         clearCommentInput();
         return { success: true };
@@ -133,9 +150,12 @@ const commentService = {
     comment.likesCount = newLikesCount;
     renderCommentsUI(activeCommentsList);
 
-    if (typeof firebase !== 'undefined' && firebaseFirestore && checkIsFirebaseConfigured()) {
+    const db = getFirestoreDb();
+    const isConfigured = typeof checkIsFirebaseConfigured === 'function' ? checkIsFirebaseConfigured() : false;
+
+    if (db && isConfigured) {
       try {
-        await firebaseFirestore.collection('comments').doc(commentId).update({
+        await db.collection('comments').doc(commentId).update({
           likesCount: newLikesCount,
           likedUsers: likedUsers
         });
@@ -154,9 +174,12 @@ const commentService = {
 
     if (!confirm("Bạn có chắc chắn muốn xóa bình luận này không?")) return;
 
-    if (typeof firebase !== 'undefined' && firebaseFirestore && checkIsFirebaseConfigured()) {
+    const db = getFirestoreDb();
+    const isConfigured = typeof checkIsFirebaseConfigured === 'function' ? checkIsFirebaseConfigured() : false;
+
+    if (db && isConfigured) {
       try {
-        await firebaseFirestore.collection('comments').doc(commentId).delete();
+        await db.collection('comments').doc(commentId).delete();
         showToast("🗑️ Đã xóa bình luận.");
       } catch (err) {
         console.error("Error deleting comment:", err);

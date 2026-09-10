@@ -70,6 +70,17 @@ function initFirebaseApp() {
     googleAuthProvider.addScope('email');
 
     isFirebaseInitialized = true;
+
+    // Export to global window scope to avoid ReferenceErrors
+    if (typeof window !== 'undefined') {
+      window.firebaseApp = firebaseApp;
+      window.firebaseAuth = firebaseAuth;
+      window.firestoreDb = firestoreDb;
+      window.firebaseFirestore = firestoreDb;
+      window.googleAuthProvider = googleAuthProvider;
+      window.isFirebaseInitialized = isFirebaseInitialized;
+    }
+
     return true;
   } catch (error) {
     console.warn("⚠️ Firebase initialization warning:", error.message);
