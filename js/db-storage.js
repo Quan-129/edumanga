@@ -178,7 +178,13 @@ const dbStorage = {
       if (item && item.id) merged.set(item.id, item);
     });
     list.forEach(item => {
-      if (item && item.id) merged.set(item.id, { ...merged.get(item.id), ...item });
+      if (item && item.id) {
+        const prev = merged.get(item.id) || {};
+        const resolvedCover = (item.cover && typeof item.cover === 'string' && item.cover.trim() !== '') 
+          ? item.cover.trim() 
+          : (prev.cover || '');
+        merged.set(item.id, { ...prev, ...item, cover: resolvedCover });
+      }
     });
 
     return Array.from(merged.values());
@@ -595,9 +601,13 @@ const dbStorage = {
 
       if (mergedMap.has(custom.id)) {
         const existing = mergedMap.get(custom.id);
+        const resolvedCover = (custom.cover && typeof custom.cover === 'string' && custom.cover.trim() !== '')
+          ? custom.cover.trim()
+          : (existing.cover || '');
         mergedMap.set(custom.id, {
           ...existing,
           ...custom,
+          cover: resolvedCover,
           chapters: (customChaps && customChaps.length > 0) ? customChaps : existing.chapters
         });
       } else {
@@ -607,6 +617,40 @@ const dbStorage = {
         });
       }
     });
+
+    // 3. Tự động lấy trang đầu của Chương 1 làm bìa nếu bộ truyện chưa có ảnh bìa riêng
+    for (const m of mergedMap.values()) {
+      const hasCustomCover = m.cover && typeof m.cover === 'string' && m.cover.trim() !== '' && !m.cover.includes('default_cover.jpg');
+      if (!hasCustomCover && m.chapters && m.chapters.length > 0) {
+        const firstChap = m.chapters[0];
+        if (firstChap) {
+          // 3a. Kiểm tra firstPageUrl trong metadata chương
+          if (firstChap.firstPageUrl && typeof firstChap.firstPageUrl === 'string' && firstChap.firstPageUrl.trim() !== '') {
+            m.cover = firstChap.firstPageUrl.trim();
+          } 
+          // 3b. Kiểm tra mảng pages trong metadata chương
+          else if (firstChap.pages && Array.isArray(firstChap.pages) && firstChap.pages.length > 0 && firstChap.pages[0].imageUrl) {
+            m.cover = firstChap.pages[0].imageUrl;
+            firstChap.firstPageUrl = firstChap.pages[0].imageUrl;
+          } 
+          // 3c. Đọc trực tiếp từ kho lưu trữ IndexedDB 'chapters'
+          else {
+            try {
+              const storedPages = await this.getChapterPages(m.id, firstChap.id);
+              if (storedPages && storedPages.length > 0) {
+                const firstImg = storedPages[0].imageUrl || storedPages[0].image || storedPages[0].url || (storedPages[0].base64 ? (storedPages[0].base64.startsWith('data:') ? storedPages[0].base64 : `data:image/jpeg;base64,${storedPages[0].base64}`) : '');
+                if (firstImg) {
+                  m.cover = firstImg;
+                  firstChap.firstPageUrl = firstImg;
+                }
+              }
+            } catch (e) {
+              console.warn("Không thể tải trang đầu Chương 1 làm bìa:", m.id, e);
+            }
+          }
+        }
+      }
+    }
 
     return Array.from(mergedMap.values());
   },

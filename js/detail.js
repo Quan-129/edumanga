@@ -464,7 +464,14 @@ async function handleAdminSaveChapter(e) {
   }
 
   // 2. Prepare chapter object with firstPageUrl
-  const firstPageUrl = (pagesToSave.length > 0 && pagesToSave[0].imageUrl) ? pagesToSave[0].imageUrl : '';
+  let firstPageUrl = '';
+  if (pagesToSave.length > 0) {
+    firstPageUrl = pagesToSave[0].imageUrl || pagesToSave[0].image || pagesToSave[0].url || '';
+    if (!firstPageUrl && pagesToSave[0].base64) {
+      firstPageUrl = pagesToSave[0].base64.startsWith('data:') ? pagesToSave[0].base64 : `data:image/jpeg;base64,${pagesToSave[0].base64}`;
+    }
+  }
+
   const newChapter = {
     id: chapId,
     title: chapTitle,
@@ -491,10 +498,18 @@ async function handleAdminSaveChapter(e) {
     existingChaps.push(newChapter);
   }
 
-  // 5. Strictly preserve currentSeries cover & metadata
+  // 5. Strictly preserve custom cover or auto-set cover from chapter 1
+  let seriesCover = (currentSeries.cover && currentSeries.cover.trim() !== '' && !currentSeries.cover.includes('default_cover.jpg')) 
+    ? currentSeries.cover.trim() 
+    : '';
+
+  if (!seriesCover && firstPageUrl) {
+    seriesCover = firstPageUrl;
+  }
+
   const updatedSeries = {
     ...currentSeries,
-    cover: currentSeries.cover || '',
+    cover: seriesCover,
     chapters: existingChaps
   };
 
