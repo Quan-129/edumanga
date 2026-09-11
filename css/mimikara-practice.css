@@ -479,7 +479,7 @@ body.mimikara-active .floating-reader-dock {
 
 .mimikara-card-3d {
   width: 100%;
-  min-height: 520px;
+  min-height: 540px;
   cursor: pointer;
   position: relative;
 }
@@ -487,7 +487,7 @@ body.mimikara-active .floating-reader-dock {
 .mimikara-card-3d-inner {
   position: relative;
   width: 100%;
-  min-height: 520px;
+  min-height: 540px;
   transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
   transform-style: preserve-3d;
   will-change: transform;
@@ -502,16 +502,17 @@ body.mimikara-active .floating-reader-dock {
   inset: 0;
   width: 100%;
   height: 100%;
-  min-height: 520px;
+  min-height: 540px;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
   border-radius: 26px;
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6), 0 0 20px rgba(168, 85, 247, 0.15);
-  padding: 2.5rem 3.25rem;
+  padding: 1.4rem 2.2rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   box-sizing: border-box;
+  overflow: hidden;
 }
 
 .mimikara-card-front {
@@ -537,70 +538,72 @@ body.mimikara-active .floating-reader-dock {
 .mimikara-card-main-word {
   text-align: center;
   margin: auto 0;
-  padding: 1.5rem 0;
+  padding: 0.2rem 0;
 }
 
 .mimikara-kanji-huge {
   font-family: 'Hiragino Kaku Gothic Pro', 'BIZ UDPGothic', 'Meiryo', 'Noto Sans JP', sans-serif;
-  font-size: 6rem;
+  font-size: 4.5rem;
   font-weight: 900;
   color: #ffffff;
-  letter-spacing: 0.08em;
-  margin-bottom: 1rem;
+  letter-spacing: 0.06em;
+  margin-bottom: 0.35rem;
   line-height: 1.1;
-  text-shadow: 0 6px 35px rgba(168, 85, 247, 0.6);
+  text-shadow: 0 4px 25px rgba(168, 85, 247, 0.5);
 }
 
 .mimikara-reading-mid {
   font-family: 'Hiragino Kaku Gothic Pro', 'BIZ UDPGothic', 'Meiryo', 'Noto Sans JP', sans-serif;
-  font-size: 2.6rem;
+  font-size: 2.1rem;
   color: #38bdf8;
   font-weight: 800;
-  margin-bottom: 1.25rem;
-  letter-spacing: 0.04em;
+  margin-bottom: 0.35rem;
+  letter-spacing: 0.03em;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 12px;
+  gap: 10px;
   flex-wrap: wrap;
 }
 
 .mimikara-pitch-chip {
-  font-size: 1.35rem;
+  font-size: 1.15rem;
   color: #7dd3fc;
   background: rgba(56, 189, 248, 0.18);
   border: 1.5px solid rgba(56, 189, 248, 0.4);
-  padding: 3px 14px;
-  border-radius: 10px;
+  padding: 2px 10px;
+  border-radius: 8px;
   font-weight: 700;
   vertical-align: middle;
 }
 
 .mimikara-hanviet-tag {
   display: inline-block;
-  background: rgba(245, 158, 11, 0.22);
+  background: rgba(245, 158, 11, 0.2);
   color: #fde047;
-  border: 2px solid rgba(245, 158, 11, 0.6);
-  padding: 8px 26px;
-  border-radius: 12px;
-  font-size: 1.45rem;
+  border: 1.5px solid rgba(245, 158, 11, 0.55);
+  padding: 4px 18px;
+  border-radius: 10px;
+  font-size: 1.2rem;
   font-weight: 800;
-  margin-top: 0.5rem;
+  margin-top: 0.2rem;
   letter-spacing: 0.03em;
-  box-shadow: 0 4px 15px rgba(245, 158, 11, 0.2);
+  box-shadow: 0 4px 15px rgba(245, 158, 11, 0.15);
 }
 
-/* Mnemonic & Kanji Breakdown on Front Card */
-.mimikara-front-mnemonic-box {
-  margin: 1.5rem auto 0 auto;
-  max-width: 680px;
-  background: rgba(168, 85, 247, 0.09);
+/* Sơ đồ Radial Mindmap & Cần gạt 2 chế độ trên mặt trước Flashcard */
+.mimikara-front-mindmap-box {
+  margin: 0.65rem auto 0 auto;
+  max-width: 620px;
+  width: 100%;
+  background: rgba(15, 23, 42, 0.85);
   border: 1.5px solid rgba(168, 85, 247, 0.35);
   border-radius: 18px;
-  padding: 1.1rem 1.6rem;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), inset 0 0 15px rgba(168, 85, 247, 0.1);
+  padding: 0.6rem 1rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), inset 0 0 15px rgba(168, 85, 247, 0.08);
   text-align: center;
-  animation: fadeInMnemonic 0.3s ease;
+  animation: fadeInMnemonic 0.25s ease;
+  box-sizing: border-box;
 }
 
 @keyframes fadeInMnemonic {
@@ -608,72 +611,159 @@ body.mimikara-active .floating-reader-dock {
   to { opacity: 1; transform: translateY(0); }
 }
 
-.mnemonic-tag-title {
-  font-size: 0.88rem;
-  font-weight: 800;
-  color: #c084fc;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  margin-bottom: 0.75rem;
+.mimikara-graph-toolbar {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 8px;
-}
-
-.mnemonic-pills-row {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   gap: 10px;
+  margin-bottom: 0.25rem;
   flex-wrap: wrap;
-  margin-bottom: 0.75rem;
 }
 
-.mnemonic-kanji-pill {
-  background: rgba(15, 23, 42, 0.85);
-  border: 1.5px solid rgba(56, 189, 248, 0.45);
-  border-radius: 12px;
-  padding: 6px 14px;
+.graph-mode-toggle {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  background: rgba(0, 0, 0, 0.38);
+  padding: 3px;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  gap: 3px;
 }
 
-.mnemonic-kanji-pill .pill-char {
-  font-size: 1.45rem;
-  font-weight: 900;
-  color: #38bdf8;
-  font-family: 'Hiragino Kaku Gothic Pro', 'BIZ UDPGothic', 'Meiryo', 'Noto Sans JP', sans-serif;
-}
-
-.mnemonic-kanji-pill .pill-meaning {
-  font-size: 0.95rem;
-  color: #e2e8f0;
+.btn-graph-pill {
+  background: transparent;
+  border: none;
+  color: #94a3b8;
+  font-size: 0.76rem;
   font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 16px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  transition: all 0.2s ease;
 }
 
-.mnemonic-story-box {
-  font-size: 1.12rem;
-  color: #f1f5f9;
-  line-height: 1.55;
-  font-weight: 500;
-  padding-top: 0.6rem;
-  border-top: 1px dashed rgba(255, 255, 255, 0.12);
+.btn-graph-pill:hover {
+  color: #e2e8f0;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.btn-graph-pill.active {
+  background: linear-gradient(135deg, #a855f7, #6366f1);
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(168, 85, 247, 0.4);
+}
+
+.graph-kanji-selector {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.selector-label {
+  font-size: 0.75rem;
+  color: #94a3b8;
+  font-weight: 600;
+}
+
+.btn-kanji-pick {
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #cbd5e1;
+  font-size: 0.78rem;
+  font-weight: 800;
+  padding: 2px 9px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  font-family: 'Hiragino Kaku Gothic Pro', 'Meiryo', sans-serif;
+}
+
+.btn-kanji-pick:hover {
+  background: rgba(56, 189, 248, 0.2);
+  border-color: rgba(56, 189, 248, 0.4);
+  color: #fff;
+}
+
+.btn-kanji-pick.active {
+  background: linear-gradient(135deg, #0284c7, #38bdf8);
+  border-color: #38bdf8;
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(56, 189, 248, 0.4);
+}
+
+.mimikara-svg-radial-wrap {
+  width: 100%;
+  height: 140px;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  text-align: center;
 }
 
-.mnemonic-story-box b {
+.mimikara-svg-radial {
+  width: 100%;
+  height: 100%;
+  max-width: 360px;
+  overflow: visible;
+}
+
+.svg-sat-group {
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.svg-sat-group:hover circle {
+  stroke: #ffffff;
+  stroke-width: 2.5px;
+  filter: drop-shadow(0 0 8px rgba(249, 115, 22, 0.9));
+}
+
+.graph-node-detail {
+  min-height: 24px;
+  font-size: 0.84rem;
+  color: #e2e8f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background: rgba(0, 0, 0, 0.25);
+  border-radius: 8px;
+  padding: 2px 8px;
+  margin-top: 2px;
+}
+
+.detail-node-pill {
+  background: #ea580c;
+  color: #fff;
+  font-weight: 900;
+  padding: 1px 7px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  display: inline-block;
+}
+
+.graph-story-hook {
+  font-size: 0.92rem;
+  color: #f8fafc;
+  line-height: 1.4;
+  font-weight: 500;
+  margin-top: 4px;
+  padding-top: 4px;
+  border-top: 1px dashed rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.graph-story-hook b {
   color: #38bdf8;
   font-weight: 800;
 }
 
-.mnemonic-story-box i {
+.graph-story-hook i {
   color: #34d399;
   font-weight: 700;
   font-style: normal;

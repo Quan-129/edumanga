@@ -5,6 +5,37 @@ Nơi ghi lại toàn bộ tiến trình phát triển, các quyết định ki�
 
 ---
 
+## [2026-09-11 13:30] - Triển Khai Sơ Đồ Radial Mindmap SVG & Cần Gạt 2 Chế Độ (Ghép Từ vs Chiết Tự Bộ Thủ) Cho Flashcard Mimikara N2
+
+### 🎯 Mục tiêu
+- Khắc phục triệt để lỗi tràn giao diện (overflow layout) trên mặt trước Flashcard Bước 1 khi các thành phần chữ Kanji kích thước lớn đè lên cụm nút điều hướng `< Từ trước` và `Từ tiếp theo ➔`.
+- Trực quan hóa cấu trúc chữ Kanji thành **Sơ đồ mạng nơ-ron hướng tâm (Radial Mindmap Graph)** chuẩn vector SVG: Tâm là từ/chữ mục tiêu màu xanh Cyan, các node vệ tinh màu cam rực rỡ có mũi tên chỉ hướng tâm kèm 2 hạt phân đoạn màu trắng.
+- Tích hợp **Cần gạt 2 chế độ (Mode Toggle Pill)** tương tự Bước 4:
+  1. **[ 🧬 Ghép Từ ] (Compound Word)**: Tâm là từ vựng (ví dụ `人生`), các vệ tinh là các chữ Hán cấu thành (`人` và `生`).
+  2. **[ 🔬 Chiết Tự Bộ Thủ ] (Radical Decomposition Mindmap)**: Cho phép đi sâu mổ xẻ từng chữ Kanji thành các nét/bộ thủ cấu thành (ví dụ `石` gồm `丿`, `一`, `口` hoặc `生` gồm `丿`, `一`, `土`).
+
+### ✅ Công việc đã hoàn thành
+- **[Tạo Bộ Dữ Liệu Chiết Tự 715 Chữ Hán N2] ([`scripts/build_kanji_radicals.py`](<file:///g:/My%20Drive/hk261/D%E1%BB%B1%20%C3%A1n%20manga/scripts/build_kanji_radicals.py>), [`data/kanji_radicals_n2.json`](<file:///g:/My%20Drive/hk261/D%E1%BB%B1%20%C3%A1n%20manga/data/kanji_radicals_n2.json>))**:
+  - Viết script Python tự động tải và phân tích dữ liệu CJKVI IDS chuẩn quốc tế kết hợp bảng 214 bộ thủ Khang Hy chuẩn Hán-Việt.
+  - Trích xuất toàn bộ 715 chữ Kanji trong 1.160 từ vựng Mimikara N2, phân rã thành các bộ thủ/nét trực quan (từ 2 đến 4 node vệ tinh) kèm âm Hán-Việt, tên bộ thủ và câu thần chú liên tưởng.
+- **[Engine Vẽ Sơ Đồ Vector SVG Hướng Tâm (Radial SVG Generator)] ([`js/mimikara-practice-service.js`](<file:///g:/My%20Drive/hk261/D%E1%BB%B1%20%C3%A1n%20manga/js/mimikara-practice-service.js>))**:
+  - Xây dựng phương thức `generateRadialSvg()` thuần lượng giác vector: tự động tính tọa độ node vệ tinh tỏa tròn đều đặn theo số lượng ($N = 1, 2, 3, 4$).
+  - Nối các node bằng đường thẳng có gắn mũi tên `<marker id="arrowIn">` hướng vào tâm, trên thân đường có 2 hạt tròn trắng phân đoạn tương tự thiết kế tham khảo.
+  - Tích hợp bộ lọc phát sáng neon `feDropShadow` cho cả node trung tâm Cyan và node vệ tinh Orange.
+- **[Cần Gạt 2 Chế Độ & Bộ Chọn Chữ Kanji Thông Minh] ([`js/mimikara-practice-service.js`](<file:///g:/My%20Drive/hk261/D%E1%BB%B1%20%C3%A1n%20manga/js/mimikara-practice-service.js>))**:
+  - Hỗ trợ chuyển đổi nhanh giữa `compound` và `radical` mà không gây lật thẻ (`event.stopPropagation()`).
+  - Ở chế độ Chiết tự bộ thủ, nếu từ có nhiều chữ Kanji (ví dụ `人生`), tự động hiển thị thanh chọn chữ `[ 人 ]` `[ 生 ]` để người học dễ dàng chuyển đổi chiết tự từng chữ.
+  - Tương tác di chuột / chạm (hover/click) vào node vệ tinh lập tức cập nhật caption chi tiết bên dưới (ví dụ: `土 [Bộ Thổ]: Đất đai màu mỡ, cội nguồn`).
+- **[Tối Ưu Typography & Khắc Phục Triệt Để Lỗi Tràn Viền] ([`css/mimikara-practice.css`](<file:///g:/My%20Drive/hk261/D%E1%BB%B1%20%C3%A1n%20manga/css/mimikara-practice.css>))**:
+  - Tinh chỉnh cỡ chữ Kanji chính từ `6rem` xuống `4.5rem`, cách dòng cân đối hơn.
+  - Khống chế chiều cao khối sơ đồ Mindmap SVG ở mức chuẩn 140px, padding thẻ được thu gọn hợp lý (`1.4rem 2.2rem`).
+  - Đảm bảo khoảng cách an toàn tuyệt đối (safe area), các nút chuyển bài `< Từ trước` và `Từ tiếp theo ➔` hiển thị hoàn toàn rõ ràng, không bao giờ bị đè nữa.
+- **[Cập Nhật Cache Buster v3.2 & Kiểm Thử Toàn Diện] ([`reader.html`](<file:///g:/My%20Drive/hk261/D%E1%BB%B1%20%C3%A1n%20manga/reader.html>), [`index.html`](<file:///g:/My%20Drive/hk261/D%E1%BB%B1%20%C3%A1n%20manga/index.html>), [`detail.html`](<file:///g:/My%20Drive/hk261/D%E1%BB%B1%20%C3%A1n%20manga/detail.html>))**:
+  - Cập nhật phiên bản link stylesheet và script lên `?v=3.2`.
+  - Khởi chạy subagent trình duyệt Playwright kiểm thử thực tế trên `http://localhost:8080/index.html`: xác nhận cả 2 chế độ hoạt động trơn tru, node vệ tinh bắt sự kiện chính xác và layout không bị đè nút.
+
+---
+
 ## [2026-09-11 07:55] - Tích Hợp Khối "Chiết Tự Bộ Thủ & Thần Chú Gợi Nhớ" Lên Mặt Trước Thẻ Flashcard Mimikara N2
 
 ### 🎯 Mục tiêu

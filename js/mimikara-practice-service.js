@@ -40,6 +40,11 @@ class MimikaraPracticeService {
     this.dictationAudioRate = 1.0;
     this.dictationLiveInput = '';
 
+    // Step 1 Radial Mindmap Graph State (Cần gạt 2 chế độ: 'compound' | 'radical')
+    this.frontGraphMode = localStorage.getItem('edumanga_mimikara_front_graph_mode') || 'compound';
+    this.selectedFrontKanjiChar = null;
+    this.kanjiRadicalsDb = null;
+
     this.initKeyboardEvents();
   }
 
@@ -74,6 +79,21 @@ class MimikaraPracticeService {
       }
     } catch (err) {
       console.error("Could not load data/mimikara_n2_units.json:", err);
+    }
+    return null;
+  }
+
+  // Fetch Kanji Radicals Database for Mindmap Graph
+  async loadKanjiRadicalsDb() {
+    if (this.kanjiRadicalsDb) return this.kanjiRadicalsDb;
+    try {
+      const resp = await fetch('data/kanji_radicals_n2.json');
+      if (resp.ok) {
+        this.kanjiRadicalsDb = await resp.json();
+        return this.kanjiRadicalsDb;
+      }
+    } catch (err) {
+      console.warn("Could not load data/kanji_radicals_n2.json, using heuristic breakdown:", err);
     }
     return null;
   }
@@ -133,6 +153,7 @@ class MimikaraPracticeService {
   // Open Modal
   async openModal(unitId = null) {
     await this.loadDataset();
+    this.loadKanjiRadicalsDb(); // Nạp ngầm cơ sở dữ liệu chiết tự bộ thủ
     if (!this.dataset) {
       alert("Không thể nạp dữ liệu từ vựng Mimikara N2. Vui lòng thử lại sau!");
       return;
@@ -429,8 +450,8 @@ class MimikaraPracticeService {
                   ${w.pitch_accent ? `<span class="mimikara-pitch-chip" title="Trọng âm Pitch Accent">${escapeHtml(w.pitch_accent)}</span>` : ''}
                 </div>
                 ${w.han_viet ? `<span class="mimikara-hanviet-tag">[ ${escapeHtml(w.han_viet)} ]</span>` : ''}
-                ${this.renderFrontMnemonic(w)}
-                <div style="margin-top: 1.5rem; font-size: 1.05rem; color: #cbd5e1; display: flex; align-items: center; justify-content: center; gap: 10px; font-weight: 600;">
+                ${this.renderFrontMindmap(w)}
+                <div style="margin-top: 0.85rem; font-size: 0.95rem; color: #cbd5e1; display: flex; align-items: center; justify-content: center; gap: 8px; font-weight: 600;">
                   <i class="fas fa-rotate" style="color: #c084fc;"></i> Chạm vào thẻ hoặc nhấn <b>Phím Cách</b> để xem nghĩa & ví dụ
                 </div>
               </div>
@@ -541,59 +562,317 @@ class MimikaraPracticeService {
     }
   }
 
-  // Bóc tách bộ thủ chiết tự & Tạo câu thần chú liên tưởng cho mặt trước
-  renderFrontMnemonic(w) {
-    if (!w.kanji_breakdown && !w.han_viet) return '';
+  // --------------------------------------------------------------------------
+  // SƠ ĐỒ RADIAL MINDMAP CHIẾT TỰ & CẦN GẠT 2 CHẾ ĐỘ CHO MẶT TRƯỚC FLASHCARD
+  // --------------------------------------------------------------------------
+  setFrontGraphMode(mode) {
+    this.frontGraphMode = mode;
+    try {
+      localStorage.setItem('edumanga_mimikara_front_graph_mode', mode);
+    } catch (e) {}
+    const container = document.getElementById('mimikaraFrontMindmapContainer');
+    if (container && this.currentChunkWords && this.currentChunkWords[this.flashcardIndex]) {
+      container.innerHTML = this.renderFrontMindmapContent(this.currentChunkWords[this.flashcardIndex]);
+    }
+  }
 
-    const breakdownText = w.kanji_breakdown || '';
-    const parts = breakdownText.split('+').map(p => p.trim()).filter(Boolean);
+  selectFrontKanjiChar(char) {
+    this.selectedFrontKanjiChar = char;
+    const container = document.getElementById('mimikaraFrontMindmapContainer');
+    if (container && this.currentChunkWords && this.currentChunkWords[this.flashcardIndex]) {
+      container.innerHTML = this.renderFrontMindmapContent(this.currentChunkWords[this.flashcardIndex]);
+    }
+  }
 
-    let pillsHtml = '';
-    const parsedComponents = [];
+  showNodeDetail(char, name, meaning) {
+    const el = document.getElementById('mimikaraGraphNodeDetail');
+    if (el) {
+      el.innerHTML = `<span class="detail-node-pill">${escapeHtml(char)}</span> <b>${escapeHtml(name)}</b>: ${escapeHtml(meaning)}`;
+    }
+  }
 
-    parts.forEach(part => {
-      // Bóc tách dạng: "人 (Nhân: người)", "生 (Sinh: sống/sinh mệnh)"
-      const m = part.match(/^([^\(（]+)[\(（]([^:\：\)]+)[:\：]?([^\)）]*)[\)）]/);
-      if (m) {
-        const kanji = m[1].trim();
-        const hanViet = m[2].trim();
-        const mean = m[3] ? m[3].trim() : '';
-        parsedComponents.push({ kanji, hanViet, mean });
-        pillsHtml += `
-          <div class="mnemonic-kanji-pill">
-            <span class="pill-char">${escapeHtml(kanji)}</span>
-            <span class="pill-meaning">${escapeHtml(mean ? `${hanViet}: ${mean}` : hanViet)}</span>
+  generateRadialSvg({ centerText, centerSub = '', satellites = [], satelliteColor = '#ea580c' }) {
+    const width = 360;
+    const height = 145;
+    const cx = 180;
+    const cy = 72;
+    const centerR = 24;
+    const orbitR = 62;
+    const satR = 17;
+
+    const count = Math.min(satellites.length, 4);
+    if (count === 0) {
+      return `
+        <svg viewBox="0 0 ${width} ${height}" class="mimikara-svg-radial" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="${cx}" cy="${cy}" r="${centerR}" fill="#0284c7" stroke="#38bdf8" stroke-width="2.5"/>
+          <text x="${cx}" y="${cy}" text-anchor="middle" dominant-baseline="central" fill="#ffffff" font-weight="900" font-size="16">${escapeHtml(centerText)}</text>
+        </svg>
+      `;
+    }
+
+    let angles = [];
+    if (count === 1) {
+      angles = [-90];
+    } else if (count === 2) {
+      angles = [180, 0];
+    } else if (count === 3) {
+      // Đúng chuẩn Hình 2: Đỉnh trên (-90°), Dưới phải (30°), Dưới trái (150°)
+      angles = [-90, 30, 150];
+    } else if (count === 4) {
+      angles = [-135, -45, 45, 135];
+    }
+
+    let linesSvg = '';
+    let dotsSvg = '';
+    let satellitesSvg = '';
+
+    for (let i = 0; i < count; i++) {
+      const sat = satellites[i];
+      const rad = (angles[i] * Math.PI) / 180;
+      const sx = cx + orbitR * Math.cos(rad);
+      const sy = cy + orbitR * Math.sin(rad);
+
+      // Vector từ node vệ tinh hướng vào tâm
+      const dx = cx - sx;
+      const dy = cy - sy;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      const nx = dx / dist;
+      const ny = dy / dist;
+
+      // Điểm bắt đầu từ viền vệ tinh, điểm kết thúc tại viền tâm (chừa 5px cho mũi tên)
+      const x1 = sx + satR * nx;
+      const y1 = sy + satR * ny;
+      const x2 = cx - (centerR + 5) * nx;
+      const y2 = cy - (centerR + 5) * ny;
+
+      // 2 chấm hạt trắng tinh tế trên đường nối (chuẩn xác theo Hình 2)
+      const xd1 = x1 + (x2 - x1) * 0.35;
+      const yd1 = y1 + (y2 - y1) * 0.35;
+      const xd2 = x1 + (x2 - x1) * 0.70;
+      const yd2 = y1 + (y2 - y1) * 0.70;
+
+      dotsSvg += `
+        <circle cx="${xd1.toFixed(1)}" cy="${yd1.toFixed(1)}" r="2" fill="#ffffff" opacity="0.9"/>
+        <circle cx="${xd2.toFixed(1)}" cy="${yd2.toFixed(1)}" r="2" fill="#ffffff" opacity="0.9"/>
+      `;
+
+      linesSvg += `
+        <line x1="${x1.toFixed(1)}" y1="${y1.toFixed(1)}" x2="${x2.toFixed(1)}" y2="${y2.toFixed(1)}" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arrowIn)" />
+      `;
+
+      const satChar = sat.char || '';
+      const satName = sat.name || '';
+      const satMeaning = sat.meaning || '';
+      const charFontSize = satChar.length > 2 ? 11 : (satChar.length === 2 ? 13 : 15);
+
+      satellitesSvg += `
+        <g class="svg-sat-group" onclick="event.stopPropagation(); window.mimikaraService.showNodeDetail('${escapeJs(satChar)}', '${escapeJs(satName)}', '${escapeJs(satMeaning)}')" onmouseenter="window.mimikaraService.showNodeDetail('${escapeJs(satChar)}', '${escapeJs(satName)}', '${escapeJs(satMeaning)}')">
+          <circle cx="${sx.toFixed(1)}" cy="${sy.toFixed(1)}" r="${satR}" fill="${satelliteColor}" stroke="#fdba74" stroke-width="2" filter="url(#glowSat)"/>
+          <text x="${sx.toFixed(1)}" y="${sy.toFixed(1)}" text-anchor="middle" dominant-baseline="central" fill="#ffffff" font-weight="900" font-size="${charFontSize}" font-family="'Hiragino Kaku Gothic Pro', 'BIZ UDPGothic', 'Meiryo', sans-serif" style="pointer-events: none;">${escapeHtml(satChar)}</text>
+        </g>
+      `;
+    }
+
+    const centerFontSize = centerText.length > 3 ? 12 : (centerText.length >= 2 ? 14 : 19);
+
+    return `
+      <svg viewBox="0 0 ${width} ${height}" class="mimikara-svg-radial" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <marker id="arrowIn" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+            <path d="M0,0 L0,6 L6,3 z" fill="#cbd5e1" />
+          </marker>
+          <filter id="glowCenter" x="-30%" y="-30%" width="160%" height="160%">
+            <feDropShadow dx="0" dy="0" stdDeviation="3.5" flood-color="#38bdf8" flood-opacity="0.8"/>
+          </filter>
+          <filter id="glowSat" x="-30%" y="-30%" width="160%" height="160%">
+            <feDropShadow dx="0" dy="0" stdDeviation="3" flood-color="#f97316" flood-opacity="0.75"/>
+          </filter>
+        </defs>
+        ${linesSvg}
+        ${dotsSvg}
+        <!-- Tâm Node xanh Cyan -->
+        <g class="svg-center-group">
+          <circle cx="${cx}" cy="${cy}" r="${centerR}" fill="#0284c7" stroke="#38bdf8" stroke-width="2.5" filter="url(#glowCenter)"/>
+          <text x="${cx}" y="${cy}" text-anchor="middle" dominant-baseline="central" fill="#ffffff" font-weight="900" font-size="${centerFontSize}" font-family="'Hiragino Kaku Gothic Pro', 'BIZ UDPGothic', 'Meiryo', sans-serif">${escapeHtml(centerText)}</text>
+        </g>
+        <!-- Vệ tinh màu cam hướng vào tâm -->
+        ${satellitesSvg}
+      </svg>
+    `;
+  }
+
+  renderFrontMindmap(w) {
+    return `
+      <div id="mimikaraFrontMindmapContainer" class="mimikara-front-mindmap-box" onclick="event.stopPropagation()">
+        ${this.renderFrontMindmapContent(w)}
+      </div>
+    `;
+  }
+
+  renderFrontMindmapContent(w) {
+    const term = w.term || '';
+    const kanjiList = [...term].filter(ch => ch >= '\u4e00' && ch <= '\u9faf');
+    const isCompound = this.frontGraphMode === 'compound';
+
+    let toolbarHtml = '';
+    let svgHtml = '';
+    let initialDetailHtml = '';
+    let storyHtml = '';
+
+    // Cần gạt 2 chế độ & Bộ chọn chữ Kanji khi ở chế độ Chiết tự bộ thủ
+    let kanjiPickerHtml = '';
+    if (!isCompound && kanjiList.length > 1) {
+      if (!this.selectedFrontKanjiChar || !kanjiList.includes(this.selectedFrontKanjiChar)) {
+        this.selectedFrontKanjiChar = kanjiList[0];
+      }
+      kanjiPickerHtml = `
+        <div class="graph-kanji-selector" onclick="event.stopPropagation()">
+          <span class="selector-label">Chọn chữ:</span>
+          ${kanjiList.map(k => `
+            <button type="button" class="btn-kanji-pick ${k === this.selectedFrontKanjiChar ? 'active' : ''}" onclick="window.mimikaraService.selectFrontKanjiChar('${k}')">
+              ${k}
+            </button>
+          `).join('')}
+        </div>
+      `;
+    }
+
+    toolbarHtml = `
+      <div class="mimikara-graph-toolbar" onclick="event.stopPropagation()">
+        <div class="graph-mode-toggle">
+          <button type="button" class="btn-graph-pill ${isCompound ? 'active' : ''}" onclick="window.mimikaraService.setFrontGraphMode('compound')" title="Sơ đồ ghép từ vựng từ các chữ Hán cấu thành">
+            <i class="fas fa-cubes"></i> Ghép Từ
+          </button>
+          <button type="button" class="btn-graph-pill ${!isCompound ? 'active' : ''}" onclick="window.mimikaraService.setFrontGraphMode('radical')" title="Chiết tự bộ thủ từng chữ Hán theo sơ đồ mạng (Mindmap)">
+            <i class="fas fa-sitemap"></i> Chiết Tự Bộ Thủ
+          </button>
+        </div>
+        ${kanjiPickerHtml}
+      </div>
+    `;
+
+    if (isCompound) {
+      // ----------------------------------------------------------------------
+      // CHẾ ĐỘ 1: GHÉP TỪ VỰNG (COMPOUND WORD GRAPH)
+      // ----------------------------------------------------------------------
+      const breakdownText = w.kanji_breakdown || '';
+      const parts = breakdownText.split('+').map(p => p.trim()).filter(Boolean);
+      const satellites = [];
+
+      parts.forEach(part => {
+        const m = part.match(/^([^\(（]+)[\(（]([^:\：\)]+)[:\：]?([^\)）]*)[\)）]/);
+        if (m) {
+          satellites.push({
+            char: m[1].trim(),
+            name: m[2].trim(),
+            meaning: m[3] ? m[3].trim() : m[2].trim()
+          });
+        } else {
+          satellites.push({
+            char: part,
+            name: part,
+            meaning: 'Thành phần chữ Hán'
+          });
+        }
+      });
+
+      // Dự phòng nếu không có breakdown text nhưng có chữ Hán trong từ
+      if (satellites.length === 0 && kanjiList.length > 0) {
+        kanjiList.forEach(k => {
+          satellites.push({
+            char: k,
+            name: `Chữ ${k}`,
+            meaning: 'Chữ Hán cấu thành'
+          });
+        });
+      }
+
+      svgHtml = this.generateRadialSvg({
+        centerText: term,
+        centerSub: w.han_viet || '',
+        satellites: satellites,
+        satelliteColor: '#ea580c'
+      });
+
+      const primaryMeaning = (w.meaning || '').split(/[-–,;/]/)[0].trim();
+      if (satellites.length >= 2) {
+        const charHooks = satellites.map(s => `<b>${escapeHtml(s.char)}</b> (${escapeHtml(s.meaning)})`).join(' + ');
+        storyHtml = `Ghép từ ${charHooks} ➔ Liên tưởng: <i>"${escapeHtml(primaryMeaning)}"</i>`;
+      } else if (satellites.length === 1) {
+        storyHtml = `Chữ <b>${escapeHtml(satellites[0].char)}</b> (${escapeHtml(satellites[0].meaning)}) ➔ Gợi nhớ: <i>"${escapeHtml(primaryMeaning)}"</i>`;
+      } else {
+        storyHtml = `Từ vựng <b>${escapeHtml(term)}</b>: <i>"${escapeHtml(primaryMeaning)}"</i>`;
+      }
+
+      if (satellites.length > 0) {
+        initialDetailHtml = `<span class="detail-node-pill">${escapeHtml(satellites[0].char)}</span> <b>${escapeHtml(satellites[0].name)}</b>: ${escapeHtml(satellites[0].meaning)}`;
+      } else {
+        initialDetailHtml = `<span>Chạm hoặc rê chuột vào các node vệ tinh để xem chi tiết</span>`;
+      }
+
+    } else {
+      // ----------------------------------------------------------------------
+      // CHẾ ĐỘ 2: CHIẾT TỰ BỘ THỦ (RADICAL MINDMAP - CHUẨN HÌNH 2)
+      // ----------------------------------------------------------------------
+      if (kanjiList.length === 0) {
+        return `
+          ${toolbarHtml}
+          <div style="padding: 1rem; text-align: center; color: #94a3b8; font-size: 0.9rem;">
+            <i class="fas fa-info-circle" style="color: #38bdf8; margin-right: 6px;"></i>
+            Từ vựng này là chữ Kana / ngoại lai, không có chữ Hán để chiết tự bộ thủ.
           </div>
         `;
-      } else {
-        pillsHtml += `<div class="mnemonic-kanji-pill"><span class="pill-char">${escapeHtml(part)}</span></div>`;
       }
-    });
 
-    // Tạo câu thần chú liên tưởng tự nhiên
-    let story = '';
-    const primaryMeaning = (w.meaning || '').split(/[-–,;/]/)[0].trim();
+      if (!this.selectedFrontKanjiChar || !kanjiList.includes(this.selectedFrontKanjiChar)) {
+        this.selectedFrontKanjiChar = kanjiList[0];
+      }
+      const targetKanji = this.selectedFrontKanjiChar;
 
-    if (w.mnemonic) {
-      story = w.mnemonic;
-    } else if (parsedComponents.length >= 2) {
-      const charHooks = parsedComponents.map(c => `<b>${escapeHtml(c.kanji)}</b> (${escapeHtml(c.mean || c.hanViet)})`).join(' + ');
-      story = `Ghép từ ${charHooks} ➔ Liên tưởng: <i>"${escapeHtml(primaryMeaning)}"</i>`;
-    } else if (parsedComponents.length === 1) {
-      const c = parsedComponents[0];
-      story = `Chữ <b>${escapeHtml(c.kanji)}</b> (${escapeHtml(c.mean || c.hanViet)}) ➔ Gợi nhớ: <i>"${escapeHtml(primaryMeaning)}"</i>`;
-    } else if (w.han_viet) {
-      story = `Hán-Việt <b>${escapeHtml(w.han_viet)}</b> ➔ Gợi nhớ: <i>"${escapeHtml(primaryMeaning)}"</i>`;
+      // Tra cứu trong cơ sở dữ liệu chiết tự bộ thủ kanjiRadicalsDb
+      let entry = this.kanjiRadicalsDb ? this.kanjiRadicalsDb[targetKanji] : null;
+
+      // Fallback heuristics nếu chưa nạp xong file json
+      if (!entry) {
+        entry = {
+          char: targetKanji,
+          hanviet: '',
+          meaning: '',
+          components: [
+            { char: targetKanji, name: `Chữ ${targetKanji}`, meaning: 'Thành phần chữ Hán' }
+          ],
+          story: `Chiết tự chữ <b>${targetKanji}</b>`
+        };
+      }
+
+      svgHtml = this.generateRadialSvg({
+        centerText: targetKanji,
+        centerSub: entry.hanviet || '',
+        satellites: entry.components || [],
+        satelliteColor: '#f97316'
+      });
+
+      storyHtml = entry.story || `Chữ <b>${targetKanji}</b> gồm các bộ phận hướng vào tâm!`;
+
+      if (entry.components && entry.components.length > 0) {
+        const c0 = entry.components[0];
+        initialDetailHtml = `<span class="detail-node-pill">${escapeHtml(c0.char)}</span> <b>${escapeHtml(c0.name)}</b>: ${escapeHtml(c0.meaning)}`;
+      } else {
+        initialDetailHtml = `<span>Chạm hoặc rê chuột vào các node vệ tinh để xem chi tiết bộ thủ</span>`;
+      }
     }
 
     return `
-      <div class="mimikara-front-mnemonic-box">
-        <div class="mnemonic-tag-title">
-          <i class="fas fa-puzzle-piece" style="color: #38bdf8;"></i>
-          <span>Chiết Tự & Thần Chú Gợi Nhớ</span>
-        </div>
-        ${pillsHtml ? `<div class="mnemonic-pills-row">${pillsHtml}</div>` : ''}
-        ${story ? `<div class="mnemonic-story-box"><i class="fas fa-wand-magic-sparkles" style="color: #fde047;"></i> <span>${story}</span></div>` : ''}
+      ${toolbarHtml}
+      <div class="mimikara-svg-radial-wrap">
+        ${svgHtml}
+      </div>
+      <div id="mimikaraGraphNodeDetail" class="graph-node-detail">
+        ${initialDetailHtml}
+      </div>
+      <div class="graph-story-hook">
+        <i class="fas fa-wand-magic-sparkles" style="color: #fde047; margin-right: 6px;"></i>
+        <span>${storyHtml}</span>
       </div>
     `;
   }
