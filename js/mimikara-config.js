@@ -31,7 +31,10 @@ window.MIMIKARA_CONFIG = {
     dictation: true,
 
     // Chế độ 5: Luyện dịch câu phức chuẩn N2 (Scrambled Chunk Translation Puzzle)
-    translation: false
+    translation: false,
+
+    // Chế độ 6: Ninja Leo Tháp Phản Xạ 15 Cành (Marathon Shuffle: Kanji / Nghĩa / Audio)
+    climbing: true
   },
 
   // ------------------------------------------------------------------------
@@ -77,6 +80,14 @@ window.MIMIKARA_CONFIG = {
       shortName: 'Luyện Dịch',
       icon: 'fa-language',
       desc: 'Dịch câu phức N2'
+    },
+    {
+      id: 'climbing',
+      originalStep: 6,
+      name: 'Leo Tháp',
+      shortName: 'Leo Tháp',
+      icon: 'fa-mountain',
+      desc: 'Leo tháp phản xạ 15 cành Marathon'
     }
   ]
 };

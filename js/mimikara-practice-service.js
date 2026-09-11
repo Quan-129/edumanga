@@ -92,7 +92,8 @@ class MimikaraPracticeService {
       { id: 'matching', originalStep: 2, name: 'Ghép Cặp', shortName: 'Ghép Cặp', icon: 'fa-puzzle-piece', desc: 'Ghép cặp 5x5' },
       { id: 'typing', originalStep: 3, name: 'Gõ Từ', shortName: 'Gõ Từ', icon: 'fa-keyboard', desc: 'Gõ từ 2 chiều' },
       { id: 'dictation', originalStep: 4, name: 'Nghe Điền', shortName: 'Nghe Điền', icon: 'fa-headphones', desc: 'Nghe điền câu Audio' },
-      { id: 'translation', originalStep: 5, name: 'Luyện Dịch', shortName: 'Luyện Dịch', icon: 'fa-language', desc: 'Dịch câu phức N2' }
+      { id: 'translation', originalStep: 5, name: 'Luyện Dịch', shortName: 'Luyện Dịch', icon: 'fa-language', desc: 'Dịch câu phức N2' },
+      { id: 'climbing', originalStep: 6, name: 'Leo Tháp', shortName: 'Leo Tháp', icon: 'fa-mountain', desc: 'Leo tháp phản xạ 15 cành Marathon' }
     ];
 
     const activeList = defs.filter(d => modes[d.id] !== false);
@@ -119,6 +120,12 @@ class MimikaraPracticeService {
     const cur = activeSteps.find(s => s.id === stepId);
     this.currentStepNumber = cur ? cur.stepNumber : 1;
 
+    // Dọn dẹp game cũ nếu đang chạy
+    if (this.activeClimberGame) {
+      this.activeClimberGame.destroy();
+      this.activeClimberGame = null;
+    }
+
     if (stepId === 'flashcard') {
       this.currentStep = 1;
       this.flashcardIndex = 0;
@@ -136,6 +143,9 @@ class MimikaraPracticeService {
     } else if (stepId === 'translation') {
       this.currentStep = 5;
       this.startStep5Translation();
+    } else if (stepId === 'climbing') {
+      this.currentStep = 6;
+      this.startStep6Climbing();
     }
   }
 
@@ -357,6 +367,10 @@ class MimikaraPracticeService {
 
   // Close Modal
   closeModal() {
+    if (this.activeClimberGame) {
+      this.activeClimberGame.destroy();
+      this.activeClimberGame = null;
+    }
     const modal = document.getElementById('mimikaraMasterModal');
     if (modal) {
       modal.classList.remove('active');
@@ -537,6 +551,21 @@ class MimikaraPracticeService {
           <h3 style="margin: 0; font-size: 1.1rem; color: #fff; font-weight: 700;">${escapeHtml(unit.title)}</h3>
           <span style="font-size: 0.8rem; color: #94a3b8;">${escapeHtml(unit.subtitle)} • ${unit.words.length} từ (${chunksCount} phiên)</span>
         </div>
+      </div>
+
+      <!-- Đấu Trường Leo Tháp Vô Tận (Endless Climber) Banner -->
+      <div style="background: linear-gradient(135deg, rgba(168,85,247,0.15), rgba(6,182,212,0.15)); border: 1px solid rgba(168,85,247,0.3); border-radius: 14px; padding: 14px 20px; margin-bottom: 1.2rem; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;">
+        <div>
+          <h4 style="margin: 0 0 4px 0; color: #f8fafc; font-size: 0.98rem; font-weight: 800; display: flex; align-items: center; gap: 8px;">
+            <i class="fas fa-mountain" style="color: #38bdf8;"></i> Đấu Trường Leo Tháp Vô Tận (Endless Climber)
+          </h4>
+          <p style="margin: 0; color: #94a3b8; font-size: 0.8rem;">
+            Thử thách phản xạ gõ phím Romaji liên tục với toàn bộ ${unit.words.length} từ của ${escapeHtml(unit.title)}!
+          </p>
+        </div>
+        <button type="button" class="btn-primary" onclick="window.mimikaraService.startEndlessClimbing(${unitId})" style="background: linear-gradient(135deg, #0284c7, #a855f7); padding: 9px 20px; font-weight: 800; font-size: 0.86rem; border-radius: 10px; box-shadow: 0 4px 14px rgba(2,132,199,0.4); display: flex; align-items: center; gap: 8px; cursor: pointer;">
+          <i class="fas fa-play"></i> Bắt đầu Leo Tháp ➔
+        </button>
       </div>
 
       <div class="mimikara-chunks-grid">
@@ -2348,6 +2377,86 @@ class MimikaraPracticeService {
     } catch (e) {}
     this.initCurrentTranslationQuestion();
     this.renderStep5Translation();
+  }
+
+  // --------------------------------------------------------------------------
+  // BƯỚC 6: NINJA LEO THÁP PHẢN XẠ 15 CÀNH (MARATHON SHUFFLE)
+  // --------------------------------------------------------------------------
+  startStep6Climbing() {
+    const body = document.getElementById('mimikaraModalBody');
+    if (!body) return;
+
+    if (this.activeClimberGame) {
+      this.activeClimberGame.destroy();
+      this.activeClimberGame = null;
+    }
+
+    body.innerHTML = `
+      ${this.renderStepperHeader()}
+      <div id="mimikaraClimberContainer" style="width: 100%; display: flex; justify-content: center; padding: 10px 0;"></div>
+    `;
+
+    const container = document.getElementById('mimikaraClimberContainer');
+    if (container && typeof window.MimikaraClimberGame !== 'undefined') {
+      this.activeClimberGame = new window.MimikaraClimberGame(container, {
+        mode: 'session',
+        words: this.currentChunkWords,
+        onVictory: (stats) => {
+          this.startNextActiveStep('climbing');
+        },
+        onRestartStep1: () => {
+          this.startFirstActiveStep();
+        },
+        onExit: () => {
+          this.renderUnitChunks(this.currentUnitId);
+        }
+      });
+    }
+  }
+
+  // Khởi động chế độ Leo Tháp Vô Tận (Endless Climber) cho toàn Unit
+  startEndlessClimbing(unitId) {
+    this.currentUnitId = unitId;
+    const unit = this.dataset.units.find(u => u.id === unitId);
+    if (!unit) return;
+
+    const body = document.getElementById('mimikaraModalBody');
+    if (!body) return;
+
+    if (this.activeClimberGame) {
+      this.activeClimberGame.destroy();
+      this.activeClimberGame = null;
+    }
+
+    body.innerHTML = `
+      <div class="mimikara-nav-bar" style="margin-bottom: 12px;">
+        <button type="button" class="mimikara-btn-back" onclick="window.mimikaraService.renderUnitChunks(${unitId})">
+          <i class="fas fa-arrow-left"></i> Quay lại Unit ${unitId}
+        </button>
+        <span style="color: #38bdf8; font-weight: 800; font-size: 1rem;">
+          🏆 LEO THÁP VÔ TẬN: ${escapeHtml(unit.title)} (${unit.words.length} TỪ)
+        </span>
+      </div>
+      <div id="mimikaraClimberContainer" style="width: 100%; display: flex; justify-content: center;"></div>
+    `;
+
+    const container = document.getElementById('mimikaraClimberContainer');
+    if (container && typeof window.MimikaraClimberGame !== 'undefined') {
+      this.activeClimberGame = new window.MimikaraClimberGame(container, {
+        mode: 'endless',
+        words: unit.words,
+        onVictory: (stats) => {
+          alert(`🎉 Chúc mừng! Bạn đã đạt ${stats.score.toLocaleString()} điểm và leo được ${stats.branchesClimbed} cành cây!`);
+          this.renderUnitChunks(unitId);
+        },
+        onRestartStep1: () => {
+          this.startEndlessClimbing(unitId);
+        },
+        onExit: () => {
+          this.renderUnitChunks(unitId);
+        }
+      });
+    }
   }
 
   // --------------------------------------------------------------------------

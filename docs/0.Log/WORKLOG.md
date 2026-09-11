@@ -5,6 +5,35 @@ Nơi ghi lại toàn bộ tiến trình phát triển, các quyết định ki�
 
 ---
 
+## [2026-09-11 23:10] - Triển Khai Chế Độ 6: Minigame Ninja Leo Tháp 15 Cành (Marathon Shuffle) & Đấu Trường Vô Tận
+
+### 🎯 Mục tiêu
+- Hiện thực hóa cơ chế game lấy cảm hứng từ *Keyboard Jump* (`gameplay.mp4`):
+  - Biến phần kết thúc phiên học 5 từ thành bài kiểm tra "Boss Fight" leo tháp **15 cành cây Marathon Shuffle** (5 Kanji + 5 Nghĩa tiếng Việt + 5 Audio phát âm).
+  - Vượt qua 15 cành cây mới tính là hoàn thành phiên học; nếu hết 5 tim cho phép người học chọn "Leo lại tháp (hồi 5 tim)" hoặc "Về bước 1 ôn lại" (Hướng 1).
+  - Thêm chế độ **Leo Tháp Vô Tận (Endless Climber)** cho toàn bộ Unit để thi đấu điểm kỷ lục.
+
+### ✅ Công việc đã hoàn thành
+- **[Động Cơ Game Canvas 2D Độc Lập] ([`js/mimikara-climber-engine.js`](file:///g:/My%20Drive/hk261/Dự%20án%20manga/js/mimikara-climber-engine.js))**:
+  - Xây dựng lớp `MimikaraClimberGame` chạy 60 FPS Canvas:
+    - Bố cục 15 cành cây gỗ thông zigzag với mảng tuyết, lá kim và các thẻ nhiệm vụ trực quan.
+    - Thuật toán xáo trộn ngẫu nhiên thông minh (Smart Shuffle) đảm bảo không trùng từ liền kề.
+    - Vi chuyển động gõ: Gõ đúng nhích bước rướn người + mặt cười híp `^ ^`; gõ sai khựng giật lại + ô đỏ + mặt hoảng `• _ •`.
+    - Cú nhảy parabol uốn cong, tiếp đất bung 2 cụm khói mây trắng (*dust clouds*) + camera cuộn dọc mượt mà.
+    - Âm thanh Web Audio API tổng hợp offline (tiếng phím cơ, tiếng nhảy whoosh, tiếng tiếp đất, tiếng nhạc chiến thắng) + tích hợp giọng đọc Web Speech API cho cành Audio.
+    - Hệ thống tính điểm Combo bội số 312 (`+624`, `+1248`, `+1560`).
+    - Modal Game Over khi hết 5 tim: Nút *Leo lại tháp ngay* hoặc *Về bước 1 ôn lại*.
+- **[Cấu Hình Bật/Tắt & Tích Hợp Stepper Funnel] ([`js/mimikara-config.js`](file:///g:/My%20Drive/hk261/Dự%20án%20manga/js/mimikara-config.js), [`js/mimikara-practice-service.js`](file:///g:/My%20Drive/hk261/Dự%20án%20manga/js/mimikara-practice-service.js))**:
+  - Thêm `climbing: true` vào `modes` và `definitions`.
+  - Kết nối `startStep6Climbing()` và `startEndlessClimbing(unitId)`.
+  - Thêm Banner Đấu Trường Leo Tháp Vô Tận tại giao diện danh sách phiên Unit.
+- **[Nâng Cache-Buster lên v=3.6] ([`index.html`](file:///g:/My%20Drive/hk261/Dự%20án%20manga/index.html), [`detail.html`](file:///g:/My%20Drive/hk261/Dự%20án%20manga/detail.html), [`reader.html`](file:///g:/My%20Drive/hk261/Dự%20án%20manga/reader.html))**:
+  - Nhúng file `js/mimikara-climber-engine.js?v=3.6` và nâng phiên bản toàn bộ bundle.
+- **[Kiểm Thử Thực Tế Trình Duyệt]**:
+  - Đã kiểm tra trực tiếp trên trình duyệt qua subagent: Canvas arena hiển thị mượt mà, gõ Romaji nhân vật rướn bước, nhảy parabol tiếp đất bung khói, camera cuộn chính xác từ cành 0 ➔ 1 ➔ 2.
+
+---
+
 ## [2026-09-11 22:20] - Xử Lý Triệt Để Bộ Nhớ Đệm Trình Duyệt (Browser Cache Buster v3.5) & Đồng Bộ Tiêu Đề Modal Động
 
 ### 🎯 Mục tiêu
