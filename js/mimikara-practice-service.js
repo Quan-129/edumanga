@@ -374,11 +374,53 @@ class MimikaraPracticeService {
     const modal = document.getElementById('mimikaraMasterModal');
     if (modal) {
       modal.classList.remove('active');
+      modal.classList.remove('is-fullscreen');
       document.body.classList.remove('mimikara-active');
       document.body.style.overflow = '';
+      this.updateFullscreenButtonIcon(false);
     }
+    try {
+      if (document.fullscreenElement && document.exitFullscreen) {
+        document.exitFullscreen().catch(() => {});
+      }
+    } catch (e) {}
     if ('speechSynthesis' in window) {
       window.speechSynthesis.cancel();
+    }
+  }
+
+  // Chuyển đổi chế độ toàn màn hình cho modal & hỗ trợ HTML5 Fullscreen API
+  toggleFullscreen(forceState = null) {
+    const modal = document.getElementById('mimikaraMasterModal');
+    if (!modal) return;
+
+    const isCurrentlyFullscreen = modal.classList.contains('is-fullscreen');
+    const shouldFullscreen = (forceState !== null) ? forceState : !isCurrentlyFullscreen;
+
+    if (shouldFullscreen) {
+      modal.classList.add('is-fullscreen');
+      this.updateFullscreenButtonIcon(true);
+      try {
+        if (!document.fullscreenElement && document.documentElement.requestFullscreen) {
+          document.documentElement.requestFullscreen().catch(() => {});
+        }
+      } catch (e) {}
+    } else {
+      modal.classList.remove('is-fullscreen');
+      this.updateFullscreenButtonIcon(false);
+      try {
+        if (document.fullscreenElement && document.exitFullscreen) {
+          document.exitFullscreen().catch(() => {});
+        }
+      } catch (e) {}
+    }
+  }
+
+  updateFullscreenButtonIcon(isFullscreen) {
+    const btn = document.getElementById('mimikaraBtnFullscreen');
+    if (btn) {
+      btn.innerHTML = isFullscreen ? '<i class="fas fa-compress"></i>' : '<i class="fas fa-expand"></i>';
+      btn.title = isFullscreen ? 'Thu nhỏ giao diện (Esc)' : 'Toàn màn hình';
     }
   }
 
@@ -407,9 +449,14 @@ class MimikaraPracticeService {
                 <p id="mimikaraHeaderSubtitle">${dynamicSubtitle}</p>
               </div>
             </div>
-            <button type="button" class="mimikara-btn-close" onclick="window.mimikaraService.closeModal()" title="Đóng cửa sổ">
-              <i class="fas fa-times"></i>
-            </button>
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <button type="button" id="mimikaraBtnFullscreen" class="mimikara-btn-fullscreen" onclick="window.mimikaraService.toggleFullscreen()" title="Toàn màn hình / Thu nhỏ">
+                <i class="fas fa-expand"></i>
+              </button>
+              <button type="button" class="mimikara-btn-close" onclick="window.mimikaraService.closeModal()" title="Đóng cửa sổ">
+                <i class="fas fa-times"></i>
+              </button>
+            </div>
           </div>
 
           <!-- Body -->
@@ -421,6 +468,15 @@ class MimikaraPracticeService {
     `;
 
     document.body.insertAdjacentHTML('beforeend', modalHtml);
+
+    // Lắng nghe sự kiện fullscreenchange của trình duyệt
+    document.addEventListener('fullscreenchange', () => {
+      const modal = document.getElementById('mimikaraMasterModal');
+      if (!modal) return;
+      if (!document.fullscreenElement && !modal.classList.contains('is-fullscreen')) {
+        this.updateFullscreenButtonIcon(false);
+      }
+    });
   }
 
   // --------------------------------------------------------------------------
@@ -497,6 +553,8 @@ class MimikaraPracticeService {
   // --------------------------------------------------------------------------
   renderUnitChunks(unitId) {
     this.currentUnitId = unitId;
+    // Khi thoát phiên về danh sách chunk của Unit, hoàn lại chế độ cửa sổ bình thường
+    this.toggleFullscreen(false);
     const body = document.getElementById('mimikaraModalBody');
     if (!body || !this.dataset) return;
 
@@ -586,6 +644,9 @@ class MimikaraPracticeService {
     const startIdx = chunkIndex * 5;
     const endIdx = Math.min(startIdx + 5, unit.words.length);
     this.currentChunkWords = unit.words.slice(startIdx, endIdx);
+
+    // Tự động bật chế độ toàn màn hình cho phiên học để dễ nhìn và tập trung tối đa
+    this.toggleFullscreen(true);
 
     // Khởi động từ bước đầu tiên đang BẬT trong file cấu hình
     this.startFirstActiveStep();
@@ -2419,6 +2480,9 @@ class MimikaraPracticeService {
     this.currentUnitId = unitId;
     const unit = this.dataset.units.find(u => u.id === unitId);
     if (!unit) return;
+
+    // Tự động bật chế độ toàn màn hình cho leo tháp vô tận
+    this.toggleFullscreen(true);
 
     const body = document.getElementById('mimikaraModalBody');
     if (!body) return;

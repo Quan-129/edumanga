@@ -122,6 +122,103 @@ body.mimikara-active .floating-reader-dock {
   transform: rotate(90deg);
 }
 
+/* Nút Toàn Màn Hình */
+.mimikara-btn-fullscreen {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--text-muted, #94a3b8);
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+}
+
+.mimikara-btn-fullscreen:hover {
+  background: rgba(168, 85, 247, 0.2);
+  color: #c084fc;
+  border-color: rgba(168, 85, 247, 0.4);
+  transform: scale(1.06);
+}
+
+/* ==========================================================================
+   CHẾ ĐỘ TOÀN MÀN HÌNH (FULLSCREEN MODE) CHO PHIÊN HỌC & MINIGAME
+   ========================================================================== */
+.mimikara-modal.is-fullscreen {
+  padding: 0 !important;
+  background: #090d16 !important;
+}
+
+.mimikara-modal.is-fullscreen .mimikara-modal-container {
+  max-width: 100vw !important;
+  width: 100vw !important;
+  max-height: 100vh !important;
+  height: 100vh !important;
+  border-radius: 0 !important;
+  border: none !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+
+.mimikara-modal.is-fullscreen .mimikara-modal-header {
+  padding: 0.8rem 1.75rem !important;
+  border-radius: 0 !important;
+}
+
+.mimikara-modal.is-fullscreen .mimikara-modal-body {
+  padding: 0.9rem 1.75rem !important;
+  flex: 1 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  height: calc(100vh - 66px) !important;
+  max-height: calc(100vh - 66px) !important;
+  overflow-y: auto !important;
+}
+
+.mimikara-modal.is-fullscreen .mimikara-stepper-header {
+  margin-bottom: 0.75rem !important;
+}
+
+/* Mở rộng không gian các bước học khi Toàn Màn Hình */
+.mimikara-modal.is-fullscreen .mimikara-flashcard-box {
+  max-width: 840px !important;
+  margin: 0 auto !important;
+}
+
+.mimikara-modal.is-fullscreen .mimikara-matching-box {
+  max-width: 1100px !important;
+  margin: 0 auto !important;
+}
+
+.mimikara-modal.is-fullscreen .mimikara-typing-box {
+  max-width: 920px !important;
+  margin: 0 auto !important;
+}
+
+.mimikara-modal.is-fullscreen .mimikara-listening-box {
+  max-width: 920px !important;
+  margin: 0 auto !important;
+}
+
+/* ĐẶC BIỆT: Minigame Ninja Leo Tháp khi Toàn Màn Hình */
+.mimikara-modal.is-fullscreen .mimikara-climber-wrapper {
+  max-width: 1180px !important;
+  width: 100% !important;
+  margin: 0 auto !important;
+  border-radius: 18px !important;
+  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.75) !important;
+}
+
+.mimikara-modal.is-fullscreen .mimikara-climber-arena {
+  height: calc(100vh - 210px) !important;
+  min-height: 520px !important;
+  max-height: 760px !important;
+}
+
 /* Modal Body */
 .mimikara-modal-body {
   padding: 1.5rem 2rem;

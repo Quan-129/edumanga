@@ -138,8 +138,8 @@ class MimikaraClimberGame {
         </div>
 
         <!-- Canvas Game Arena -->
-        <div style="position: relative; width: 100%; height: 520px; background: linear-gradient(to bottom, #0f172a 0%, #1e1b4b 60%, #0f172a 100%);">
-          <canvas id="climberCanvas" width="${this.width}" height="${this.height}" style="width: 100%; height: 100%; display: block;"></canvas>
+        <div class="mimikara-climber-arena" style="position: relative; width: 100%; height: 520px; background: linear-gradient(to bottom, #0f172a 0%, #1e1b4b 60%, #0f172a 100%); display: flex; align-items: center; justify-content: center; overflow: hidden;">
+          <canvas id="climberCanvas" width="${this.width}" height="${this.height}" style="width: 100%; height: 100%; max-width: 100%; max-height: 100%; object-fit: contain; aspect-ratio: 820 / 540; display: block;"></canvas>
           
           <!-- Virtual Keyboard / Mobile Tip -->
           <div style="position: absolute; bottom: 8px; right: 14px; color: rgba(255,255,255,0.4); font-size: 0.72rem; pointer-events: none;">

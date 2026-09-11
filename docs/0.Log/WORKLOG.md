@@ -5,6 +5,37 @@ Nơi ghi lại toàn bộ tiến trình phát triển, các quyết định ki�
 
 ---
 
+## [2026-09-12 00:05] - Triển Khai Chế Độ Toàn Màn Hình (Fullscreen Mode) Cho Phiên Học & Minigame Leo Tháp
+
+### 🎯 Mục tiêu
+- Đáp ứng yêu cầu người dùng: "tôi muốn phiên học ở chế độ toàn màn hình cho dễ nhìn".
+- Trước đây: Cửa sổ modal học từ vựng bị giới hạn `max-width: 1120px` với viền đen bao quanh; khu vực minigame Leo Tháp bị bóp nghẹt ở `max-width: 860px` và chiều cao 520px, khiến giao diện trên màn hình lớn (1080p, 2K) có nhiều khoảng trống đen lãng phí, chữ và cành cây bị thu nhỏ.
+- **Giải pháp**:
+  1. Tự động chuyển modal sang **Chế độ Toàn Màn Hình (`.is-fullscreen`)** ngay khi người dùng bắt đầu bất kỳ phiên học nào (`startChunkPractice`) hoặc chế độ Leo Tháp Vô Tận (`startEndlessClimbing`).
+  2. Bổ sung nút **Toàn màn hình / Thu nhỏ** (`#mimikaraBtnFullscreen`) cạnh nút đóng `X` trên Header của Modal, hỗ trợ bật/tắt linh hoạt và tích hợp HTML5 Fullscreen API (`requestFullscreen()`).
+  3. Mở rộng không gian hiển thị:
+     - Toàn bộ khung modal chiếm trọn 100vw x 100vh không viền đen.
+     - Minigame Ninja Leo Tháp được mở rộng lên `max-width: 1180px`, chiều cao mở rộng tới `calc(100vh - 210px)` (tối đa 760px).
+     - Canvas tự động co giãn theo tỉ lệ chuẩn `820 / 540` với `object-fit: contain`, giữ trọn độ sắc nét, nhân vật và cành cây lớn hơn ~35%, cực kỳ đã mắt và dễ quan sát.
+     - Các bước Flashcard, Ghép cặp, Gõ từ, Nghe điền đều được mở rộng diện tích hiển thị thoáng đãng.
+
+### ✅ Công việc đã hoàn thành
+- **[CSS Chế Độ Toàn Màn Hình] ([`css/mimikara-practice.css`](file:///g:/My%20Drive/hk261/Dự%20án%20manga/css/mimikara-practice.css))**:
+  - Thêm class `.is-fullscreen` cho modal container (100vw x 100vh, 0 padding, 0 border-radius).
+  - Tối ưu kích thước mở rộng cho `.mimikara-climber-wrapper` (1180px) và `.mimikara-climber-arena` (cao tới 760px).
+  - Thêm styles cho nút `.mimikara-btn-fullscreen`.
+- **[Logic Bật/Tắt & Đồng Bộ API Fullscreen] ([`js/mimikara-practice-service.js`](file:///g:/My%20Drive/hk261/Dự%20án%20manga/js/mimikara-practice-service.js))**:
+  - Thêm nút Fullscreen vào `ensureModalDOM()`.
+  - Triển khai `toggleFullscreen(forceState)` và `updateFullscreenButtonIcon()`.
+  - Tự động kích hoạt fullscreen khi vào `startChunkPractice` và `startEndlessClimbing`.
+  - Tự động thu nhỏ về modal card khi bấm "Dừng phiên" hoặc đóng modal.
+- **[Đáp Ứng Tỉ Lệ Co Giãn Canvas] ([`js/mimikara-climber-engine.js`](file:///g:/My%20Drive/hk261/Dự%20án%20manga/js/mimikara-climber-engine.js))**:
+  - Cập nhật wrapper canvas sang class `.mimikara-climber-arena` và thiết lập `aspect-ratio: 820 / 540; object-fit: contain;`.
+- **[Nâng Cache-Buster lên v=3.9] ([`index.html`](file:///g:/My%20Drive/hk261/Dự%20án%20manga/index.html), [`detail.html`](file:///g:/My%20Drive/hk261/Dự%20án%20manga/detail.html), [`reader.html`](file:///g:/My%20Drive/hk261/Dự%20án%20manga/reader.html))**:
+  - Nâng cache buster cho cả CSS và script bundle lên `?v=3.9`.
+
+---
+
 ## [2026-09-11 23:40] - Sửa Xung Đột Phím Gõ: Loại Bỏ Phím 'R', Chỉ Dùng Phím 'Space' Để Nghe Lại Âm Thanh Trong Minigame Leo Tháp
 
 ### 🎯 Mục tiêu
