@@ -429,7 +429,8 @@ class MimikaraPracticeService {
                   ${w.pitch_accent ? `<span class="mimikara-pitch-chip" title="Trọng âm Pitch Accent">${escapeHtml(w.pitch_accent)}</span>` : ''}
                 </div>
                 ${w.han_viet ? `<span class="mimikara-hanviet-tag">[ ${escapeHtml(w.han_viet)} ]</span>` : ''}
-                <div style="margin-top: 2.5rem; font-size: 1.15rem; color: #cbd5e1; display: flex; align-items: center; justify-content: center; gap: 10px; font-weight: 600;">
+                ${this.renderFrontMnemonic(w)}
+                <div style="margin-top: 1.5rem; font-size: 1.05rem; color: #cbd5e1; display: flex; align-items: center; justify-content: center; gap: 10px; font-weight: 600;">
                   <i class="fas fa-rotate" style="color: #c084fc;"></i> Chạm vào thẻ hoặc nhấn <b>Phím Cách</b> để xem nghĩa & ví dụ
                 </div>
               </div>
@@ -538,6 +539,63 @@ class MimikaraPracticeService {
       this.isCardFlipped = false;
       this.renderStep1Flashcard();
     }
+  }
+
+  // Bóc tách bộ thủ chiết tự & Tạo câu thần chú liên tưởng cho mặt trước
+  renderFrontMnemonic(w) {
+    if (!w.kanji_breakdown && !w.han_viet) return '';
+
+    const breakdownText = w.kanji_breakdown || '';
+    const parts = breakdownText.split('+').map(p => p.trim()).filter(Boolean);
+
+    let pillsHtml = '';
+    const parsedComponents = [];
+
+    parts.forEach(part => {
+      // Bóc tách dạng: "人 (Nhân: người)", "生 (Sinh: sống/sinh mệnh)"
+      const m = part.match(/^([^\(（]+)[\(（]([^:\：\)]+)[:\：]?([^\)）]*)[\)）]/);
+      if (m) {
+        const kanji = m[1].trim();
+        const hanViet = m[2].trim();
+        const mean = m[3] ? m[3].trim() : '';
+        parsedComponents.push({ kanji, hanViet, mean });
+        pillsHtml += `
+          <div class="mnemonic-kanji-pill">
+            <span class="pill-char">${escapeHtml(kanji)}</span>
+            <span class="pill-meaning">${escapeHtml(mean ? `${hanViet}: ${mean}` : hanViet)}</span>
+          </div>
+        `;
+      } else {
+        pillsHtml += `<div class="mnemonic-kanji-pill"><span class="pill-char">${escapeHtml(part)}</span></div>`;
+      }
+    });
+
+    // Tạo câu thần chú liên tưởng tự nhiên
+    let story = '';
+    const primaryMeaning = (w.meaning || '').split(/[-–,;/]/)[0].trim();
+
+    if (w.mnemonic) {
+      story = w.mnemonic;
+    } else if (parsedComponents.length >= 2) {
+      const charHooks = parsedComponents.map(c => `<b>${escapeHtml(c.kanji)}</b> (${escapeHtml(c.mean || c.hanViet)})`).join(' + ');
+      story = `Ghép từ ${charHooks} ➔ Liên tưởng: <i>"${escapeHtml(primaryMeaning)}"</i>`;
+    } else if (parsedComponents.length === 1) {
+      const c = parsedComponents[0];
+      story = `Chữ <b>${escapeHtml(c.kanji)}</b> (${escapeHtml(c.mean || c.hanViet)}) ➔ Gợi nhớ: <i>"${escapeHtml(primaryMeaning)}"</i>`;
+    } else if (w.han_viet) {
+      story = `Hán-Việt <b>${escapeHtml(w.han_viet)}</b> ➔ Gợi nhớ: <i>"${escapeHtml(primaryMeaning)}"</i>`;
+    }
+
+    return `
+      <div class="mimikara-front-mnemonic-box">
+        <div class="mnemonic-tag-title">
+          <i class="fas fa-puzzle-piece" style="color: #38bdf8;"></i>
+          <span>Chiết Tự & Thần Chú Gợi Nhớ</span>
+        </div>
+        ${pillsHtml ? `<div class="mnemonic-pills-row">${pillsHtml}</div>` : ''}
+        ${story ? `<div class="mnemonic-story-box"><i class="fas fa-wand-magic-sparkles" style="color: #fde047;"></i> <span>${story}</span></div>` : ''}
+      </div>
+    `;
   }
 
   // --------------------------------------------------------------------------

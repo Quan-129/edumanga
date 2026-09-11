@@ -5,6 +5,25 @@ Nơi ghi lại toàn bộ tiến trình phát triển, các quyết định ki�
 
 ---
 
+## [2026-09-11 07:55] - Tích Hợp Khối "Chiết Tự Bộ Thủ & Thần Chú Gợi Nhớ" Lên Mặt Trước Thẻ Flashcard Mimikara N2
+
+### 🎯 Mục tiêu
+- Xử lý vấn đề người học nhìn mặt trước chữ Kanji khó/nhiều nét bị choáng hoặc không có điểm tựa tư duy (Memory Hook) trước khi lật thẻ.
+- Đưa khối bóc tách bộ thủ (`kanji_breakdown`) và câu thần chú gợi nhớ (Mnemonic Story) trực tiếp lên mặt trước của thẻ Flashcard Bước 1, tạo cầu nối tư duy (Thought Bridge) giúp người học chủ động suy luận nghĩa từ vựng trước khi lật thẻ.
+
+### ✅ Công việc đã hoàn thành
+- **[Engine Bóc Tách Bộ Thủ & Sinh Câu Thần Chú Tự Nhiên] ([`js/mimikara-practice-service.js`](<file:///g:/My%20Drive/hk261/D%E1%BB%B1%20%C3%A1n%20manga/js/mimikara-practice-service.js>))**:
+  - Xây dựng phương thức `renderFrontMnemonic(w)`: tự động parse trường `kanji_breakdown` thành các thành phần cấu thành (chữ Hán, âm Hán Việt, ý nghĩa bộ thủ).
+  - Tự động xâu chuỗi các bộ thủ kết hợp với nghĩa trọng tâm của từ để sinh ra câu thần chú liên tưởng logic, dễ nhớ.
+- **[Thiết Kế UI/UX Khối Thần Chú Kính Mờ Đẳng Cấp] ([`css/mimikara-practice.css`](<file:///g:/My%20Drive/hk261/D%E1%BB%B1%20%C3%A1n%20manga/css/mimikara-practice.css>))**:
+  - Thiết kế `.mimikara-front-mnemonic-box` với hiệu ứng kính mờ ánh tím Neon sang trọng.
+  - Các viên thuốc bộ thủ `.mnemonic-kanji-pill` bo góc viền xanh Cyan nổi bật chữ Hán to rõ và giải nghĩa gọn gàng.
+  - Dòng thần chú `.mnemonic-story-box` kèm icon gậy phép thuật phát sáng màu vàng hoàng yến, highlight rõ nét từ khóa liên tưởng.
+- **[Cập Nhật Cache Buster v3.1] ([`reader.html`](<file:///g:/My%20Drive/hk261/D%E1%BB%B1%20%C3%A1n%20manga/reader.html>))**:
+  - Cập nhật phiên bản link stylesheet và script lên `?v=3.1` để trình duyệt người dùng luôn nạp giao diện mới nhất.
+
+---
+
 ## [2026-09-11 07:30] - Triển Khai Bước 4: Luyện Nghe & Gõ Điền Khuyết Câu (Audio Cloze & Dictation Engine) Cho Mimikara N2
 
 ### 🎯 Mục tiêu
