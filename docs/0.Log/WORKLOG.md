@@ -5,6 +5,40 @@ Nơi ghi lại toàn bộ tiến trình phát triển, các quyết định ki�
 
 ---
 
+## [2026-09-12 06:40] - Bước 4 (Nghe Điền): Ẩn Đáp Án Ở Placeholder, Thể Hiện Ô Ký Tự Romaji & Chỉ Show Kanji Kèm Furigana Phía Trên Khi Check Đúng
+
+### 🎯 Mục tiêu
+- Xử lý phản hồi của người dùng: *"nó đang hiện luôn đáp án ở bước 4 và ở trên kia kí tự tôi muốn thể hiện dạng romaji đi check đúng thì mới show kanji kèm furigana phía trên bạn hiểu không"*.
+- **Vấn đề trước đây**:
+  1. Placeholder ô nhập liệu lộ liễu từ mục tiêu: `✍️ Nghe và gõ từ bị khuyết (Ví dụ: jinsei)...`.
+  2. Số lượng ô trống trong câu cloze tính theo số âm tiết Hiragana (`じんせい` = 4 dấu chấm `[ • • • • ]`), trong khi người học gõ phím dạng Romaji bằng bàn phím thông thường (6 chữ cái `jinsei`), dẫn đến việc số lượng ô không khớp với số phím gõ.
+  3. Khi check đúng, từ vựng và furigana hiển thị ngang hàng nhau trong ngoặc vuông (`人生 【じんせい】`) thay vì hiển thị Furigana nằm ở ngay phía trên Kanji.
+- **Giải pháp**:
+  1. **Ẩn hoàn toàn đáp án ở Placeholder**:
+     - Cập nhật placeholder thành: `✍️ Nghe và gõ từ bị khuyết bằng Romaji hoặc Hiragana...` (tuyệt đối không lộ từ ví dụ).
+     - Rút gọn gợi ý phím tắt thành: `Phím Space: Nghe lại • Enter: Kiểm tra • Tab: Gợi ý`.
+  2. **Thể hiện ô ký tự theo chuẩn Romaji**:
+     - Tính số ô trống dựa trên độ dài chuỗi Romaji mục tiêu (`targetRomaji.length`, ví dụ `jinsei` có 6 ô ký tự).
+     - Trạng thái chưa gõ: hiển thị dấu gạch dưới `[ _ ][ _ ][ _ ][ _ ][ _ ][ _ ]`.
+     - Trạng thái gõ phím thời gian thực: người học gõ ký tự Romaji nào thì ký tự đó lập tức điền vào ô tương ứng (`filled`) với hiệu ứng scale nổi bật.
+  3. **Chỉ hiển thị Kanji kèm Furigana phía trên khi check đúng**:
+     - Trước khi check đúng: chỉ hiển thị nhóm ô Romaji.
+     - Sau khi người học bấm Kiểm tra (hoặc Enter) và kết quả chính xác: nhóm ô biến thành khối Ruby căn dọc (`.cloze-target-ruby`), trong đó Furigana Hiragana (`じんせい`) màu vàng neon nằm **ngay phía trên**, và chữ Kanji (`人生`) màu xanh ngọc bích nằm ở phía dưới với cỡ chữ lớn 2.3rem.
+     - Tăng độ trễ chuyển câu lên 1400ms để người học vừa nghe phát âm cả câu vừa kịp quan sát chữ Kanji và Furigana.
+     - Nâng cấp `revealDictationAnswer()` để nạp Romaji cho người học khi xem gợi ý.
+
+### ✅ Công việc đã hoàn thành
+- **[Logic Bước 4 Nghe Điền Romaji & Ruby Furigana] ([`js/mimikara-practice-service.js`](file:///g:/My%20Drive/hk261/Dự%20án%20manga/js/mimikara-practice-service.js))**:
+  - `renderStep4Dictation()`: tính số ô theo Romaji, ẩn đáp án ở placeholder, render ruby furigana trên Kanji khi `dictationState === 'correct'`.
+  - `handleDictationInput()`: cập nhật ký tự Romaji live vào các ô `cloze-slot-char`.
+  - `checkDictationAnswer()`: tăng transition delay lên 1400ms.
+- **[CSS Furigana Trên Kanji & Ô Ký Tự Romaji] ([`css/mimikara-practice.css`](file:///g:/My%20Drive/hk261/Dự%20án%20manga/css/mimikara-practice.css))**:
+  - Thiết kế `.cloze-target-ruby` với `flex-direction: column`, `.cloze-target-furigana` (order: 1) ở trên, `.cloze-target-term` (order: 2) ở dưới.
+  - Định dạng `.cloze-slot-char.empty` và `.cloze-slot-char.filled` dạng Romaji monospace.
+- **[Nâng Cache-Buster lên v=4.2] ([`index.html`](file:///g:/My%20Drive/hk261/Dự%20án%20manga/index.html), [`detail.html`](file:///g:/My%20Drive/hk261/Dự%20án manga/detail.html), [`reader.html`](file:///g:/My%20Drive/hk261/Dự%20án%20manga/reader.html))**: Nâng cache buster lên `?v=4.2`.
+
+---
+
 ## [2026-09-12 06:25] - Tinh Chỉnh Thời Điểm Phát Audio: Bước 2 Chỉ Phát Khi Ghép Đúng Cặp, Bước 3 Chỉ Phát Sau Khi Bấm Enter
 
 ### 🎯 Mục tiêu

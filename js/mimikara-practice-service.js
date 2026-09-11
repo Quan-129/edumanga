@@ -1661,39 +1661,51 @@ class MimikaraPracticeService {
     const isLevel1 = this.dictationMode === 'target_cloze';
 
     if (isLevel1) {
-      // CẤP ĐỘ 1: Điền từ mục tiêu [ • • • • ]
+      // CẤP ĐỘ 1: Điền từ mục tiêu [ _ _ _ _ _ _ ] dạng Romaji
       const parts = sentence.split(targetTerm);
       const before = parts[0] || '';
       const after = parts.slice(1).join(targetTerm) || '';
-      const dotCount = Math.max(1, targetReading ? targetReading.length : targetTerm.length);
+
+      // Tính số ký tự Romaji của từ mục tiêu (độ dài theo Romaji)
+      const targetRomaji = (q.romaji || '').toLowerCase().trim().replace(/[^a-z0-9]/g, '');
+      const romajiCount = targetRomaji.length || Math.max(1, (targetReading || targetTerm).length);
 
       if (this.dictationState === 'correct') {
+        // CHỈ KHI CHECK ĐÚNG: Show Kanji kèm Furigana nằm ở phía trên
+        const hasFurigana = targetReading && targetReading !== targetTerm;
         sentenceDisplayHtml = `
           <div class="mimikara-cloze-sentence">
             <span class="cloze-prefix">${escapeHtml(before)}</span>
             <span class="cloze-target-correct">
-              <span class="cloze-target-term">${escapeHtml(targetTerm)}</span>
-              <span class="cloze-target-furigana">【${escapeHtml(targetReading)}】</span>
+              ${hasFurigana ? `
+                <span class="cloze-target-ruby">
+                  <span class="cloze-target-furigana">${escapeHtml(targetReading)}</span>
+                  <span class="cloze-target-term">${escapeHtml(targetTerm)}</span>
+                </span>
+              ` : `
+                <span class="cloze-target-term">${escapeHtml(targetTerm)}</span>
+              `}
             </span>
             <span class="cloze-suffix">${escapeHtml(after)}</span>
           </div>
         `;
       } else {
-        const typedHiragana = romajiToHiragana(this.dictationLiveInput || '');
+        // TRƯỚC KHI CHECK ĐÚNG: Thể hiện dạng các ô Romaji tương ứng số chữ cái
+        const rawInput = (this.dictationLiveInput || '').trim();
         let slots = '';
-        for (let i = 0; i < dotCount; i++) {
-          const char = typedHiragana[i] || '';
+        for (let i = 0; i < romajiCount; i++) {
+          const char = rawInput[i] || '';
           if (char) {
             slots += `<span class="cloze-slot-char filled">${escapeHtml(char)}</span>`;
           } else {
-            slots += `<span class="cloze-slot-char empty">•</span>`;
+            slots += `<span class="cloze-slot-char empty">_</span>`;
           }
         }
 
         sentenceDisplayHtml = `
           <div class="mimikara-cloze-sentence">
             <span class="cloze-prefix">${escapeHtml(before)}</span>
-            <span id="mimikaraTargetSlotGroup" class="cloze-slot-group" title="Cần gõ ${dotCount} âm tiết">${slots}</span>
+            <span id="mimikaraTargetSlotGroup" class="cloze-slot-group" title="Cần gõ ${romajiCount} ký tự Romaji">${slots}</span>
             <span class="cloze-suffix">${escapeHtml(after)}</span>
           </div>
         `;
@@ -1749,7 +1761,7 @@ class MimikaraPracticeService {
     }
 
     const placeholderText = isLevel1
-      ? `✍️ Nghe và gõ từ bị khuyết (Ví dụ: ${escapeHtml(q.romaji || q.reading)})...`
+      ? `✍️ Nghe và gõ từ bị khuyết bằng Romaji hoặc Hiragana...`
       : `✍️ Nghe và gõ toàn bộ câu bằng Romaji hoặc Hiragana...`;
 
     body.innerHTML = `
@@ -1824,7 +1836,7 @@ class MimikaraPracticeService {
             <i class="fas fa-eye"></i> Xem đáp án gợi ý (Tab)
           </button>
           <span style="font-size: 0.95rem; color: #cbd5e1; font-weight: 600;">
-            Phím <b>Space / R</b>: Nghe lại • <b>Enter</b>: Kiểm tra • <b>Tab</b>: Gợi ý
+            Phím <b>Space</b>: Nghe lại • <b>Enter</b>: Kiểm tra • <b>Tab</b>: Gợi ý
           </span>
         </div>
       </div>
@@ -1849,18 +1861,19 @@ class MimikaraPracticeService {
       const q = this.dictationQuestions[this.dictationIndex];
       const targetReading = q.reading || '';
       const targetTerm = q.term || '';
-      const dotCount = Math.max(1, targetReading ? targetReading.length : targetTerm.length);
-      const typedHiragana = romajiToHiragana(val);
+      const targetRomaji = (q.romaji || '').toLowerCase().trim().replace(/[^a-z0-9]/g, '');
+      const romajiCount = targetRomaji.length || Math.max(1, (targetReading || targetTerm).length);
+      const rawInput = (val || '').trim();
 
       const slotGroup = document.getElementById('mimikaraTargetSlotGroup');
       if (slotGroup) {
         let slots = '';
-        for (let i = 0; i < dotCount; i++) {
-          const char = typedHiragana[i] || '';
+        for (let i = 0; i < romajiCount; i++) {
+          const char = rawInput[i] || '';
           if (char) {
             slots += `<span class="cloze-slot-char filled">${escapeHtml(char)}</span>`;
           } else {
-            slots += `<span class="cloze-slot-char empty">•</span>`;
+            slots += `<span class="cloze-slot-char empty">_</span>`;
           }
         }
         slotGroup.innerHTML = slots;
@@ -1989,7 +2002,7 @@ class MimikaraPracticeService {
         } else {
           this.renderStep4Dictation();
         }
-      }, 950);
+      }, 1400);
     } else {
       this.dictationState = 'incorrect';
       input.classList.remove('correct');
@@ -2015,7 +2028,7 @@ class MimikaraPracticeService {
 
     const input = document.getElementById('mimikaraDictationInput');
     if (input) {
-      input.value = isLevel1 ? q.reading : q.exam_ja;
+      input.value = isLevel1 ? (q.romaji || q.reading) : q.exam_ja;
       this.handleDictationInput({ target: input });
       input.focus();
     }
