@@ -820,7 +820,7 @@ function romajiToHiragana(romaji) {
     'wa':'わ','wo':'を',
     'ga':'が','gi':'ぎ','gu':'ぐ','ge':'げ','go':'ご',
     'za':'ざ','ji':'じ','zi':'じ','zu':'ず','ze':'ぜ','zo':'ぞ',
-    'da':'だ','di':'ぢ','du':'づ','de':'de','do':'ど',
+    'da':'だ','di':'ぢ','du':'づ','de':'で','do':'ど',
     'ba':'ば','bi':'び','bu':'ぶ','be':'べ','bo':'ぼ',
     'pa':'ぱ','pi':'ぴ','pu':'ぷ','pe':'ぺ','po':'ぽ',
     'nn':'ん',"n'":'ん','n ':'ん',
@@ -1353,7 +1353,6 @@ function renderPracticeModeView(container) {
                    id="practiceTypingInput" 
                    class="practice-typing-input" 
                    placeholder="${inputPlaceholder}" 
-                   autofocus 
                    autocomplete="off" 
                    spellcheck="false">
             <button type="submit" class="btn-typing-submit">
@@ -1391,7 +1390,7 @@ function renderPracticeModeView(container) {
         </div>
 
         <div class="typing-next-controls">
-          <button type="button" id="btnNextPracticeCard" class="btn-typing-next correct" onclick="flashcardService.nextPracticeCard()" autofocus>
+          <button type="button" id="btnNextPracticeCard" class="btn-typing-next correct" onclick="flashcardService.nextPracticeCard()">
             <span>Tiếp tục từ kế tiếp</span> <i class="fas fa-arrow-right"></i>
             <span class="kbd-hint">(Phím Enter)</span>
           </button>
@@ -1418,7 +1417,7 @@ function renderPracticeModeView(container) {
           <button type="button" class="btn-typing-reveal" onclick="flashcardService.revealAnswer()">
             <i class="fas fa-lightbulb"></i> <span>Xem đáp án chi tiết (Tab)</span>
           </button>
-          <button type="button" id="btnNextPracticeCard" class="btn-typing-next" onclick="flashcardService.nextPracticeCard()" autofocus>
+          <button type="button" id="btnNextPracticeCard" class="btn-typing-next" onclick="flashcardService.nextPracticeCard()">
             <span>Bỏ qua</span> <i class="fas fa-arrow-right"></i>
           </button>
         </div>
@@ -1450,7 +1449,7 @@ function renderPracticeModeView(container) {
           <button type="button" class="btn-typing-retry" onclick="flashcardService.retryTyping()">
             <i class="fas fa-rotate-left"></i> <span>Gõ lại để nhớ</span>
           </button>
-          <button type="button" id="btnNextPracticeCard" class="btn-typing-next" onclick="flashcardService.nextPracticeCard()" autofocus>
+          <button type="button" id="btnNextPracticeCard" class="btn-typing-next" onclick="flashcardService.nextPracticeCard()">
             <span>Sang từ kế tiếp</span> <i class="fas fa-arrow-right"></i>
             <span class="kbd-hint">(Phím Enter)</span>
           </button>

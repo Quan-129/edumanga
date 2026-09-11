@@ -35,7 +35,7 @@ const commentService = {
     const db = getFirestoreDb();
     const isConfigured = typeof checkIsFirebaseConfigured === 'function' ? checkIsFirebaseConfigured() : false;
 
-    if (db && isConfigured) {
+    if (db && isConfigured && !window._isFirestoreCommentsBlocked) {
       try {
         commentUnsubscribe = db.collection('comments')
           .where('chapterKey', '==', currentCommentChapterKey)
@@ -56,10 +56,23 @@ const commentService = {
             renderCommentsUI(comments);
             updateCommentBadges(comments.length);
           }, (err) => {
-            console.warn("Firestore comments error, falling back to local:", err);
+            if (commentUnsubscribe) {
+              try { commentUnsubscribe(); } catch (e) {}
+              commentUnsubscribe = null;
+            }
+            if (err && (err.code === 'permission-denied' || (err.message && err.message.includes('insufficient permissions')))) {
+              console.info("ℹ️ Cloud Firestore chưa cấp quyền bình luận (Security Rules). Đang chuyển sang lưu trữ cục bộ mượt mà.");
+              window._isFirestoreCommentsBlocked = true;
+            } else {
+              console.warn("Firestore comments error, falling back to local:", err);
+            }
             loadLocalComments();
           });
       } catch (err) {
+        if (commentUnsubscribe) {
+          try { commentUnsubscribe(); } catch (e) {}
+          commentUnsubscribe = null;
+        }
         console.warn("Error attaching comment listener:", err);
         loadLocalComments();
       }

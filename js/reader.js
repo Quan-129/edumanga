@@ -167,6 +167,46 @@ function createPageSkeletonElement(pageNum) {
   return skeleton;
 }
 
+// Lightweight Virtual Windowing (Only loads active pages, unloads far offscreen pages to keep RAM minimal)
+const PLACEHOLDER_1PX_SVG = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E";
+
+let pageLazyLoadObserver = null;
+
+function initPageImageLazyLoader() {
+  if (pageLazyLoadObserver) {
+    pageLazyLoadObserver.disconnect();
+  }
+
+  pageLazyLoadObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      const wrapper = entry.target;
+      const idx = parseInt(wrapper.dataset.pageIndex, 10);
+      const img = wrapper.querySelector('.reader-page-img');
+      if (!img || isNaN(idx) || !currentChapter || !currentChapter.pages || !currentChapter.pages[idx]) return;
+
+      const pageData = currentChapter.pages[idx];
+
+      if (entry.isIntersecting) {
+        // Vào vùng nhìn thấy -> Nạp ảnh native cực nhanh bằng GPU C++ decoding
+        if (img.src !== pageData.imageUrl) {
+          img.src = pageData.imageUrl;
+        }
+      } else {
+        // Cuộn ra xa khỏi vùng nhìn thấy (> 3 trang) -> Xả ảnh về SVG 1px để giải phóng GPU Bitmap
+        if (Math.abs(idx - currentPageIndex) > 3) {
+          if (img.src !== PLACEHOLDER_1PX_SVG) {
+            img.src = PLACEHOLDER_1PX_SVG;
+            wrapper.classList.remove('is-loaded');
+          }
+        }
+      }
+    });
+  }, {
+    rootMargin: '600px 0px 600px 0px', // Nạp trước 600px để trải nghiệm liền mạch
+    threshold: 0.01
+  });
+}
+
 function setupPageImageSkeleton(img, pageWrapper, skeletonEl) {
   const markLoaded = () => {
     pageWrapper.classList.add('is-loaded');
@@ -176,7 +216,7 @@ function setupPageImageSkeleton(img, pageWrapper, skeletonEl) {
         if (skeletonEl && skeletonEl.parentNode) {
           skeletonEl.remove();
         }
-      }, 320);
+      }, 200);
     }
   };
 
@@ -202,6 +242,8 @@ function renderPages() {
   const viewport = document.getElementById('readerViewport');
   if (!viewport) return;
 
+  initPageImageLazyLoader();
+
   viewport.className = `reader-viewport mode-${readerMode}`;
   viewport.innerHTML = '';
 
@@ -211,7 +253,7 @@ function renderPages() {
   viewport.appendChild(canvasLayer);
 
   if (readerMode === 'webtoon') {
-    // Render all pages in a vertical stack
+    // Render all pages in a vertical stack with Virtual Windowing
     currentChapter.pages.forEach((page, idx) => {
       // Add stylish between-page divider for page 2 onwards
       if (idx > 0) {
@@ -228,9 +270,15 @@ function renderPages() {
 
       const img = document.createElement('img');
       img.className = 'reader-page-img';
-      img.src = page.imageUrl;
       img.alt = `Trang ${page.pageNumber}`;
-      img.loading = idx < 3 ? 'eager' : 'lazy';
+
+      // 2 trang đầu tiên nạp ngay, các trang sau để Virtual Observer nạp/xả thông minh
+      if (idx < 2) {
+        img.src = page.imageUrl;
+      } else {
+        img.src = PLACEHOLDER_1PX_SVG;
+        pageLazyLoadObserver.observe(pageWrapper);
+      }
 
       pageWrapper.appendChild(img);
       pageWrapper.appendChild(createPageBadgeElement(idx + 1, totalPages));
@@ -251,7 +299,7 @@ function renderPages() {
     initWebtoonScrollObserver();
 
   } else if (readerMode === 'single') {
-    // Render only current page (Webtoon-like full natural width layout)
+    // Render only current page
     const page = currentChapter.pages[currentPageIndex];
     if (!page) return;
 
@@ -648,21 +696,36 @@ try {
 
 
 
-function saveReadingHistory() {
-  if (!currentSeries || !currentChapter) return;
-  const data = {
-    seriesId: currentSeries.id,
-    seriesTitle: currentSeries.title,
-    chapterId: currentChapter.id,
-    chapterTitle: currentChapter.title,
-    pageNumber: currentPageIndex + 1,
-    timestamp: Date.now()
-  };
-  localStorage.setItem('edumanga_last_read', JSON.stringify(data));
+let readingHistorySaveTimer = null;
 
-  // Sync reading progress to Cloud Firestore
-  if (window.syncEngine && typeof window.syncEngine.saveReadingProgress === 'function') {
-    window.syncEngine.saveReadingProgress(currentSeries.id, currentChapter.id, currentPageIndex + 1);
+function saveReadingHistory(immediate = false) {
+  if (!currentSeries || !currentChapter) return;
+
+  const doSave = () => {
+    const data = {
+      seriesId: currentSeries.id,
+      seriesTitle: currentSeries.title,
+      chapterId: currentChapter.id,
+      chapterTitle: currentChapter.title,
+      pageNumber: currentPageIndex + 1,
+      timestamp: Date.now()
+    };
+    try {
+      localStorage.setItem('edumanga_last_read', JSON.stringify(data));
+    } catch (e) {}
+
+    // Sync reading progress to Cloud Firestore
+    if (window.syncEngine && typeof window.syncEngine.saveReadingProgress === 'function') {
+      window.syncEngine.saveReadingProgress(currentSeries.id, currentChapter.id, currentPageIndex + 1);
+    }
+  };
+
+  if (immediate) {
+    if (readingHistorySaveTimer) clearTimeout(readingHistorySaveTimer);
+    doSave();
+  } else {
+    if (readingHistorySaveTimer) clearTimeout(readingHistorySaveTimer);
+    readingHistorySaveTimer = setTimeout(doSave, 300);
   }
 }
 
