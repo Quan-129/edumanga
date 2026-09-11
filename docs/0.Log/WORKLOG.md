@@ -5,6 +5,32 @@ Nơi ghi lại toàn bộ tiến trình phát triển, các quyết định ki�
 
 ---
 
+## [2026-09-11 23:30] - Tối Ưu UX Chế Độ Leo Tháp: Ẩn Đáp Án Romaji (Chỉ Hiện Gạch Dưới _ Theo Số Ký Tự) & Ẩn Chữ Kanji Ở Thử Thách Audio
+
+### 🎯 Mục tiêu
+- Khắc phục tình trạng "lộ đáp án" trước khi gõ trong minigame Ninja Leo Tháp:
+  - Trước đây: Các ô Romaji hiển thị toàn bộ chữ cái (ví dụ `j i n s e i`) trước khi người học bắt đầu gõ.
+  - Thử thách Audio: Thẻ câu hỏi và thanh HUD hiển thị cả icon loa lẫn chữ Kanji `🔊 人生`, khiến người học nhìn thấy chữ thay vì thuần luyện nghe.
+- **Yêu cầu mới**:
+  1. Các ô ký tự Romaji ban đầu chỉ hiển thị dấu gạch dưới `_` để người học nhận biết độ dài/số ký tự từ vựng.
+  2. Chỉ khi người học gõ đúng ký tự (`i < inputIndex`), ô đó mới chuyển sang nền xanh lá rực rỡ và hiển thị ký tự đã gõ.
+  3. Nếu gõ sai, ô hiện tại nháy đỏ và hiển thị ký tự vừa gõ sai để cảnh báo.
+  4. Ở các cành cây phía trên (chưa tới lượt), hiển thị chuỗi gạch dưới `_ _ _ _ _` thay vì độ dài thô.
+  5. Ở thử thách Audio: Thẻ bài chỉ hiển thị duy nhất biểu tượng loa `🔊` cỡ lớn màu cyan; thanh gợi ý HUD hiển thị `Mục tiêu: 🔊 Nghe âm thanh [Phím R hoặc Space nghe lại]`, tuyệt đối không để lộ từ Kanji.
+
+### ✅ Công việc đã hoàn thành
+- **[Ẩn Đáp Án & Hiển Thị Động Ký Tự Romaji] ([`js/mimikara-climber-engine.js`](file:///g:/My%20Drive/hk261/Dự%20án%20manga/js/mimikara-climber-engine.js))**:
+  - Cập nhật hàm `renderTargetRomajiBoxes`: Mặc định vẽ `_` với màu chữ mờ. Khi gõ đúng hiển thị ký tự với `#16a34a`. Khi gõ sai hiển thị ký tự sai với `#b91c1c`.
+  - Cập nhật `setupBranches`: Với `type === 'audio'`, `display` chỉ còn duy nhất icon `'🔊'`.
+  - Cập nhật `renderBranches`: Thẻ Audio chỉ vẽ biểu tượng loa 22px; cành trên hiển thị `_ _ _ _ _`.
+  - Cập nhật `updateHUD`: Giữ bí mật từ vựng cho cành Audio.
+- **[Nâng Cache-Buster lên v=3.7] ([`index.html`](file:///g:/My%20Drive/hk261/Dự%20án%20manga/index.html), [`detail.html`](file:///g:/My%20Drive/hk261/Dự%20án%20manga/detail.html), [`reader.html`](file:///g:/My%20Drive/hk261/Dự%20án%20manga/reader.html))**:
+  - Nâng cache buster lên `?v=3.7` để trình duyệt tự động nạp code mới ngay lập tức.
+- **[Kiểm Thử Trực Tiếp Trên Trình Duyệt]**:
+  - Đã xác thực trên Canvas: Lúc bắt đầu cành 1 chỉ hiện `_ _ _ _ _` và `🔊 NGHE 🔊`. Khi gõ phím `f` ký tự đầu tiên chuyển xanh `f`, các ô sau vẫn là `_ _ _ _`.
+
+---
+
 ## [2026-09-11 23:10] - Triển Khai Chế Độ 6: Minigame Ninja Leo Tháp 15 Cành (Marathon Shuffle) & Đấu Trường Vô Tận
 
 ### 🎯 Mục tiêu

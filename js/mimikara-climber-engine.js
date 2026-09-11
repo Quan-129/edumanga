@@ -214,15 +214,14 @@ class MimikaraClimberGame {
     if (hintBox) {
       const nextBranch = this.branches[this.currentBranchIndex + 1];
       if (nextBranch) {
-        let typeBadge = '';
         if (nextBranch.type === 'kanji') {
-          typeBadge = '<span style="color: #c084fc;">⛩️ Kanji</span>';
+          hintBox.innerHTML = `Mục tiêu: <span style="color: #c084fc;">⛩️ Kanji:</span> <span style="color: #fff; font-weight: 800; font-size: 1.15rem; margin-left: 4px;">${nextBranch.display}</span>`;
         } else if (nextBranch.type === 'meaning') {
-          typeBadge = '<span style="color: #f59e0b;">💡 Nghĩa</span>';
+          hintBox.innerHTML = `Mục tiêu: <span style="color: #f59e0b;">💡 Nghĩa:</span> <span style="color: #fff; font-weight: 800; margin-left: 4px;">${nextBranch.display}</span>`;
         } else {
-          typeBadge = '<span style="color: #06b6d4;">🔊 Nghe</span>';
+          // Audio: TUYỆT ĐỐI KHÔNG HIỆN CHỮ KANJI HAY ĐÁP ÁN!
+          hintBox.innerHTML = `Mục tiêu: <span style="color: #06b6d4;">🔊 Nghe âm thanh</span> <span style="color: #94a3b8; font-size: 0.8rem; margin-left: 6px;">[Phím R hoặc Space nghe lại]</span>`;
         }
-        hintBox.innerHTML = `Mục tiêu: ${typeBadge} <span style="color: #fff; font-weight: 800;">${nextBranch.display}</span>`;
       } else if (this.currentBranchIndex >= this.totalBranches) {
         hintBox.innerHTML = `<span style="color: #34d399; font-weight: 800;">🏆 ĐÃ CHẠM ĐỈNH THÁP!</span>`;
       }
@@ -351,7 +350,8 @@ class MimikaraClimberGame {
       const cleanRomaji = (w.romaji || '').toLowerCase().replace(/[^a-z]/g, '');
       challenges.push({ word: w, type: 'kanji', display: w.term, targetRomaji: cleanRomaji, label: 'Chữ Hán' });
       challenges.push({ word: w, type: 'meaning', display: this.shortenMeaning(w.meaning), targetRomaji: cleanRomaji, label: 'Ý Nghĩa' });
-      challenges.push({ word: w, type: 'audio', display: '🔊 ' + w.term, targetRomaji: cleanRomaji, label: 'Nghe Âm' });
+      // Với Audio: chỉ để icon Loa 🔊, tuyệt đối không đính kèm w.term để giữ tính bất ngờ thử thách!
+      challenges.push({ word: w, type: 'audio', display: '🔊', targetRomaji: cleanRomaji, label: 'Nghe Âm' });
     });
 
     // Thuật toán xáo trộn thông minh (Smart Shuffle): không có 2 từ liên tiếp trùng nhau
@@ -492,6 +492,7 @@ class MimikaraClimberGame {
       // GÕ ĐÚNG:
       this.inputIndex++;
       this.lastInputState = 'correct';
+      this.lastWrongChar = null;
       this.playKeyCorrectSound();
 
       // Vi chuyển động: Nhích một bước về phía cành cây + mặt cười híp ^ ^
@@ -509,6 +510,7 @@ class MimikaraClimberGame {
     } else {
       // GÕ SAI:
       this.lastInputState = 'error';
+      this.lastWrongChar = char;
       this.playKeyWrongSound();
 
       // Vi chuyển động: Khựng lại giật nhẹ + mặt hoảng hốt • _ •
@@ -860,20 +862,29 @@ class MimikaraClimberGame {
         ctx.fillText(badgeText, b.x - cardW / 2 + 8, cardY + 12);
 
         // Nội dung câu hỏi (Kanji / Nghĩa / Audio)
-        ctx.fillStyle = '#ffffff';
-        ctx.font = '700 14px Outfit, sans-serif';
-        ctx.textAlign = 'center';
-        ctx.fillText(b.display, b.x, cardY + 24);
+        if (b.type === 'audio') {
+          // Với Audio: CHỈ HIỆN ICON LOA, TUYỆT ĐỐI KHÔNG HIỆN CHỮ KANJI HAY TỪ
+          ctx.fillStyle = '#22d3ee';
+          ctx.font = '700 22px Outfit, sans-serif';
+          ctx.textAlign = 'center';
+          ctx.fillText('🔊', b.x, cardY + 25);
+        } else {
+          ctx.fillStyle = '#ffffff';
+          ctx.font = b.type === 'kanji' ? '800 16px Outfit, sans-serif' : '700 13px Outfit, sans-serif';
+          ctx.textAlign = 'center';
+          ctx.fillText(b.display, b.x, cardY + 24);
+        }
 
         // 3. Hiển thị dãy Romaji với ô Xanh / Đỏ chạy theo từng chữ cái
         if (isTarget) {
           this.renderTargetRomajiBoxes(ctx, b, cardY - 26);
         } else if (!isPast) {
-          // Gợi ý độ dài từ mờ cho các cành phía trên
-          ctx.fillStyle = 'rgba(255,255,255,0.3)';
-          ctx.font = '600 11px monospace';
+          // Gợi ý độ dài bằng các gạch dưới: _ _ _ _ _
+          const underlineHint = Array(b.targetRomaji.length).fill('_').join(' ');
+          ctx.fillStyle = 'rgba(255,255,255,0.45)';
+          ctx.font = '800 13px monospace';
           ctx.textAlign = 'center';
-          ctx.fillText(`[ ${b.targetRomaji.length} ký tự ]`, b.x, cardY - 8);
+          ctx.fillText(underlineHint, b.x, cardY - 6);
         }
       } else {
         // Cành xuất phát
@@ -887,7 +898,7 @@ class MimikaraClimberGame {
     });
   }
 
-  // Vẽ các ô ký tự Romaji với ô Xanh Lá (gõ đúng) & Ô Đỏ Đô (gõ sai)
+  // Vẽ các ô ký tự Romaji: CHỈ HIỆN KÝ TỰ ĐÃ GÕ ĐÚNG, CÁC Ô CHƯA GÕ CHỈ HIỆN GẠCH DƯỚI _
   renderTargetRomajiBoxes(ctx, branch, y) {
     const romaji = branch.targetRomaji;
     const boxSize = 22;
@@ -899,28 +910,35 @@ class MimikaraClimberGame {
       const char = romaji[i];
       const bx = startX + i * (boxSize + spacing);
 
-      let boxBg = 'rgba(15, 23, 42, 0.8)';
-      let textColor = '#cbd5e1';
-      let borderColor = 'rgba(255,255,255,0.2)';
+      let boxBg = 'rgba(15, 23, 42, 0.7)';
+      let textColor = 'rgba(255, 255, 255, 0.35)';
+      let borderColor = 'rgba(255,255,255,0.15)';
+      let textToRender = '_'; // Mặc định chỉ hiển thị gạch dưới để biết số ký tự
 
       if (i < this.inputIndex) {
-        // Đã gõ đúng: Ô màu xanh lá cây rực rỡ
+        // ĐÃ GÕ ĐÚNG: Hiện ô màu xanh lá cây rực rỡ + CHỮ CÁI ĐÃ GÕ
         boxBg = '#16a34a';
         textColor = '#ffffff';
         borderColor = '#22c55e';
+        textToRender = char;
       } else if (i === this.inputIndex) {
-        // Ký tự đang chờ gõ:
+        // KÝ TỰ ĐANG CHỜ GÕ:
         if (this.lastInputState === 'error') {
-          // Gõ sai: Khối hộp màu ĐỎ ĐÔ cảnh báo
+          // Gõ sai: Khối hộp màu ĐỎ ĐÔ cảnh báo + hiển thị ký tự vừa gõ sai
           boxBg = '#b91c1c';
           textColor = '#ffffff';
           borderColor = '#ef4444';
+          textToRender = this.lastWrongChar ? this.lastWrongChar.toUpperCase() : '✗';
         } else {
-          // Con trỏ chờ: Viền xanh dương nhấp nháy
-          boxBg = 'rgba(2, 132, 199, 0.4)';
+          // Con trỏ đang chờ: Viền xanh dương nhấp nháy, hiện gạch dưới _
+          boxBg = 'rgba(2, 132, 199, 0.35)';
           textColor = '#38bdf8';
           borderColor = '#38bdf8';
+          textToRender = '_';
         }
+      } else {
+        // CHƯA GÕ: Chỉ là ô mờ với dấu gạch dưới _
+        textToRender = '_';
       }
 
       // Vẽ ô vuông
@@ -929,15 +947,15 @@ class MimikaraClimberGame {
       ctx.fill();
 
       ctx.strokeStyle = borderColor;
-      ctx.lineWidth = 1.5;
+      ctx.lineWidth = (i === this.inputIndex) ? 2 : 1;
       ctx.stroke();
 
-      // Chữ cái Romaji
+      // Vẽ chữ cái hoặc dấu gạch dưới
       ctx.fillStyle = textColor;
       ctx.font = '800 13px monospace';
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
-      ctx.fillText(char, bx + boxSize / 2, y + boxSize / 2 + 1);
+      ctx.fillText(textToRender, bx + boxSize / 2, y + boxSize / 2 + 1);
     }
   }
 
