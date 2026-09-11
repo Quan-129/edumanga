@@ -1267,7 +1267,7 @@ class MimikaraPracticeService {
         this.selectedLeftCard = card;
         const curEl = document.getElementById(id);
         if (curEl) curEl.classList.add('selected');
-        this.speak(card.term);
+        // Không phát audio khi mới chỉ click 1 thẻ lẻ, chỉ phát khi đã ghép đúng cặp ở checkMatchingPair
       }
     } else {
       const card = this.rightMatchCards.find(c => c.id === id);
@@ -1391,9 +1391,7 @@ class MimikaraPracticeService {
     }
 
     const q = this.typingQuestions[this.typingIndex];
-    if (q.direction === 'kanji_to_reading') {
-      this.speak(q.word.term);
-    }
+    // Không tự động phát audio khi vừa nạp câu hỏi, chỉ phát khi người học gõ xong và bấm Enter kiểm tra
 
     body.innerHTML = `
       ${this.renderStepperHeader()}
@@ -1466,11 +1464,13 @@ class MimikaraPracticeService {
     const q = this.typingQuestions[this.typingIndex];
     const isCorrect = this.evaluateAnswer(val, q.word, q.direction);
 
+    // Gõ xong bấm Enter -> Phát audio từ vựng tương ứng
+    this.speak(q.word.term);
+
     const feedback = document.getElementById('mimikaraTypingFeedback');
 
     if (isCorrect) {
       this.typingState = 'correct';
-      this.speak(q.word.term);
       input.classList.remove('incorrect');
       input.classList.add('correct');
       if (feedback) feedback.innerHTML = this.renderTypingFeedbackHTML(q);
@@ -1479,7 +1479,7 @@ class MimikaraPracticeService {
         this.typingIndex++;
         this.typingState = 'input';
         this.renderStep3Typing();
-      }, 650);
+      }, 700);
     } else {
       this.typingState = 'incorrect';
       input.classList.remove('correct');

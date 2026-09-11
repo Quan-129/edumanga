@@ -5,6 +5,30 @@ Nơi ghi lại toàn bộ tiến trình phát triển, các quyết định ki�
 
 ---
 
+## [2026-09-12 06:25] - Tinh Chỉnh Thời Điểm Phát Audio: Bước 2 Chỉ Phát Khi Ghép Đúng Cặp, Bước 3 Chỉ Phát Sau Khi Bấm Enter
+
+### 🎯 Mục tiêu
+- Đáp ứng yêu cầu người dùng: "ở bước 2 sau khi chọn 1 cặp tương ứng mới phát audio tương ứng đó, bước 3 khi nào gõ xong bấm enter mới phát audio".
+- **Vấn đề trước đây**:
+  - Ở Bước 2 (Ghép cặp): Ngay khi click vào 1 thẻ ở cột trái, hệ thống đã vội phát âm thanh từ vựng, làm mất tính hồi hộp thử thách ghép cặp.
+  - Ở Bước 3 (Gõ từ): Khi vừa nạp câu hỏi, hệ thống tự động phát âm thanh từ vựng ngay lập tức, khiến người học nghe thấy trước khi tự suy nghĩ và gõ đáp án.
+- **Giải pháp**:
+  1. **Bước 2 (Ghép cặp 5x5)**:
+     - Gỡ bỏ lệnh `this.speak(card.term)` khi người học mới chỉ click chọn 1 thẻ đơn lẻ trong `selectMatchCard`.
+     - Chỉ kích hoạt `this.speak(left.term)` khi 2 thẻ được chọn ghép chính xác thành một cặp tương ứng trong `checkMatchingPair()`.
+  2. **Bước 3 (Gõ phản xạ 2 chiều)**:
+     - Gỡ bỏ lệnh tự động phát audio trong `renderStep3Typing()` khi vừa nạp câu hỏi.
+     - Chỉ phát âm thanh `this.speak(q.word.term)` khi người học gõ xong và nhấn phím **Enter** (hoặc bấm nút "Kiểm Tra") trong `checkTypingAnswer()`.
+
+### ✅ Công việc đã hoàn thành
+- **[Logic Kích Hoạt Audio Chuẩn Xác] ([`js/mimikara-practice-service.js`](file:///g:/My%20Drive/hk261/Dự%20án%20manga/js/mimikara-practice-service.js))**:
+  - Chỉnh sửa `selectMatchCard()`: không phát âm khi click thẻ đơn lẻ.
+  - Chỉnh sửa `renderStep3Typing()`: không phát âm khi nạp câu.
+  - Chỉnh sửa `checkTypingAnswer()`: phát âm từ vựng ngay khi nhấn Enter kiểm tra câu trả lời.
+- **[Nâng Cache-Buster lên v=4.1] ([`index.html`](file:///g:/My%20Drive/hk261/Dự%20án%20manga/index.html), [`detail.html`](file:///g:/My%20Drive/hk261/Dự%20án%20manga/detail.html), [`reader.html`](file:///g:/My%20Drive/hk261/Dự%20án%20manga/reader.html))**: Nâng cache buster lên `?v=4.1`.
+
+---
+
 ## [2026-09-12 00:20] - Tối Ưu Triệt Để Responsive Co Giãn Tràn Viền Toàn Màn Hình (2K / 4K / 1080p Ultra-Wide)
 
 ### 🎯 Mục tiêu
