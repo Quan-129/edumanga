@@ -5,6 +5,40 @@ Nơi ghi lại toàn bộ tiến trình phát triển, các quyết định ki�
 
 ---
 
+## [2026-09-11 14:50] - Triển Khai Bước 5: Luyện Dịch Câu Phức N2 (Scrambled Chunk Translation Puzzle) Đa Chiều Cho Mimikara N2
+
+### 🎯 Mục tiêu
+- Khắc phục điểm yếu chí mạng của người học khi đối mặt với câu phức dài, nhiều vế ở trình độ JLPT N2 (Đọc hiểu Dokkai & Diễn đạt Sakubun).
+- Triển khai **Bước 5: Luyện Dịch Câu Phức N2** dưới dạng trò chơi xếp khối ngữ nghĩa giải đố (Scrambled Chunk Translation Puzzle), yêu cầu người học ghép các cụm từ logic theo đúng cấu trúc câu N2.
+- Hỗ trợ **Cần gạt 2 chế độ (Two-way Translation Toggle)**:
+  1. **[ 🇯🇵 ➔ 🇻🇳 Dịch Xuôi (Đọc Hiểu Dokkai) ]**: Đề bài tiếng Nhật phức ➔ Lắp ráp các cụm dịch tiếng Việt theo thứ tự văn phong tự nhiên.
+  2. **[ 🇻🇳 ➔ 🇯🇵 Dịch Ngược (Diễn Đạt & Đặt Câu Sakubun) ]**: Đề bài tiếng Việt ➔ Lắp ráp các cụm Bunsetsu tiếng Nhật tương ứng.
+- Tự động hiển thị **Thẻ Phân Tích Ngữ Pháp & Cụm Từ N2 (Breakdown Card)** sau khi giải đúng: giải thích cấu trúc ngữ pháp trọng tâm (ví dụ `~ためには`, `~にあたって`, `~をめぐって`) và cụm từ cố định Collocation.
+
+### ✅ Công việc đã hoàn thành
+- **[Tạo Bộ Dữ Liệu Dịch Câu Phức N2 1.160 Mục] ([`scripts/build_n2_translations.py`](<file:///g:/My%20Drive/hk261/D%E1%BB%B1%20%C3%A1n%20manga/scripts/build_n2_translations.py>), [`data/mimikara_n2_translations.json`](<file:///g:/My%20Drive/hk261/D%E1%BB%B1%20%C3%A1n%20manga/data/mimikara_n2_translations.json>))**:
+  - Xây dựng cơ sở dữ liệu câu phức dài đúng chuẩn JLPT N2 cho toàn bộ 1.160 từ vựng Mimikara N2.
+  - Phân đoạn chính xác từng vế câu thành mảng khối logic (`chunks_ja` và `chunks_vi`), ghi chú điểm ngữ pháp N2 trọng tâm và cụm từ kết hợp Collocation tự nhiên.
+- **[Engine Lắp Ghép Khối Ngữ Nghĩa & Logic Bước 5] ([`js/mimikara-practice-service.js`](<file:///g:/My%20Drive/hk261/D%E1%BB%B1%20%C3%A1n%20manga/js/mimikara-practice-service.js>))**:
+  - Xây dựng các hàm lõi: `startStep5Translation()`, `initCurrentTranslationQuestion()`, `renderStep5Translation()`, `selectChunk()`, `unselectChunk()`, `resetTranslationChunks()`, `checkTranslationAnswer()`, `revealTranslationHint()`, `nextTranslationQuestion()`, `toggleTranslationMode()`.
+  - Thuật toán xáo trộn Fisher-Yates các khối ngữ nghĩa kèm cơ chế đối chiếu vị trí chuẩn xác tuyệt đối (`correctIndex === pos`).
+  - Hỗ trợ phím tắt bàn phím tiện lợi: các phím số `1-9` để chọn khối, `Backspace` xóa khối gần nhất, `Escape` làm lại từ đầu, `Enter` để kiểm tra hoặc qua câu tiếp theo.
+- **[Thiết Kế UI/UX Cyberpunk Glassmorphism Hiện Đại] ([`css/mimikara-practice.css`](<file:///g:/My%20Drive/hk261/D%E1%BB%B1%20%C3%A1n%20manga/css/mimikara-practice.css>))**:
+  - Khung câu gốc kính mờ viền Cyan, làm nổi bật từ vựng bài học bằng thẻ màu vàng hổ phách `.trans-target-term`.
+  - Khay thả câu `.trans-assembly-area` dạng viền đứt nét khi rỗng và chuyển viền đặc sáng bóng khi có khối; hiệu ứng rung lắc khi sai và viền ngọc lục bảo phát sáng khi đúng.
+  - Các chip khối lắp ráp `.assembled-chunk-chip` có đánh số thứ tự `[1]`, `[2]`, ... và icon xóa nhanh khi hover.
+  - Ngân hàng khối bấm `.btn-chunk-item` mượt mà, mờ đi khi đã được chọn.
+  - Thẻ phân tích giải thích `.translation-breakdown-card` trượt xuống êm ái khi hoàn thành.
+- **[Cập Nhật Stepper 5 Bước & Màn Hình Vinh Quang Chiến Thắng] ([`js/mimikara-practice-service.js`](<file:///g:/My%20Drive/hk261/D%E1%BB%B1%20%C3%A1n%20manga/js/mimikara-practice-service.js>))**:
+  - Nâng cấp Stepper Header từ 4 bước thành 5 bước hoàn chỉnh: `1. Flashcard` ➔ `2. Ghép Cặp` ➔ `3. Gõ Từ` ➔ `4. Nghe Điền` ➔ `5. Luyện Dịch`.
+  - Tự động chuyển mượt từ Bước 4 sang Bước 5 sau khi hoàn thành câu nghe cuối cùng.
+  - Màn hình Victory Modal chúc mừng khi hoàn thành trọn vẹn cả 5 bước của phiên học.
+- **[Cập Nhật Cache Buster v3.3 & Kiểm Thử E2E Trình Duyệt] ([`reader.html`](<file:///g:/My%20Drive/hk261/D%E1%BB%B1%20%C3%A1n%20manga/reader.html>), [`index.html`](<file:///g:/My%20Drive/hk261/D%E1%BB%B1%20%C3%A1n%20manga/index.html>), [`detail.html`](<file:///g:/My%20Drive/hk261/D%E1%BB%B1%20%C3%A1n%20manga/detail.html>))**:
+  - Cập nhật chuỗi phiên bản query `?v=3.3` trên tất cả trang HTML.
+  - Chạy subagent kiểm thử thực tế trên trình duyệt: xác nhận chức năng chọn khối, kiểm tra đáp án, hiển thị Breakdown Card và cần gạt đổi chế độ hoạt động trơn tru.
+
+---
+
 ## [2026-09-11 13:30] - Triển Khai Sơ Đồ Radial Mindmap SVG & Cần Gạt 2 Chế Độ (Ghép Từ vs Chiết Tự Bộ Thủ) Cho Flashcard Mimikara N2
 
 ### 🎯 Mục tiêu

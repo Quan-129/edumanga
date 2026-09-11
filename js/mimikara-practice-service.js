@@ -45,6 +45,15 @@ class MimikaraPracticeService {
     this.selectedFrontKanjiChar = null;
     this.kanjiRadicalsDb = null;
 
+    // Step 5 State (Luyện Dịch Câu Phức N2 - Scrambled Chunk Translation)
+    this.translationMode = localStorage.getItem('edumanga_mimikara_trans_mode') || 'ja_to_vi'; // 'ja_to_vi' | 'vi_to_ja'
+    this.translationIndex = 0;
+    this.translationQuestions = [];
+    this.assembledChunks = [];
+    this.availableChunks = [];
+    this.translationState = 'input'; // 'input' | 'correct' | 'incorrect'
+    this.n2TranslationsDb = null;
+
     this.initKeyboardEvents();
   }
 
@@ -98,6 +107,21 @@ class MimikaraPracticeService {
     return null;
   }
 
+  // Fetch N2 Complex Sentences Database for Translation Practice
+  async loadTranslationsDb() {
+    if (this.n2TranslationsDb) return this.n2TranslationsDb;
+    try {
+      const resp = await fetch('data/mimikara_n2_translations.json');
+      if (resp.ok) {
+        this.n2TranslationsDb = await resp.json();
+        return this.n2TranslationsDb;
+      }
+    } catch (err) {
+      console.warn("Could not load data/mimikara_n2_translations.json:", err);
+    }
+    return null;
+  }
+
   // Text-To-Speech Pronunciation
   speak(text, rate = 0.9) {
     if (!('speechSynthesis' in window) || !text) return;
@@ -146,6 +170,36 @@ class MimikaraPracticeService {
           e.preventDefault();
           this.replayDictationAudio();
         }
+      } else if (this.currentStep === 5) {
+        if (e.code === 'Space' || e.code === 'KeyR') {
+          e.preventDefault();
+          const q = this.translationQuestions && this.translationQuestions[this.translationIndex];
+          if (q) this.speak(q.n2_sentence_ja, 0.9);
+        } else if (e.code === 'Enter') {
+          e.preventDefault();
+          if (this.translationState === 'correct') {
+            this.nextTranslationQuestion();
+          } else {
+            this.checkTranslationAnswer();
+          }
+        } else if (e.code === 'Backspace') {
+          e.preventDefault();
+          if (this.assembledChunks.length > 0) {
+            this.unselectChunk(this.assembledChunks.length - 1);
+          }
+        } else if (e.code === 'Escape') {
+          e.preventDefault();
+          this.resetTranslationChunks();
+        } else if (e.key >= '1' && e.key <= '9') {
+          const num = parseInt(e.key, 10) - 1;
+          if (num >= 0 && num < this.availableChunks.length) {
+            e.preventDefault();
+            const targetChunk = this.availableChunks[num];
+            if (targetChunk && !this.assembledChunks.includes(targetChunk.id)) {
+              this.selectChunk(targetChunk.id);
+            }
+          }
+        }
       }
     });
   }
@@ -154,6 +208,7 @@ class MimikaraPracticeService {
   async openModal(unitId = null) {
     await this.loadDataset();
     this.loadKanjiRadicalsDb(); // Nạp ngầm cơ sở dữ liệu chiết tự bộ thủ
+    this.loadTranslationsDb(); // Nạp ngầm cơ sở dữ liệu câu dịch N2
     if (!this.dataset) {
       alert("Không thể nạp dữ liệu từ vựng Mimikara N2. Vui lòng thử lại sau!");
       return;
@@ -202,7 +257,7 @@ class MimikaraPracticeService {
               </div>
               <div class="mimikara-header-titles">
                 <h2>14 Unit Mimikara N2 <span style="font-size: 0.75rem; background: rgba(168,85,247,0.2); color: #c084fc; padding: 2px 8px; border-radius: 6px; border: 1px solid rgba(168,85,247,0.3);">1.160 TỪ CHUẨN</span></h2>
-                <p id="mimikaraHeaderSubtitle">Học từ vựng 4 bước: Flashcard ➔ Ghép cặp 5x5 ➔ Gõ 2 chiều ➔ Nghe điền câu</p>
+                <p id="mimikaraHeaderSubtitle">Học từ vựng 5 bước: Flashcard ➔ Ghép cặp 5x5 ➔ Gõ 2 chiều ➔ Nghe điền câu ➔ Luyện dịch N2</p>
               </div>
             </div>
             <button type="button" class="mimikara-btn-close" onclick="window.mimikaraService.closeModal()" title="Đóng cửa sổ">
@@ -403,8 +458,11 @@ class MimikaraPracticeService {
           <div class="mimikara-step-pill ${this.currentStep === 3 ? 'active' : (this.currentStep > 3 ? 'completed' : '')}">
             <i class="fas ${this.currentStep > 3 ? 'fa-check' : 'fa-keyboard'}"></i> Bước 3: Gõ 2 Chiều
           </div>
-          <div class="mimikara-step-pill ${this.currentStep === 4 ? 'active' : ''}">
-            <i class="fas fa-headphones"></i> Bước 4: Nghe Điền Câu
+          <div class="mimikara-step-pill ${this.currentStep === 4 ? 'active' : (this.currentStep > 4 ? 'completed' : '')}">
+            <i class="fas ${this.currentStep > 4 ? 'fa-check' : 'fa-headphones'}"></i> Bước 4: Nghe Điền Câu
+          </div>
+          <div class="mimikara-step-pill ${this.currentStep === 5 ? 'active' : ''}">
+            <i class="fas fa-language"></i> Bước 5: Luyện Dịch N2
           </div>
         </div>
       </div>
@@ -1361,7 +1419,7 @@ class MimikaraPracticeService {
     if (!body) return;
 
     if (this.dictationIndex >= this.dictationQuestions.length) {
-      this.renderVictoryScreen();
+      this.startStep5Translation();
       return;
     }
 
@@ -1700,7 +1758,11 @@ class MimikaraPracticeService {
         this.dictationIndex++;
         this.dictationState = 'input';
         this.dictationLiveInput = '';
-        this.renderStep4Dictation();
+        if (this.dictationIndex >= this.dictationQuestions.length) {
+          this.startStep5Translation();
+        } else {
+          this.renderStep4Dictation();
+        }
       }, 950);
     } else {
       this.dictationState = 'incorrect';
@@ -1734,6 +1796,366 @@ class MimikaraPracticeService {
   }
 
   // --------------------------------------------------------------------------
+  // BƯỚC 5: LUYỆN DỊCH CÂU PHỨC N2 (SCRAMBLED CHUNK TRANSLATION PUZZLE)
+  // --------------------------------------------------------------------------
+  async startStep5Translation() {
+    this.currentStep = 5;
+    this.translationIndex = 0;
+    this.translationState = 'input';
+    await this.loadTranslationsDb();
+
+    this.translationQuestions = this.currentChunkWords.map(w => {
+      const stt = String(w.stt);
+      const custom = this.n2TranslationsDb ? this.n2TranslationsDb[stt] : null;
+      if (custom) {
+        return {
+          ...w,
+          ...custom
+        };
+      }
+      return {
+        ...w,
+        n2_sentence_ja: w.exam_ja || `${w.term}を深く理解する。`,
+        n2_sentence_vi: w.exam_vi || `Thấu hiểu sâu sắc về ${w.meaning}.`,
+        chunks_ja: [w.exam_ja || w.term],
+        chunks_vi: [w.exam_vi || w.meaning],
+        grammar: 'Cấu trúc câu cơ bản',
+        collocation: w.term
+      };
+    });
+
+    this.initCurrentTranslationQuestion();
+    this.renderStep5Translation();
+  }
+
+  initCurrentTranslationQuestion() {
+    this.assembledChunks = [];
+    this.translationState = 'input';
+
+    const q = this.translationQuestions[this.translationIndex];
+    if (!q) return;
+
+    const isJaToVi = this.translationMode === 'ja_to_vi';
+    const targetList = isJaToVi ? (q.chunks_vi || []) : (q.chunks_ja || []);
+
+    // Tạo các khối kèm id duy nhất và thứ tự đúng ban đầu
+    this.availableChunks = targetList.map((text, idx) => ({
+      id: idx,
+      text: text.trim(),
+      correctIndex: idx
+    }));
+
+    // Xáo trộn ngẫu nhiên (Fisher-Yates Shuffle)
+    for (let i = this.availableChunks.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [this.availableChunks[i], this.availableChunks[j]] = [this.availableChunks[j], this.availableChunks[i]];
+    }
+  }
+
+  renderStep5Translation() {
+    const body = document.getElementById('mimikaraModalBody');
+    if (!body) return;
+
+    if (this.translationIndex >= this.translationQuestions.length) {
+      this.renderVictoryScreen();
+      return;
+    }
+
+    const q = this.translationQuestions[this.translationIndex];
+    const isJaToVi = this.translationMode === 'ja_to_vi';
+
+    // Tự động phát âm câu tiếng Nhật khi sang câu mới ở chế độ Dịch Xuôi
+    if (isJaToVi) {
+      this.speak(q.n2_sentence_ja, 0.9);
+    }
+
+    // Highlight từ vựng bài học trong câu nguồn tiếng Nhật
+    let sourceTextHtml = '';
+    if (isJaToVi) {
+      const escapedJa = escapeHtml(q.n2_sentence_ja);
+      const escapedTerm = escapeHtml(q.term);
+      if (escapedJa.includes(escapedTerm)) {
+        sourceTextHtml = escapedJa.replace(
+          new RegExp(escapedTerm, 'g'),
+          `<span class="trans-target-term" title="Từ vựng bài học">${escapedTerm}</span>`
+        );
+      } else {
+        sourceTextHtml = escapedJa;
+      }
+    } else {
+      sourceTextHtml = escapeHtml(q.n2_sentence_vi);
+    }
+
+    // Các khối đã ráp vào khay
+    let assembledHtml = '';
+    if (this.assembledChunks.length === 0) {
+      assembledHtml = `
+        <div class="trans-assembly-placeholder">
+          <i class="fas fa-hand-pointer" style="color: #c084fc;"></i>
+          Chạm vào các khối ngữ nghĩa bên dưới hoặc bấm phím số (1, 2, 3...) để xếp câu dịch...
+        </div>
+      `;
+    } else {
+      this.assembledChunks.forEach((chunkId, pos) => {
+        const chunk = this.availableChunks.find(c => c.id === chunkId);
+        if (!chunk) return;
+        assembledHtml += `
+          <div class="assembled-chunk-chip" onclick="window.mimikaraService.unselectChunk(${pos})" title="Chạm để gỡ khối này ra">
+            <span class="chunk-order-badge">${pos + 1}</span>
+            <span class="chunk-text">${escapeHtml(chunk.text)}</span>
+            <i class="fas fa-xmark chunk-remove-icon"></i>
+          </div>
+        `;
+      });
+    }
+
+    // Các khối trong kho lựa chọn (Chunk Bank)
+    let bankHtml = '';
+    this.availableChunks.forEach((chunk, idx) => {
+      const isPicked = this.assembledChunks.includes(chunk.id);
+      bankHtml += `
+        <button type="button" 
+                class="btn-chunk-item ${isPicked ? 'picked' : ''}" 
+                onclick="window.mimikaraService.selectChunk(${chunk.id})" 
+                ${isPicked ? 'disabled' : ''}
+                title="Bấm phím ${idx + 1} để chọn nhanh">
+          <span class="chunk-item-key">${idx + 1}</span>
+          <span class="chunk-item-text">${escapeHtml(chunk.text)}</span>
+        </button>
+      `;
+    });
+
+    const isDoneCorrect = this.translationState === 'correct';
+
+    // Khối giải thích ngữ pháp & Collocation khi hoàn thành chính xác
+    let breakdownHtml = '';
+    if (isDoneCorrect) {
+      breakdownHtml = `
+        <div class="translation-breakdown-card">
+          <div class="breakdown-header">
+            <i class="fas fa-circle-check"></i>
+            <span>Chính xác tuyệt đối! Câu dịch chuẩn N2 hoàn chỉnh:</span>
+          </div>
+          <div class="breakdown-full-text">
+            ${escapeHtml(isJaToVi ? q.n2_sentence_vi : q.n2_sentence_ja)}
+          </div>
+          <div class="breakdown-details-grid">
+            <div class="breakdown-detail-col">
+              <span class="detail-label"><i class="fas fa-graduation-cap" style="color: #c084fc;"></i> Điểm ngữ pháp N2 trọng tâm:</span>
+              <span class="detail-val">${escapeHtml(q.grammar || 'Cấu trúc câu phức N2')}</span>
+            </div>
+            <div class="breakdown-detail-col">
+              <span class="detail-label"><i class="fas fa-link" style="color: #38bdf8;"></i> Cụm từ đi kèm (Collocation):</span>
+              <span class="detail-val">${escapeHtml(q.collocation || q.term)}</span>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    body.innerHTML = `
+      ${this.renderStepperHeader()}
+
+      <div class="mimikara-translation-container">
+        <div class="mimikara-translation-card">
+          <!-- Hàng trên: Bộ đếm, Cần gạt 2 chế độ, Nút nghe phát âm -->
+          <div class="mimikara-dictation-toolbar">
+            <div class="dictation-toolbar-left">
+              <span class="dictation-step-badge">
+                <i class="fas fa-language"></i> CÂU ${this.translationIndex + 1} / ${this.translationQuestions.length} (STT #${q.stt})
+              </span>
+
+              <!-- Cần gạt 2 chế độ: Dịch Xuôi vs Dịch Ngược -->
+              <div class="dictation-mode-toggle">
+                <button type="button" class="btn-mode-pill ${isJaToVi ? 'active' : ''}" onclick="window.mimikaraService.toggleTranslationMode('ja_to_vi')" title="Đọc hiểu câu tiếng Nhật ➔ Xếp các khối tiếng Việt">
+                  <i class="fas fa-book-open"></i> 🇯🇵 ➔ 🇻🇳 Dịch Xuôi
+                </button>
+                <button type="button" class="btn-mode-pill ${!isJaToVi ? 'active' : ''}" onclick="window.mimikaraService.toggleTranslationMode('vi_to_ja')" title="Nhìn tiếng Việt ➔ Xếp các khối cụm tiếng Nhật">
+                  <i class="fas fa-pen-nib"></i> 🇻🇳 ➔ 🇯🇵 Dịch Ngược
+                </button>
+              </div>
+            </div>
+
+            <!-- Nút nghe phát âm câu -->
+            <div class="dictation-toolbar-right">
+              <button type="button" class="btn-dictation-speaker" onclick="window.mimikaraService.speak('${escapeJs(q.n2_sentence_ja)}', 0.9)" title="Nghe câu phát âm chuẩn (Phím Space hoặc R)">
+                <i class="fas fa-volume-high"></i> <span>Nghe Câu</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Khối câu nguồn N2 -->
+          <div class="trans-source-sentence-box">
+            <div class="trans-source-text ${!isJaToVi ? 'vi-mode' : ''}">
+              ${sourceTextHtml}
+            </div>
+            <span class="trans-hint-badge">
+              <i class="fas fa-key"></i> Từ vựng bài học: <b>${escapeHtml(q.term)}</b> [ ${escapeHtml(q.han_viet || '')} ] - ${escapeHtml(q.meaning || '')}
+            </span>
+          </div>
+
+          <!-- Khay ráp câu dịch (Assembly Drop Zone) -->
+          <div class="trans-assembly-box">
+            <div class="assembly-header">
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <i class="fas fa-layer-group" style="color: #c084fc;"></i>
+                <span>Khay ráp câu dịch:</span>
+              </div>
+              <span class="assembly-counter">(${this.assembledChunks.length} / ${this.availableChunks.length} khối)</span>
+            </div>
+            <div id="transAssemblyArea" class="trans-assembly-area ${this.translationState}">
+              ${assembledHtml}
+            </div>
+          </div>
+
+          <!-- Khối phân tích ngữ pháp & Collocation khi đúng -->
+          ${breakdownHtml}
+
+          <!-- Kho lựa chọn khối ngữ nghĩa (Chunk Bank) -->
+          <div class="trans-bank-box">
+            <div class="bank-header">
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <i class="fas fa-cubes" style="color: #38bdf8;"></i>
+                <span>Các khối ngữ nghĩa (Chạm chọn theo thứ tự dịch):</span>
+              </div>
+            </div>
+            <div class="trans-bank-grid">
+              ${bankHtml}
+            </div>
+          </div>
+
+          <!-- Thanh nút thao tác -->
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.08);">
+            <div style="display: flex; gap: 10px; align-items: center;">
+              <button type="button" class="btn-secondary" onclick="window.mimikaraService.resetTranslationChunks()" style="font-size: 0.95rem; font-weight: 700; padding: 10px 18px; border-radius: 12px;">
+                <i class="fas fa-rotate-left"></i> Đặt Lại (Esc)
+              </button>
+              <button type="button" class="btn-secondary" onclick="window.mimikaraService.revealTranslationHint()" style="font-size: 0.95rem; font-weight: 700; padding: 10px 18px; border-radius: 12px; color: #fde047;">
+                <i class="fas fa-lightbulb"></i> Gợi Ý
+              </button>
+            </div>
+
+            <div>
+              ${isDoneCorrect ? `
+                <button type="button" class="btn-primary" onclick="window.mimikaraService.nextTranslationQuestion()" style="background: linear-gradient(135deg, #10b981, #059669); padding: 12px 34px; font-size: 1.1rem; font-weight: 800; border-radius: 14px; cursor: pointer; box-shadow: 0 4px 20px rgba(16,185,129,0.5);">
+                  Câu Tiếp Theo ➔ (Enter)
+                </button>
+              ` : `
+                <button type="button" class="btn-primary" onclick="window.mimikaraService.checkTranslationAnswer()" style="background: linear-gradient(135deg, #a855f7, #6366f1); padding: 12px 34px; font-size: 1.1rem; font-weight: 800; border-radius: 14px; cursor: pointer; box-shadow: 0 4px 20px rgba(168,85,247,0.4);">
+                  Kiểm Tra (Enter)
+                </button>
+              `}
+            </div>
+          </div>
+        </div>
+
+        <!-- Bảng hướng dẫn phím tắt -->
+        <div class="mimikara-shortcuts-guide" style="margin-top: 1rem;">
+          <span><span class="mimikara-kbd">Phím 1-9</span> Chọn khối nhanh</span>
+          <span><span class="mimikara-kbd">Backspace</span> Gỡ khối cuối</span>
+          <span><span class="mimikara-kbd">Enter</span> Kiểm tra / Tiếp tục</span>
+          <span><span class="mimikara-kbd">Space / R</span> Nghe câu</span>
+        </div>
+      </div>
+    `;
+  }
+
+  selectChunk(chunkId) {
+    if (this.translationState === 'correct') return;
+    if (this.assembledChunks.includes(chunkId)) return;
+    this.assembledChunks.push(chunkId);
+    this.translationState = 'input';
+    this.renderStep5Translation();
+  }
+
+  unselectChunk(pos) {
+    if (this.translationState === 'correct') return;
+    if (pos >= 0 && pos < this.assembledChunks.length) {
+      this.assembledChunks.splice(pos, 1);
+      this.translationState = 'input';
+      this.renderStep5Translation();
+    }
+  }
+
+  resetTranslationChunks() {
+    if (this.translationState === 'correct') return;
+    this.assembledChunks = [];
+    this.translationState = 'input';
+    this.renderStep5Translation();
+  }
+
+  checkTranslationAnswer() {
+    if (this.translationState === 'correct') {
+      this.nextTranslationQuestion();
+      return;
+    }
+
+    if (this.assembledChunks.length < this.availableChunks.length) {
+      const area = document.getElementById('transAssemblyArea');
+      if (area) {
+        area.classList.remove('incorrect');
+        void area.offsetWidth;
+        area.classList.add('incorrect');
+      }
+      alert("Vui lòng xếp đầy đủ tất cả các khối ngữ nghĩa trước khi kiểm tra!");
+      return;
+    }
+
+    // Kiểm tra từng vị trí xem có khớp đúng correctIndex
+    const isCorrect = this.assembledChunks.every((chunkId, pos) => {
+      const chunk = this.availableChunks.find(c => c.id === chunkId);
+      return chunk && chunk.correctIndex === pos;
+    });
+
+    if (isCorrect) {
+      this.translationState = 'correct';
+      const q = this.translationQuestions[this.translationIndex];
+      this.speak(q.n2_sentence_ja, 0.9);
+      this.renderStep5Translation();
+    } else {
+      this.translationState = 'incorrect';
+      const area = document.getElementById('transAssemblyArea');
+      if (area) {
+        area.classList.remove('incorrect');
+        void area.offsetWidth;
+        area.classList.add('incorrect');
+      }
+      this.renderStep5Translation();
+    }
+  }
+
+  revealTranslationHint() {
+    if (this.translationState === 'correct') return;
+    const nextCorrectPos = this.assembledChunks.length;
+    if (nextCorrectPos < this.availableChunks.length) {
+      const nextChunk = this.availableChunks.find(c => c.correctIndex === nextCorrectPos);
+      if (nextChunk && !this.assembledChunks.includes(nextChunk.id)) {
+        this.assembledChunks.push(nextChunk.id);
+        this.renderStep5Translation();
+      }
+    }
+  }
+
+  nextTranslationQuestion() {
+    this.translationIndex++;
+    if (this.translationIndex >= this.translationQuestions.length) {
+      this.renderVictoryScreen();
+    } else {
+      this.initCurrentTranslationQuestion();
+      this.renderStep5Translation();
+    }
+  }
+
+  toggleTranslationMode(mode) {
+    this.translationMode = mode;
+    try {
+      localStorage.setItem('edumanga_mimikara_trans_mode', mode);
+    } catch (e) {}
+    this.initCurrentTranslationQuestion();
+    this.renderStep5Translation();
+  }
+
+  // --------------------------------------------------------------------------
   // VICTORY SCREEN
   // --------------------------------------------------------------------------
   renderVictoryScreen() {
@@ -1763,10 +2185,10 @@ class MimikaraPracticeService {
         <div class="mimikara-victory-icon">🏆</div>
         <h2 class="mimikara-victory-title">XUẤT SẮC! HOÀN THÀNH PHIÊN ${this.currentChunkIndex + 1}!</h2>
         <p class="mimikara-victory-desc">
-          Bạn đã hoàn thành trọn vẹn cả 4 bước: <b>Flashcard</b> ➔ <b>Ghép Cặp 5x5</b> ➔ <b>Gõ 2 Chiều</b> ➔ <b>Nghe Điền Câu</b> cho 5 từ vựng vừa rồi!
+          Bạn đã hoàn thành trọn vẹn cả 5 bước: <b>Flashcard</b> ➔ <b>Ghép Cặp 5x5</b> ➔ <b>Gõ 2 Chiều</b> ➔ <b>Nghe Điền Câu</b> ➔ <b>Luyện Dịch N2</b> cho 5 từ vựng vừa rồi!
           <br>
           <span style="color: #34d399; font-weight: 700; font-size: 1.1rem; display: inline-block; margin-top: 0.5rem;">
-            +5 Từ Đã Thuộc Lòng Vào Kho Kiến Thức N2!
+            +5 Từ Đã Thuộc Lòng & Làm Chủ Ngữ Cảnh N2!
           </span>
         </p>
 
