@@ -5,6 +5,24 @@ Nơi ghi lại toàn bộ tiến trình phát triển, các quyết định ki�
 
 ---
 
+## [2026-09-12 00:20] - Tối Ưu Triệt Để Responsive Co Giãn Tràn Viền Toàn Màn Hình (2K / 4K / 1080p Ultra-Wide)
+
+### 🎯 Mục tiêu
+- Xử lý vấn đề người học phản hồi: "nó đang bị kiểu như vầy chưa ứng với toàn màn hình nè" (kèm ảnh chụp màn hình 2560x1330).
+- **Nguyên nhân**: Mặc dù khung modal đã mở rộng 100vw, nhưng các khối nội dung bên trong vẫn bị kẹp cứng ở `max-width: 840px` và chiều cao cố định `min-height: 540px`, dẫn tới việc trên màn hình lớn 2K/4K, thẻ Flashcard chỉ chiếm ~32% chiều rộng và ~40% chiều cao, để lại khoảng trống màu đen khổng lồ xung quanh.
+- **Giải pháp**:
+  1. **Bước 1 (Flashcard 3D)**: Mở rộng `max-width: min(1200px, 92vw)` và chiều cao `calc(100vh - 270px)` (tối đa 800px). Font chữ Kanji mở rộng linh hoạt theo `clamp(5.2rem, 11vh, 8.2rem)`, Furigana `clamp(2.2rem, 4.5vh, 3.2rem)`, Mindmap chiết tự mở rộng 960px.
+  2. **Bước 2 (Ghép Cặp 5x5)**: Mở rộng `max-width: min(1360px, 94vw)`, thẻ ghép cao 110px, chữ Kanji 2.6rem dễ bấm.
+  3. **Bước 3 (Gõ Từ)**: Mở rộng `max-width: min(1200px, 92vw)`, chữ Kanji đề bài `clamp(4.2rem, 8.5vh, 6.5rem)`.
+  4. **Bước 4 (Nghe Điền)**: Mở rộng `max-width: min(1260px, 92vw)`, cỡ chữ câu nghe điền 2.6rem.
+  5. **Bước 5 (Ninja Leo Tháp)**: Mở rộng `max-width: min(1400px, 95vw)` và chiều cao đấu trường tới 840px.
+
+### ✅ Công việc đã hoàn thành
+- **[CSS Co Giãn Màn Hình Lớn] ([`css/mimikara-practice.css`](file:///g:/My%20Drive/hk261/Dự%20án%20manga/css/mimikara-practice.css))**: Cập nhật toàn bộ các quy tắc kích thước theo tỉ lệ `vh` và `vw` với `clamp()`, xóa bỏ giới hạn cứng 840px.
+- **[Nâng Cache-Buster lên v=4.0] ([`index.html`](file:///g:/My%20Drive/hk261/Dự%20án%20manga/index.html), [`detail.html`](file:///g:/My%20Drive/hk261/Dự%20án%20manga/detail.html), [`reader.html`](file:///g:/My%20Drive/hk261/Dự%20án%20manga/reader.html))**: Nâng cache buster lên `?v=4.0`.
+
+---
+
 ## [2026-09-12 00:05] - Triển Khai Chế Độ Toàn Màn Hình (Fullscreen Mode) Cho Phiên Học & Minigame Leo Tháp
 
 ### 🎯 Mục tiêu

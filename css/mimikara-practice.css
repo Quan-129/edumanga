@@ -165,12 +165,12 @@ body.mimikara-active .floating-reader-dock {
 }
 
 .mimikara-modal.is-fullscreen .mimikara-modal-header {
-  padding: 0.8rem 1.75rem !important;
+  padding: 0.8rem 2rem !important;
   border-radius: 0 !important;
 }
 
 .mimikara-modal.is-fullscreen .mimikara-modal-body {
-  padding: 0.9rem 1.75rem !important;
+  padding: 0.8rem 2rem 1.2rem 2rem !important;
   flex: 1 !important;
   display: flex !important;
   flex-direction: column !important;
@@ -180,43 +180,223 @@ body.mimikara-active .floating-reader-dock {
 }
 
 .mimikara-modal.is-fullscreen .mimikara-stepper-header {
-  margin-bottom: 0.75rem !important;
+  max-width: 1400px !important;
+  width: 100% !important;
+  margin: 0 auto 0.75rem auto !important;
+  padding: 8px 16px !important;
 }
 
-/* Mở rộng không gian các bước học khi Toàn Màn Hình */
+.mimikara-modal.is-fullscreen .mimikara-step-pill {
+  padding: 7px 16px !important;
+  font-size: 0.92rem !important;
+}
+
+/* ==========================================================================
+   BƯỚC 1: FLASHCARD 3D CO GIÃN TOÀN MÀN HÌNH (RESPONSIVE 2K / 4K / 1080P)
+   ========================================================================== */
 .mimikara-modal.is-fullscreen .mimikara-flashcard-box {
-  max-width: 840px !important;
-  margin: 0 auto !important;
-}
-
-.mimikara-modal.is-fullscreen .mimikara-matching-box {
-  max-width: 1100px !important;
-  margin: 0 auto !important;
-}
-
-.mimikara-modal.is-fullscreen .mimikara-typing-box {
-  max-width: 920px !important;
-  margin: 0 auto !important;
-}
-
-.mimikara-modal.is-fullscreen .mimikara-listening-box {
-  max-width: 920px !important;
-  margin: 0 auto !important;
-}
-
-/* ĐẶC BIỆT: Minigame Ninja Leo Tháp khi Toàn Màn Hình */
-.mimikara-modal.is-fullscreen .mimikara-climber-wrapper {
-  max-width: 1180px !important;
+  max-width: min(1200px, 92vw) !important;
   width: 100% !important;
   margin: 0 auto !important;
+  flex: 1 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+}
+
+.mimikara-modal.is-fullscreen .mimikara-card-3d {
+  width: 100% !important;
+  height: 100% !important;
+  min-height: calc(100vh - 270px) !important;
+  max-height: 800px !important;
+  flex: 1 !important;
+}
+
+.mimikara-modal.is-fullscreen .mimikara-card-3d-inner {
+  width: 100% !important;
+  height: 100% !important;
+  min-height: calc(100vh - 270px) !important;
+  max-height: 800px !important;
+}
+
+.mimikara-modal.is-fullscreen .mimikara-card-face {
+  min-height: calc(100vh - 270px) !important;
+  max-height: 800px !important;
+  padding: 2rem 3.5rem !important;
+  border-radius: 28px !important;
+}
+
+.mimikara-modal.is-fullscreen .mimikara-card-main-word {
+  margin: auto 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 100% !important;
+}
+
+.mimikara-modal.is-fullscreen .mimikara-kanji-huge {
+  font-size: clamp(5.2rem, 11vh, 8.2rem) !important;
+  margin-bottom: 0.5rem !important;
+  text-shadow: 0 6px 35px rgba(168, 85, 247, 0.6) !important;
+}
+
+.mimikara-modal.is-fullscreen .mimikara-reading-mid {
+  font-size: clamp(2.2rem, 4.5vh, 3.2rem) !important;
+  margin-bottom: 0.6rem !important;
+}
+
+.mimikara-modal.is-fullscreen .mimikara-hanviet-tag {
+  font-size: clamp(1.2rem, 2.4vh, 1.65rem) !important;
+  padding: 6px 28px !important;
+  border-radius: 12px !important;
+}
+
+.mimikara-modal.is-fullscreen .mimikara-front-mindmap-box {
+  max-width: 960px !important;
+  width: 92% !important;
+  margin: 1.1rem auto 0 auto !important;
+  padding: 1.1rem 1.6rem !important;
+  border-radius: 20px !important;
+}
+
+.mimikara-modal.is-fullscreen .mimikara-svg-radial-wrap {
+  height: 160px !important;
+}
+
+.mimikara-modal.is-fullscreen .mimikara-svg-radial {
+  max-width: 440px !important;
+}
+
+.mimikara-modal.is-fullscreen .mimikara-meaning-highlight {
+  font-size: clamp(1.8rem, 3.5vh, 2.8rem) !important;
+  padding: 0.8rem 1.5rem !important;
+}
+
+.mimikara-modal.is-fullscreen .mimikara-sentences-list {
+  max-height: 280px !important;
+  font-size: 1.15rem !important;
+}
+
+.mimikara-modal.is-fullscreen .mimikara-card-controls {
+  margin-top: 1rem !important;
+  display: flex !important;
+  justify-content: center !important;
+  gap: 1.5rem !important;
+}
+
+.mimikara-modal.is-fullscreen .mimikara-shortcuts-guide {
+  margin-top: 0.5rem !important;
+  font-size: 0.95rem !important;
+}
+
+/* ==========================================================================
+   BƯỚC 2: GHÉP CẶP MATCHING GAME (5x5) CO GIÃN TOÀN MÀN HÌNH
+   ========================================================================== */
+.mimikara-modal.is-fullscreen .mimikara-matching-board {
+  max-width: min(1360px, 94vw) !important;
+  width: 100% !important;
+  margin: 0 auto !important;
+  flex: 1 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+}
+
+.mimikara-modal.is-fullscreen .mimikara-match-grid {
+  gap: 2rem !important;
+}
+
+.mimikara-modal.is-fullscreen .mimikara-match-card {
+  min-height: 110px !important;
+  padding: 1.6rem 2rem !important;
+  border-radius: 20px !important;
+}
+
+.mimikara-modal.is-fullscreen .mimikara-match-card .match-card-term {
+  font-size: clamp(1.8rem, 3.2vh, 2.6rem) !important;
+}
+
+.mimikara-modal.is-fullscreen .mimikara-match-card .match-card-meaning {
+  font-size: clamp(1.15rem, 2vh, 1.5rem) !important;
+}
+
+/* ==========================================================================
+   BƯỚC 3: GÕ TỪ (TYPING) CO GIÃN TOÀN MÀN HÌNH
+   ========================================================================== */
+.mimikara-modal.is-fullscreen .mimikara-typing-container {
+  max-width: min(1200px, 92vw) !important;
+  width: 100% !important;
+  margin: 0 auto !important;
+  flex: 1 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+}
+
+.mimikara-modal.is-fullscreen .mimikara-typing-card {
+  padding: 3.5rem 4rem !important;
+  border-radius: 28px !important;
+}
+
+.mimikara-modal.is-fullscreen .mimikara-typing-prompt-text {
+  font-size: clamp(4.2rem, 8.5vh, 6.5rem) !important;
+}
+
+.mimikara-modal.is-fullscreen .mimikara-typing-hint {
+  font-size: 1.45rem !important;
+}
+
+.mimikara-modal.is-fullscreen .mimikara-typing-input {
+  font-size: 1.8rem !important;
+  padding: 20px 28px !important;
   border-radius: 18px !important;
-  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.75) !important;
+}
+
+/* ==========================================================================
+   BƯỚC 4: NGHE ĐIỀN (DICTATION) CO GIÃN TOÀN MÀN HÌNH
+   ========================================================================== */
+.mimikara-modal.is-fullscreen .mimikara-dictation-container {
+  max-width: min(1260px, 92vw) !important;
+  width: 100% !important;
+  margin: 0 auto !important;
+  flex: 1 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+}
+
+.mimikara-modal.is-fullscreen .mimikara-dictation-card {
+  padding: 2.75rem 3.75rem !important;
+  border-radius: 28px !important;
+}
+
+.mimikara-modal.is-fullscreen .mimikara-cloze-sentence {
+  font-size: clamp(1.8rem, 3.6vh, 2.6rem) !important;
+  line-height: 1.8 !important;
+}
+
+.mimikara-modal.is-fullscreen .mimikara-dictation-input {
+  font-size: 1.8rem !important;
+  padding: 20px 28px !important;
+  border-radius: 18px !important;
+}
+
+/* ==========================================================================
+   BƯỚC 5: MINIGAME NINJA LEO THÁP CO GIÃN TOÀN MÀN HÌNH
+   ========================================================================== */
+.mimikara-modal.is-fullscreen .mimikara-climber-wrapper {
+  max-width: min(1400px, 95vw) !important;
+  width: 100% !important;
+  margin: 0 auto !important;
+  border-radius: 22px !important;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8) !important;
 }
 
 .mimikara-modal.is-fullscreen .mimikara-climber-arena {
   height: calc(100vh - 210px) !important;
-  min-height: 520px !important;
-  max-height: 760px !important;
+  min-height: 560px !important;
+  max-height: 840px !important;
 }
 
 /* Modal Body */
