@@ -15,16 +15,17 @@ body.mimikara-active .floating-reader-dock {
 .mimikara-modal {
   position: fixed;
   inset: 0;
+  width: 100vw;
+  height: 100vh;
   z-index: 99999;
   background: #080c16;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
   padding: 1.5rem;
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.2s ease, visibility 0.2s ease;
-  contain: strict;
 }
 
 .mimikara-modal.active {
@@ -33,6 +34,7 @@ body.mimikara-active .floating-reader-dock {
 }
 
 .mimikara-modal-container {
+  margin: auto !important;
   width: 100%;
   max-width: 1120px;
   max-height: 94vh;
