@@ -127,7 +127,7 @@ class MimikaraClimberGame {
               Score: <span id="climberScoreText">0</span>
             </div>
 
-            <button type="button" id="climberBtnAudio" class="climber-icon-btn" title="Nghe lại phát âm (Phím R hoặc Space)" style="background: rgba(6,182,212,0.2); border: 1px solid rgba(6,182,212,0.4); color: #22d3ee; width: 34px; height: 34px; border-radius: 8px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s;">
+            <button type="button" id="climberBtnAudio" class="climber-icon-btn" title="Nghe lại phát âm (Phím Space)" style="background: rgba(6,182,212,0.2); border: 1px solid rgba(6,182,212,0.4); color: #22d3ee; width: 34px; height: 34px; border-radius: 8px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s;">
               <i class="fas fa-volume-up"></i>
             </button>
 
@@ -143,7 +143,7 @@ class MimikaraClimberGame {
           
           <!-- Virtual Keyboard / Mobile Tip -->
           <div style="position: absolute; bottom: 8px; right: 14px; color: rgba(255,255,255,0.4); font-size: 0.72rem; pointer-events: none;">
-            ⌨️ Gõ Romaji trực tiếp • Phím [R / Space] nghe lại âm
+            ⌨️ Gõ Romaji trực tiếp • Phím [Space] nghe lại âm
           </div>
 
           <!-- Hidden Input for mobile touch devices -->
@@ -220,7 +220,7 @@ class MimikaraClimberGame {
           hintBox.innerHTML = `Mục tiêu: <span style="color: #f59e0b;">💡 Nghĩa:</span> <span style="color: #fff; font-weight: 800; margin-left: 4px;">${nextBranch.display}</span>`;
         } else {
           // Audio: TUYỆT ĐỐI KHÔNG HIỆN CHỮ KANJI HAY ĐÁP ÁN!
-          hintBox.innerHTML = `Mục tiêu: <span style="color: #06b6d4;">🔊 Nghe âm thanh</span> <span style="color: #94a3b8; font-size: 0.8rem; margin-left: 6px;">[Phím R hoặc Space nghe lại]</span>`;
+          hintBox.innerHTML = `Mục tiêu: <span style="color: #06b6d4;">🔊 Nghe âm thanh</span> <span style="color: #94a3b8; font-size: 0.8rem; margin-left: 6px;">[Phím Space nghe lại]</span>`;
         }
       } else if (this.currentBranchIndex >= this.totalBranches) {
         hintBox.innerHTML = `<span style="color: #34d399; font-weight: 800;">🏆 ĐÃ CHẠM ĐỈNH THÁP!</span>`;
@@ -469,8 +469,8 @@ class MimikaraClimberGame {
   handleKeyDown(e) {
     if (!this.isRunning || this.isPaused || this.character.isJumping) return;
 
-    // Phím nghe lại Audio: 'R' hoặc 'Space'
-    if (e.code === 'KeyR' || (e.code === 'Space' && this.targetRomaji)) {
+    // Phím nghe lại Audio: Chỉ dùng 'Space' (loại bỏ phím R để tránh xung đột với chữ cái Romaji 'r')
+    if (e.code === 'Space' && this.targetRomaji) {
       e.preventDefault();
       this.replayCurrentAudio();
       return;

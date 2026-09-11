@@ -5,6 +5,24 @@ Nơi ghi lại toàn bộ tiến trình phát triển, các quyết định ki�
 
 ---
 
+## [2026-09-11 23:40] - Sửa Xung Đột Phím Gõ: Loại Bỏ Phím 'R', Chỉ Dùng Phím 'Space' Để Nghe Lại Âm Thanh Trong Minigame Leo Tháp
+
+### 🎯 Mục tiêu
+- Khắc phục lỗi xung đột phím (key collision): Trước đây minigame dùng cả phím `R` và `Space` để nghe lại âm thanh. Khi gặp các từ vựng chứa chữ cái `r` trong Romaji (ví dụ `kirei`, `toru`, `renshuu`, `shinseki`...), việc bấm phím `r` để gõ chữ bị engine chặn lại và chuyển thành lệnh phát âm thanh.
+- **Giải pháp**:
+  1. Loại bỏ hoàn toàn phím tắt `KeyR` khỏi sự kiện `keydown`.
+  2. Chỉ dùng duy nhất phím `Space` để nghe lại phát âm thanh (không bao giờ xung đột vì Romaji chỉ gồm các chữ cái `a-z` viết liền không dấu cách).
+  3. Cập nhật nhãn hướng dẫn phím bấm trên HUD banner (`[Phím Space nghe lại]`) và tip bàn phím dưới đáy canvas.
+
+### ✅ Công việc đã hoàn thành
+- **[Sửa Logic Bắt Phím] ([`js/mimikara-climber-engine.js`](file:///g:/My%20Drive/hk261/Dự%20án%20manga/js/mimikara-climber-engine.js))**:
+  - `handleKeyDown`: Chỉ kiểm tra `e.code === 'Space'` để kích hoạt `this.replayCurrentAudio()`.
+  - Cập nhật tooltip nút loa, tip góc canvas và thanh gợi ý HUD về `[Phím Space nghe lại]`.
+- **[Nâng Cache-Buster lên v=3.8] ([`index.html`](file:///g:/My%20Drive/hk261/Dự%20án%20manga/index.html), [`detail.html`](file:///g:/My%20Drive/hk261/Dự%20án%20manga/detail.html), [`reader.html`](file:///g:/My%20Drive/hk261/Dự%20án%20manga/reader.html))**:
+  - Đảm bảo trình duyệt tải ngay logic mới nhất.
+
+---
+
 ## [2026-09-11 23:30] - Tối Ưu UX Chế Độ Leo Tháp: Ẩn Đáp Án Romaji (Chỉ Hiện Gạch Dưới _ Theo Số Ký Tự) & Ẩn Chữ Kanji Ở Thử Thách Audio
 
 ### 🎯 Mục tiêu
