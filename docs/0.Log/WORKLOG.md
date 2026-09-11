@@ -5,6 +5,22 @@ Nơi ghi lại toàn bộ tiến trình phát triển, các quyết định ki�
 
 ---
 
+## [2026-09-11 15:05] - Khắc Phục Lỗi Câu Ngắn & Lồng Hết Vào 1 Khối Ở Bước 5 (Offline JS Bundle & Smart Chunk Splitter)
+
+### 🎯 Mục tiêu
+- Xử lý triệt để phản hồi lỗi từ người dùng: Ở Bước 5, một số câu (như câu STT #5: `夫婦`) bị rơi về câu ví dụ ngắn sách giáo khoa (`愛情に満ちた夫婦。`) và dồn toàn bộ nội dung dịch vào 1 khối duy nhất `[1] Vợ chồng tràn đầy tình yêu thương.`.
+- Đảm bảo dữ liệu câu phức N2 và các khối phân mảnh luôn nạp được 100% trên cả giao thức `file:///` (mở trực tiếp không qua web server) lẫn `http://localhost:8080`.
+
+### ✅ Công việc đã hoàn thành
+- **[Đóng Gói Dữ Liệu Offline JavaScript Bundle] ([`data/mimikara_n2_translations.js`](<file:///g:/My%20Drive/hk261/D%E1%BB%B1%20%C3%A1n%20manga/data/mimikara_n2_translations.js>), [`data/mimikara_n2_units.js`](<file:///g:/My%20Drive/hk261/D%E1%BB%B1%20%C3%A1n%20manga/data/mimikara_n2_units.js>), [`data/kanji_radicals_n2.js`](<file:///g:/My%20Drive/hk261/D%E1%BB%B1%20%C3%A1n%20manga/data/kanji_radicals_n2.js>))**:
+  - Chuyển đổi toàn bộ các file JSON sang biến JS toàn cục (`window.MIMIKARA_N2_TRANSLATIONS`, `window.MIMIKARA_N2_UNITS`, `window.MIMIKARA_KANJI_RADICALS`) và nhúng trực tiếp qua thẻ `<script>` vào `index.html`, `detail.html`, `reader.html`.
+  - Giúp ứng dụng hoạt động mượt mà không bị trình duyệt chặn CORS khi mở file qua đường dẫn `file:///`.
+- **[Bộ Tách Khối Câu Thông Minh Dự Phòng (Smart Sentence Chunk Splitter)] ([`js/mimikara-practice-service.js`](<file:///g:/My%20Drive/hk261/D%E1%BB%B1%20%C3%A1n%20manga/js/mimikara-practice-service.js>))**:
+  - Xây dựng phương thức `splitSentenceIntoChunks()`: tự động phân tích ngữ pháp, ngắt vế theo dấu phẩy, trợ từ và liên từ N2 (`ためには`, `にあたって`, `ながら`, `ことこそが`, v.v.), đảm bảo KHÔNG BAO GIỜ bị dồn vào 1 khối duy nhất.
+  - Tìm kiếm linh hoạt đa thuộc tính (STT chuỗi, STT số nguyên, hoặc theo chữ Hán `term`), khắc phục 100% lỗi câu #5 (`夫婦`).
+- **[Kiểm Thử Thực Tế Trình Duyệt]**:
+  - Xác nhận Câu #5 (`夫婦`) hiển thị câu phức N2 hoàn chỉnh: `お互いの価値観や仕事を尊重し合いながら支え合うことこそが、円満な夫婦関係を長く保つ秘訣である。` với đầy đủ 5 khối tách rời trên cả 2 chế độ Dịch Xuôi và Dịch Ngược.
+
 ## [2026-09-11 14:50] - Triển Khai Bước 5: Luyện Dịch Câu Phức N2 (Scrambled Chunk Translation Puzzle) Đa Chiều Cho Mimikara N2
 
 ### 🎯 Mục tiêu

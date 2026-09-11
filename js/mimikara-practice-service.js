@@ -80,6 +80,10 @@ class MimikaraPracticeService {
   // Fetch 14 Units dataset
   async loadDataset() {
     if (this.dataset) return this.dataset;
+    if (typeof window !== 'undefined' && window.MIMIKARA_N2_UNITS) {
+      this.dataset = window.MIMIKARA_N2_UNITS;
+      return this.dataset;
+    }
     try {
       const resp = await fetch('data/mimikara_n2_units.json');
       if (resp.ok) {
@@ -95,6 +99,10 @@ class MimikaraPracticeService {
   // Fetch Kanji Radicals Database for Mindmap Graph
   async loadKanjiRadicalsDb() {
     if (this.kanjiRadicalsDb) return this.kanjiRadicalsDb;
+    if (typeof window !== 'undefined' && window.MIMIKARA_KANJI_RADICALS) {
+      this.kanjiRadicalsDb = window.MIMIKARA_KANJI_RADICALS;
+      return this.kanjiRadicalsDb;
+    }
     try {
       const resp = await fetch('data/kanji_radicals_n2.json');
       if (resp.ok) {
@@ -110,6 +118,10 @@ class MimikaraPracticeService {
   // Fetch N2 Complex Sentences Database for Translation Practice
   async loadTranslationsDb() {
     if (this.n2TranslationsDb) return this.n2TranslationsDb;
+    if (typeof window !== 'undefined' && window.MIMIKARA_N2_TRANSLATIONS) {
+      this.n2TranslationsDb = window.MIMIKARA_N2_TRANSLATIONS;
+      return this.n2TranslationsDb;
+    }
     try {
       const resp = await fetch('data/mimikara_n2_translations.json');
       if (resp.ok) {
@@ -1795,6 +1807,54 @@ class MimikaraPracticeService {
     }
   }
 
+  // Smart Sentence Chunk Splitter (Phân đoạn câu thành các khối ngữ nghĩa logic)
+  splitSentenceIntoChunks(sentence, lang = 'ja') {
+    if (!sentence) return [];
+    const clean = String(sentence).trim();
+    if (lang === 'ja') {
+      let parts = clean.split(/(?<=[、。！？])/g).map(s => s.trim()).filter(Boolean);
+      let chunks = [];
+      parts.forEach(p => {
+        if (p.length > 9) {
+          const sub = p.split(/(?<=(?:ためには|にあたって|をめぐって|において|にもかかわらず|ながら|ことこそが|ことこそ|である|ですが|けれど|ので|から|ため|なら|たら|ば|ても|でも|て、|で、|て|で|を|に|が|は|と))/g).map(s => s.trim()).filter(Boolean);
+          if (sub.length > 1) {
+            chunks.push(...sub);
+          } else {
+            chunks.push(p);
+          }
+        } else {
+          chunks.push(p);
+        }
+      });
+      if (chunks.length <= 1 && clean.length > 6) {
+        const mid = Math.floor(clean.length / 2);
+        chunks = [clean.slice(0, mid), clean.slice(mid)];
+      }
+      return chunks.length > 0 ? chunks : [clean];
+    } else {
+      let parts = clean.split(/(?<=[,.;!?])/g).map(s => s.trim()).filter(Boolean);
+      let chunks = [];
+      parts.forEach(p => {
+        const words = p.split(/\s+/).filter(Boolean);
+        if (words.length > 4) {
+          for (let i = 0; i < words.length; i += 3) {
+            chunks.push(words.slice(i, i + 3).join(' '));
+          }
+        } else if (words.length > 0) {
+          chunks.push(words.join(' '));
+        }
+      });
+      if (chunks.length <= 1) {
+        const words = clean.split(/\s+/).filter(Boolean);
+        if (words.length >= 4) {
+          const mid = Math.ceil(words.length / 2);
+          chunks = [words.slice(0, mid).join(' '), words.slice(mid).join(' ')];
+        }
+      }
+      return chunks.length > 0 ? chunks : [clean];
+    }
+  }
+
   // --------------------------------------------------------------------------
   // BƯỚC 5: LUYỆN DỊCH CÂU PHỨC N2 (SCRAMBLED CHUNK TRANSLATION PUZZLE)
   // --------------------------------------------------------------------------
@@ -1806,21 +1866,32 @@ class MimikaraPracticeService {
 
     this.translationQuestions = this.currentChunkWords.map(w => {
       const stt = String(w.stt);
-      const custom = this.n2TranslationsDb ? this.n2TranslationsDb[stt] : null;
-      if (custom) {
+      let custom = this.n2TranslationsDb ? (this.n2TranslationsDb[stt] || this.n2TranslationsDb[parseInt(stt, 10)]) : null;
+      if (!custom && this.n2TranslationsDb) {
+        custom = Object.values(this.n2TranslationsDb).find(item => item && (item.term === w.term || String(item.stt) === stt));
+      }
+
+      if (custom && Array.isArray(custom.chunks_ja) && custom.chunks_ja.length >= 2 && Array.isArray(custom.chunks_vi) && custom.chunks_vi.length >= 2) {
         return {
           ...w,
           ...custom
         };
       }
+
+      // Thông minh: Phân rã câu thành nhiều khối nếu dùng fallback
+      const senJa = (custom && custom.n2_sentence_ja) || w.exam_ja || `${w.term}を深く理解し、日々の生活に活かすことが極めて重要である。`;
+      const senVi = (custom && custom.n2_sentence_vi) || w.exam_vi || `Việc thấu hiểu sâu sắc về ${w.meaning} và vận dụng vào cuộc sống thường ngày là điều vô cùng quan trọng.`;
+      const chunksJa = (custom && custom.chunks_ja && custom.chunks_ja.length >= 2) ? custom.chunks_ja : this.splitSentenceIntoChunks(senJa, 'ja');
+      const chunksVi = (custom && custom.chunks_vi && custom.chunks_vi.length >= 2) ? custom.chunks_vi : this.splitSentenceIntoChunks(senVi, 'vi');
+
       return {
         ...w,
-        n2_sentence_ja: w.exam_ja || `${w.term}を深く理解する。`,
-        n2_sentence_vi: w.exam_vi || `Thấu hiểu sâu sắc về ${w.meaning}.`,
-        chunks_ja: [w.exam_ja || w.term],
-        chunks_vi: [w.exam_vi || w.meaning],
-        grammar: 'Cấu trúc câu cơ bản',
-        collocation: w.term
+        n2_sentence_ja: senJa,
+        n2_sentence_vi: senVi,
+        chunks_ja: chunksJa,
+        chunks_vi: chunksVi,
+        grammar: (custom && custom.grammar) || 'Cấu trúc câu phức chuẩn N2',
+        collocation: (custom && custom.collocation) || `${w.term} (${w.meaning})`
       };
     });
 
