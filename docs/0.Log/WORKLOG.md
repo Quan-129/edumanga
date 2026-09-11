@@ -5,6 +5,30 @@ Nơi ghi lại toàn bộ tiến trình phát triển, các quyết định ki�
 
 ---
 
+## [2026-09-11 22:00] - Triển Khai File Cấu Hình Bật/Tắt Chế Độ Học & Dynamic Stepper Funnel Tự Động Co Giãn Đôn Bước
+
+### 🎯 Mục tiêu
+- Tạo file cấu hình độc lập [`js/mimikara-config.js`](<file:///g:/My%20Drive/hk261/D%E1%BB%B1%20%C3%A1n%20manga/js/mimikara-config.js>) cho phép người dùng bật/tắt (on/off) 5 chế độ học linh hoạt theo nhu cầu cá nhân.
+- Xây dựng cơ chế **Dynamic Stepper Funnel**: Khi tắt bất kỳ chế độ nào (ví dụ tắt Chế độ 3: `typing: false`), toàn bộ giao diện thanh Stepper, số thứ tự các bước và luồng học sẽ tự động **co lại và đôn lên liền mạch** (từ `1..5` thành `1..4` gồm Flashcard ➔ Ghép Cặp ➔ Nghe Điền ➔ Luyện Dịch), không bao giờ bị khuyết hổng hay ngắt quãng.
+
+### ✅ Công việc đã hoàn thành
+- **[Tạo File Cấu Hình Trực Quan] ([`js/mimikara-config.js`](<file:///g:/My%20Drive/hk261/D%E1%BB%B1%20%C3%A1n%20manga/js/mimikara-config.js>))**:
+  - Định nghĩa biến toàn cục `window.MIMIKARA_CONFIG` gồm bảng công tắc `modes` (`flashcard`, `matching`, `typing`, `dictation`, `translation`) và danh mục `definitions` chứa tên, icon và mô tả của từng bước.
+- **[Engine Co Giãn & Đôn Số Thứ Tự Động] ([`js/mimikara-practice-service.js`](<file:///g:/My%20Drive/hk261/D%E1%BB%B1%20%C3%A1n%20manga/js/mimikara-practice-service.js>))**:
+  - Thêm các phương thức lõi: `getActiveSteps()`, `startFirstActiveStep()`, `goToStepById(stepId)`, `startNextActiveStep(currentStepId)`, `getNextActiveStepInfo(currentStepId)`.
+  - Tự động tính toán lại số bước hiển thị (`stepNumber = 1..N`) và nhãn nút chuyển tiếp (ví dụ: `🎉 Xuất Sắc! Sang Bước 3: Nghe Điền ➔` khi Bước 3 cũ bị tắt).
+  - Khởi động phiên học từ bước đầu tiên đang BẬT thay vì mặc định Flashcard.
+  - Tự động bỏ qua các bước tắt và chuyển thẳng sang bước tiếp theo đang bật; khi hoàn thành bước cuối cùng thì kích hoạt màn hình Victory.
+  - Cập nhật phụ đề tiêu đề modal và màn hình Victory phản ánh chính xác số lượng và danh sách các bước đang bật.
+- **[Cập Nhật Cache Buster v3.4 & Nhúng Script] ([`index.html`](<file:///g:/My%20Drive/hk261/D%E1%BB%B1%20%C3%A1n%20manga/index.html>), [`detail.html`](<file:///g:/My%20Drive/hk261/D%E1%BB%B1%20%C3%A1n%20manga/detail.html>), [`reader.html`](<file:///g:/My%20Drive/hk261/D%E1%BB%B1%20%C3%A1n%20manga/reader.html>))**:
+  - Nâng chuỗi phiên bản query lên `?v=3.4` và nhúng `js/mimikara-config.js` ở đầu danh sách nạp dữ liệu.
+- **[Kiểm Thử Thực Tế Trình Duyệt]**:
+  - Đã kiểm tra cả 2 trường hợp:
+    1. Đầy đủ 5 bước: Stepper hiển thị `Bước 1: Flashcard ➔ Bước 2: Ghép Cặp ➔ Bước 3: Gõ Từ ➔ Bước 4: Nghe Điền ➔ Bước 5: Luyện Dịch`.
+    2. Tắt Bước 3 (`typing: false`): Stepper tự động đôn lên thành 4 bước `1. Flashcard ➔ 2. Ghép Cặp ➔ 3. Nghe Điền ➔ 4. Luyện Dịch`. Xong Ghép Cặp chuyển thẳng qua Nghe Điền thành công mỹ mãn.
+
+---
+
 ## [2026-09-11 15:05] - Khắc Phục Lỗi Câu Ngắn & Lồng Hết Vào 1 Khối Ở Bước 5 (Offline JS Bundle & Smart Chunk Splitter)
 
 ### 🎯 Mục tiêu

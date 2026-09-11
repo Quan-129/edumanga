@@ -54,7 +54,96 @@ class MimikaraPracticeService {
     this.translationState = 'input'; // 'input' | 'correct' | 'incorrect'
     this.n2TranslationsDb = null;
 
+    // Dynamic Funnel Step State
+    this.currentStepId = 'flashcard';
+    this.currentStepNumber = 1;
+
     this.initKeyboardEvents();
+  }
+
+  // --------------------------------------------------------------------------
+  // DYNAMIC STEPPER FUNNEL ENGINE (HỆ THỐNG ĐÔN BƯỚC & CO GIÃN THEO CẤU HÌNH)
+  // --------------------------------------------------------------------------
+  getActiveSteps() {
+    const config = (typeof window !== 'undefined' && window.MIMIKARA_CONFIG) ? window.MIMIKARA_CONFIG : null;
+    const modes = config && config.modes ? config.modes : {
+      flashcard: true,
+      matching: true,
+      typing: true,
+      dictation: true,
+      translation: true
+    };
+    const defs = config && config.definitions ? config.definitions : [
+      { id: 'flashcard', originalStep: 1, name: 'Flashcard', shortName: 'Flashcard', icon: 'fa-clone', desc: 'Lướt từ & Chiết tự Mindmap' },
+      { id: 'matching', originalStep: 2, name: 'Ghép Cặp', shortName: 'Ghép Cặp', icon: 'fa-puzzle-piece', desc: 'Ghép cặp 5x5' },
+      { id: 'typing', originalStep: 3, name: 'Gõ Từ', shortName: 'Gõ Từ', icon: 'fa-keyboard', desc: 'Gõ từ 2 chiều' },
+      { id: 'dictation', originalStep: 4, name: 'Nghe Điền', shortName: 'Nghe Điền', icon: 'fa-headphones', desc: 'Nghe điền câu Audio' },
+      { id: 'translation', originalStep: 5, name: 'Luyện Dịch', shortName: 'Luyện Dịch', icon: 'fa-language', desc: 'Dịch câu phức N2' }
+    ];
+
+    const activeList = defs.filter(d => modes[d.id] !== false);
+    if (activeList.length === 0) {
+      activeList.push(defs[0]); // Bắt buộc giữ lại ít nhất 1 bước
+    }
+
+    // Tự động đôn và đánh số thứ tự liên tục 1..N
+    return activeList.map((step, index) => ({
+      ...step,
+      stepNumber: index + 1
+    }));
+  }
+
+  startFirstActiveStep() {
+    const activeSteps = this.getActiveSteps();
+    const firstStep = activeSteps[0];
+    this.goToStepById(firstStep.id);
+  }
+
+  goToStepById(stepId) {
+    this.currentStepId = stepId;
+    const activeSteps = this.getActiveSteps();
+    const cur = activeSteps.find(s => s.id === stepId);
+    this.currentStepNumber = cur ? cur.stepNumber : 1;
+
+    if (stepId === 'flashcard') {
+      this.currentStep = 1;
+      this.flashcardIndex = 0;
+      this.isCardFlipped = false;
+      this.renderStep1Flashcard();
+    } else if (stepId === 'matching') {
+      this.currentStep = 2;
+      this.startStep2Matching();
+    } else if (stepId === 'typing') {
+      this.currentStep = 3;
+      this.startStep3Typing();
+    } else if (stepId === 'dictation') {
+      this.currentStep = 4;
+      this.startStep4Dictation();
+    } else if (stepId === 'translation') {
+      this.currentStep = 5;
+      this.startStep5Translation();
+    }
+  }
+
+  startNextActiveStep(currentStepId) {
+    const activeSteps = this.getActiveSteps();
+    const currentIndex = activeSteps.findIndex(s => s.id === currentStepId);
+    if (currentIndex !== -1 && currentIndex < activeSteps.length - 1) {
+      const nextStep = activeSteps[currentIndex + 1];
+      this.goToStepById(nextStep.id);
+    } else {
+      // Đã hoàn thành bước bật cuối cùng
+      this.renderVictoryScreen();
+    }
+  }
+
+  getNextActiveStepInfo(currentStepId) {
+    const activeSteps = this.getActiveSteps();
+    const currentIndex = activeSteps.findIndex(s => s.id === currentStepId);
+    if (currentIndex !== -1 && currentIndex < activeSteps.length - 1) {
+      return activeSteps[currentIndex + 1];
+    }
+    return null;
   }
 
   // Load progress from localStorage
@@ -258,6 +347,10 @@ class MimikaraPracticeService {
   ensureModalDOM() {
     if (document.getElementById('mimikaraMasterModal')) return;
 
+    const activeSteps = this.getActiveSteps();
+    const stepNames = activeSteps.map(s => s.name).join(' ➔ ');
+    const dynamicSubtitle = `Học từ vựng ${activeSteps.length} bước: ${stepNames}`;
+
     const modalHtml = `
       <div id="mimikaraMasterModal" class="mimikara-modal" onclick="if(event.target===this) window.mimikaraService.closeModal()">
         <div class="mimikara-modal-container">
@@ -269,7 +362,7 @@ class MimikaraPracticeService {
               </div>
               <div class="mimikara-header-titles">
                 <h2>14 Unit Mimikara N2 <span style="font-size: 0.75rem; background: rgba(168,85,247,0.2); color: #c084fc; padding: 2px 8px; border-radius: 6px; border: 1px solid rgba(168,85,247,0.3);">1.160 TỪ CHUẨN</span></h2>
-                <p id="mimikaraHeaderSubtitle">Học từ vựng 5 bước: Flashcard ➔ Ghép cặp 5x5 ➔ Gõ 2 chiều ➔ Nghe điền câu ➔ Luyện dịch N2</p>
+                <p id="mimikaraHeaderSubtitle">${dynamicSubtitle}</p>
               </div>
             </div>
             <button type="button" class="mimikara-btn-close" onclick="window.mimikaraService.closeModal()" title="Đóng cửa sổ">
@@ -437,17 +530,34 @@ class MimikaraPracticeService {
     const endIdx = Math.min(startIdx + 5, unit.words.length);
     this.currentChunkWords = unit.words.slice(startIdx, endIdx);
 
-    // Start Step 1: Flashcard
-    this.currentStep = 1;
-    this.flashcardIndex = 0;
-    this.isCardFlipped = false;
-    this.renderStep1Flashcard();
+    // Khởi động từ bước đầu tiên đang BẬT trong file cấu hình
+    this.startFirstActiveStep();
   }
 
   renderStepperHeader() {
     const unit = this.dataset.units.find(u => u.id === this.currentUnitId);
     const startStt = this.currentChunkWords[0].stt;
     const endStt = this.currentChunkWords[this.currentChunkWords.length - 1].stt;
+
+    const activeSteps = this.getActiveSteps();
+    const currentActive = activeSteps.find(s => s.id === this.currentStepId) || activeSteps.find(s => s.originalStep === this.currentStep) || activeSteps[0];
+    const currentStepNum = currentActive ? currentActive.stepNumber : 1;
+
+    const pillsHtml = activeSteps.map(s => {
+      let stateClass = '';
+      let icon = s.icon;
+      if (s.stepNumber === currentStepNum) {
+        stateClass = 'active';
+      } else if (s.stepNumber < currentStepNum) {
+        stateClass = 'completed';
+        icon = 'fa-check';
+      }
+      return `
+        <div class="mimikara-step-pill ${stateClass}" title="${escapeHtml(s.desc)}">
+          <i class="fas ${icon}"></i> Bước ${s.stepNumber}: ${escapeHtml(s.name)}
+        </div>
+      `;
+    }).join('');
 
     return `
       <div class="mimikara-stepper-header">
@@ -461,21 +571,7 @@ class MimikaraPracticeService {
         </div>
 
         <div class="mimikara-stepper-pills">
-          <div class="mimikara-step-pill ${this.currentStep === 1 ? 'active' : (this.currentStep > 1 ? 'completed' : '')}">
-            <i class="fas ${this.currentStep > 1 ? 'fa-check' : 'fa-clone'}"></i> Bước 1: Flashcard
-          </div>
-          <div class="mimikara-step-pill ${this.currentStep === 2 ? 'active' : (this.currentStep > 2 ? 'completed' : '')}">
-            <i class="fas ${this.currentStep > 2 ? 'fa-check' : 'fa-puzzle-piece'}"></i> Bước 2: Ghép Cặp
-          </div>
-          <div class="mimikara-step-pill ${this.currentStep === 3 ? 'active' : (this.currentStep > 3 ? 'completed' : '')}">
-            <i class="fas ${this.currentStep > 3 ? 'fa-check' : 'fa-keyboard'}"></i> Bước 3: Gõ 2 Chiều
-          </div>
-          <div class="mimikara-step-pill ${this.currentStep === 4 ? 'active' : (this.currentStep > 4 ? 'completed' : '')}">
-            <i class="fas ${this.currentStep > 4 ? 'fa-check' : 'fa-headphones'}"></i> Bước 4: Nghe Điền Câu
-          </div>
-          <div class="mimikara-step-pill ${this.currentStep === 5 ? 'active' : ''}">
-            <i class="fas fa-language"></i> Bước 5: Luyện Dịch N2
-          </div>
+          ${pillsHtml}
         </div>
       </div>
     `;
@@ -587,8 +683,8 @@ class MimikaraPracticeService {
           </button>
 
           ${isLastCard ? `
-            <button type="button" class="btn-primary" onclick="window.mimikaraService.startStep2Matching()" style="background: linear-gradient(135deg, #a855f7, #6366f1); padding: 14px 34px; font-weight: 800; font-size: 1.1rem; border-radius: 14px; box-shadow: 0 6px 25px rgba(168,85,247,0.5);">
-              <span>Sẵn Sàng Sang Bước 2: Ghép Cặp ➔</span>
+            <button type="button" class="btn-primary" onclick="window.mimikaraService.startNextActiveStep('flashcard')" style="background: linear-gradient(135deg, #a855f7, #6366f1); padding: 14px 34px; font-weight: 800; font-size: 1.1rem; border-radius: 14px; box-shadow: 0 6px 25px rgba(168,85,247,0.5);">
+              <span>${this.getNextActiveStepInfo('flashcard') ? `Sẵn Sàng Sang Bước ${this.getNextActiveStepInfo('flashcard').stepNumber}: ${this.getNextActiveStepInfo('flashcard').name} ➔` : `Hoàn Thành Phiên Học ➔`}</span>
             </button>
           ` : `
             <button type="button" class="btn-primary" onclick="window.mimikaraService.nextFlashcard()" style="background: linear-gradient(135deg, #0284c7, #6366f1); padding: 14px 34px; font-weight: 800; font-size: 1.1rem; border-radius: 14px; box-shadow: 0 6px 25px rgba(2,132,199,0.5);">
@@ -1031,8 +1127,8 @@ class MimikaraPracticeService {
         </div>
 
         <div id="mimikaraMatchNextBtnBox" style="text-align: center; margin-top: 2rem; display: ${allDone ? 'block' : 'none'};">
-          <button type="button" class="btn-primary" onclick="window.mimikaraService.startStep3Typing()" style="background: linear-gradient(135deg, #a855f7, #6366f1); padding: 12px 30px; font-weight: 800; font-size: 1rem; border-radius: 12px; box-shadow: 0 4px 20px rgba(168,85,247,0.5);">
-            <span>🎉 Xuất Sắc! Sang Bước 3: Gõ Phản Xạ 2 Chiều ➔</span>
+          <button type="button" class="btn-primary" onclick="window.mimikaraService.startNextActiveStep('matching')" style="background: linear-gradient(135deg, #a855f7, #6366f1); padding: 12px 30px; font-weight: 800; font-size: 1rem; border-radius: 12px; box-shadow: 0 4px 20px rgba(168,85,247,0.5);">
+            <span>${this.getNextActiveStepInfo('matching') ? `🎉 Xuất Sắc! Sang Bước ${this.getNextActiveStepInfo('matching').stepNumber}: ${this.getNextActiveStepInfo('matching').name} ➔` : `🎉 Hoàn Thành Phiên Học ➔`}</span>
           </button>
         </div>
       </div>
@@ -1172,7 +1268,7 @@ class MimikaraPracticeService {
     if (!body) return;
 
     if (this.typingIndex >= this.typingQuestions.length) {
-      this.startStep4Dictation();
+      this.startNextActiveStep('typing');
       return;
     }
 
@@ -1771,7 +1867,7 @@ class MimikaraPracticeService {
         this.dictationState = 'input';
         this.dictationLiveInput = '';
         if (this.dictationIndex >= this.dictationQuestions.length) {
-          this.startStep5Translation();
+          this.startNextActiveStep('dictation');
         } else {
           this.renderStep4Dictation();
         }
@@ -2210,7 +2306,7 @@ class MimikaraPracticeService {
   nextTranslationQuestion() {
     this.translationIndex++;
     if (this.translationIndex >= this.translationQuestions.length) {
-      this.renderVictoryScreen();
+      this.startNextActiveStep('translation');
     } else {
       this.initCurrentTranslationQuestion();
       this.renderStep5Translation();
@@ -2251,12 +2347,15 @@ class MimikaraPracticeService {
     const chunksTotal = Math.ceil(unit.words.length / 5);
     const hasNextChunk = this.currentChunkIndex < chunksTotal - 1;
 
+    const activeSteps = this.getActiveSteps();
+    const activeNames = activeSteps.map(s => `<b>${escapeHtml(s.name)}</b>`).join(' ➔ ');
+
     body.innerHTML = `
       <div class="mimikara-victory-box">
         <div class="mimikara-victory-icon">🏆</div>
         <h2 class="mimikara-victory-title">XUẤT SẮC! HOÀN THÀNH PHIÊN ${this.currentChunkIndex + 1}!</h2>
         <p class="mimikara-victory-desc">
-          Bạn đã hoàn thành trọn vẹn cả 5 bước: <b>Flashcard</b> ➔ <b>Ghép Cặp 5x5</b> ➔ <b>Gõ 2 Chiều</b> ➔ <b>Nghe Điền Câu</b> ➔ <b>Luyện Dịch N2</b> cho 5 từ vựng vừa rồi!
+          Bạn đã hoàn thành trọn vẹn cả ${activeSteps.length} bước: ${activeNames} cho 5 từ vựng vừa rồi!
           <br>
           <span style="color: #34d399; font-weight: 700; font-size: 1.1rem; display: inline-block; margin-top: 0.5rem;">
             +5 Từ Đã Thuộc Lòng & Làm Chủ Ngữ Cảnh N2!
