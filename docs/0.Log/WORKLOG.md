@@ -5,6 +5,25 @@ Nơi ghi lại toàn bộ tiến trình phát triển, các quyết định ki�
 
 ---
 
+## [2026-09-11 22:20] - Xử Lý Triệt Để Bộ Nhớ Đệm Trình Duyệt (Browser Cache Buster v3.5) & Đồng Bộ Tiêu Đề Modal Động
+
+### 🎯 Mục tiêu
+- Khắc phục hiện tượng người dùng đã cấu hình `translation: false` trong [`js/mimikara-config.js`](file:///g:/My%20Drive/hk261/Dự%20án%20manga/js/mimikara-config.js) nhưng khi tải lại trang ở trình duyệt cá nhân vẫn thấy Bước 5 hoặc tiêu đề cũ.
+- Nguyên nhân: Trình duyệt (Chrome/Edge) giữ lại file `js/mimikara-config.js?v=3.4` trong Disk/Memory Cache, cùng với việc DOM modal giữ lại tiêu đề cũ nếu không được cập nhật động khi mở lại.
+
+### ✅ Công việc đã hoàn thành
+- **[Tăng Cache-Busting Version lên v=3.5] ([index.html](file:///g:/My%20Drive/hk261/Dự%20án%20manga/index.html), [detail.html](file:///g:/My%20Drive/hk261/Dự%20án%20manga/detail.html), [reader.html](file:///g:/My%20Drive/hk261/Dự%20án%20manga/reader.html))**:
+  - Cập nhật toàn bộ các thẻ nạp script lên query string `?v=3.5` để ép trình duyệt tải ngay file cấu hình và service mới nhất khi bấm F5.
+- **[Hàm Cập Nhật Phụ Đề Động & Hỗ Trợ LocalStorage Override] ([js/mimikara-practice-service.js](file:///g:/My%20Drive/hk261/Dự%20án%20manga/js/mimikara-practice-service.js))**:
+  - Thêm phương thức `updateHeaderSubtitle()` và gọi mỗi khi `openModal()` hoặc `ensureModalDOM()`, đảm bảo dòng chữ `Học từ vựng N bước...` luôn được làm mới tức thì theo danh sách bước đang bật.
+  - Cho phép `getActiveSteps()` đọc thêm từ `localStorage.getItem('edumanga_mimikara_config')` (nếu có ghi đè từ DevTools).
+- **[Thêm Hàm Tiện Ích Trực Tiếp Trên Console] ([js/mimikara-config.js](file:///g:/My%20Drive/hk261/Dự%20án%20manga/js/mimikara-config.js))**:
+  - Cung cấp hàm `window.setMimikaraMode('translation', false/true)` để người dùng có thể test bật/tắt ngay lập tức từ cửa sổ Console mà không cần tải lại trang.
+- **[Kiểm Thử Thực Tế Trình Duyệt]**:
+  - Xác nhận trên trình duyệt: Khi `translation: false`, tiêu đề phụ hiển thị chuẩn xác `Học từ vựng 4 bước: Flashcard ➔ Ghép Cặp ➔ Gõ Từ ➔ Nghe Điền` và thanh Stepper chỉ hiển thị đúng 4 pills `1..4`.
+
+---
+
 ## [2026-09-11 22:00] - Triển Khai File Cấu Hình Bật/Tắt Chế Độ Học & Dynamic Stepper Funnel Tự Động Co Giãn Đôn Bước
 
 ### 🎯 Mục tiêu

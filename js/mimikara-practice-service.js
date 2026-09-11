@@ -65,14 +65,28 @@ class MimikaraPracticeService {
   // DYNAMIC STEPPER FUNNEL ENGINE (HỆ THỐNG ĐÔN BƯỚC & CO GIÃN THEO CẤU HÌNH)
   // --------------------------------------------------------------------------
   getActiveSteps() {
-    const config = (typeof window !== 'undefined' && window.MIMIKARA_CONFIG) ? window.MIMIKARA_CONFIG : null;
-    const modes = config && config.modes ? config.modes : {
+    let config = (typeof window !== 'undefined' && window.MIMIKARA_CONFIG) ? window.MIMIKARA_CONFIG : null;
+    let modes = config && config.modes ? { ...config.modes } : {
       flashcard: true,
       matching: true,
       typing: true,
       dictation: true,
       translation: true
     };
+
+    // Kiểm tra cấu hình ghi đè trong localStorage (nếu có) để lập tức phản hồi
+    try {
+      if (typeof localStorage !== 'undefined') {
+        const saved = localStorage.getItem('edumanga_mimikara_config');
+        if (saved) {
+          const parsed = JSON.parse(saved);
+          if (parsed && parsed.modes) {
+            modes = { ...modes, ...parsed.modes };
+          }
+        }
+      }
+    } catch (e) {}
+
     const defs = config && config.definitions ? config.definitions : [
       { id: 'flashcard', originalStep: 1, name: 'Flashcard', shortName: 'Flashcard', icon: 'fa-clone', desc: 'Lướt từ & Chiết tự Mindmap' },
       { id: 'matching', originalStep: 2, name: 'Ghép Cặp', shortName: 'Ghép Cặp', icon: 'fa-puzzle-piece', desc: 'Ghép cặp 5x5' },
@@ -316,6 +330,7 @@ class MimikaraPracticeService {
     }
 
     this.ensureModalDOM();
+    this.updateHeaderSubtitle();
     const modal = document.getElementById('mimikaraMasterModal');
     if (modal) {
       modal.classList.add('active');
@@ -327,6 +342,16 @@ class MimikaraPracticeService {
       this.renderUnitChunks(unitId);
     } else {
       this.renderUnitsOverview();
+    }
+  }
+
+  // Cập nhật phụ đề tiêu đề modal theo số bước đang active
+  updateHeaderSubtitle() {
+    const subEl = document.getElementById('mimikaraHeaderSubtitle');
+    if (subEl) {
+      const activeSteps = this.getActiveSteps();
+      const stepNames = activeSteps.map(s => s.name).join(' ➔ ');
+      subEl.textContent = `Học từ vựng ${activeSteps.length} bước: ${stepNames}`;
     }
   }
 
@@ -345,7 +370,10 @@ class MimikaraPracticeService {
 
   // Ensure Modal DOM exists in document
   ensureModalDOM() {
-    if (document.getElementById('mimikaraMasterModal')) return;
+    if (document.getElementById('mimikaraMasterModal')) {
+      this.updateHeaderSubtitle();
+      return;
+    }
 
     const activeSteps = this.getActiveSteps();
     const stepNames = activeSteps.map(s => s.name).join(' ➔ ');

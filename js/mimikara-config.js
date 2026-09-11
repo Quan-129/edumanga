@@ -80,3 +80,20 @@ window.MIMIKARA_CONFIG = {
     }
   ]
 };
+
+/**
+ * Hàm tiện ích chuyển đổi nhanh chế độ học từ Console trình duyệt (nếu cần thử nghiệm ngay):
+ * Ví dụ: setMimikaraMode('translation', false) hoặc setMimikaraMode('translation', true)
+ */
+window.setMimikaraMode = function(modeId, isEnabled) {
+  if (window.MIMIKARA_CONFIG && window.MIMIKARA_CONFIG.modes) {
+    window.MIMIKARA_CONFIG.modes[modeId] = !!isEnabled;
+    try {
+      localStorage.setItem('edumanga_mimikara_config', JSON.stringify({ modes: window.MIMIKARA_CONFIG.modes }));
+    } catch (e) {}
+    console.log(`%c[MimikaraConfig] Đã đổi '${modeId}' = ${isEnabled}`, 'color: #10b981; font-weight: bold;');
+    if (window.mimikaraService) {
+      window.mimikaraService.updateHeaderSubtitle();
+    }
+  }
+};
