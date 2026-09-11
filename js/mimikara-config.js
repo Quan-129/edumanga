@@ -31,7 +31,7 @@ window.MIMIKARA_CONFIG = {
     dictation: true,
 
     // Chế độ 5: Luyện dịch câu phức chuẩn N2 (Scrambled Chunk Translation Puzzle)
-    translation: true
+    translation: false
   },
 
   // ------------------------------------------------------------------------

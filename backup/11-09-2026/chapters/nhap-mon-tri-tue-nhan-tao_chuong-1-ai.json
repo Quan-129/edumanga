@@ -1,0 +1,30 @@
+{
+  "id": "chuong-1-ai",
+  "title": "Chương 1: Trí Tuệ Nhân Tạo Khởi Nguyên",
+  "subtitle": "Tự động đồng bộ từ Chương 1 AI.json",
+  "releaseDate": "2026-09-07",
+  "pagesCount": 1,
+  "pages": [
+    {
+      "pageNumber": 1,
+      "imageUrl": "assets/chapters/nhap-mon-tri-tue-nhan-tao/chuong-1-ai/page_01.jpg",
+      "bubbles": [
+        {
+          "id": "b-ai-test-1",
+          "text": "Bách Khoa: Khởi động thuật toán tìm kiếm không gian trạng thái!",
+          "x": 30,
+          "y": 25,
+          "fontSize": 14,
+          "width": 35,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "normal"
+        }
+      ],
+      "dialogue": "PANEL 1: Bách Khoa khởi động mô hình AI."
+    }
+  ],
+  "pdfUrl": "",
+  "seriesId": "nhap-mon-tri-tue-nhan-tao"
+}

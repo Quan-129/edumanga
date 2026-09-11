@@ -1,0 +1,971 @@
+{
+  "id": "chuong-1-n2",
+  "title": "Chương 1 N2",
+  "subtitle": "Tự động đồng bộ từ Chương 1 N2.json",
+  "releaseDate": "2026-09-01",
+  "pagesCount": 31,
+  "pages": [
+    {
+      "pageNumber": 1,
+      "imageUrl": "assets/chapters/n2/chuong-1-n2/page_01.jpg",
+      "bubbles": [],
+      "dialogue": ""
+    },
+    {
+      "pageNumber": 2,
+      "imageUrl": "assets/chapters/n2/chuong-1-n2/page_02.jpg",
+      "bubbles": [
+        {
+          "id": "80df87fa-8e7a-4475-92da-347001d56b0e",
+          "text": "Lại lỗi... 人生 (じんせい - Nhân Sanh - đời người) của một coder chỉ toàn màu đen thế này sao?",
+          "x": 25.904673607341444,
+          "y": 21.82247163669037,
+          "fontSize": 14,
+          "width": 30,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "normal"
+        },
+        {
+          "id": "48a5e24b-f432-4866-89f5-d1ae2f89bab4",
+          "text": "Xong API này định chợp mắt thì... xong ~思ったら／思うと (~おもったら／おもうと - vừa mới ~ thì đã) database lại sập.",
+          "x": 81.11208569384132,
+          "y": 69.9941032911177,
+          "fontSize": 14,
+          "width": 30,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "normal"
+        }
+      ],
+      "dialogue": "PANEL 1:\nMINH (Thầm): \"Lại lỗi... 人生 (じんせい - Nhân Sanh - đời người) của một coder chỉ toàn màu đen thế này sao?\"\n\nPANEL 2:\n(Không có thoại)\n\nPANEL 3:\nMINH (Nghĩ): \"Xong API này định chợp mắt thì... xong ~思ったら／思うと (~おもったら／おもうと - vừa mới ~ thì đã) database lại sập.\"\n\n--------------------------------------------------"
+    },
+    {
+      "pageNumber": 3,
+      "imageUrl": "assets/chapters/n2/chuong-1-n2/page_03.jpg",
+      "bubbles": [
+        {
+          "id": "770d0376-6e4b-4b3b-8b9c-668524c33daf",
+          "text": "Tiếng quạt máy chủ thật 騒々しい (そうぞうしい - Tao - ồn ào).",
+          "x": 50,
+          "y": 25,
+          "fontSize": 14,
+          "width": 30,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "normal"
+        },
+        {
+          "id": "debe2d55-82c5-489f-8dd8-3bf602b12761",
+          "text": "Bụng mình hoàn toàn 空 (から - Không - trống rỗng) rồi. Đói quá...",
+          "x": 50.92674413862021,
+          "y": 59.84960296459153,
+          "fontSize": 14,
+          "width": 30,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "normal"
+        }
+      ],
+      "dialogue": "PANEL 1:\nMINH (Nghĩ): \"Tiếng quạt máy chủ thật 騒々しい (そうぞうしい - Tao - ồn ào).\"\n\nPANEL 2:\nMINH (Thầm): \"Bụng mình hoàn toàn 空 (から - Không - trống rỗng) rồi. Đói quá...\"\n\nPANEL 3:\n(Không có thoại)\n\n--------------------------------------------------"
+    },
+    {
+      "pageNumber": 4,
+      "imageUrl": "assets/chapters/n2/chuong-1-n2/page_04.jpg",
+      "bubbles": [
+        {
+          "id": "aa7dfc2e-57d8-49d2-91da-ca108872ba5a",
+          "text": "Hạn 提出 (ていしゅつ - Đề Xuất - nộp) là 8 giờ sáng nay...",
+          "x": 40.99735347558066,
+          "y": 9.023886921490519,
+          "fontSize": 14,
+          "width": 30,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "normal"
+        },
+        {
+          "id": "3c9fceef-7e12-474c-ab2c-88dfb216fb2a",
+          "text": "Giảng viên bắt bẻ cũng ~もっともだ。 (~もっともだ - đương nhiên/có lý). Lỗi rành rành ra thế này.",
+          "x": 47.947926939708346,
+          "y": 66.88292659457679,
+          "fontSize": 14,
+          "width": 30,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "normal"
+        }
+      ],
+      "dialogue": "PANEL 1:\nMINH (Thầm): \"Hạn 提出 (ていしゅつ - Đề Xuất - nộp) là 8 giờ sáng nay...\"\n\nPANEL 2:\nMINH (Nói): \"Giảng viên bắt bẻ cũng ~もっともだ。 (~もっともだ - đương nhiên/có lý). Lỗi rành rành ra thế này.\"\n\nPANEL 3:\n(Không có thoại)\n\n--------------------------------------------------"
+    },
+    {
+      "pageNumber": 5,
+      "imageUrl": "assets/chapters/n2/chuong-1-n2/page_05.jpg",
+      "bubbles": [
+        {
+          "id": "4c2ad517-489a-4b7d-a384-3a4a5d0550b2",
+          "text": "Phải tập trung 作業 (さぎょう - Tác Nghiệp - công việc/thao tác) thôi. Không thể bỏ cuộc.",
+          "x": 72.37422797078563,
+          "y": 24.41757637579787,
+          "fontSize": 14,
+          "width": 30,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "normal"
+        },
+        {
+          "id": "e5e75433-b776-4c4f-b1e9-4b13ba99239c",
+          "text": "Chỉ mong 運 (うん - Vận - may mắn) mỉm cười lần này, code chạy mượt mà đi.",
+          "x": 25.90467966776055,
+          "y": 56.26658903988206,
+          "fontSize": 14,
+          "width": 30,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "normal"
+        }
+      ],
+      "dialogue": "PANEL 1:\nMINH (Nghĩ): \"Phải tập trung 作業 (さぎょう - Tác Nghiệp - công việc/thao tác) thôi. Không thể bỏ cuộc.\"\n\nPANEL 2:\nMINH (Thầm): \"Chỉ mong 運 (うん - Vận - may mắn) mỉm cười lần này, code chạy mượt mà đi.\"\n\nPANEL 3:\n(Không có thoại)\n\n--------------------------------------------------"
+    },
+    {
+      "pageNumber": 6,
+      "imageUrl": "assets/chapters/n2/chuong-1-n2/page_06.jpg",
+      "bubbles": [
+        {
+          "id": "55bd07d8-675c-40b5-a96a-f5ba6532cf05",
+          "text": "Mùi thịt nướng 匂う (におう - Mùi - có mùi) ở đâu ra vậy?",
+          "x": 32.259489692105866,
+          "y": 55.33765950384627,
+          "fontSize": 14,
+          "width": 30,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "normal"
+        },
+        {
+          "id": "42b70641-a37e-4051-822b-cbcd20e68e0a",
+          "text": "Đang chờ cậu 迎える (むかえる - Nghênh - nghênh đón/chào đón) tớ đây, anh bạn thân mến.",
+          "x": 79.5233892481741,
+          "y": 49.10056119046312,
+          "fontSize": 14,
+          "width": 40,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "normal"
+        }
+      ],
+      "dialogue": "PANEL 1:\n(Không có thoại)\n\nPANEL 2:\nMINH (Nói): \"Mùi thịt nướng 匂う (におう - Mùi - có mùi) ở đâu ra vậy?\"\n\nPANEL 3:\nKHOA (Nói): \"Đang chờ cậu 迎える (むかえる - Nghênh - nghênh đón/chào đón) tớ đây, anh bạn thân mến.\"\n\n--------------------------------------------------"
+    },
+    {
+      "pageNumber": 7,
+      "imageUrl": "assets/chapters/n2/chuong-1-n2/page_07.jpg",
+      "bubbles": [
+        {
+          "id": "6e0cae99-b983-4c14-81b8-72671b42dbf1",
+          "text": "May mà tớ có 持ち合わせる (もちあわせる - Trì Hợp - có sẵn (mang theo)) tiền mặt để mua hộp cơm cuối cùng đấy.",
+          "x": 20.741396522979986,
+          "y": 23.62135105919577,
+          "fontSize": 14,
+          "width": 30,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "normal"
+        },
+        {
+          "id": "c7421105-98d8-4817-bcba-dbb58e41b6d0",
+          "text": "Cậu cứu sống tớ rồi!",
+          "x": 79.92056487469569,
+          "y": 47.77351899612627,
+          "fontSize": 14,
+          "width": 30,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "normal"
+        },
+        {
+          "id": "c8ccce5a-b76a-4912-83cd-a6337c34ce70",
+          "text": "Trông cậu thảm hại cứ như vừa 遭難 (そうなん - Tao Nan - gặp nạn) về vậy.",
+          "x": 46.557812246882804,
+          "y": 70.73134895815363,
+          "fontSize": 14,
+          "width": 30,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "normal"
+        }
+      ],
+      "dialogue": "PANEL 1:\nKHOA (Nói): \"May mà tớ có 持ち合わせる (もちあわせる - Trì Hợp - có sẵn (mang theo)) tiền mặt để mua hộp cơm cuối cùng đấy.\"\n\nPANEL 2:\nMINH (Nói): \"Cậu cứu sống tớ rồi!\"\n\nPANEL 3:\nKHOA (Nói): \"Trông cậu thảm hại cứ như vừa 遭難 (そうなん - Tao Nan - gặp nạn) về vậy.\"\n\n--------------------------------------------------"
+    },
+    {
+      "pageNumber": 8,
+      "imageUrl": "assets/chapters/n2/chuong-1-n2/page_08.jpg",
+      "bubbles": [
+        {
+          "id": "9ad90e3c-d845-4185-94fc-30c8dd9fe45c",
+          "text": "Caffeine đúng là một 刺激 (しげき - Thứ Kích - kích thích) cần thiết lúc này.",
+          "x": 20.480135299182827,
+          "y": 14.602462015134071,
+          "fontSize": 14,
+          "width": 30,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "normal"
+        },
+        {
+          "id": "2096b3b2-7735-4372-98a3-4071422fe654",
+          "text": "Động lực của tớ đang 減退 (げんたい - Giảm Thoái - suy giảm) nghiêm trọng vì cái API chết tiệt này.",
+          "x": 72.53311753564766,
+          "y": 62.25733055877228,
+          "fontSize": 14,
+          "width": 40,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "normal"
+        }
+      ],
+      "dialogue": "PANEL 1:\nMINH (Nói): \"Caffeine đúng là một 刺激 (しげき - Thứ Kích - kích thích) cần thiết lúc này.\"\n\nPANEL 2:\nMINH (Nói): \"Động lực của tớ đang 減退 (げんたい - Giảm Thoái - suy giảm) nghiêm trọng vì cái API chết tiệt này.\"\n\nPANEL 3:\n(Không có thoại)\n\n--------------------------------------------------"
+    },
+    {
+      "pageNumber": 9,
+      "imageUrl": "assets/chapters/n2/chuong-1-n2/page_09.jpg",
+      "bubbles": [
+        {
+          "id": "149c2340-9ae6-4f0f-a62c-610b671c351c",
+          "text": "Để tớ かぶせる (かぶせる - trùm lên/phủ lên) cái áo cho ấm. Đừng để cảm lạnh.",
+          "x": 82.06954176217558,
+          "y": 37.23520560941998,
+          "fontSize": 14,
+          "width": 30,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "normal"
+        },
+        {
+          "id": "62496f72-5e71-4812-b31b-6987658a270c",
+          "text": "Thực ra đây chỉ là một lỗi 単純な (たんじゅんな - Đơn Thuần - đơn giản) thôi. Nhìn kĩ cấu trúc JSON đi.",
+          "x": 57.831130186417134,
+          "y": 62.456445228615685,
+          "fontSize": 14,
+          "width": 35,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "normal"
+        }
+      ],
+      "dialogue": "PANEL 1:\n(Không có thoại)\n\nPANEL 2:\nKHOA (Nói): \"Để tớ かぶせる (かぶせる - trùm lên/phủ lên) cái áo cho ấm. Đừng để cảm lạnh.\"\n\nPANEL 3:\nKHOA (Nói): \"Thực ra đây chỉ là một lỗi 単純な (たんじゅんな - Đơn Thuần - đơn giản) thôi. Nhìn kĩ cấu trúc JSON đi.\"\n\n--------------------------------------------------"
+    },
+    {
+      "pageNumber": 10,
+      "imageUrl": "assets/chapters/n2/chuong-1-n2/page_10.jpg",
+      "bubbles": [
+        {
+          "id": "ca6039c0-ca96-4321-8a25-f92670b9cde3",
+          "text": "Có một ký tự bị 挟まる (はさまる - Hiệp - kẹp vào) giữa hai chuỗi này.",
+          "x": 44.12252036078327,
+          "y": 23.82812560132121,
+          "fontSize": 14,
+          "width": 30,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "normal"
+        },
+        {
+          "id": "7af7bb55-e405-4efd-91df-e88e9364703a",
+          "text": "Trời đất ơi, bảo sao danh sách mảng cứ 膨らむ (ふくらむ - Bành - phồng lên/tăng lên) vô hạn!",
+          "x": 44.12252036078327,
+          "y": 53.56263967868878,
+          "fontSize": 14,
+          "width": 35,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "normal"
+        }
+      ],
+      "dialogue": "PANEL 1:\nKHOA (Nói): \"Có một ký tự bị 挟まる (はさまる - Hiệp - kẹp vào) giữa hai chuỗi này.\"\n\nPANEL 2:\n(Không có thoại)\n\nPANEL 3:\nMINH (Nói): \"Trời đất ơi, bảo sao danh sách mảng cứ 膨らむ (ふくらむ - Bành - phồng lên/tăng lên) vô hạn!\"\n\n--------------------------------------------------"
+    },
+    {
+      "pageNumber": 11,
+      "imageUrl": "assets/chapters/n2/chuong-1-n2/page_11.jpg",
+      "bubbles": [
+        {
+          "id": "13921ab0-86eb-4eb9-b5f5-188e90359bb4",
+          "text": "Để tớ 書き込む (かきこむ - Thư Vào - viết vào/nhập vào) hàm lọc dữ liệu mới cho.",
+          "x": 33.79139411537804,
+          "y": 34.84582501391723,
+          "fontSize": 14,
+          "width": 30,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "normal"
+        },
+        {
+          "id": "8f2c5128-d687-436d-96db-ee8ab8e54dc8",
+          "text": "Đã bắt đầu thì phải làm V抜く (Vぬく - làm đến cùng), đúng không?",
+          "x": 78.4933826772276,
+          "y": 60.19980799952977,
+          "fontSize": 14,
+          "width": 30,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "normal"
+        }
+      ],
+      "dialogue": "PANEL 1:\n(Không có thoại)\n\nPANEL 2:\nKHOA (Nói): \"Để tớ 書き込む (かきこむ - Thư Vào - viết vào/nhập vào) hàm lọc dữ liệu mới cho.\"\n\nPANEL 3:\nKHOA (Nói): \"Đã bắt đầu thì phải làm V抜く (Vぬく - làm đến cùng), đúng không?\"\n\n--------------------------------------------------"
+    },
+    {
+      "pageNumber": 12,
+      "imageUrl": "assets/chapters/n2/chuong-1-n2/page_12.jpg",
+      "bubbles": [
+        {
+          "id": "d2f2735e-110e-4700-ae07-bfd98184e56e",
+          "text": "Đáng lẽ tớ nên test server 事前に (じぜんに - Sự Tiền - từ trước) thay vì gộp chung vào thế này.",
+          "x": 42.13576531358996,
+          "y": 15.53166558005181,
+          "fontSize": 14,
+          "width": 35,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "normal"
+        }
+      ],
+      "dialogue": "PANEL 1:\nMINH (Nói): \"Đáng lẽ tớ nên test server 事前に (じぜんに - Sự Tiền - từ trước) thay vì gộp chung vào thế này.\"\n\nPANEL 2:\nMINH (Thầm): \"Nó mà đứng ở 99% thì rớt môn là ~決まっている／違いない／相違ない (~きまっている／ちがいない／そういない - chắc chắn là)!\"\n\nPANEL 3:\n(Không có thoại)\n\n--------------------------------------------------"
+    },
+    {
+      "pageNumber": 13,
+      "imageUrl": "assets/chapters/n2/chuong-1-n2/page_13.jpg",
+      "bubbles": [
+        {
+          "id": "74c627aa-6733-415e-9bf0-84d01ac86f92",
+          "text": "CHẠY ĐƯỢC RỒI! THÀNH CÔNG RỒI!",
+          "x": 26.837751450201434,
+          "y": 38.363524603744764,
+          "fontSize": 14,
+          "width": 45,
+          "fontWeight": "900",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "scream"
+        },
+        {
+          "id": "70fedf5f-445c-4042-8616-f26ad21b67cb",
+          "text": "Tất nhiên rồi. なぜなら (なぜなら - bởi vì) tớ đã 縮小 (しゅくしょう - Súc Tiểu - thu nhỏ) vòng lặp thừa đi 50% tài nguyên.",
+          "x": 66.77152789878706,
+          "y": 63.186534123690016,
+          "fontSize": 14,
+          "width": 35,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "normal"
+        }
+      ],
+      "dialogue": "PANEL 1:\n(Không có thoại)\n\nPANEL 2:\nMINH (Hét): \"CHẠY ĐƯỢC RỒI! THÀNH CÔNG RỒI!\"\n\nPANEL 3:\nKHOA (Nói): \"Tất nhiên rồi. なぜなら (なぜなら - bởi vì) tớ đã 縮小 (しゅくしょう - Súc Tiểu - thu nhỏ) vòng lặp thừa đi 50% tài nguyên.\"\n\n--------------------------------------------------"
+    },
+    {
+      "pageNumber": 14,
+      "imageUrl": "assets/chapters/n2/chuong-1-n2/page_14.jpg",
+      "bubbles": [
+        {
+          "id": "8d1a63fa-69d9-434d-98ac-1e94604174ab",
+          "text": "Cậu là thiên tài Khoa ạ! Tớ yêu cậu!",
+          "x": 42.13576531358996,
+          "y": 27.345825191148748,
+          "fontSize": 14,
+          "width": 30,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "normal"
+        },
+        {
+          "id": "1be74688-4e5c-417a-a71c-619432f3b31f",
+          "text": "Bỏ ra coi, tớ phải 反抗 (はんこう - Phản Kháng - phản kháng) lại sự vồ vập của cậu mất!",
+          "x": 75.9106011158763,
+          "y": 32.390073114987885,
+          "fontSize": 14,
+          "width": 30,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "normal"
+        },
+        {
+          "id": "0e2f166e-682f-451a-8bec-088009fcb349",
+          "text": "Niềm vui này 打ち消す (うちけす - Đả Tiêu - phủ nhận/bác bỏ) sạch mọi cơn buồn ngủ của tớ.",
+          "x": 21.274837318060154,
+          "y": 62.25733055877228,
+          "fontSize": 14,
+          "width": 30,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "normal"
+        }
+      ],
+      "dialogue": "PANEL 1:\nMINH (Nói): \"Cậu là thiên tài Khoa ạ! Tớ yêu cậu!\"\n\nPANEL 2:\nKHOA (Nói): \"Bỏ ra coi, tớ phải 反抗 (はんこう - Phản Kháng - phản kháng) lại sự vồ vập của cậu mất!\"\n\nPANEL 3:\nMINH (Nói): \"Niềm vui này 打ち消す (うちけす - Đả Tiêu - phủ nhận/bác bỏ) sạch mọi cơn buồn ngủ của tớ.\"\n\n--------------------------------------------------"
+    },
+    {
+      "pageNumber": 15,
+      "imageUrl": "assets/chapters/n2/chuong-1-n2/page_15.jpg",
+      "bubbles": [
+        {
+          "id": "1abe23e4-f2eb-43fa-a043-b053f996f0a7",
+          "text": "Code của cậu 最も (もっとも - Tối - nhất) định là khá tốt rồi, chỉ là lỗi 見かけ (みかけ - Kiến - bề ngoài) do gõ nhầm thôi.",
+          "x": 52.665567063714526,
+          "y": 32.65555984782152,
+          "fontSize": 14,
+          "width": 35,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "normal"
+        },
+        {
+          "id": "e6152cbe-cd07-4f93-a562-ce26b308ae5e",
+          "text": "Để tớ nén file lại rồi gửi lên hệ thống liền.",
+          "x": 40.34768577111597,
+          "y": 64.24848105502457,
+          "fontSize": 14,
+          "width": 30,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "normal"
+        }
+      ],
+      "dialogue": "PANEL 1:\n(Không có thoại)\n\nPANEL 2:\nKHOA (Nói): \"Code của cậu 最も (もっとも - Tối - nhất) định là khá tốt rồi, chỉ là lỗi 見かけ (みかけ - Kiến - bề ngoài) do gõ nhầm thôi.\"\n\nPANEL 3:\nMINH (Nói): \"Để tớ nén file lại rồi gửi lên hệ thống liền.\"\n\n--------------------------------------------------"
+    },
+    {
+      "pageNumber": 16,
+      "imageUrl": "assets/chapters/n2/chuong-1-n2/page_16.jpg",
+      "bubbles": [
+        {
+          "id": "da55ff1a-e090-4217-81b5-bd87a460abbb",
+          "text": "Đồ án này mà được điểm cao, có 利益 (りえき - Lợi Ích - lợi nhuận) từ học bổng, tớ sẽ bao cậu ăn.",
+          "x": 50.480136511801874,
+          "y": 30.133435885901953,
+          "fontSize": 14,
+          "width": 30,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "normal"
+        },
+        {
+          "id": "b66bba19-d992-42e2-b1d2-cc1dfce68673",
+          "text": "Nhớ đấy nhé, tớ sẽ không 支払う (しはらう - Chi Phất - chi trả) tiền cho bữa lẩu tuần sau đâu.",
+          "x": 37.566228705045326,
+          "y": 54.95644540584721,
+          "fontSize": 14,
+          "width": 30,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "normal"
+        }
+      ],
+      "dialogue": "PANEL 1:\n(Không có thoại)\n\nPANEL 2:\nMINH (Nói): \"Đồ án này mà được điểm cao, có 利益 (りえき - Lợi Ích - lợi nhuận) từ học bổng, tớ sẽ bao cậu ăn.\"\n\nPANEL 3:\nKHOA (Nói): \"Nhớ đấy nhé, tớ sẽ không 支払う (しはらう - Chi Phất - chi trả) tiền cho bữa lẩu tuần sau đâu.\"\n\n--------------------------------------------------"
+    },
+    {
+      "pageNumber": 17,
+      "imageUrl": "assets/chapters/n2/chuong-1-n2/page_17.jpg",
+      "bubbles": [
+        {
+          "id": "dd1782c2-8dc4-48d0-85c9-dbacdf6f2438",
+          "text": "Dù đồ án xong rồi, sao mặt cậu vẫn buồn ~げ(な) (~げ(な) - có vẻ) thế?",
+          "x": 40.94371228527397,
+          "y": 10.620161022629487,
+          "fontSize": 14,
+          "width": 30,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "normal"
+        },
+        {
+          "id": "954c0689-db18-463b-8831-3e07456e5953",
+          "text": "Chỉ là nghĩ về tương lai thôi. Xây dựng キャリア (キャリア - sự nghiệp/kinh nghiệm) trong ngành IT này gian nan thật.",
+          "x": 55.44702412978516,
+          "y": 58.14228619985088,
+          "fontSize": 14,
+          "width": 30,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "normal"
+        }
+      ],
+      "dialogue": "PANEL 1:\nKHOA (Nói): \"Dù đồ án xong rồi, sao mặt cậu vẫn buồn ~げ(な) (~げ(な) - có vẻ) thế?\"\n\nPANEL 2:\nMINH (Nói): \"Chỉ là nghĩ về tương lai thôi. Xây dựng キャリア (キャリア - sự nghiệp/kinh nghiệm) trong ngành IT này gian nan thật.\"\n\nPANEL 3:\n(Không có thoại)\n\n--------------------------------------------------"
+    },
+    {
+      "pageNumber": 18,
+      "imageUrl": "assets/chapters/n2/chuong-1-n2/page_18.jpg",
+      "bubbles": [
+        {
+          "id": "9351b0b4-e7fe-4d17-b53c-3358dfecd7b3",
+          "text": "Muốn học tốt thì phải mua thiết bị 高価な (こうかな - Cao Giá - đắt tiền), mà tiền thì eo hẹp.",
+          "x": 16.30794970007687,
+          "y": 41.15113479212222,
+          "fontSize": 14,
+          "width": 30,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "normal"
+        },
+        {
+          "id": "2f530aab-3d9b-4524-b032-6adecae8ce56",
+          "text": "Chưa kể, 維持 (いじ - Duy Trì - duy trì) sức khỏe thế này sớm muộn cũng hói đầu.",
+          "x": 50.082785502363215,
+          "y": 55.35467499872191,
+          "fontSize": 14,
+          "width": 30,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "normal"
+        },
+        {
+          "id": "01d867bd-0e14-433c-bf74-0bac6d89161a",
+          "text": "IT mà lị, đành chấp nhận thôi.",
+          "x": 81.27483974329824,
+          "y": 29.071488448191644,
+          "fontSize": 14,
+          "width": 30,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "normal"
+        }
+      ],
+      "dialogue": "PANEL 1:\nMINH (Nói): \"Muốn học tốt thì phải mua thiết bị 高価な (こうかな - Cao Giá - đắt tiền), mà tiền thì eo hẹp.\"\n\nPANEL 2:\nMINH (Nói): \"Chưa kể, 維持 (いじ - Duy Trì - duy trì) sức khỏe thế này sớm muộn cũng hói đầu.\"\n\nPANEL 3:\nKHOA (Nói): \"IT mà lị, đành chấp nhận thôi.\"\n\n--------------------------------------------------"
+    },
+    {
+      "pageNumber": 19,
+      "imageUrl": "assets/chapters/n2/chuong-1-n2/page_19.jpg",
+      "bubbles": [
+        {
+          "id": "8f001ba8-1907-4abf-9935-bb1c744f845a",
+          "text": "Chúng ta 属する (ぞくする - Thuộc - thuộc về) về ngành kỹ thuật, phải chịu khó thôi.",
+          "x": 48.096030455169895,
+          "y": 22.567064000143244,
+          "fontSize": 14,
+          "width": 30,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "normal"
+        },
+        {
+          "id": "922f1dce-a9cc-47f7-937e-4b903aef73bf",
+          "text": "Giống như người thợ 編む (あむ - Biên - đan) len, cứ cặm cụi từng dòng code một.",
+          "x": 30.215235030430073,
+          "y": 47.92104698575577,
+          "fontSize": 14,
+          "width": 30,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "normal"
+        },
+        {
+          "id": "f0fa5e0c-3a5f-4332-a3cf-dbfda96cca67",
+          "text": "Cảm ơn mớ triết lý nửa đêm của cậu nhé.",
+          "x": 51.47351403539854,
+          "y": 71.32812709512969,
+          "fontSize": 14,
+          "width": 30,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "normal"
+        }
+      ],
+      "dialogue": "PANEL 1:\nKHOA (Nói): \"Chúng ta 属する (ぞくする - Thuộc - thuộc về) về ngành kỹ thuật, phải chịu khó thôi.\"\n\nPANEL 2:\nKHOA (Nói): \"Giống như người thợ 編む (あむ - Biên - đan) len, cứ cặm cụi từng dòng code một.\"\n\nPANEL 3:\nMINH (Nói): \"Cảm ơn mớ triết lý nửa đêm của cậu nhé.\"\n\n--------------------------------------------------"
+    },
+    {
+      "pageNumber": 20,
+      "imageUrl": "assets/chapters/n2/chuong-1-n2/page_20.jpg",
+      "bubbles": [
+        {
+          "id": "e219707b-96d4-4f22-bc1e-4df11d5ab6ef",
+          "text": "Nhưng tớ sẽ không bỏ cuộc. Tớ sẽ 追う (おう - Truy - đuổi theo/truy cứu) đam mê này.",
+          "x": 55.44702412978516,
+          "y": 28.31927612289229,
+          "fontSize": 14,
+          "width": 30,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "normal"
+        },
+        {
+          "id": "39747f1a-f60a-45d2-9047-67f14eff73b8",
+          "text": "Tớ sẽ 鍛え上げる (きたえあげる - Đoán Thượng - rèn luyện tới cùng) kỹ năng của mình cho đến khi trở thành Senior!",
+          "x": 49.48675898820522,
+          "y": 65.48741871960175,
+          "fontSize": 14,
+          "width": 35,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "normal"
+        }
+      ],
+      "dialogue": "PANEL 1:\nMINH (Nói): \"Nhưng tớ sẽ không bỏ cuộc. Tớ sẽ 追う (おう - Truy - đuổi theo/truy cứu) đam mê này.\"\n\nPANEL 2:\nMINH (Nói): \"Tớ sẽ 鍛え上げる (きたえあげる - Đoán Thượng - rèn luyện tới cùng) kỹ năng của mình cho đến khi trở thành Senior!\"\n\nPANEL 3:\n(Không có thoại)\n\n--------------------------------------------------"
+    },
+    {
+      "pageNumber": 21,
+      "imageUrl": "assets/chapters/n2/chuong-1-n2/page_21.jpg",
+      "bubbles": [
+        {
+          "id": "00e4040f-baba-40af-bb01-47034595fc74",
+          "text": "Đòi làm Senior mà ウエスト (ウエスト - vòng eo) giảm đi cả chục phân thế kia à?",
+          "x": 27.2351024596401,
+          "y": 27.434320431176122,
+          "fontSize": 14,
+          "width": 30,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "normal"
+        },
+        {
+          "id": "f85d8817-a1f7-4201-9fdc-c56c65f0d1a7",
+          "text": "Về ngủ đi. Đêm nay せいぜい (せいぜい - tối đa/cùng lắm) cậu cũng chỉ thức được đến đây thôi.",
+          "x": 56.44040165338182,
+          "y": 44.2927279661122,
+          "fontSize": 14,
+          "width": 30,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "normal"
+        },
+        {
+          "id": "8f7d4b90-28e8-43f6-9497-bbf10d5a494a",
+          "text": "Được rồi, đi về.",
+          "x": 19.288082270866838,
+          "y": 55.97414421079232,
+          "fontSize": 14,
+          "width": 30,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "normal"
+        }
+      ],
+      "dialogue": "PANEL 1:\nKHOA (Nói): \"Đòi làm Senior mà ウエスト (ウエスト - vòng eo) giảm đi cả chục phân thế kia à?\"\n\nPANEL 2:\nKHOA (Nói): \"Về ngủ đi. Đêm nay せいぜい (せいぜい - tối đa/cùng lắm) cậu cũng chỉ thức được đến đây thôi.\"\n\nPANEL 3:\nMINH (Nói): \"Được rồi, đi về.\"\n\n--------------------------------------------------"
+    },
+    {
+      "pageNumber": 22,
+      "imageUrl": "assets/chapters/n2/chuong-1-n2/page_22.jpg",
+      "bubbles": [
+        {
+          "id": "112f870e-b2c4-4580-b10c-cf12bc3c4b16",
+          "text": "Trời tối thui, 恐らく (おそらく - Khủng - có lẽ) phải mấy tiếng nữa mới sáng.",
+          "x": 60.81126275720711,
+          "y": 20.664408743918326,
+          "fontSize": 14,
+          "width": 30,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "normal"
+        },
+        {
+          "id": "22cc689d-2cc2-42ab-a961-386f05a0b1d8",
+          "text": "Bầu trời 染まる (そまる - Nhiễm - nhuộm màu) một màu đen kịt.",
+          "x": 29.817884020991404,
+          "y": 59.15998500479599,
+          "fontSize": 14,
+          "width": 30,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "normal"
+        }
+      ],
+      "dialogue": "PANEL 1:\nMINH (Nói): \"Trời tối thui, 恐らく (おそらく - Khủng - có lẽ) phải mấy tiếng nữa mới sáng.\"\n\nPANEL 2:\nMINH (Nói): \"Bầu trời 染まる (そまる - Nhiễm - nhuộm màu) một màu đen kịt.\"\n\nPANEL 3:\n(Không có thoại)\n\n--------------------------------------------------"
+    },
+    {
+      "pageNumber": 23,
+      "imageUrl": "assets/chapters/n2/chuong-1-n2/page_23.jpg",
+      "bubbles": [
+        {
+          "id": "f692edc9-a170-4fb2-93cc-c3ad2e0790a7",
+          "text": "Hai cậu sinh viên kia, định ở đây luôn không về しまう (しまう - cất đi / hoàn thành) à? 3 giờ sáng rồi!",
+          "x": 67.36755441294505,
+          "y": 19.77945330539003,
+          "fontSize": 14,
+          "width": 30,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "normal"
+        },
+        {
+          "id": "49f98925-80cd-4be2-81d7-9ebbe3f26a25",
+          "text": "Giờ này mà còn ở trường, lát nữa giảng viên 出勤 (しゅっきん - Xuất Cần - đi làm) sớm thấy thì lại to chuyện!",
+          "x": 58.029805691136474,
+          "y": 58.938746398351796,
+          "fontSize": 14,
+          "width": 32,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "normal"
+        }
+      ],
+      "dialogue": "PANEL 1:\n(Không có thoại)\n\nPANEL 2:\nToàn (Nói): \"Hai cậu sinh viên kia, định ở đây luôn không về しまう (しまう - cất đi / hoàn thành) à? 3 giờ sáng rồi!\"\n\nPANEL 3:\nToàn (Nói): \"Giờ này mà còn ở trường, lát nữa giảng viên 出勤 (しゅっきん - Xuất Cần - đi làm) sớm thấy thì lại to chuyện!\""
+    },
+    {
+      "pageNumber": 24,
+      "imageUrl": "assets/chapters/n2/chuong-1-n2/page_24.jpg",
+      "bubbles": [
+        {
+          "id": "43bfce5c-fdc9-4c4b-b4c3-a848e133f849",
+          "text": "Dạ bọn cháu cất đồ xong ngay đây bác ơi.",
+          "x": 25.24834741244678,
+          "y": 14.956443987995085,
+          "fontSize": 14,
+          "width": 30,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "normal"
+        },
+        {
+          "id": "c01d0660-26f1-4796-a93d-87a2044b42ca",
+          "text": "Mình sẽ lấy tiếng nhắc nhở này ~きっかけに／きっかけとして／きっかけにして／契機に／契機として (~きっかけに - nhân cơ hội/nhân dịp) dọn dẹp sạch sẽ để về luôn.",
+          "x": 35.57947365785202,
+          "y": 68.18653392113971,
+          "fontSize": 14,
+          "width": 45,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "whisper"
+        }
+      ],
+      "dialogue": "PANEL 1:\n(Không có thoại)\n\nPANEL 2:\nMINH (Nói): \"Dạ bọn cháu cất đồ xong ngay đây bác ơi.\"\n\nPANEL 3:\nMINH (Thầm): \"Mình sẽ lấy tiếng nhắc nhở này ~きっかけに／きっかけとして／きっかけにして／契機に／契機として (~きっかけに - nhân cơ hội/nhân dịp) dọn dẹp sạch sẽ để về luôn.\"\n\n--------------------------------------------------"
+    },
+    {
+      "pageNumber": 25,
+      "imageUrl": "assets/chapters/n2/chuong-1-n2/page_25.jpg",
+      "bubbles": [
+        {
+          "id": "6901be54-9b4c-4e65-b603-bc25a45d2faa",
+          "text": "Học hành chăm chỉ thì tốt, nhưng cũng phải biết giữ sức khỏe nghe chưa.",
+          "x": 61.605964776084434,
+          "y": 26.6378602326752,
+          "fontSize": 14,
+          "width": 30,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "normal"
+        },
+        {
+          "id": "a0c6bab7-ba65-43bf-a7f5-36b037d9f849",
+          "text": "Dạ, tụi cháu biết rồi ạ. Bác vất vả quá.",
+          "x": 51.07616302595987,
+          "y": 53.85025034812321,
+          "fontSize": 14,
+          "width": 30,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "normal"
+        }
+      ],
+      "dialogue": "PANEL 1:\nTOÀN (Nói): \"Học hành chăm chỉ thì tốt, nhưng cũng phải biết giữ sức khỏe nghe chưa.\"\n\nPANEL 2:\nKHOA (Nói): \"Dạ, tụi cháu biết rồi ạ. Bác vất vả quá.\"\n\nPANEL 3:\n(Không có thoại)\n"
+    },
+    {
+      "pageNumber": 26,
+      "imageUrl": "assets/chapters/n2/chuong-1-n2/page_26.jpg",
+      "bubbles": [
+        {
+          "id": "9be9ba04-2117-45ba-aaa6-d94676553baf",
+          "text": "Đi theo tôi ra cổng số 2, cổng chính khóa từ 11 giờ rồi.",
+          "x": 50.082785502363215,
+          "y": 34.33697548485073,
+          "fontSize": 14,
+          "width": 30,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "normal"
+        },
+        {
+          "id": "9a101608-0f49-4b9a-87f3-cf36a3ddffc9",
+          "text": "Dạ vâng, cảm ơn bác.",
+          "x": 31.80463906818472,
+          "y": 65.26617985996968,
+          "fontSize": 14,
+          "width": 30,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "normal"
+        }
+      ],
+      "dialogue": "PANEL 1:\n(Không có thoại)\n\nPANEL 2:\nTOÀN (Nói): \"Đi theo tôi ra cổng số 2, cổng chính khóa từ 11 giờ rồi.\"\n\nPANEL 3:\nMINH (Nói): \"Dạ vâng, cảm ơn bác.\"\n\n--------------------------------------------------"
+    },
+    {
+      "pageNumber": 27,
+      "imageUrl": "assets/chapters/n2/chuong-1-n2/page_27.jpg",
+      "bubbles": [
+        {
+          "id": "c1c1115a-2399-4dd6-bd8e-94359def6dd4",
+          "text": "Về đến phòng trọ là tớ ngủ một giấc tới trưa luôn đấy.",
+          "x": 48.89073247404722,
+          "y": 54.24848044737366,
+          "fontSize": 14,
+          "width": 30,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "normal"
+        }
+      ],
+      "dialogue": "PANEL 1:\n(Không có thoại)\n\nPANEL 2:\n(Không có thoại)\n\nPANEL 3:\nKHOA (Nói): \"Về đến phòng trọ là tớ ngủ một giấc tới trưa luôn đấy.\"\n\n--------------------------------------------------"
+    },
+    {
+      "pageNumber": 28,
+      "imageUrl": "assets/chapters/n2/chuong-1-n2/page_28.jpg",
+      "bubbles": [
+        {
+          "id": "6ea4a4d2-0d13-4649-8781-e794817caaeb",
+          "text": "Công nhận giờ này gió lạnh thật.",
+          "x": 53.26159357787251,
+          "y": 11.505116461157778,
+          "fontSize": 14,
+          "width": 30,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "normal"
+        },
+        {
+          "id": "0830af21-5a7a-4272-923b-7bbac222ae74",
+          "text": "Lạnh rát cả mặt. Mau lấy xe máy ra đi.",
+          "x": 47.69867944573124,
+          "y": 65.00069312713605,
+          "fontSize": 14,
+          "width": 30,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "normal"
+        }
+      ],
+      "dialogue": "PANEL 1:\n(Không có thoại)\n\nPANEL 2:\nMINH (Nói): \"Công nhận giờ này gió lạnh thật.\"\n\nPANEL 3:\nKHOA (Nói): \"Lạnh rát cả mặt. Mau lấy xe máy ra đi.\"\n\n--------------------------------------------------"
+    },
+    {
+      "pageNumber": 29,
+      "imageUrl": "assets/chapters/n2/chuong-1-n2/page_29.jpg",
+      "bubbles": [
+        {
+          "id": "212f14c4-c2ea-4740-aac8-e12d05ace3b2",
+          "text": "Cuối cùng thì mọi gánh nặng cũng kết thúc rồi.",
+          "x": 50.082785502363215,
+          "y": 42.34582458349784,
+          "fontSize": 14,
+          "width": 30,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "normal"
+        }
+      ],
+      "dialogue": "PANEL 1:\n(Không có thoại)\n\nPANEL 2:\nMINH (Thầm): \"Cuối cùng thì mọi gánh nặng cũng kết thúc rồi.\"\n\nPANEL 3:\n(Không có thoại)\n\n--------------------------------------------------"
+    },
+    {
+      "pageNumber": 30,
+      "imageUrl": "assets/chapters/n2/chuong-1-n2/page_30.jpg",
+      "bubbles": [
+        {
+          "id": "2c707027-de55-415d-8d1e-f9bdf462ac54",
+          "text": "Nè, chụp lấy. Nay tớ chở cho, cậu buồn ngủ lái xe nguy hiểm lắm.",
+          "x": 56.837752662820485,
+          "y": 30.53166598515241,
+          "fontSize": 14,
+          "width": 30,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "normal"
+        },
+        {
+          "id": "83a7a0b2-ff0a-4648-8cf5-755188721e57",
+          "text": "Thế thì tốt quá, xin nương tựa vào tay lái của cậu.",
+          "x": 33.39404310593937,
+          "y": 68.89449887961325,
+          "fontSize": 14,
+          "width": 30,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "normal"
+        }
+      ],
+      "dialogue": "PANEL 1:\n(Không có thoại)\n\nPANEL 2:\nKHOA (Nói): \"Nè, chụp lấy. Nay tớ chở cho, cậu buồn ngủ lái xe nguy hiểm lắm.\"\n\nPANEL 3:\nMINH (Nói): \"Thế thì tốt quá, xin nương tựa vào tay lái của cậu.\"\n\n--------------------------------------------------"
+    },
+    {
+      "pageNumber": 31,
+      "imageUrl": "assets/chapters/n2/chuong-1-n2/page_31.jpg",
+      "bubbles": [
+        {
+          "id": "53c0b047-421d-436a-83c5-8d83669df256",
+          "text": "Về thẳng phòng ngủ nhé, mai lên trường nhận kết quả sau.",
+          "x": 60.81126275720711,
+          "y": 9.55821409129493,
+          "fontSize": 14,
+          "width": 30,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "normal"
+        },
+        {
+          "id": "31d1f8e7-7214-4d15-b43d-40560e2c5ece",
+          "text": "Ừ, mai tính tiếp. Đi thôi!",
+          "x": 46.10927540797658,
+          "y": 53.09803827601173,
+          "fontSize": 14,
+          "width": 30,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "normal"
+        }
+      ],
+      "dialogue": "PANEL 1:\n(Không có thoại)\n\nPANEL 2:\nKHOA (Nói): \"Về thẳng phòng ngủ nhé, mai lên trường nhận kết quả sau.\"\n\nPANEL 3:\nMINH (Nói): \"Ừ, mai tính tiếp. Đi thôi!\""
+    }
+  ],
+  "pdfUrl": "3. N2/1. Manga/Chương 1/Chương_1_N2_MANGA.pdf",
+  "seriesId": "n2"
+}

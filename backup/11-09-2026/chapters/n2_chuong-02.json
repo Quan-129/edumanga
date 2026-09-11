@@ -1,0 +1,1264 @@
+{
+  "id": "chuong-02",
+  "title": "chuong_02",
+  "subtitle": "Tự động đồng bộ từ chuong_02.json",
+  "releaseDate": "2026-09-08",
+  "pagesCount": 30,
+  "pages": [
+    {
+      "pageNumber": 1,
+      "imageUrl": "assets/chapters/add-manga/chuong-02/page_01.jpg",
+      "bubbles": [],
+      "dialogue": ""
+    },
+    {
+      "pageNumber": 2,
+      "imageUrl": "assets/chapters/add-manga/chuong-02/page_02.jpg",
+      "bubbles": [
+        {
+          "id": "f6c07466-1ed5-4d19-8f96-a0eeba3c5397",
+          "text": "Cảm ơn bà giáo đã luôn ủng hộ tiệm, xin nhận một 礼 (れい - Lễ - lễ nghi, cảm ơn, cúi chào) chân thành từ gia đình chúng tôi.",
+          "x": 23.32303203495116,
+          "y": 38.05662126342128,
+          "fontSize": 17,
+          "width": 40,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "normal"
+        },
+        {
+          "id": "cdeff3e7-f8c6-4a20-9397-02701d097afd",
+          "text": "Trong văn hóa phương Đông, động tác お辞儀 (おじぎ - Từ Nghi - cúi chào) thể hiện sự tôn trọng sâu sắc nhất đối với người đối diện.",
+          "x": 56.685784662764036,
+          "y": 66.18991578336231,
+          "fontSize": 17,
+          "width": 40,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "narration"
+        },
+        {
+          "id": "4ec9de94-a238-42cd-93fc-9151a953c0ba",
+          "text": "Sự tận tâm của bố chính là bài học lớn nhất về kinh doanh.",
+          "x": 80.31773444079816,
+          "y": 31.554114511170756,
+          "fontSize": 17,
+          "width": 40,
+          "fontWeight": "bold",
+          "fontStyle": "italic",
+          "textAlign": "center",
+          "bubbleType": "thought"
+        }
+      ],
+      "dialogue": "PANEL 1:\nNam : \"Cảm ơn bà giáo đã luôn ủng hộ tiệm, xin nhận một 礼 (れい - Lễ - lễ nghi, cảm ơn, cúi chào) chân thành từ gia đình chúng tôi.\"\n\nPANEL 2:\nNarrator (Dẫn) : \"Trong văn hóa phương Đông, động tác お辞儀 (おじぎ - Từ Nghi - cúi chào) thể hiện sự tôn trọng sâu sắc nhất đối với người đối diện.\"\n\nPANEL 3:\nMinh (Nghĩ) : \"Sự tận tâm của bố chính là bài học lớn nhất về kinh doanh.\"\n\n--------------------------------------------------"
+    },
+    {
+      "pageNumber": 3,
+      "imageUrl": "assets/chapters/add-manga/chuong-02/page_03.jpg",
+      "bubbles": [
+        {
+          "id": "f2b8b04b-9730-4a07-8db1-6837a9c8e465",
+          "text": "Chào ngài David! Rất vui được gặp ngài tại tiệm bánh của chúng tôi.",
+          "x": 72.96998535014889,
+          "y": 27.70569214759392,
+          "fontSize": 17,
+          "width": 40,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "normal"
+        },
+        {
+          "id": "4ebea3a4-560c-438e-bbf4-ba7cff842f82",
+          "text": "Một cái 握手 (あくしゅ - Ác Thủ - bắt tay) dứt khoát và nụ cười rạng rỡ sẽ mở đầu cho sự hợp tác bền chặt.",
+          "x": 26.69902486038461,
+          "y": 47.08050818491179,
+          "fontSize": 17,
+          "width": 40,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "narration"
+        },
+        {
+          "id": "3ba81eb6-9a4a-4f46-900c-86798abe38aa",
+          "text": "Bức ảnh bắt tay đẹp lắm anh hai, góc chụp rất chuyên nghiệp!",
+          "x": 76.9417416153647,
+          "y": 50.66352210962126,
+          "fontSize": 17,
+          "width": 40,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "normal"
+        }
+      ],
+      "dialogue": "PANEL 1:\nMinh : \"Chào ngài David! Rất vui được gặp ngài tại tiệm bánh của chúng tôi.\"\n\nPANEL 2:\nNarrator (Dẫn) : \"Một cái 握手 (あくしゅ - Ác Thủ - bắt tay) dứt khoát và nụ cười rạng rỡ sẽ mở đầu cho sự hợp tác bền chặt.\"\n\nPANEL 3:\nLan : \"Bức ảnh bắt tay đẹp lắm anh hai, góc chụp rất chuyên nghiệp!\"\n\n--------------------------------------------------"
+    },
+    {
+      "pageNumber": 4,
+      "imageUrl": "assets/chapters/add-manga/chuong-02/page_04.jpg",
+      "bubbles": [
+        {
+          "id": "41a60f8d-0e83-4833-96ab-2005ef713ae9",
+          "text": "Anh đừng có 意地悪 (いじわる - Ý Địa Ác - xấu tính, bắt nạt) em gái thế chứ anh hai!",
+          "x": 28.089139553210146,
+          "y": 26.378649953257078,
+          "fontSize": 17,
+          "width": 40,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "normal"
+        },
+        {
+          "id": "c61ff67b-55e4-4a4e-bf67-9986b9d95e05",
+          "text": "Chỉ là một trò いたずら (いたずら - Nghịch Ngợm - nghịch ngợm) nho nhỏ để giải tỏa căng thẳng thôi mà!",
+          "x": 77.33891724188629,
+          "y": 61.27985966431599,
+          "fontSize": 17,
+          "width": 40,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "normal"
+        },
+        {
+          "id": "f28eca3a-3931-4ac9-9d4f-2917d004e46d",
+          "text": "Coi chừng kem dính vào ống kính máy ảnh của em bây giờ!",
+          "x": 27.294788300166985,
+          "y": 65.92450734449494,
+          "fontSize": 17,
+          "width": 40,
+          "fontWeight": "900",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "scream"
+        }
+      ],
+      "dialogue": "PANEL 1:\nLan : \"Anh đừng có 意地悪 (いじわる - Ý Địa Ác - xấu tính, bắt nạt) em gái thế chứ anh hai!\"\n\nPANEL 2:\nMinh : \"Chỉ là một trò いたずら (いたずら - Nghịch Ngợm - nghịch ngợm) nho nhỏ để giải tỏa căng thẳng thôi mà!\"\n\nPANEL 3:\nLan (Hét) : \"Coi chừng kem dính vào ống kính máy ảnh của em bây giờ!\"\n\n--------------------------------------------------"
+    },
+    {
+      "pageNumber": 5,
+      "imageUrl": "assets/chapters/add-manga/chuong-02/page_05.jpg",
+      "bubbles": [
+        {
+          "id": "c5af28ec-d574-4606-90d3-348996c59eab",
+          "text": "Nếu chúng ta 節約 (せつやく - Tiết Ước - tiết kiệm) được 15% điện năng vào giờ cao điểm, lợi nhuận sẽ tăng đáng kể.",
+          "x": 79.12620756123341,
+          "y": 20.406960078741292,
+          "fontSize": 17,
+          "width": 40,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "normal"
+        },
+        {
+          "id": "f06fc232-a84f-4fe9-85a5-70bd1b42b381",
+          "text": "Phương pháp 経営 (けいえい - Kinh Doanh - kinh doanh, quản trị) hiện đại của con đã giúp tiệm giảm bớt rất nhiều chi phí lãng phí.",
+          "x": 27.493376113427775,
+          "y": 41.63963518813075,
+          "fontSize": 17,
+          "width": 40,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "normal"
+        },
+        {
+          "id": "e342dd8a-789c-4526-80fe-1ff783c5c5c8",
+          "text": "Con sẽ kết nối hệ thống cảm biến tự động ngắt điện khi không dùng nữa bố ạ.",
+          "x": 52.71402839754822,
+          "y": 64.86287358902545,
+          "fontSize": 17,
+          "width": 40,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "normal"
+        }
+      ],
+      "dialogue": "PANEL 1:\nMinh : \"Nếu chúng ta 節約 (せつやく - Tiết Ước - tiết kiệm) được 15% điện năng vào giờ cao điểm, lợi nhuận sẽ tăng đáng kể.\"\n\nPANEL 2:\nNam : \"Phương pháp 経営 (けいえい - Kinh Doanh - kinh doanh, quản trị) hiện đại của con đã giúp tiệm giảm bớt rất nhiều chi phí lãng phí.\"\n\nPANEL 3:\nMinh : \"Con sẽ kết nối hệ thống cảm biến tự động ngắt điện khi không dùng nữa bố ạ.\"\n\n--------------------------------------------------"
+    },
+    {
+      "pageNumber": 6,
+      "imageUrl": "assets/chapters/add-manga/chuong-02/page_06.jpg",
+      "bubbles": [
+        {
+          "id": "01e68ca7-b8f7-4272-90c0-bef762dbc93a",
+          "text": "Sau sự cố cháy bánh lần trước, con đã tự mình 反省 (はんせい - Phản Tỉnh - tự kiểm điểm, xem lại mình) rất nghiêm túc.",
+          "x": 25.308910167559073,
+          "y": 20.539664298174976,
+          "fontSize": 17,
+          "width": 40,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "normal"
+        },
+        {
+          "id": "e064745b-a18f-4926-92ff-7ac2dd8e4aa6",
+          "text": "Biết nhận sai và 実行 (じっこう - Thực Hành - thực hiện, chấp hành) ngay phương án khắc phục mới là điều quan trọng.",
+          "x": 78.33185630819025,
+          "y": 37.39310016625286,
+          "fontSize": 17,
+          "width": 40,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "normal"
+        },
+        {
+          "id": "1becdfe6-4cb7-4336-9d1d-635a7aee9b2a",
+          "text": "Lần này cảm biến nhiệt đã hoạt động chính xác 100% rồi bố ơi!",
+          "x": 26.50043704712382,
+          "y": 76.01002802145493,
+          "fontSize": 17,
+          "width": 40,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "normal"
+        }
+      ],
+      "dialogue": "PANEL 1:\nMinh : \"Sau sự cố cháy bánh lần trước, con đã tự mình 反省 (はんせい - Phản Tỉnh - tự kiểm điểm, xem lại mình) rất nghiêm túc.\"\n\nPANEL 2:\nNam : \"Biết nhận sai và 実行 (じっこう - Thực Hành - thực hiện, chấp hành) ngay phương án khắc phục mới là điều quan trọng.\"\n\nPANEL 3:\nMinh : \"Lần này cảm biến nhiệt đã hoạt động chính xác 100% rồi bố ơi!\"\n\n--------------------------------------------------"
+    },
+    {
+      "pageNumber": 7,
+      "imageUrl": "assets/chapters/add-manga/chuong-02/page_07.jpg",
+      "bubbles": [
+        {
+          "id": "36bdab96-d38c-46c0-ba34-79efb13c88da",
+          "text": "Sự 進歩 (しんぽ - Tiến Bộ - tiến bộ) của công nghệ đang mang đến những 変化 (へんか - Biến Hóa - thay đổi, biến hóa) tích cực cho các cửa hàng truyền thống.",
+          "x": 26.69902486038461,
+          "y": 16.986140087511565,
+          "fontSize": 17,
+          "width": 40,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "narration"
+        },
+        {
+          "id": "f2596040-8516-42b7-af35-59a86db9a0d4",
+          "text": "Thanh toán nhanh thật đấy, không còn phải xếp hàng chờ thối tiền lẻ nữa!",
+          "x": 76.34597817558235,
+          "y": 45.25213882688628,
+          "fontSize": 17,
+          "width": 40,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "normal"
+        },
+        {
+          "id": "05ce3c49-18d5-48f6-9b2e-3978df1bcd82",
+          "text": "Sự 発達 (はったつ - Phát Đạt - phát triển) này giúp doanh nghiệp nhỏ bắt kịp xu hướng thời đại số.",
+          "x": 31.663720191904382,
+          "y": 71.7929827136231,
+          "fontSize": 17,
+          "width": 40,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "normal"
+        }
+      ],
+      "dialogue": "PANEL 1:\nNarrator (Dẫn) : \"Sự 進歩 (しんぽ - Tiến Bộ - tiến bộ) của công nghệ đang mang đến những 変化 (へんか - Biến Hóa - thay đổi, biến hóa) tích cực cho các cửa hàng truyền thống.\"\n\nPANEL 2:\nKhách hàng : \"Thanh toán nhanh thật đấy, không còn phải xếp hàng chờ thối tiền lẻ nữa!\"\n\nPANEL 3:\nNarrator : \"Sự 発達 (はったつ - Phát Đạt - phát triển) này giúp doanh nghiệp nhỏ bắt kịp xu hướng thời đại số.\"\n\n--------------------------------------------------"
+    },
+    {
+      "pageNumber": 8,
+      "imageUrl": "assets/chapters/add-manga/chuong-02/page_08.jpg",
+      "bubbles": [
+        {
+          "id": "e1e4f6cb-5c1e-4c2e-80be-d3954a7f56f3",
+          "text": "Chào cả nhà! Chủ nhật này khu phố tổ chức chạy marathon để rèn luyện 体力 (たいりょく - Thể Lực - thể lực) và gây quỹ từ thiện đấy!",
+          "x": 23.521619848211955,
+          "y": 14.86287257657262,
+          "fontSize": 17,
+          "width": 40,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "normal"
+        },
+        {
+          "id": "002b8e62-7254-44ed-9413-54fd6b9c2f5e",
+          "text": "Hay quá, anh em mình cùng đăng ký 出場 (しゅつじょう - Xuất Trường - tham gia thi đấu) luôn đi Lan!",
+          "x": 76.34597817558235,
+          "y": 26.806252325604184,
+          "fontSize": 17,
+          "width": 40,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "normal"
+        },
+        {
+          "id": "43faf2b3-4895-4049-b637-e022e2a0eff6",
+          "text": "Em sẽ tham gia với tư cách nhiếp ảnh gia kiêm hậu cần cổ vũ nhé!",
+          "x": 74.36010004297444,
+          "y": 63.69802532816836,
+          "fontSize": 17,
+          "width": 40,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "normal"
+        }
+      ],
+      "dialogue": "PANEL 1:\nTuấn : \"Chào cả nhà! Chủ nhật này khu phố tổ chức chạy marathon để rèn luyện 体力 (たいりょく - Thể Lực - thể lực) và gây quỹ từ thiện đấy!\"\n\nPANEL 2:\nMinh : \"Hay quá, anh em mình cùng đăng ký 出場 (しゅつじょう - Xuất Trường - tham gia thi đấu) luôn đi Lan!\"\n\nPANEL 3:\nLan : \"Em sẽ tham gia với tư cách nhiếp ảnh gia kiêm hậu cần cổ vũ nhé!\"\n\n--------------------------------------------------"
+    },
+    {
+      "pageNumber": 9,
+      "imageUrl": "assets/chapters/add-manga/chuong-02/page_09.jpg",
+      "bubbles": [
+        {
+          "id": "33f3eb9c-63b0-462f-8731-14bed272026e",
+          "text": "Các bạn trẻ luôn 活躍 (かつやく - Hoạt Dược - hoạt động tích cực) trong mọi phong trào thể thao và thiện nguyện của địa phương.",
+          "x": 79.52338318775499,
+          "y": 21.734002273078133,
+          "fontSize": 17,
+          "width": 40,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "narration"
+        },
+        {
+          "id": "a23a8aa4-62dc-4f62-8299-196f4e91d9f8",
+          "text": "Dù có tinh thần 競争 (きょうそう - Cạnh Tranh - cạnh tranh) lành mạnh, nhưng quan trọng nhất vẫn là vượt qua chính mình.",
+          "x": 28.28772736647094,
+          "y": 27.838396367027602,
+          "fontSize": 17,
+          "width": 40,
+          "fontWeight": "bold",
+          "fontStyle": "italic",
+          "textAlign": "center",
+          "bubbleType": "thought"
+        },
+        {
+          "id": "5556f14c-a990-4aa3-a631-4d10b4255b4d",
+          "text": "Cố lên Minh ơi! Sắp đến trạm tiếp nước số 2 rồi!",
+          "x": 70.18975596449782,
+          "y": 63.53583139468862,
+          "fontSize": 17,
+          "width": 40,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "normal"
+        }
+      ],
+      "dialogue": "PANEL 1:\nNarrator (Dẫn) : \"Các bạn trẻ luôn 活躍 (かつやく - Hoạt Dược - hoạt động tích cực) trong mọi phong trào thể thao và thiện nguyện của địa phương.\"\n\nPANEL 2:\nMinh (Nghĩ) : \"Dù có tinh thần 競争 (きょうそう - Cạnh Tranh - cạnh tranh) lành mạnh, nhưng quan trọng nhất vẫn là vượt qua chính mình.\"\n\nPANEL 3:\nTuấn : \"Cố lên Minh ơi! Sắp đến trạm tiếp nước số 2 rồi!\"\n\n--------------------------------------------------"
+    },
+    {
+      "pageNumber": 10,
+      "imageUrl": "assets/chapters/add-manga/chuong-02/page_10.jpg",
+      "bubbles": [
+        {
+          "id": "759c7263-5471-4bb3-a85a-71944273a3ce",
+          "text": "Cố lên anh hai! Đội nhà luôn ở phía sau 応援 (おうえん - Ứng Viện - cổ vũ, hỗ trợ) hết mình!",
+          "x": 72.7713975368881,
+          "y": 13.93394304053683,
+          "fontSize": 17,
+          "width": 40,
+          "fontWeight": "900",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "scream"
+        },
+        {
+          "id": "208f79a3-3f04-49c2-8ce8-a7fa131b5da6",
+          "text": "Những tràng 拍手 (はくしゅ - Phách Thủ - vỗ tay) giòn giã đã tiếp thêm nguồn năng lượng vô tận cho các vận động viên.",
+          "x": 26.69902486038461,
+          "y": 82.27661604888414,
+          "fontSize": 17,
+          "width": 40,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "narration"
+        },
+        {
+          "id": "2d2bde71-8ba6-48e9-88cf-533af3c92e10",
+          "text": "Cảm ơn mọi người! Tớ sẽ tăng tốc về đích đây!",
+          "x": 75.94880254906076,
+          "y": 57.72633545365258,
+          "fontSize": 17,
+          "width": 40,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "normal"
+        }
+      ],
+      "dialogue": "PANEL 1:\nLan (Hét) : \"Cố lên anh hai! Đội nhà luôn ở phía sau 応援 (おうえん - Ứng Viện - cổ vũ, hỗ trợ) hết mình!\"\n\nPANEL 2:\nNarrator (Dẫn) : \"Những tràng 拍手 (はくしゅ - Phách Thủ - vỗ tay) giòn giã đã tiếp thêm nguồn năng lượng vô tận cho các vận động viên.\"\n\nPANEL 3:\nMinh : \"Cảm ơn mọi người! Tớ sẽ tăng tốc về đích đây!\"\n\n--------------------------------------------------"
+    },
+    {
+      "pageNumber": 11,
+      "imageUrl": "assets/chapters/add-manga/chuong-02/page_11.jpg",
+      "bubbles": [
+        {
+          "id": "7238fe14-5f5c-4b0d-a05e-6f148156fbba",
+          "text": "Bánh năng lượng của tiệm chú Nam hôm nay đạt được 人気 (にんき - Nhân Khí - yêu thích, hâm mộ) cực kỳ lớn từ các vận động viên đấy!",
+          "x": 75.94880254906076,
+          "y": 36.49366034426313,
+          "fontSize": 17,
+          "width": 40,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "normal"
+        },
+        {
+          "id": "7c257e0a-3313-42ba-8e16-22a64198ae27",
+          "text": "Có うわさ (うわさ - Đồn Đại - lời đồn) rằng công thức bí mật là do bố em ủ men tự nhiên suốt 24 giờ cơ đấy!",
+          "x": 53.309791837330586,
+          "y": 69.66971520268415,
+          "fontSize": 17,
+          "width": 40,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "normal"
+        },
+        {
+          "id": "d1750c9d-c834-460e-a6f2-e1cea2200bdf",
+          "text": "Đây là công thức chuẩn dinh dưỡng mà cả nhà tớ đã cùng nhau hoàn thiện!",
+          "x": 27.493376113427775,
+          "y": 23.62135105919577,
+          "fontSize": 17,
+          "width": 40,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "normal"
+        }
+      ],
+      "dialogue": "PANEL 1:\nTuấn : \"Bánh năng lượng của tiệm chú Nam hôm nay đạt được 人気 (にんき - Nhân Khí - yêu thích, hâm mộ) cực kỳ lớn từ các vận động viên đấy!\"\n\nPANEL 2:\nLan : \"Có うわさ (うわさ - Đồn Đại - lời đồn) rằng công thức bí mật là do bố em ủ men tự nhiên suốt 24 giờ cơ đấy!\"\n\nPANEL 3:\nMinh : \"Đây là công thức chuẩn dinh dưỡng mà cả nhà tớ đã cùng nhau hoàn thiện!\"\n\n--------------------------------------------------"
+    },
+    {
+      "pageNumber": 12,
+      "imageUrl": "assets/chapters/add-manga/chuong-02/page_12.jpg",
+      "bubbles": [
+        {
+          "id": "7193797c-03bb-4d89-a8de-5e0145f5c7b9",
+          "text": "Chúng ta cần cập nhật đầy đủ 情報 (じょうほう - Tình Báo - thông tin) về thành phần dinh dưỡng lên trang web của tiệm.",
+          "x": 52.71402839754822,
+          "y": 12.872309285067358,
+          "fontSize": 17,
+          "width": 40,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "normal"
+        },
+        {
+          "id": "37a70a93-b3be-4ac4-92b6-6134571257ee",
+          "text": "Em vừa lập nhóm để khách hàng cùng nhau 交換 (こうかん - Giao Hoán - trao đổi) công thức làm bánh tại nhà nữa nè.",
+          "x": 54.89849434341693,
+          "y": 43.12887131594733,
+          "fontSize": 17,
+          "width": 40,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "normal"
+        },
+        {
+          "id": "190b23b6-3165-415a-936f-e70d30933aac",
+          "text": "Ý tưởng này rất hay để gắn kết cộng đồng khách hàng thân thiết!",
+          "x": 75.1544512960176,
+          "y": 72.72191224965889,
+          "fontSize": 17,
+          "width": 40,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "normal"
+        }
+      ],
+      "dialogue": "PANEL 1:\nMinh : \"Chúng ta cần cập nhật đầy đủ 情報 (じょうほう - Tình Báo - thông tin) về thành phần dinh dưỡng lên trang web của tiệm.\"\n\nPANEL 2:\nLan : \"Em vừa lập nhóm để khách hàng cùng nhau 交換 (こうかん - Giao Hoán - trao đổi) công thức làm bánh tại nhà nữa nè.\"\n\nPANEL 3:\nMinh : \"Ý tưởng này rất hay để gắn kết cộng đồng khách hàng thân thiết!\"\n\n--------------------------------------------------"
+    },
+    {
+      "pageNumber": 13,
+      "imageUrl": "assets/chapters/add-manga/chuong-02/page_13.jpg",
+      "bubbles": [
+        {
+          "id": "51c4396b-932d-463c-bdd3-bd5170e83ce3",
+          "text": "Bánh mì lên men tự nhiên đang là 流行 (りゅうこう - Lưu Hành - trào lưu, dịch bệnh lây lan) ăn uống lành mạnh của giới trẻ hiện nay.",
+          "x": 34.245361764294664,
+          "y": 15.52639367374104,
+          "fontSize": 17,
+          "width": 40,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "normal"
+        },
+        {
+          "id": "cd98e2a5-ff1b-41e5-8e37-9b4307b04bd2",
+          "text": "Nhờ chiến dịch 宣伝 (せんでん - Tuyên Truyền - quảng cáo, truyền thông) trên mạng xã hội của em mà lượng khách trẻ tăng gấp đôi.",
+          "x": 75.94880254906076,
+          "y": 41.53642068274312,
+          "fontSize": 17,
+          "width": 40,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "normal"
+        },
+        {
+          "id": "1050dc58-b772-463c-a112-9f0539d8777b",
+          "text": "Một sản phẩm chất lượng khi biết cách thu hút 注目 (ちゅうもく - Chú Mục - chú ý, quan tâm) sẽ nhanh chóng lan tỏa giá trị.",
+          "x": 36.23123989690257,
+          "y": 81.7457991711494,
+          "fontSize": 17,
+          "width": 40,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "narration"
+        }
+      ],
+      "dialogue": "PANEL 1:\nLan : \"Bánh mì lên men tự nhiên đang là 流行 (りゅうこう - Lưu Hành - trào lưu, dịch bệnh lây lan) ăn uống lành mạnh của giới trẻ hiện nay.\"\n\nPANEL 2:\nMinh : \"Nhờ chiến dịch 宣伝 (せんでん - Tuyên Truyền - quảng cáo, truyền thông) trên mạng xã hội của em mà lượng khách trẻ tăng gấp đôi.\"\n\nPANEL 3:\nNarrator (Dẫn) : \"Một sản phẩm chất lượng khi biết cách thu hút 注目 (ちゅうもく - Chú Mục - chú ý, quan tâm) sẽ nhanh chóng lan tỏa giá trị.\"\n\n--------------------------------------------------"
+    },
+    {
+      "pageNumber": 14,
+      "imageUrl": "assets/chapters/add-manga/chuong-02/page_14.jpg",
+      "bubbles": [
+        {
+          "id": "014ddba6-d112-45fa-88a1-454f5ca21770",
+          "text": "Để con làm 通訳 (つうやく - Thông Dịch - thông dịch) trực tiếp lời giải thích của chuyên gia cho bố nhé.",
+          "x": 48.940859945593196,
+          "y": 12.076083968465252,
+          "fontSize": 17,
+          "width": 40,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "normal"
+        },
+        {
+          "id": "38708810-d69b-447e-bd60-adaed046775e",
+          "text": "Tuyệt vời quá! Kỹ thuật tạo bọt khí của Pháp đúng là rất độc đáo.",
+          "x": 56.884372476024836,
+          "y": 89.81126684255808,
+          "fontSize": 17,
+          "width": 40,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "normal"
+        },
+        {
+          "id": "7fab67d0-0bbd-4a8b-936f-e8a58b962bcd",
+          "text": "Tối nay con sẽ 翻訳 (ほんやく - Phiên Dịch - biên dịch sách báo) toàn bộ tài liệu kỹ thuật này sang tiếng Việt để bố đọc kỹ hơn ạ.",
+          "x": 53.70696746385217,
+          "y": 63.40312717525494,
+          "fontSize": 17,
+          "width": 40,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "normal"
+        }
+      ],
+      "dialogue": "PANEL 1:\nMinh : \"Để con làm 通訳 (つうやく - Thông Dịch - thông dịch) trực tiếp lời giải thích của chuyên gia cho bố nhé.\"\n\nPANEL 2:\nNam : \"Tuyệt vời quá! Kỹ thuật tạo bọt khí của Pháp đúng là rất độc đáo.\"\n\nPANEL 3:\nMinh : \"Tối nay con sẽ 翻訳 (ほんやく - Phiên Dịch - biên dịch sách báo) toàn bộ tài liệu kỹ thuật này sang tiếng Việt để bố đọc kỹ hơn ạ.\"\n\n--------------------------------------------------"
+    },
+    {
+      "pageNumber": 15,
+      "imageUrl": "assets/chapters/add-manga/chuong-02/page_15.jpg",
+      "bubbles": [
+        {
+          "id": "13a958e5-aba5-4eff-9a53-fe8bfdf94245",
+          "text": "Anh Minh ơi, có 伝言 (でんごん - Truyền Ngôn - lời nhắn) từ ban tổ chức hội chợ nông sản muốn đặt 200 ổ bánh mì vào sáng mai!",
+          "x": 76.54456598884313,
+          "y": 37.79121282455391,
+          "fontSize": 17,
+          "width": 40,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "normal"
+        },
+        {
+          "id": "8c229f66-68ef-4699-85e7-62a7f0433892",
+          "text": "Tuyệt vời! Em ghi lại số điện thoại để tí nữa anh làm 報告 (ほうこく - Báo Cáo - báo cáo) kế hoạch sản xuất cho bố duyệt nhé.",
+          "x": 26.301849233863027,
+          "y": 38.985550799457066,
+          "fontSize": 17,
+          "width": 40,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "normal"
+        },
+        {
+          "id": "8c9c9610-fc32-4f3f-9451-ae07c381b93a",
+          "text": "Em đã ghi chú rõ số lượng và thời gian giao hàng chi tiết rồi đây!",
+          "x": 49.53662338537556,
+          "y": 81.98171789597072,
+          "fontSize": 17,
+          "width": 40,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "normal"
+        }
+      ],
+      "dialogue": "PANEL 1:\nLan : \"Anh Minh ơi, có 伝言 (でんごん - Truyền Ngôn - lời nhắn) từ ban tổ chức hội chợ nông sản muốn đặt 200 ổ bánh mì vào sáng mai!\"\n\nPANEL 2:\nMinh : \"Tuyệt vời! Em ghi lại số điện thoại để tí nữa anh làm 報告 (ほうこく - Báo Cáo - báo cáo) kế hoạch sản xuất cho bố duyệt nhé.\"\n\nPANEL 3:\nLan : \"Em đã ghi chú rõ số lượng và thời gian giao hàng chi tiết rồi đây!\"\n\n--------------------------------------------------"
+    },
+    {
+      "pageNumber": 16,
+      "imageUrl": "assets/chapters/add-manga/chuong-02/page_16.jpg",
+      "bubbles": [
+        {
+          "id": "22bbcd4e-6a04-4355-97f7-0d5d3a2dcbbb",
+          "text": "Bố ơi, con đang tiến hành 録画 (ろくが - Lục Họa - ghi hình, quay video) quy trình rạch bánh để đăng lên kênh học nghề nhé!",
+          "x": 26.69902486038461,
+          "y": 33.14656514437497,
+          "fontSize": 17,
+          "width": 40,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "normal"
+        },
+        {
+          "id": "e8d67dbd-a2eb-4a2b-84c1-9b078a3ddf53",
+          "text": "Cứ tự nhiên con gái, chia sẻ bí quyết làm bánh ngon cho cộng đồng là điều bố luôn mong muốn.",
+          "x": 29.0820786195141,
+          "y": 76.80625333805703,
+          "fontSize": 17,
+          "width": 40,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "normal"
+        },
+        {
+          "id": "fa2432d3-9b1a-48ba-bc19-6730fd31bb30",
+          "text": "Video này chắc chắn sẽ đạt triệu view cho xem!",
+          "x": 77.73609286840788,
+          "y": 76.1427322408886,
+          "fontSize": 17,
+          "width": 40,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "normal"
+        }
+      ],
+      "dialogue": "PANEL 1:\nLan : \"Bố ơi, con đang tiến hành 録画 (ろくが - Lục Họa - ghi hình, quay video) quy trình rạch bánh để đăng lên kênh học nghề nhé!\"\n\nPANEL 2:\nNam : \"Cứ tự nhiên con gái, chia sẻ bí quyết làm bánh ngon cho cộng đồng là điều bố luôn mong muốn.\"\n\nPANEL 3:\nLan : \"Video này chắc chắn sẽ đạt triệu view cho xem!\"\n\n--------------------------------------------------"
+    },
+    {
+      "pageNumber": 17,
+      "imageUrl": "assets/chapters/add-manga/chuong-02/page_17.jpg",
+      "bubbles": [
+        {
+          "id": "312bedaa-fbad-40d8-ab61-de9620b91291",
+          "text": "Khu vực ngã tư trước cửa hàng đang rơi vào tình trạng 混雑 (こんざつ - Hỗn Tạp - đông đúc, hỗn loạn) nghiêm trọng rồi.",
+          "x": 50.529562451679524,
+          "y": 14.33205569883788,
+          "fontSize": 17,
+          "width": 40,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "normal"
+        },
+        {
+          "id": "b2730b99-b8fa-440c-85c7-a1c1136233ef",
+          "text": "Tuyến đường chính bị 渋滞 (じゅうたい - Sáp Trệ - kẹt xe, tắc nghẽn) dài hơn 2 cây số do trời mưa to.",
+          "x": 52.71402839754822,
+          "y": 50.26540945132021,
+          "fontSize": 17,
+          "width": 40,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "normal"
+        },
+        {
+          "id": "a9d75169-ac5b-412a-9b34-7bddd8e67606",
+          "text": "Chúng ta phải đổi lộ trình giao bánh sang các con hẻm nhỏ để không bị trễ giờ của khách.",
+          "x": 64.62929719319568,
+          "y": 88.3810101428336,
+          "fontSize": 17,
+          "width": 40,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "normal"
+        }
+      ],
+      "dialogue": "PANEL 1:\nMinh : \"Khu vực ngã tư trước cửa hàng đang rơi vào tình trạng 混雑 (こんざつ - Hỗn Tạp - đông đúc, hỗn loạn) nghiêm trọng rồi.\"\n\nPANEL 2:\nTuấn : \"Tuyến đường chính bị 渋滞 (じゅうたい - Sáp Trệ - kẹt xe, tắc nghẽn) dài hơn 2 cây số do trời mưa to.\"\n\nPANEL 3:\nMinh : \"Chúng ta phải đổi lộ trình giao bánh sang các con hẻm nhỏ để không bị trễ giờ của khách.\"\n\n--------------------------------------------------"
+    },
+    {
+      "pageNumber": 18,
+      "imageUrl": "assets/chapters/add-manga/chuong-02/page_18.jpg",
+      "bubbles": [
+        {
+          "id": "fa1b86be-2296-4454-bd78-7f4696c0a2d2",
+          "text": "Cơn mưa lớn bất ngờ đã dẫn đến một vụ 衝突 (しょうとつ - Xung Đột - va chạm, xung đột) nhỏ giữa hai phương tiện.",
+          "x": 76.9417416153647,
+          "y": 20.93777695647603,
+          "fontSize": 17,
+          "width": 40,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "narration"
+        },
+        {
+          "id": "90b0dc56-c3e1-4c72-a917-d3cf98f5e390",
+          "text": "May quá, không ai bị thương nặng và 被害 (ひがい - Bị Hại - thiệt hại) về xe cộ cũng không đáng kể.",
+          "x": 28.28772736647094,
+          "y": 46.68239552661074,
+          "fontSize": 17,
+          "width": 40,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "normal"
+        },
+        {
+          "id": "167a470a-6613-4fc0-9a89-dc331ddb88dd",
+          "text": "Trời mưa đường trơn, những 事故 (じこ - Sự Cố - tai nạn, sự cố) giao thông rất dễ xảy ra nếu không chú ý quan sát.",
+          "x": 49.93379901189715,
+          "y": 83.57416852917493,
+          "fontSize": 17,
+          "width": 40,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "normal"
+        }
+      ],
+      "dialogue": "PANEL 1:\nNarrator (Dẫn) : \"Cơn mưa lớn bất ngờ đã dẫn đến một vụ 衝突 (しょうとつ - Xung Đột - va chạm, xung đột) nhỏ giữa hai phương tiện.\"\n\nPANEL 2:\nTuấn : \"May quá, không ai bị thương nặng và 被害 (ひがい - Bị Hại - thiệt hại) về xe cộ cũng không đáng kể.\"\n\nPANEL 3:\nMinh : \"Trời mưa đường trơn, những 事故 (じこ - Sự Cố - tai nạn, sự cố) giao thông rất dễ xảy ra nếu không chú ý quan sát.\"\n\n--------------------------------------------------"
+    },
+    {
+      "pageNumber": 19,
+      "imageUrl": "assets/chapters/add-manga/chuong-02/page_19.jpg",
+      "bubbles": [
+        {
+          "id": "2f059a92-11af-480c-9a20-88879cd9d5d2",
+          "text": "Vụ việc đã được lập biên bản giải quyết ổn thỏa, các phương tiện có thể tiếp tục di chuyển.",
+          "x": 25.308910167559073,
+          "y": 21.232675109389458,
+          "fontSize": 17,
+          "width": 40,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "normal"
+        },
+        {
+          "id": "3979f37c-3f1c-478a-9f4a-88bb9774e451",
+          "text": "Mỗi một 事件 (じけん - Sự Kiện - vụ án, sự việc) phát sinh ngoài đường đều cần cách xử lý bình tĩnh và tôn trọng pháp luật.",
+          "x": 75.94880254906076,
+          "y": 76.43763039380204,
+          "fontSize": 17,
+          "width": 40,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "narration"
+        },
+        {
+          "id": "5e19a790-54ca-47da-91bc-8354acdcc56a",
+          "text": "Văn hóa giao thông văn minh sẽ giúp mọi người an toàn trở về nhà.",
+          "x": 23.521619848211955,
+          "y": 64.09613798646942,
+          "fontSize": 17,
+          "width": 40,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "normal"
+        }
+      ],
+      "dialogue": "PANEL 1:\nCảnh sát giao thông : \"Vụ việc đã được lập biên bản giải quyết ổn thỏa, các phương tiện có thể tiếp tục di chuyển.\"\n\nPANEL 2:\nNarrator (Dẫn) : \"Mỗi một 事件 (じけん - Sự Kiện - vụ án, sự việc) phát sinh ngoài đường đều cần cách xử lý bình tĩnh và tôn trọng pháp luật.\"\n\nPANEL 3:\nMinh : \"Văn hóa giao thông văn minh sẽ giúp mọi người an toàn trở về nhà.\"\n\n--------------------------------------------------"
+    },
+    {
+      "pageNumber": 20,
+      "imageUrl": "assets/chapters/add-manga/chuong-02/page_20.jpg",
+      "bubbles": [
+        {
+          "id": "b9426ce0-f526-4926-b3e6-c36585ea92a6",
+          "text": "Máy nhào bột chính gặp 故障 (こしょう - Cố Chướng - hỏng hóc) đột ngột rồi Minh ơi!",
+          "x": 45.167691493638166,
+          "y": 15.393689454307355,
+          "fontSize": 17,
+          "width": 40,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "normal"
+        },
+        {
+          "id": "fb5215ee-7466-4d34-9680-6d289ccf23db",
+          "text": "Bố đừng lo, con đã học khóa bảo trì cơ bản, để con tiến hành 修理 (しゅうり - Tu Lý - sửa chữa) ngay ạ.",
+          "x": 65.22506063297804,
+          "y": 55.33765950384627,
+          "fontSize": 17,
+          "width": 40,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "normal"
+        },
+        {
+          "id": "0263fab8-62b4-47d9-8132-990c8dad88ba",
+          "text": "Tuyệt vời, máy chạy êm ru trở lại rồi! Con trai bố đa tài thật.",
+          "x": 75.94880254906076,
+          "y": 92.0672385729307,
+          "fontSize": 17,
+          "width": 40,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "normal"
+        }
+      ],
+      "dialogue": "PANEL 1:\nNam : \"Máy nhào bột chính gặp 故障 (こしょう - Cố Chướng - hỏng hóc) đột ngột rồi Minh ơi!\"\n\nPANEL 2:\nMinh : \"Bố đừng lo, con đã học khóa bảo trì cơ bản, để con tiến hành 修理 (しゅうり - Tu Lý - sửa chữa) ngay ạ.\"\n\nPANEL 3:\nNam : \"Tuyệt vời, máy chạy êm ru trở lại rồi! Con trai bố đa tài thật.\"\n\n--------------------------------------------------"
+    },
+    {
+      "pageNumber": 21,
+      "imageUrl": "assets/chapters/add-manga/chuong-02/page_21.jpg",
+      "bubbles": [
+        {
+          "id": "ecee6a96-ec59-467f-b6be-607e7c5256fd",
+          "text": "Đây là 時期 (じき - Thời Kỳ - thời kỳ, giai đoạn) bận rộn nhất trong năm của tiệm bánh chúng ta.",
+          "x": 33.25242269799071,
+          "y": 16.322618990343145,
+          "fontSize": 17,
+          "width": 40,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "normal"
+        },
+        {
+          "id": "10d184ba-a72f-42cf-917a-d43750415d46",
+          "text": "Chúng ta cần phân ca làm việc hợp lý để mọi người không bị kiệt sức bố ạ.",
+          "x": 37.81994240298891,
+          "y": 89.14774574538966,
+          "fontSize": 17,
+          "width": 40,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "normal"
+        },
+        {
+          "id": "461e21ac-87f6-4b8d-be0c-ab271feec1a9",
+          "text": "Em đã lên danh sách đặt hàng online trước để chủ động nguyên liệu rồi!",
+          "x": 78.92761974797263,
+          "y": 63.80123983355599,
+          "fontSize": 17,
+          "width": 40,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "normal"
+        }
+      ],
+      "dialogue": "PANEL 1:\nNam : \"Đây là 時期 (じき - Thời Kỳ - thời kỳ, giai đoạn) bận rộn nhất trong năm của tiệm bánh chúng ta.\"\n\nPANEL 2:\nMinh : \"Chúng ta cần phân ca làm việc hợp lý để mọi người không bị kiệt sức bố ạ.\"\n\nPANEL 3:\nLan : \"Em đã lên danh sách đặt hàng online trước để chủ động nguyên liệu rồi!\"\n\n--------------------------------------------------"
+    },
+    {
+      "pageNumber": 22,
+      "imageUrl": "assets/chapters/add-manga/chuong-02/page_22.jpg",
+      "bubbles": [
+        {
+          "id": "ae98aee1-2955-4da5-a0d6-43076873f7b4",
+          "text": "Mẹ ơi con mệt quá, nướng bánh liên tục 4 tiếng mỏi nhừ cả tay ~もの／〜もん (~もの / 〜もん - vì mệt mà... nũng nịu biện bạch)!",
+          "x": 75.94880254906076,
+          "y": 27.838396367027602,
+          "fontSize": 17,
+          "width": 40,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "normal"
+        },
+        {
+          "id": "389f88cd-fcc3-49cb-a44e-a5c298f92dfe",
+          "text": "Ăn miếng dưa hấu mát ngọt này cho lại sức nào con gái yêu.",
+          "x": 26.103261420602237,
+          "y": 45.886170210008636,
+          "fontSize": 17,
+          "width": 40,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "normal"
+        },
+        {
+          "id": "9dced08c-862f-4dc9-b03b-af5db3b54223",
+          "text": "Có mẹ bồi dưỡng là con nạp đầy 100% năng lượng ngay!",
+          "x": 74.75727566949601,
+          "y": 81.71630945710334,
+          "fontSize": 17,
+          "width": 40,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "normal"
+        }
+      ],
+      "dialogue": "PANEL 1:\nLan : \"Mẹ ơi con mệt quá, nướng bánh liên tục 4 tiếng mỏi nhừ cả tay ~もの／〜もん (~もの / 〜もん - vì mệt mà... nũng nịu biện bạch)!\"\n\nPANEL 2:\nHân : \"Ăn miếng dưa hấu mát ngọt này cho lại sức nào con gái yêu.\"\n\nPANEL 3:\nLan : \"Có mẹ bồi dưỡng là con nạp đầy 100% năng lượng ngay!\"\n\n--------------------------------------------------"
+    },
+    {
+      "pageNumber": 23,
+      "imageUrl": "assets/chapters/add-manga/chuong-02/page_23.jpg",
+      "bubbles": [
+        {
+          "id": "eab3c38f-a557-4098-801b-d293fdf57761",
+          "text": "Mặc dù mệt mỏi ~ものの (~ものの - mặc dù... nhưng...) mình vẫn phải hoàn thành xong bài luận công nghệ này trước hạn chót.",
+          "x": 79.3247953744942,
+          "y": 19.876143201006556,
+          "fontSize": 17,
+          "width": 40,
+          "fontWeight": "bold",
+          "fontStyle": "italic",
+          "textAlign": "center",
+          "bubbleType": "thought"
+        },
+        {
+          "id": "95816e43-73b1-4d74-9576-87c95ab71e23",
+          "text": "Ý chí kiên định trước những áp lực là phẩm chất quý giá nhất của tuổi trẻ.",
+          "x": 26.50043704712382,
+          "y": 39.649071896625486,
+          "fontSize": 17,
+          "width": 40,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "narration"
+        },
+        {
+          "id": "13174d0d-da02-4796-b663-12f07bb4f8d4",
+          "text": "Không được bỏ cuộc khi mục tiêu lớn vẫn còn ở phía trước!",
+          "x": 68.6010534584115,
+          "y": 78.66411241012861,
+          "fontSize": 17,
+          "width": 40,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "whisper"
+        }
+      ],
+      "dialogue": "PANEL 1:\nMinh (Nghĩ) : \"Mặc dù mệt mỏi ~ものの (~ものの - mặc dù... nhưng...) mình vẫn phải hoàn thành xong bài luận công nghệ này trước hạn chót.\"\n\nPANEL 2:\nNarrator (Dẫn) : \"Ý chí kiên định trước những áp lực là phẩm chất quý giá nhất của tuổi trẻ.\"\n\nPANEL 3:\nMinh (Thầm) : \"Không được bỏ cuộc khi mục tiêu lớn vẫn còn ở phía trước!\"\n\n--------------------------------------------------"
+    },
+    {
+      "pageNumber": 24,
+      "imageUrl": "assets/chapters/add-manga/chuong-02/page_24.jpg",
+      "bubbles": [
+        {
+          "id": "6e5cf875-0fb5-41d2-907c-272ace3d987f",
+          "text": "Tiệm bánh không chỉ phục vụ khách quen Nはもとより〜も (Nはもとより〜も - không chỉ khách quen mà ngay cả...) khách du lịch quốc tế cũng vô cùng yêu thích.",
+          "x": 23.124444221690375,
+          "y": 16.45532320977683,
+          "fontSize": 17,
+          "width": 40,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "narration"
+        },
+        {
+          "id": "ffc85b39-c275-4511-9f04-e5b7f329f2ce",
+          "text": "Bánh mì Việt Nam ở đây mang hương vị truyền thống rất độc đáo!",
+          "x": 49.73521119863636,
+          "y": 48.967856971029434,
+          "fontSize": 17,
+          "width": 40,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "normal"
+        },
+        {
+          "id": "4cade3fa-ec24-4420-9d2d-de4e529af147",
+          "text": "Cảm ơn sự ủng hộ nhiệt tình của tất cả mọi người ạ!",
+          "x": 48.54368431907161,
+          "y": 88.24830592339993,
+          "fontSize": 17,
+          "width": 40,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "normal"
+        }
+      ],
+      "dialogue": "PANEL 1:\nNarrator (Dẫn) : \"Tiệm bánh không chỉ phục vụ khách quen Nはもとより〜も (Nはもとより〜も - không chỉ khách quen mà ngay cả...) khách du lịch quốc tế cũng vô cùng yêu thích.\"\n\nPANEL 2:\nKhách du lịch : \"Bánh mì Việt Nam ở đây mang hương vị truyền thống rất độc đáo!\"\n\nPANEL 3:\nLan : \"Cảm ơn sự ủng hộ nhiệt tình của tất cả mọi người ạ!\"\n\n--------------------------------------------------"
+    },
+    {
+      "pageNumber": 25,
+      "imageUrl": "assets/chapters/add-manga/chuong-02/page_25.jpg",
+      "bubbles": [
+        {
+          "id": "9ffa848b-ca92-4b6e-8cc5-d4a649edc990",
+          "text": "Doanh thu N1はともかく（として）N2は / が (N1はともかく（として） - Doanh thu thì tạm gác lại, trước hết) chất lượng vệ sinh an toàn thực phẩm phải là ưu tiên hàng đầu.",
+          "x": 74.36010004297444,
+          "y": 21.232675109389458,
+          "fontSize": 17,
+          "width": 40,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "normal"
+        },
+        {
+          "id": "a4cf27ba-8714-4e1a-b1dd-5a29c43fa386",
+          "text": "Đúng vậy con trai! Uy tín thương hiệu tạo nên từ sự trung thực với khách hàng.",
+          "x": 46.5578061864637,
+          "y": 49.07107147641705,
+          "fontSize": 17,
+          "width": 40,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "normal"
+        },
+        {
+          "id": "0c651e97-bee5-4a84-adc4-aedd1c18d497",
+          "text": "Con sẽ tiếp tục duy trì tiêu chuẩn kiểm định nghiêm ngặt nhất cho tiệm.",
+          "x": 28.684902992992516,
+          "y": 77.20436599635808,
+          "fontSize": 17,
+          "width": 40,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "normal"
+        }
+      ],
+      "dialogue": "PANEL 1:\nMinh : \"Doanh thu N1はともかく（として）N2は / が (N1はともかく（として） - Doanh thu thì tạm gác lại, trước hết) chất lượng vệ sinh an toàn thực phẩm phải là ưu tiên hàng đầu.\"\n\nPANEL 2:\nNam : \"Đúng vậy con trai! Uy tín thương hiệu tạo nên từ sự trung thực với khách hàng.\"\n\nPANEL 3:\nMinh : \"Con sẽ tiếp tục duy trì tiêu chuẩn kiểm định nghiêm ngặt nhất cho tiệm.\"\n\n--------------------------------------------------"
+    },
+    {
+      "pageNumber": 26,
+      "imageUrl": "assets/chapters/add-manga/chuong-02/page_26.jpg",
+      "bubbles": [
+        {
+          "id": "6640a4d3-8469-4df5-8ca6-c53b2067f80f",
+          "text": "Giao trễ 10 phút N1はまだしもN2... (N1はまだしも - Trễ 10 phút thì còn châm chước được, chứ) để khách đợi nguội bánh thì nhất quyết không được.",
+          "x": 78.72903193471184,
+          "y": 43.79239241311575,
+          "fontSize": 17,
+          "width": 40,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "normal"
+        },
+        {
+          "id": "4e4874f9-d899-4ae9-92b6-f008495a3aa5",
+          "text": "Anh xử lý tặng thêm bánh ngọt xin lỗi thế này khách hàng hài lòng lắm đấy!",
+          "x": 25.507497980819867,
+          "y": 32.91064641955366,
+          "fontSize": 17,
+          "width": 40,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "normal"
+        },
+        {
+          "id": "0aefec29-3abc-4fb7-a0f6-a137849dccc0",
+          "text": "Sự hài lòng của khách hàng là thước đo giá trị dịch vụ của chúng ta.",
+          "x": 30.472193312339634,
+          "y": 69.66971520268415,
+          "fontSize": 17,
+          "width": 40,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "normal"
+        }
+      ],
+      "dialogue": "PANEL 1:\nMinh : \"Giao trễ 10 phút N1はまだしもN2... (N1はまだしも - Trễ 10 phút thì còn châm chước được, chứ) để khách đợi nguội bánh thì nhất quyết không được.\"\n\nPANEL 2:\nLan : \"Anh xử lý tặng thêm bánh ngọt xin lỗi thế này khách hàng hài lòng lắm đấy!\"\n\nPANEL 3:\nMinh : \"Sự hài lòng của khách hàng là thước đo giá trị dịch vụ của chúng ta.\"\n\n--------------------------------------------------"
+    },
+    {
+      "pageNumber": 27,
+      "imageUrl": "assets/chapters/add-manga/chuong-02/page_27.jpg",
+      "bubbles": [
+        {
+          "id": "fe27ee83-62cc-4d82-b7b5-d266670c6d5c",
+          "text": "Bán sạch bách 500 chiếc bánh trong một buổi chiều, cảm giác vui sướng ~たまらない (~たまらない - vui sướng không chịu nổi/cực kỳ vui sướng) luôn anh ơi!",
+          "x": 30.670781125600428,
+          "y": 16.588027429210513,
+          "fontSize": 17,
+          "width": 40,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "normal"
+        },
+        {
+          "id": "5db7bbc0-e58d-41e3-ae20-b101b961a01b",
+          "text": "Bõ công cả nhà cùng nhau thức khuya dậy sớm chuẩn bị.",
+          "x": 26.69902486038461,
+          "y": 70.46594051928625,
+          "fontSize": 17,
+          "width": 40,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "normal"
+        },
+        {
+          "id": "c3ae99fa-f169-4d6b-b6fe-ef8d259593b4",
+          "text": "Hôm nay ai cũng làm việc rất xuất sắc!",
+          "x": 77.53750505514708,
+          "y": 30.65467468918103,
+          "fontSize": 17,
+          "width": 40,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "normal"
+        }
+      ],
+      "dialogue": "PANEL 1:\nLan : \"Bán sạch bách 500 chiếc bánh trong một buổi chiều, cảm giác vui sướng ~たまらない (~たまらない - vui sướng không chịu nổi/cực kỳ vui sướng) luôn anh ơi!\"\n\nPANEL 2:\nNam : \"Bõ công cả nhà cùng nhau thức khuya dậy sớm chuẩn bị.\"\n\nPANEL 3:\nHân : \"Hôm nay ai cũng làm việc rất xuất sắc!\"\n\n--------------------------------------------------"
+    },
+    {
+      "pageNumber": 28,
+      "imageUrl": "assets/chapters/add-manga/chuong-02/page_28.jpg",
+      "bubbles": [
+        {
+          "id": "c1c8c510-69a3-42b0-8243-829d46969661",
+          "text": "Thay mặt ban điều hành khu phố, cảm ơn tiệm bánh gia đình đã luôn đồng hành cùng các hoạt động cộng đồng!",
+          "x": 22.72726859516879,
+          "y": 25.744618570134715,
+          "fontSize": 17,
+          "width": 40,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "normal"
+        },
+        {
+          "id": "560dd626-547d-4349-970b-110775a88d34",
+          "text": "Được đóng góp cho khu phố là niềm vinh dự lớn của gia đình chúng tôi.",
+          "x": 22.528680781908,
+          "y": 56.26658903988206,
+          "fontSize": 17,
+          "width": 40,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "normal"
+        },
+        {
+          "id": "8d5a6f11-e275-4ab6-aac2-1ed67cec077e",
+          "text": "Tụi mình sẽ tiếp tục đồng hành trong nhiều dự án sắp tới nữa!",
+          "x": 72.7713975368881,
+          "y": 65.95399705854099,
+          "fontSize": 17,
+          "width": 40,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "normal"
+        }
+      ],
+      "dialogue": "PANEL 1:\nTuấn : \"Thay mặt ban điều hành khu phố, cảm ơn tiệm bánh gia đình đã luôn đồng hành cùng các hoạt động cộng đồng!\"\n\nPANEL 2:\nNam : \"Được đóng góp cho khu phố là niềm vinh dự lớn của gia đình chúng tôi.\"\n\nPANEL 3:\nMinh : \"Tụi mình sẽ tiếp tục đồng hành trong nhiều dự án sắp tới nữa!\"\n\n--------------------------------------------------"
+    },
+    {
+      "pageNumber": 29,
+      "imageUrl": "assets/chapters/add-manga/chuong-02/page_29.jpg",
+      "bubbles": [
+        {
+          "id": "d2e9ad71-a6ba-452d-b39c-5fb2cec985c5",
+          "text": "Mỗi ngày trôi qua đều mang lại những bài học quý giá về cuộc sống và công việc.",
+          "x": 23.720207661472745,
+          "y": 10.749041774128413,
+          "fontSize": 17,
+          "width": 40,
+          "fontWeight": "bold",
+          "fontStyle": "italic",
+          "textAlign": "center",
+          "bubbleType": "thought"
+        },
+        {
+          "id": "9c475732-fdbc-433a-832e-f5d923a14323",
+          "text": "Khi ta biết cân bằng giữa nỗ lực cá nhân và sự cống hiến cho tập thể, thành công sẽ tự nhiên mỉm cười.",
+          "x": 51.12532589146189,
+          "y": 38.21881519690102,
+          "fontSize": 17,
+          "width": 40,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "narration"
+        },
+        {
+          "id": "709e8608-718c-4539-815e-a6580cf37287",
+          "text": "Ngày mai sẽ là một ngày mới tràn đầy hy vọng.",
+          "x": 51.32391370472269,
+          "y": 82.80743292661887,
+          "fontSize": 17,
+          "width": 40,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "whisper"
+        }
+      ],
+      "dialogue": "PANEL 1:\nMinh (Nghĩ) : \"Mỗi ngày trôi qua đều mang lại những bài học quý giá về cuộc sống và công việc.\"\n\nPANEL 2:\nNarrator (Dẫn) : \"Khi ta biết cân bằng giữa nỗ lực cá nhân và sự cống hiến cho tập thể, thành công sẽ tự nhiên mỉm cười.\"\n\nPANEL 3:\nMinh (Thầm) : \"Ngày mai sẽ là một ngày mới tràn đầy hy vọng.\"\n\n--------------------------------------------------"
+    },
+    {
+      "pageNumber": 30,
+      "imageUrl": "assets/chapters/add-manga/chuong-02/page_30.jpg",
+      "bubbles": [
+        {
+          "id": "8488cab7-bf11-4bb2-9200-be3cac51fd05",
+          "text": "Mọi thử thách đều sẽ qua đi khi chúng ta luôn giữ vững niềm tin và tình yêu thương.",
+          "x": 48.940859945593196,
+          "y": 17.384252745812617,
+          "fontSize": 17,
+          "width": 40,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "normal"
+        },
+        {
+          "id": "72a7e287-db51-427c-8f23-5267be7cb065",
+          "text": "Sức khỏe dồi dào, sự gắn kết cộng đồng và tinh thần tiến bộ không ngừng chính là chìa khóa mở ra tương lai rực rỡ.",
+          "x": 77.93468068166867,
+          "y": 44.58861772971785,
+          "fontSize": 17,
+          "width": 40,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "narration"
+        },
+        {
+          "id": "90708338-2b13-42f5-b7b0-1dd4674e3c8e",
+          "text": "Hãy luôn chăm sóc bản thân thật tốt và lan tỏa những điều tích cực mỗi ngày nhé!",
+          "x": 28.089139553210146,
+          "y": 64.3615464253368,
+          "fontSize": 17,
+          "width": 40,
+          "fontWeight": "bold",
+          "fontStyle": "normal",
+          "textAlign": "center",
+          "bubbleType": "normal"
+        }
+      ],
+      "dialogue": "PANEL 1:\nHân : \"Mọi thử thách đều sẽ qua đi khi chúng ta luôn giữ vững niềm tin và tình yêu thương.\"\n\nPANEL 2:\nNarrator (Dẫn) : \"Sức khỏe dồi dào, sự gắn kết cộng đồng và tinh thần tiến bộ không ngừng chính là chìa khóa mở ra tương lai rực rỡ.\"\n\nPANEL 3:\nNarrator : \"Hãy luôn chăm sóc bản thân thật tốt và lan tỏa những điều tích cực mỗi ngày nhé!\""
+    }
+  ],
+  "pdfUrl": "",
+  "seriesId": "n2"
+}
