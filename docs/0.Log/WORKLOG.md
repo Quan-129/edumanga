@@ -3,6 +3,47 @@
 
 Nơi ghi lại toàn bộ tiến trình phát triển, các quyết định kiến trúc kỹ thuật (ADR) và danh sách việc cần làm tiếp theo cho dự án EduManga Hub.
 
+## [2026-09-12 19:40] - Phóng To Toàn Diện Sơ Đồ Mindmap Phân Tích Hán Tự (Radical & Compound Mindmap) Trên Flashcard Bước 1
+
+### 🎯 Mục tiêu
+- Xử lý phản hồi của người dùng kèm ảnh chụp màn hình: *"cách phần phân tích hán tự bị bé quá hơi khó nhìn"*.
+- **Vấn đề trước đây**:
+  - Tại giao diện Bước 1 Flashcard (đặc biệt khi mở ở chế độ Toàn màn hình / Fullscreen trên màn hình độ phân giải cao 2560x1330):
+    - Các hình tròn Hán tự/Bộ thủ tâm và vệ tinh chỉ có kích thước bán kính `centerR = 24px` (~48px đường kính) và `satR = 17px` (~34px đường kính), cỡ chữ chỉ 15-19px, quá nhỏ bé so với tiêu đề từ vựng khổng lồ `味方` (font-size 72-130px) ở phía trên.
+    - Sơ đồ SVG trong CSS chế độ toàn màn hình (`.mimikara-modal.is-fullscreen`) bị bóp ép cứng ở `height: 160px !important` và `max-width: 440px !important`, khiến khung chứa 960px bị thừa khoảng trống lớn trong khi hình vẽ bên trong bị thu nhỏ như hạt đậu.
+    - Thanh thông tin giải nghĩa bộ thủ `.graph-node-detail` và thanh câu thần chú `.graph-story-hook` có kích thước chữ nhỏ (0.84rem - 0.92rem), gây mỏi mắt và khó đọc khi ngồi cách xa màn hình.
+- **Giải pháp triển khai**:
+  1. **Tăng kích thước hình học SVG & Cỡ chữ (Gấp đôi đường kính & Font size)**:
+     - Mở rộng viewBox SVG từ `360 x 145` lên `640 x 220` (`cx = 320, cy = 110`).
+     - **Node trung tâm (`centerR`)**: Tăng từ `24` lên `50` (đường kính thực tế đạt **114px** khi hiển thị), font chữ tăng lên **42px** (1 chữ) và **30px** (2 chữ). Viền phát sáng neon xanh Cyan dày 3.5px.
+     - **Node vệ tinh bộ thủ (`satR`)**: Tăng từ `17` lên `40` (đường kính thực tế đạt **91px** khi hiển thị), font chữ tăng lên **34px** (1 chữ) và **24px** (2 chữ). Viền phát sáng màu cam nổi bật.
+     - **Đường nối & Mũi tên dẫn hướng**: Độ dày nét tăng từ `1.5px` lên `2.8px`, đầu mũi tên `arrowIn` tăng lên `9x9px`, các hạt trắng định vị tăng kích thước bán kính `r=3.5px`.
+     - Tối ưu hóa tọa độ vệ tinh thích ứng: Tách đều 195px theo trục ngang cho 2 bộ thủ (`口` và `未`), 3 bộ thủ và 4 bộ thủ bố trí hình cánh quạt/ngôi sao cân đối, không đè lấn.
+  2. **Nâng cấp CSS khung chứa và Phóng to Chế độ Toàn màn hình**:
+     - `.mimikara-front-mindmap-box`: Mở rộng `max-width` từ 620px lên **840px** (chế độ thường) và **1050px** (chế độ `is-fullscreen`), padding đệm rộng rãi `1.1rem 1.8rem`.
+     - `.mimikara-svg-radial-wrap`: Chiều cao tăng từ 160px lên **250px**, `max-width` của SVG tăng từ 440px lên **780px**.
+     - **Nút chuyển đổi & Chọn chữ**: Nút bấm `.btn-graph-pill` tăng font 1.02rem, nút chọn chữ Kanji `.btn-kanji-pick` tăng lên 1.18rem (to rõ, dễ click).
+     - **Thanh giải nghĩa bộ thủ (`.graph-node-detail`)**: Chiều cao tăng lên 46px, font chữ đạt 1.22rem, pill ký tự bộ thủ nổi bật với kích thước 1.4rem.
+     - **Thanh Thần chú ghi nhớ (`.graph-story-hook`)**: Font chữ tăng lên 1.18rem - 1.22rem với line-height 1.65 thoáng mắt, huy hiệu đũa phép `.mantra-badge` vàng kim rực rỡ 1.05rem.
+  3. **Đồng bộ Cache Buster v=4.8**:
+     - Nâng toàn bộ phiên bản script và style lên `?v=4.8` trên cả 3 trang: `index.html`, `detail.html`, `reader.html`.
+  4. **Kiểm thử trực quan trên Browser Subagent**:
+     - Đã xác thực trên màn hình thực tế với từ vựng **味方 (STT 12)** cho cả 3 góc nhìn:
+       - *Ghép Từ (Compound)*: `味` + `方` ➔ `味方` (vòng tròn to 91-114px, đường nét rõ mồn một).
+       - *Chiết Tự Bộ Thủ chữ 味*: `口` + `未` ➔ `味`.
+       - *Chiết Tự Bộ Thủ chữ 方*: `ノ` + `亠` + `勹` ➔ `方`.
+
+### ✅ Công việc đã hoàn thành
+- **[Nâng cấp SVG Renderer] ([`js/mimikara-practice-service.js`](file:///g:/My%20Drive/hk261/Dự%20án%20manga/js/mimikara-practice-service.js))**:
+  - Viết lại `generateRadialSvg()` với kích thước `640x220`, `centerR=50`, `satR=40`, font 34-42px.
+- **[Nâng cấp CSS Toàn Màn Hình & Mindmap Box] ([`css/mimikara-practice.css`](file:///g:/My%20Drive/hk261/Dự%20án%20manga/css/mimikara-practice.css))**:
+  - Loại bỏ giới hạn cứng `160px` và `440px` trong `.mimikara-modal.is-fullscreen`, thay bằng `250px` chiều cao và `780px` chiều rộng, tăng font chữ toàn bộ thanh chi tiết & câu thần chú.
+- **[Đồng bộ Cache Buster v=4.8] ([`index.html`](file:///g:/My%20Drive/hk261/Dự%20án%20manga/index.html), [`detail.html`](file:///g:/My%20Drive/hk261/Dự%20án%20manga/detail.html), [`reader.html`](file:///g:/My%20Drive/hk261/Dự%20án%20manga/reader.html))**.
+- **[Kiểm thử thực tế]**:
+  - Chụp màn hình xác nhận kết quả: `verified_fullscreen_compound`, `verified_fullscreen_radical_aji`, `verified_fullscreen_radical_kata`.
+
+---
+
 ## [2026-09-12 19:10] - Chuyển Đổi Dòng Liên Tưởng Sang Bộ Câu Thần Chú Ghi Nhớ (Mnemonic Mantra) Cho Chiết Tự Bộ Thủ & Ghép Từ
 
 ### 🎯 Mục tiêu

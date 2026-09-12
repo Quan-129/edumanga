@@ -877,34 +877,48 @@ class MimikaraPracticeService {
   }
 
   generateRadialSvg({ centerText, centerSub = '', satellites = [], satelliteColor = '#ea580c' }) {
-    const width = 360;
-    const height = 145;
-    const cx = 180;
-    const cy = 72;
-    const centerR = 24;
-    const orbitR = 62;
-    const satR = 17;
-
+    const width = 640;
+    const height = 220;
+    const cx = 320;
+    const cy = 110;
     const count = Math.min(satellites.length, 4);
+
+    const centerR = 50;
+    const satR = (count <= 2) ? 40 : (count === 3 ? 34 : 28);
+
     if (count === 0) {
       return `
         <svg viewBox="0 0 ${width} ${height}" class="mimikara-svg-radial" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="${cx}" cy="${cy}" r="${centerR}" fill="#0284c7" stroke="#38bdf8" stroke-width="2.5"/>
-          <text x="${cx}" y="${cy}" text-anchor="middle" dominant-baseline="central" fill="#ffffff" font-weight="900" font-size="16">${escapeHtml(centerText)}</text>
+          <circle cx="${cx}" cy="${cy}" r="${centerR}" fill="#0284c7" stroke="#38bdf8" stroke-width="3.5"/>
+          <text x="${cx}" y="${cy}" text-anchor="middle" dominant-baseline="central" fill="#ffffff" font-weight="900" font-size="34">${escapeHtml(centerText)}</text>
         </svg>
       `;
     }
 
-    let angles = [];
+    let coords = [];
     if (count === 1) {
-      angles = [-90];
+      coords = [{ x: cx - 180, y: cy }];
     } else if (count === 2) {
-      angles = [180, 0];
+      coords = [
+        { x: cx - 195, y: cy },
+        { x: cx + 195, y: cy }
+      ];
     } else if (count === 3) {
-      // Đúng chuẩn Hình 2: Đỉnh trên (-90°), Dưới phải (30°), Dưới trái (150°)
-      angles = [-90, 30, 150];
+      coords = [
+        { x: cx - 180, y: cy },
+        { x: cx, y: cy - 74 },
+        { x: cx + 180, y: cy }
+      ];
     } else if (count === 4) {
-      angles = [-135, -45, 45, 135];
+      const rad4 = (40 * Math.PI) / 180;
+      const dx4 = 145 * Math.cos(rad4);
+      const dy4 = 72 * Math.sin(rad4);
+      coords = [
+        { x: cx - dx4, y: cy - dy4 },
+        { x: cx + dx4, y: cy - dy4 },
+        { x: cx + dx4, y: cy + dy4 },
+        { x: cx - dx4, y: cy + dy4 }
+      ];
     }
 
     let linesSvg = '';
@@ -913,9 +927,8 @@ class MimikaraPracticeService {
 
     for (let i = 0; i < count; i++) {
       const sat = satellites[i];
-      const rad = (angles[i] * Math.PI) / 180;
-      const sx = cx + orbitR * Math.cos(rad);
-      const sy = cy + orbitR * Math.sin(rad);
+      const sx = coords[i].x;
+      const sy = coords[i].y;
 
       // Vector từ node vệ tinh hướng vào tâm
       const dx = cx - sx;
@@ -924,60 +937,60 @@ class MimikaraPracticeService {
       const nx = dx / dist;
       const ny = dy / dist;
 
-      // Điểm bắt đầu từ viền vệ tinh, điểm kết thúc tại viền tâm (chừa 5px cho mũi tên)
+      // Điểm bắt đầu từ viền vệ tinh, điểm kết thúc tại viền tâm (chừa 9px cho mũi tên)
       const x1 = sx + satR * nx;
       const y1 = sy + satR * ny;
-      const x2 = cx - (centerR + 5) * nx;
-      const y2 = cy - (centerR + 5) * ny;
+      const x2 = cx - (centerR + 9) * nx;
+      const y2 = cy - (centerR + 9) * ny;
 
-      // 2 chấm hạt trắng tinh tế trên đường nối (chuẩn xác theo Hình 2)
+      // 2 chấm hạt trắng tinh tế trên đường nối
       const xd1 = x1 + (x2 - x1) * 0.35;
       const yd1 = y1 + (y2 - y1) * 0.35;
       const xd2 = x1 + (x2 - x1) * 0.70;
       const yd2 = y1 + (y2 - y1) * 0.70;
 
       dotsSvg += `
-        <circle cx="${xd1.toFixed(1)}" cy="${yd1.toFixed(1)}" r="2" fill="#ffffff" opacity="0.9"/>
-        <circle cx="${xd2.toFixed(1)}" cy="${yd2.toFixed(1)}" r="2" fill="#ffffff" opacity="0.9"/>
+        <circle cx="${xd1.toFixed(1)}" cy="${yd1.toFixed(1)}" r="3.5" fill="#ffffff" opacity="0.95"/>
+        <circle cx="${xd2.toFixed(1)}" cy="${yd2.toFixed(1)}" r="3.5" fill="#ffffff" opacity="0.95"/>
       `;
 
       linesSvg += `
-        <line x1="${x1.toFixed(1)}" y1="${y1.toFixed(1)}" x2="${x2.toFixed(1)}" y2="${y2.toFixed(1)}" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arrowIn)" />
+        <line x1="${x1.toFixed(1)}" y1="${y1.toFixed(1)}" x2="${x2.toFixed(1)}" y2="${y2.toFixed(1)}" stroke="#94a3b8" stroke-width="2.8" marker-end="url(#arrowIn)" />
       `;
 
       const satChar = sat.char || '';
       const satName = sat.name || '';
       const satMeaning = sat.meaning || '';
-      const charFontSize = satChar.length > 2 ? 11 : (satChar.length === 2 ? 13 : 15);
+      const charFontSize = satChar.length > 2 ? 18 : (satChar.length === 2 ? 24 : 34);
 
       satellitesSvg += `
         <g class="svg-sat-group" onclick="event.stopPropagation(); window.mimikaraService.showNodeDetail('${escapeJs(satChar)}', '${escapeJs(satName)}', '${escapeJs(satMeaning)}')" onmouseenter="window.mimikaraService.showNodeDetail('${escapeJs(satChar)}', '${escapeJs(satName)}', '${escapeJs(satMeaning)}')">
-          <circle cx="${sx.toFixed(1)}" cy="${sy.toFixed(1)}" r="${satR}" fill="${satelliteColor}" stroke="#fdba74" stroke-width="2" filter="url(#glowSat)"/>
+          <circle cx="${sx.toFixed(1)}" cy="${sy.toFixed(1)}" r="${satR}" fill="${satelliteColor}" stroke="#fdba74" stroke-width="3" filter="url(#glowSat)"/>
           <text x="${sx.toFixed(1)}" y="${sy.toFixed(1)}" text-anchor="middle" dominant-baseline="central" fill="#ffffff" font-weight="900" font-size="${charFontSize}" font-family="'Hiragino Kaku Gothic Pro', 'BIZ UDPGothic', 'Meiryo', sans-serif" style="pointer-events: none;">${escapeHtml(satChar)}</text>
         </g>
       `;
     }
 
-    const centerFontSize = centerText.length > 3 ? 12 : (centerText.length >= 2 ? 14 : 19);
+    const centerFontSize = centerText.length >= 3 ? 24 : (centerText.length >= 2 ? 30 : 42);
 
     return `
       <svg viewBox="0 0 ${width} ${height}" class="mimikara-svg-radial" xmlns="http://www.w3.org/2000/svg">
         <defs>
-          <marker id="arrowIn" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
-            <path d="M0,0 L0,6 L6,3 z" fill="#cbd5e1" />
+          <marker id="arrowIn" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto">
+            <path d="M0,0 L0,9 L9,4.5 z" fill="#94a3b8" />
           </marker>
           <filter id="glowCenter" x="-30%" y="-30%" width="160%" height="160%">
-            <feDropShadow dx="0" dy="0" stdDeviation="3.5" flood-color="#38bdf8" flood-opacity="0.8"/>
+            <feDropShadow dx="0" dy="0" stdDeviation="5.5" flood-color="#38bdf8" flood-opacity="0.85"/>
           </filter>
           <filter id="glowSat" x="-30%" y="-30%" width="160%" height="160%">
-            <feDropShadow dx="0" dy="0" stdDeviation="3" flood-color="#f97316" flood-opacity="0.75"/>
+            <feDropShadow dx="0" dy="0" stdDeviation="5" flood-color="#f97316" flood-opacity="0.8"/>
           </filter>
         </defs>
         ${linesSvg}
         ${dotsSvg}
         <!-- Tâm Node xanh Cyan -->
         <g class="svg-center-group">
-          <circle cx="${cx}" cy="${cy}" r="${centerR}" fill="#0284c7" stroke="#38bdf8" stroke-width="2.5" filter="url(#glowCenter)"/>
+          <circle cx="${cx}" cy="${cy}" r="${centerR}" fill="#0284c7" stroke="#38bdf8" stroke-width="3.5" filter="url(#glowCenter)"/>
           <text x="${cx}" y="${cy}" text-anchor="middle" dominant-baseline="central" fill="#ffffff" font-weight="900" font-size="${centerFontSize}" font-family="'Hiragino Kaku Gothic Pro', 'BIZ UDPGothic', 'Meiryo', sans-serif">${escapeHtml(centerText)}</text>
         </g>
         <!-- Vệ tinh màu cam hướng vào tâm -->

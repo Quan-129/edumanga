@@ -253,19 +253,70 @@ body.mimikara-active .floating-reader-dock {
 }
 
 .mimikara-modal.is-fullscreen .mimikara-front-mindmap-box {
-  max-width: 960px !important;
-  width: 92% !important;
-  margin: 1.1rem auto 0 auto !important;
-  padding: 1.1rem 1.6rem !important;
-  border-radius: 20px !important;
+  max-width: 1050px !important;
+  width: 95% !important;
+  margin: 1rem auto 0 auto !important;
+  padding: 1.1rem 1.8rem !important;
+  border-radius: 22px !important;
 }
 
 .mimikara-modal.is-fullscreen .mimikara-svg-radial-wrap {
-  height: 160px !important;
+  height: 250px !important;
+  margin: 0.4rem 0 !important;
 }
 
 .mimikara-modal.is-fullscreen .mimikara-svg-radial {
-  max-width: 440px !important;
+  max-width: 780px !important;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.mimikara-modal.is-fullscreen .btn-graph-pill {
+  font-size: 1.02rem !important;
+  padding: 8px 20px !important;
+  border-radius: 20px !important;
+}
+
+.mimikara-modal.is-fullscreen .selector-label {
+  font-size: 0.98rem !important;
+}
+
+.mimikara-modal.is-fullscreen .btn-kanji-pick {
+  font-size: 1.18rem !important;
+  padding: 6px 18px !important;
+  border-radius: 11px !important;
+}
+
+.mimikara-modal.is-fullscreen .graph-node-detail {
+  min-height: 46px !important;
+  font-size: 1.22rem !important;
+  padding: 8px 22px !important;
+  margin-top: 8px !important;
+  border-radius: 12px !important;
+}
+
+.mimikara-modal.is-fullscreen .detail-node-pill {
+  font-size: 1.4rem !important;
+  padding: 4px 15px !important;
+  border-radius: 9px !important;
+}
+
+.mimikara-modal.is-fullscreen .graph-story-hook {
+  font-size: 1.2rem !important;
+  padding: 12px 24px !important;
+  margin-top: 10px !important;
+  border-radius: 15px !important;
+  gap: 12px !important;
+}
+
+.mimikara-modal.is-fullscreen .graph-story-hook .mantra-badge {
+  font-size: 1.05rem !important;
+  padding: 7px 18px !important;
+}
+
+.mimikara-modal.is-fullscreen .graph-story-hook .mantra-content {
+  font-size: 1.18rem !important;
+  line-height: 1.65 !important;
 }
 
 .mimikara-modal.is-fullscreen .mimikara-meaning-highlight {
@@ -793,7 +844,7 @@ body.mimikara-active .floating-reader-dock {
 
 .mimikara-card-3d {
   width: 100%;
-  min-height: 540px;
+  min-height: 640px;
   cursor: pointer;
   position: relative;
 }
@@ -801,7 +852,7 @@ body.mimikara-active .floating-reader-dock {
 .mimikara-card-3d-inner {
   position: relative;
   width: 100%;
-  min-height: 540px;
+  min-height: 640px;
   transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
   transform-style: preserve-3d;
   will-change: transform;
@@ -816,7 +867,7 @@ body.mimikara-active .floating-reader-dock {
   inset: 0;
   width: 100%;
   height: 100%;
-  min-height: 540px;
+  min-height: 640px;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
   border-radius: 26px;
@@ -908,13 +959,13 @@ body.mimikara-active .floating-reader-dock {
 /* Sơ đồ Radial Mindmap & Cần gạt 2 chế độ trên mặt trước Flashcard */
 .mimikara-front-mindmap-box {
   margin: 0.65rem auto 0 auto;
-  max-width: 620px;
+  max-width: 840px;
   width: 100%;
-  background: rgba(15, 23, 42, 0.85);
-  border: 1.5px solid rgba(168, 85, 247, 0.35);
-  border-radius: 18px;
-  padding: 0.6rem 1rem;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), inset 0 0 15px rgba(168, 85, 247, 0.08);
+  background: rgba(15, 23, 42, 0.9);
+  border: 1.5px solid rgba(168, 85, 247, 0.4);
+  border-radius: 20px;
+  padding: 1rem 1.6rem;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.6), inset 0 0 20px rgba(168, 85, 247, 0.12);
   text-align: center;
   animation: fadeInMnemonic 0.25s ease;
   box-sizing: border-box;
@@ -929,75 +980,75 @@ body.mimikara-active .floating-reader-dock {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 10px;
-  margin-bottom: 0.25rem;
+  gap: 14px;
+  margin-bottom: 0.35rem;
   flex-wrap: wrap;
 }
 
 .graph-mode-toggle {
   display: inline-flex;
   align-items: center;
-  background: rgba(0, 0, 0, 0.38);
-  padding: 3px;
-  border-radius: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  gap: 3px;
+  background: rgba(0, 0, 0, 0.4);
+  padding: 4px;
+  border-radius: 22px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  gap: 4px;
 }
 
 .btn-graph-pill {
   background: transparent;
   border: none;
   color: #94a3b8;
-  font-size: 0.76rem;
+  font-size: 0.9rem;
   font-weight: 700;
-  padding: 4px 12px;
-  border-radius: 16px;
+  padding: 7px 16px;
+  border-radius: 18px;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
-  gap: 5px;
+  gap: 6px;
   transition: all 0.2s ease;
 }
 
 .btn-graph-pill:hover {
   color: #e2e8f0;
-  background: rgba(255, 255, 255, 0.06);
+  background: rgba(255, 255, 255, 0.08);
 }
 
 .btn-graph-pill.active {
   background: linear-gradient(135deg, #a855f7, #6366f1);
   color: #ffffff;
-  box-shadow: 0 2px 8px rgba(168, 85, 247, 0.4);
+  box-shadow: 0 2px 10px rgba(168, 85, 247, 0.45);
 }
 
 .graph-kanji-selector {
   display: inline-flex;
   align-items: center;
-  gap: 5px;
+  gap: 8px;
 }
 
 .selector-label {
-  font-size: 0.75rem;
+  font-size: 0.88rem;
   color: #94a3b8;
   font-weight: 600;
 }
 
 .btn-kanji-pick {
-  background: rgba(255, 255, 255, 0.07);
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.18);
   color: #cbd5e1;
-  font-size: 0.78rem;
+  font-size: 1.05rem;
   font-weight: 800;
-  padding: 2px 9px;
-  border-radius: 8px;
+  padding: 5px 14px;
+  border-radius: 10px;
   cursor: pointer;
   transition: all 0.15s ease;
   font-family: 'Hiragino Kaku Gothic Pro', 'Meiryo', sans-serif;
 }
 
 .btn-kanji-pick:hover {
-  background: rgba(56, 189, 248, 0.2);
-  border-color: rgba(56, 189, 248, 0.4);
+  background: rgba(56, 189, 248, 0.22);
+  border-color: rgba(56, 189, 248, 0.45);
   color: #fff;
 }
 
@@ -1005,21 +1056,22 @@ body.mimikara-active .floating-reader-dock {
   background: linear-gradient(135deg, #0284c7, #38bdf8);
   border-color: #38bdf8;
   color: #ffffff;
-  box-shadow: 0 2px 8px rgba(56, 189, 248, 0.4);
+  box-shadow: 0 2px 10px rgba(56, 189, 248, 0.45);
 }
 
 .mimikara-svg-radial-wrap {
   width: 100%;
-  height: 140px;
+  height: 220px;
   display: flex;
   align-items: center;
   justify-content: center;
+  margin: 0.35rem 0;
 }
 
 .mimikara-svg-radial {
   width: 100%;
   height: 100%;
-  max-width: 360px;
+  max-width: 640px;
   overflow: visible;
 }
 
@@ -1030,72 +1082,75 @@ body.mimikara-active .floating-reader-dock {
 
 .svg-sat-group:hover circle {
   stroke: #ffffff;
-  stroke-width: 2.5px;
-  filter: drop-shadow(0 0 8px rgba(249, 115, 22, 0.9));
+  stroke-width: 3.2px;
+  filter: drop-shadow(0 0 12px rgba(249, 115, 22, 1));
 }
 
 .graph-node-detail {
-  min-height: 24px;
-  font-size: 0.84rem;
+  min-height: 42px;
+  font-size: 1.15rem;
   color: #e2e8f0;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
-  background: rgba(0, 0, 0, 0.25);
-  border-radius: 8px;
-  padding: 2px 8px;
-  margin-top: 2px;
+  gap: 10px;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 8px 18px;
+  margin-top: 6px;
 }
 
 .detail-node-pill {
   background: #ea580c;
   color: #fff;
   font-weight: 900;
-  padding: 1px 7px;
-  border-radius: 6px;
-  font-size: 0.85rem;
+  padding: 3px 12px;
+  border-radius: 9px;
+  font-size: 1.25rem;
   display: inline-block;
+  line-height: 1.3;
 }
 
 .graph-story-hook {
-  font-size: 0.92rem;
+  font-size: 1.12rem;
   color: #f8fafc;
-  line-height: 1.5;
+  line-height: 1.6;
   font-weight: 500;
-  margin-top: 6px;
-  padding: 8px 14px;
-  background: rgba(15, 23, 42, 0.65);
-  border: 1px solid rgba(250, 204, 21, 0.25);
-  border-radius: 12px;
+  margin-top: 10px;
+  padding: 12px 20px;
+  background: rgba(15, 23, 42, 0.75);
+  border: 1.5px solid rgba(250, 204, 21, 0.35);
+  border-radius: 14px;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 8px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+  gap: 12px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.3);
 }
 
 .graph-story-hook .mantra-badge {
-  background: linear-gradient(135deg, rgba(245, 158, 11, 0.25), rgba(234, 88, 12, 0.25));
-  border: 1px solid rgba(251, 191, 36, 0.5);
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.3), rgba(234, 88, 12, 0.3));
+  border: 1px solid rgba(251, 191, 36, 0.6);
   color: #fde047;
-  padding: 3px 10px;
+  padding: 6px 16px;
   border-radius: 20px;
-  font-size: 0.78rem;
+  font-size: 0.96rem;
   font-weight: 800;
   letter-spacing: 0.3px;
   display: inline-flex;
   align-items: center;
-  gap: 5px;
-  box-shadow: 0 0 10px rgba(245, 158, 11, 0.2);
+  gap: 7px;
+  box-shadow: 0 0 12px rgba(245, 158, 11, 0.25);
   white-space: nowrap;
 }
 
 .graph-story-hook .mantra-content {
   color: #f1f5f9;
-  font-size: 0.9rem;
-  line-height: 1.45;
+  font-size: 1.08rem;
+  font-weight: 600;
+  line-height: 1.6;
 }
 
 .graph-story-hook b {
@@ -2386,5 +2441,11 @@ body.mimikara-active .floating-reader-dock {
   .trans-actions-right {
     justify-content: center;
     width: 100%;
+  }
+  .mimikara-front-mindmap-box {
+    padding: 0.6rem 0.8rem;
+  }
+  .mimikara-svg-radial-wrap {
+    height: 160px;
   }
 }
