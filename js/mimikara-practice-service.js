@@ -256,6 +256,7 @@ class MimikaraPracticeService {
       const utter = new SpeechSynthesisUtterance(clean);
       utter.lang = 'ja-JP';
       utter.rate = rate || 0.9;
+      utter.volume = 1.0;
       window.speechSynthesis.speak(utter);
     } catch (e) {}
   }

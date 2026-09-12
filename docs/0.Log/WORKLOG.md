@@ -3,6 +3,46 @@
 
 Nơi ghi lại toàn bộ tiến trình phát triển, các quyết định kiến trúc kỹ thuật (ADR) và danh sách việc cần làm tiếp theo cho dự án EduManga Hub.
 
+## [2026-09-12 16:35] - Khắc Phục Âm Lượng BGM & SFX (Tăng Gain Staging) & Cơ Chế Mở Khóa Tự Động AudioContext Trên Trình Duyệt
+
+### 🎯 Mục tiêu
+- Xử lý phản hồi của người dùng: *"sao không nghe gì nhỉ với lại hiệu ứng âm thanh vẫn hơi nhỏ"*.
+- **Nguyên nhân gốc rễ**:
+  1. **Chính sách Autoplay của trình duyệt**: `AudioContext` khi khởi tạo bị đặt ở trạng thái `'suspended'`. Phương thức `startBGM()` trước đó được gọi ngay trong `constructor -> start()` khi chưa có cử chỉ người dùng trực tiếp, khiến bộ đếm thời gian Web Audio API (`currentTime = 0`) bị đóng băng, nốt nhạc bị lệch nhịp hoặc không phát ra tiếng.
+  2. **Gain Staging quá nhỏ (Âm lượng yếu)**:
+     - Âm lượng tổng BGM chỉ đặt `0.13`, các nốt giai điệu đặt `0.16` và hợp âm `0.04`, dẫn đến gain thực tế chỉ là `0.13 * 0.04 = 0.0052` (~ -46 dBFS, gần như tắt tiếng).
+     - Âm lượng SFX chỉ đặt `0.24`, tiếng click gõ phím đặt `0.15` (`0.24 * 0.15 = 0.036`), khiến hiệu ứng âm thanh bị chìm và rất nhỏ trên loa ngoài máy tính.
+- **Giải pháp triển khai**:
+  1. **Tăng cường độ âm thanh (Gain Staging Boost)**:
+     - BGM Master Gain tăng từ `0.13` lên `0.40` (+10 dB).
+     - Giai điệu Marimba / Pluck tăng từ `0.16` lên `0.38` (ngân vang, trong trẻo).
+     - Bouncy Bassline tăng từ `0.28` lên `0.45` (nảy rõ rệt nhịp 96 BPM).
+     - SFX Master Gain tăng từ `0.24` lên `0.85` (+11 dB).
+     - Tiếng Click gõ đúng tăng từ `0.15` lên `0.55` và Chime ngũ âm tăng từ `0.12` lên `0.48` (cảm giác gõ phím ASMR giòn tan, thỏa mãn).
+     - Tiếng nhảy Parabol tăng từ `0.22` lên `0.68`; Tiếng tiếp đất táp cành tăng từ `0.22` lên `0.55`.
+     - Giọng đọc mẫu phát âm tiếng Nhật đảm bảo `utterance.volume = 1.0`.
+  2. **Cơ chế Mở Khóa Tự Động Toàn Diện (`unlockAudio`)**:
+     - Bổ sung hàm `unlockAudio()` tự động kiểm tra `audioCtx.state === 'suspended'` và gọi `resume()`.
+     - Gắn bộ lắng nghe sự kiện trên toàn bộ vùng chứa minigame (`container`), `window` và `canvas` ở các sự kiện `pointerdown`, `touchstart`, `click`, và `keydown`.
+     - Tách riêng `startBGM()` và `actuallyStartBGMScheduler()` để đồng bộ nhịp phách chính xác ngay khi `AudioContext` chuyển sang `running`.
+  3. **Nâng Cache Buster**:
+     - Nâng script references lên `?v=4.4` trong `index.html`, `detail.html`, `reader.html`.
+
+### ✅ Công việc đã hoàn thành
+- **[Nâng Cấp Audio Engine & Bộ Xử Lý Sự Kiện] ([`js/mimikara-climber-engine.js`](file:///g:/My%20Drive/hk261/Dự%20án%20manga/js/mimikara-climber-engine.js))**:
+  - Triển khai `unlockAudio()` và gắn event listeners cho toàn bộ tương tác người dùng.
+  - Tối ưu `startBGM()`, `actuallyStartBGMScheduler()`, bảo vệ thời điểm bắt đầu nốt nhạc (`Math.max(curTime + 0.005, startTime)`).
+  - Khuếch đại BGM gain lên `0.40`, SFX gain lên `0.85`, tinh chỉnh gain từng nốt chi tiết.
+- **[Đảm Bảo Âm Lượng Speech Synthesis] ([`js/mimikara-practice-service.js`](file:///g:/My%20Drive/hk261/Dự%20án%20manga/js/mimikara-practice-service.js))**:
+  - Thiết lập `utter.volume = 1.0` cho phát âm từ vựng.
+- **[Nâng Cache-Buster lên v=4.4] ([`index.html`](file:///g:/My%20Drive/hk261/Dự%20án%20manga/index.html), [`detail.html`](file:///g:/My%20Drive/hk261/Dự%20án%20manga/detail.html), [`reader.html`](file:///g:/My%20Drive/hk261/Dự%20án%20manga/reader.html))**.
+- **[Kiểm Thử Thực Tế Bằng Browser Subagent]**:
+  - `audioCtx.state`: `"running"`.
+  - `bgmVolume`: `0.4`.
+  - `sfxGainNode.gain.value`: `0.85`.
+  - `bgmTimer`: `true`.
+  - Kiểm tra tính năng toggle nhạc nền chạy mượt mà không lỗi.
+
 ---
 
 ## [2026-09-12 16:15] - Tích Hợp Động Cơ Nhạc Nền BGM Lo-Fi Chiptune & Nút Bật/Tắt [♫] Cho Minigame Ninja Leo Tháp
