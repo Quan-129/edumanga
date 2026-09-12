@@ -1003,6 +1003,7 @@ class MimikaraPracticeService {
     let svgHtml = '';
     let initialDetailHtml = '';
     let storyHtml = '';
+    let storyBadgeText = '';
 
     // Cần gạt 2 chế độ & Bộ chọn chữ Kanji khi ở chế độ Chiết tự bộ thủ
     let kanjiPickerHtml = '';
@@ -1080,14 +1081,8 @@ class MimikaraPracticeService {
       });
 
       const primaryMeaning = (w.meaning || '').split(/[-–,;/]/)[0].trim();
-      if (satellites.length >= 2) {
-        const charHooks = satellites.map(s => `<b>${escapeHtml(s.char)}</b> (${escapeHtml(s.meaning)})`).join(' + ');
-        storyHtml = `Ghép từ ${charHooks} ➔ Liên tưởng: <i>"${escapeHtml(primaryMeaning)}"</i>`;
-      } else if (satellites.length === 1) {
-        storyHtml = `Chữ <b>${escapeHtml(satellites[0].char)}</b> (${escapeHtml(satellites[0].meaning)}) ➔ Gợi nhớ: <i>"${escapeHtml(primaryMeaning)}"</i>`;
-      } else {
-        storyHtml = `Từ vựng <b>${escapeHtml(term)}</b>: <i>"${escapeHtml(primaryMeaning)}"</i>`;
-      }
+      storyHtml = this.getCompoundWordMnemonicMantra(w, satellites, primaryMeaning);
+      storyBadgeText = 'Thần chú ghép từ';
 
       if (satellites.length > 0) {
         initialDetailHtml = `<span class="detail-node-pill">${escapeHtml(satellites[0].char)}</span> <b>${escapeHtml(satellites[0].name)}</b>: ${escapeHtml(satellites[0].meaning)}`;
@@ -1137,7 +1132,8 @@ class MimikaraPracticeService {
         satelliteColor: '#f97316'
       });
 
-      storyHtml = entry.story || `Chữ <b>${targetKanji}</b> gồm các bộ phận hướng vào tâm!`;
+      storyHtml = this.getKanjiMnemonicMantra(targetKanji, entry);
+      storyBadgeText = 'Thần chú chiết tự';
 
       if (entry.components && entry.components.length > 0) {
         const c0 = entry.components[0];
@@ -1156,10 +1152,123 @@ class MimikaraPracticeService {
         ${initialDetailHtml}
       </div>
       <div class="graph-story-hook">
-        <i class="fas fa-wand-magic-sparkles" style="color: #fde047; margin-right: 6px;"></i>
-        <span>${storyHtml}</span>
+        <span class="mantra-badge"><i class="fas fa-wand-magic-sparkles"></i> ${storyBadgeText}:</span>
+        <span class="mantra-content">${storyHtml}</span>
       </div>
     `;
+  }
+
+  // --------------------------------------------------------------------------
+  // BỘ TỪ ĐIỂN CÂU THẦN CHÚ CHIẾT TỰ KANJI DỄ NHỚ
+  // --------------------------------------------------------------------------
+  getKanjiMnemonicMantra(targetKanji, entry) {
+    const KANJI_MANTRAS = {
+      '味': 'Dùng <b>MIỆNG</b> (口) nếm trái <b>CHƯA</b> (未) chín để cảm nhận <b>HƯƠNG VỊ</b> (味)!',
+      '方': 'Người đứng dang tay chỉ về bốn <b>PHƯƠNG</b> (方) hướng chân trời!',
+      '人': 'Hai nét tựa vào nhau làm nên con <b>NGƯỜI</b> (人) vững chãi giữa đời!',
+      '生': 'Mầm cây nhú lên khỏi mặt <b>ĐẤT</b> (土) đón chào <b>SỰ SỐNG</b> (生)!',
+      '間': 'Ánh <b>MẶT TRỜI</b> (日) lọt qua khe <b>CỔNG</b> (門) tạo nên <b>KHOẢNG CÁCH THỜI GIAN</b> (間)!',
+      '祖': 'Lập bàn thờ trước <b>BIA ĐÁ</b> (且) để phụng dưỡng <b>TỔ TIÊN</b> (祖)!',
+      '先': 'Dắt <b>BÒ</b> (牛) đi <b>TRƯỚC TIÊN</b> (先) để dẫn lối mở đường!',
+      '親': '<b>CHA MẸ</b> (親) đứng trên <b>CÂY</b> (木) dõng <b>MẮT</b> (見) nhìn trông con từ xa!',
+      '戚': 'Cầm vũ khí canh giữ góc nhà của <b>HỌ HÀNG THÂN THÍCH</b> (戚)!',
+      '夫': 'Người <b>ĐÀN ÔNG</b> (大) gánh vác việc lớn trên đầu là người <b>CHỒNG</b> (夫)!',
+      '婦': 'Người <b>PHỤ NỮ</b> (女) tay cầm chổi quét dọn tổ ấm là người <b>VỢ</b> (婦)!',
+      '長': 'Bậc cao niên tóc dài chống gậy là người <b>TRƯỞNG LÃO / LỚN NHẤT</b> (長)!',
+      '男': 'Dùng <b>SỨC LỰC</b> (力) cày cấy trên <b>RUỘNG ĐỒNG</b> (田) là người <b>ĐÀN ÔNG</b> (男)!',
+      '主': 'Ngọn lửa thắp sáng trên bệ đá là người <b>LÀM CHỦ</b> (主) gia đình!',
+      '双': 'Hai bàn tay <b>HỰU</b> (又 + 又) nắm chặt nhau tạo thành một <b>CẶP SONG ĐÔI</b> (双)!',
+      '子': 'Đứa <b>CON THƠ</b> (子) hai tay giang rộng đòi mẹ ôm!',
+      '迷': 'Bước chân (辶) đi lạc giữa cánh đồng <b>LÚA</b> (米) nên bị <b>LẠC LỐI / PHÂN VÂN</b> (迷)!',
+      '他': '<b>NGƯỜI</b> (亻) đứng bên cạnh không cùng huyết thống là <b>NGƯỜI DƯNG / NGƯỜI NGOÀI</b> (他)!',
+      '敵': 'Kẻ đứng ngoài thành gõ trống thị uy chính là <b>KẺ THÙ / ĐỐI ĐỊCH</b> (敵)!',
+      '筆': 'Cây <b>BÚT</b> (筆) làm từ thân cây <b>TRÚC</b> (竹) nắn nót từng nét chữ!',
+      '者': 'Bậc lão <b>GIÀ</b> (老) dưới ánh <b>MẶT TRỜI</b> (日) là <b>NGƯỜI</b> (者) từng trải!',
+      '寿': 'Quy tắc sống chừng mực từng <b>TẤC</b> (寸) giúp sống lâu trăm <b>THỌ</b> (寿)!',
+      '命': 'Mệnh lệnh ban xuống dưới mái nhà định đoạt <b>TÍNH MẠNG</b> (命) con người!',
+      '将': 'Tướng quân đứng bên bàn cờ <b>SẮP SỬA</b> (将) xuất quân trong <b>TƯƠNG LAI</b>!',
+      '来': 'Cây lúa trĩu hạt mang mùa màng bội thu <b>ĐẾN</b> (来)!',
+      '才': 'Mầm cây vươn lên đón nắng thể hiện <b>TÀI NĂNG</b> (才) thiên bẩm!',
+      '能': 'Con thú dũng mãnh giương vuốt thể hiện <b>KHẢ NĂNG</b> (能) phi thường!',
+      '休': 'Con <b>NGƯỜI</b> (亻) tựa lưng vào gốc <b>CÂY</b> (木) để <b>NGHỈ NGƠI</b> (休)!',
+      '体': 'Gốc rễ (本) của con <b>NGƯỜI</b> (亻) chính là <b>THÂN THỂ</b> (体)!',
+      '食': 'Con <b>NGƯỜI</b> (人) cần lương thực (良) tốt lành để <b>ĂN</b> (食)!',
+      '飲': 'Thức ăn (食) làm ta <b>KHÁT / KHIẾM</b> (欠) nên cần phải <b>UỐNG</b> (飲)!',
+      '見': 'Đôi <b>MẮT</b> (目) trên đôi <b>CHÂN</b> (儿) đi khắp nơi để <b>NHÌN NGẮM</b> (見)!',
+      '聞': 'Ghé đôi <b>TAI</b> (耳) sát <b>CÁNH CỔNG</b> (門) để <b>LẮNG NGHE</b> (聞)!',
+      '読': 'Dùng lời <b>NÓI</b> (言) để trao đổi tri thức qua việc <b>ĐỌC SÁCH</b> (読)!',
+      '書': 'Cầm bút (聿) viết chữ dưới ánh mặt trời (日) thành quyển <b>SÁCH</b> (書)!',
+      '話': 'Lời <b>NÓI</b> (言) từ chiếc <b>LƯỠI</b> (舌) tạo nên cuộc <b>TRÒ CHUYỆN</b> (話)!',
+      '語': 'Lời <b>NÓI</b> (言) của năm (五) người chúng <b>TÔI</b> (吾) là <b>NGÔN NGỮ</b> (語)!',
+      '動': 'Dùng <b>SỨC LỰC</b> (力) dịch chuyển vật <b>NẶNG</b> (重) là sự <b>CỬ ĐỘNG</b> (動)!',
+      '働': 'Con <b>NGƯỜI</b> (亻) vận <b>ĐỘNG</b> (動) không ngừng để <b>LÀM VIỆC</b> (働)!',
+      '所': 'Mở cánh <b>CỬA</b> (戶) cầm chiếc <b>RÌU</b> (斤) đến <b>NƠI CHỐN</b> (所) làm việc!',
+      '個': 'Con <b>NGƯỜI</b> (亻) kiên <b>CỐ</b> (固) giữ gìn nét riêng tạo nên từng <b>CÁ THỂ</b> (個)!',
+      '性': '<b>TRÁI TIM</b> (忄) từ khi <b>SINH</b> (生) ra đã hình thành nên <b>BẢN TÍNH</b> (性)!',
+      '愛': '<b>TRÁI TIM</b> (心) rung động đón nhận che chở là <b>TÌNH YÊU</b> (愛)!',
+      '信': 'Lời <b>NÓI</b> (言) của con <b>NGƯỜI</b> (亻) phải giữ chữ <b>TÍN</b> (信)!'
+    };
+
+    if (KANJI_MANTRAS[targetKanji]) {
+      return KANJI_MANTRAS[targetKanji];
+    }
+
+    if (entry && entry.story && !entry.story.startsWith('Kết hợp từ')) {
+      return entry.story;
+    }
+
+    // Tự động xâu chuỗi thần chú tự nhiên cho các chữ khác
+    if (entry && entry.components && entry.components.length >= 2) {
+      const c1 = entry.components[0];
+      const c2 = entry.components[1];
+      const targetMeaning = (entry.meaning || entry.hanviet || targetKanji).split(/[/,;]/)[0].trim();
+      const c1Name = c1.name.replace(/^Bộ\s+/, '');
+      const c2Name = c2.name.replace(/^Bộ\s+/, '');
+      return `Lấy hình tượng <b>${escapeHtml(c1Name)}</b> (${c1.char}) kết hợp cùng <b>${escapeHtml(c2Name)}</b> (${c2.char}) gợi nhớ ý nghĩa <b>${escapeHtml(targetMeaning)}</b> (${targetKanji})!`;
+    } else if (entry && entry.components && entry.components.length === 1) {
+      const c0 = entry.components[0];
+      const targetMeaning = (entry.meaning || entry.hanviet || targetKanji).split(/[/,;]/)[0].trim();
+      return `Chữ <b>${targetKanji}</b> mang hình tượng <b>${escapeHtml(c0.name)}</b> (${c0.char}) tạo nên ý nghĩa <b>${escapeHtml(targetMeaning)}</b>!`;
+    }
+
+    return `Khắc sâu hình tượng chữ <b>${targetKanji}</b> qua các bộ thủ cấu thành!`;
+  }
+
+  // --------------------------------------------------------------------------
+  // BỘ TỪ ĐIỂN CÂU THẦN CHÚ GHÉP TỪ (COMPOUND WORDS)
+  // --------------------------------------------------------------------------
+  getCompoundWordMnemonicMantra(w, satellites, primaryMeaning) {
+    const term = w.term || '';
+    const COMPOUND_MANTRAS = {
+      '人生': '<b>Con người</b> (人) trải qua <b>sinh mệnh</b> (生) tạo nên một <b>CUỘC ĐỜI</b> (人生)!',
+      '人間': 'Khoảng không gian (間) nơi <b>con người</b> (人) sinh sống chính là <b>NHÂN LOẠI / CON NGƯỜI</b> (人間)!',
+      '祖先': 'Bậc sinh thành (祖) đi <b>trước</b> (先) mở đường chính là <b>TỔ TIÊN</b> (祖先)!',
+      '親戚': 'Những người <b>thân thiết</b> (親) cùng dòng máu thân thích chính là <b>HỌ HÀNG</b> (親戚)!',
+      '夫婦': 'Người <b>chồng</b> (夫) và người <b>vợ</b> (婦) kết tóc se duyên thành <b>VỢ CHỒNG</b> (夫婦)!',
+      '長男': 'Người con <b>trai</b> (男) <b>lớn nhất</b> (長) trong nhà chính là <b>CON TRAI CẢ</b> (長男)!',
+      '主人': '<b>Người</b> (人) gánh vác làm <b>chủ</b> (主) một gia đình chính là <b>NGƯỜI CHỒNG / NGƯỜI CHỦ</b> (主人)!',
+      '双子': 'Hai đứa <b>con</b> (子) chào đời <b>song đôi</b> (双) chính là <b>CẶP SONG SINH</b> (双子)!',
+      '迷子': 'Đứa <b>trẻ</b> (子) bị <b>lạc lối</b> (迷) giữa chốn đông người là <b>TRẺ LẠC</b> (迷子)!',
+      '他人': '<b>Người</b> (人) ở <b>phương khác</b> (他) không cùng máu mủ chính là <b>NGƯỜI DƯNG / NGƯỜI NGOÀI</b> (他人)!',
+      '敵': 'Kẻ đứng đối diện nhắm vào ta chính là <b>KẺ THÙ / ĐỐI ĐỊCH</b> (敵)!',
+      '味方': 'Người (<b>方</b>) cùng ta nếm trải ngọt bùi cay đắng (<b>味</b>) chính là <b>BẠN BÈ / ĐỒNG MINH</b> (味方)!',
+      '筆者': '<b>Người</b> (者) cầm cây <b>bút</b> (筆) viết nên trang sách chính là <b>TÁC GIẢ</b> (筆者)!',
+      '寿命': 'Số <b>mệnh</b> (命) sống <b>lâu dài</b> (寿) chính là <b>TUỔI THỌ</b> (寿命)!',
+      '将来': 'Khoảng thời gian <b>sắp sửa</b> (将) <b>đến</b> (来) chính là <b>TƯƠNG LAI</b> (将来)!',
+      '才能': 'Khí chất <b>tài năng</b> (才) kết hợp <b>khả năng</b> (能) tạo nên <b>TÀI NĂNG</b> (才能)!'
+    };
+
+    if (COMPOUND_MANTRAS[term]) {
+      return COMPOUND_MANTRAS[term];
+    }
+
+    if (satellites && satellites.length >= 2) {
+      const charHooks = satellites.map(s => `<b>${escapeHtml(s.char)}</b> (${escapeHtml(s.meaning || s.name)})`).join(' + ');
+      return `Ghép từ ${charHooks} ➔ Liên tưởng: <b>${escapeHtml(primaryMeaning)}</b> (${term})!`;
+    } else if (satellites && satellites.length === 1) {
+      return `Chữ <b>${escapeHtml(satellites[0].char)}</b> (${escapeHtml(satellites[0].meaning || satellites[0].name)}) ➔ Gợi nhớ: <b>${escapeHtml(primaryMeaning)}</b>!`;
+    }
+    return `Từ vựng <b>${escapeHtml(term)}</b>: <b>${escapeHtml(primaryMeaning)}</b>!`;
   }
 
   // --------------------------------------------------------------------------

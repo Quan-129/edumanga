@@ -346,7 +346,7 @@ window.MIMIKARA_KANJI_RADICALS = {
         "meaning": "Chưa đến lúc, tương lai"
       }
     ],
-    "story": "Kết hợp từ <b>口</b> (Bộ Khẩu) + <b>未</b> (Bộ Vị) ➔ Tạo nên chữ <b>味</b>: <i>\"nếm/hương vị\"</i>"
+    "story": "Dùng <b>MIỆNG</b> (口) nếm trái <b>CHƯA</b> (未) chín để cảm nhận <b>HƯƠNG VỊ</b> (味)!"
   },
   "方": {
     "char": "方",
@@ -369,7 +369,7 @@ window.MIMIKARA_KANJI_RADICALS = {
         "meaning": "Nét / Bộ thủ cấu thành"
       }
     ],
-    "story": "Kết hợp từ <b>亠</b> (Bộ Đầu) + <b>丿</b> (Bộ Phiệt) + <b>𠃌</b> (Thành phần 𠃌) ➔ Tạo nên chữ <b>方</b>: <i>\"hướng/người\"</i>"
+    "story": "Người đứng dang tay chỉ về bốn <b>PHƯƠNG</b> (方) hướng chân trời!"
   },
   "筆": {
     "char": "筆",

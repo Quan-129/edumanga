@@ -3,6 +3,45 @@
 
 Nơi ghi lại toàn bộ tiến trình phát triển, các quyết định kiến trúc kỹ thuật (ADR) và danh sách việc cần làm tiếp theo cho dự án EduManga Hub.
 
+## [2026-09-12 19:10] - Chuyển Đổi Dòng Liên Tưởng Sang Bộ Câu Thần Chú Ghi Nhớ (Mnemonic Mantra) Cho Chiết Tự Bộ Thủ & Ghép Từ
+
+### 🎯 Mục tiêu
+- Xử lý yêu cầu của người dùng từ ảnh chụp màn hình: *"tôi muốn đoạn này biến tấu thành câu thần chú cho dễ nhớ"* (tại vị trí liên kết bộ thủ của chữ **`味`**: `🪄 Kết hợp từ 口 (Bộ Khẩu) + 未 (Bộ Vị) ➔ Tạo nên chữ 味: "nếm/hương vị"`).
+- **Vấn đề trước đây**:
+  - Dòng liên tưởng chữ Hán trước đây hiển thị theo dạng công thức ghép bộ thủ khô khan: `"Kết hợp từ [Bộ A] + [Bộ B] ➔ Tạo nên chữ [C]: '[nghĩa]'"`. Dạng công thức này không giúp người học liên tưởng hay gợi nhớ được mối quan hệ logic giữa các nét/bộ thủ và ngữ nghĩa của chữ Hán.
+- **Giải pháp triển khai**:
+  1. **Bộ Thần Chú Chiết Tự Tuyển Chọn (Curated Kanji Mnemonic Mantras)**:
+     - Chữ **`味`** (Vị - nếm/hương vị): Gắn kết bộ **`口`** (Khẩu - Miệng) và **`未`** (Vị - Chưa):
+       > 🪄 **Thần chú chiết tự:** *Dùng **MIỆNG** (口) nếm trái **CHƯA** (未) chín để cảm nhận **HƯƠNG VỊ** (味)!*
+     - Chữ **`方`** (Phương - hướng/người):
+       > 🪄 **Thần chú chiết tự:** *Người đứng dang tay chỉ về bốn **PHƯƠNG** (方) hướng chân trời!*
+     - Xây dựng kho thần chú chiết tự sống động cho toàn bộ chữ Hán N2 thông dụng (`人`, `生`, `間`, `祖`, `先`, `親`, `戚`, `夫`, `婦`, `長`, `男`, `主`, `双`, `子`, `迷`, `他`, `敵`, `筆`, `者`, `寿`, `命`, `将`, `来`, `才`, `能`, `休`, `体`, `食`, `飲`, `見`, `聞`, `読`, `書`, `話`, `語`, `動`, `働`, `所`, `個`, `性`, `愛`, `信`, v.v.).
+     - Tích hợp thuật toán tự động sinh câu thần chú kể chuyện giàu ngữ nghĩa cho các chữ chưa có trong từ điển thay vì công thức khô cứng.
+  2. **Bộ Thần Chú Ghép Từ (Compound Word Mantras)**:
+     - Từ vựng **`味方`** (Mikata - Bạn bè / Đồng minh):
+       > 🪄 **Thần chú ghép từ:** *Người (**方**) cùng ta nếm trải ngọt bùi cay đắng (**味**) chính là **BẠN BÈ / ĐỒNG MINH** (味方)!*
+     - Tích hợp cho toàn bộ các từ ghép trong Unit 1 (`人生`, `人間`, `祖先`, `親戚`, `夫婦`, `長男`, `主人`, `双子`, `迷子`, `他人`, `筆者`, `寿命`, `将来`, `才能`).
+  3. **Nâng Cấp Giao Diện Thần Chú Neon (Magic Spell Card Style)**:
+     - Thiết kế huy hiệu `.mantra-badge` bo tròn với gradient vàng hổ phách `rgba(245, 158, 11, 0.25)` và icon cây đũa phép `fa-wand-magic-sparkles`.
+     - Phân định rõ ngữ cảnh: `🪄 Thần chú chiết tự:` khi ở chế độ Bộ Thủ và `🪄 Thần chú ghép từ:` khi ở chế độ Ghép Từ.
+     - Khối nội dung `.mantra-content` nổi bật với chữ Hán tô màu xanh Cyan sáng `#38bdf8` và từ khóa ngữ nghĩa màu vàng rực rỡ `#fde047`.
+  4. **Đồng Bộ Dữ Liệu & Nâng Cache Buster v=4.5**:
+     - Cập nhật đồng bộ vào cả `data/kanji_radicals_n2.js` và `data/kanji_radicals_n2.json`.
+     - Nâng script và style lên `?v=4.5` trong `index.html`, `detail.html`, `reader.html`.
+
+### ✅ Công việc đã hoàn thành
+- **[Hàm Sinh Thần Chú & Từ Điển Mantra] ([`js/mimikara-practice-service.js`](file:///g:/My%20Drive/hk261/Dự%20án%20manga/js/mimikara-practice-service.js))**:
+  - Bổ sung `getKanjiMnemonicMantra()`, `getCompoundWordMnemonicMantra()` và cập nhật `renderFrontMindmapContent()`.
+- **[Dữ Liệu Chiết Tự Gốc] ([`data/kanji_radicals_n2.js`](file:///g:/My%20Drive/hk261/Dự%20án%20manga/data/kanji_radicals_n2.js), [`data/kanji_radicals_n2.json`](file:///g:/My%20Drive/hk261/Dự%20án%20manga/data/kanji_radicals_n2.json))**:
+  - Cập nhật câu thần chú cho `味` và `方`.
+- **[Styling Huy Hiệu Thần Chú] ([`css/mimikara-practice.css`](file:///g:/My%20Drive/hk261/Dự%20án%20manga/css/mimikara-practice.css))**:
+  - Bổ sung quy tắc `.graph-story-hook .mantra-badge` và `.graph-story-hook .mantra-content`.
+- **[Nâng Cache Buster Lên v=4.5] ([`index.html`](file:///g:/My%20Drive/hk261/Dự%20án%20manga/index.html), [`detail.html`](file:///g:/My%20Drive/hk261/Dự%20án%20manga/detail.html), [`reader.html`](file:///g:/My%20Drive/hk261/Dự%20án%20manga/reader.html))**.
+- **[Kiểm Thử Trực Quan Bằng Browser Subagent]**:
+  - Đã chụp 2 ảnh màn hình xác nhận hiển thị đẹp mắt cho cả 2 chế độ (`kanji_radical_mnemonic` và `kanji_compound_mnemonic`).
+
+---
+
 ## [2026-09-12 16:35] - Khắc Phục Âm Lượng BGM & SFX (Tăng Gain Staging) & Cơ Chế Mở Khóa Tự Động AudioContext Trên Trình Duyệt
 
 ### 🎯 Mục tiêu
