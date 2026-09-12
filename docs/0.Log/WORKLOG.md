@@ -5,6 +5,37 @@ Nơi ghi lại toàn bộ tiến trình phát triển, các quyết định ki�
 
 ---
 
+## [2026-09-12 16:15] - Tích Hợp Động Cơ Nhạc Nền BGM Lo-Fi Chiptune & Nút Bật/Tắt [♫] Cho Minigame Ninja Leo Tháp
+
+### 🎯 Mục tiêu
+- Triển khai theo yêu cầu từ phân tích `gameplay.mp4`: *"ok triển đi"*.
+- **Vấn đề trước đây**: Minigame Ninja Leo Tháp chỉ có âm thanh SFX thô sơ (beep đơn), thiếu hoàn toàn nhạc nền BGM thư giãn, thiếu nút bật/tắt nhạc chuyên dụng như trong tựa game mẫu, âm thanh gõ phím chưa tạo cảm giác đã tay (game feel).
+- **Giải pháp**:
+  1. **Động cơ Nhạc Nền Procedural Web Audio API (0 KB Download, Zero Lag)**:
+     - Tự động tổng hợp bản nhạc nền Lo-Fi Chiptune chuẩn 96 BPM trong trẻo, vui nhộn theo vòng hòa âm 4 khuông nhạc: `Fmaj7` -> `C` -> `Dm7` -> `B♭`.
+     - Phối khí 4 lớp sống động: Bouncy Bassline nhịp nhàng, Chords đệm êm dịu, Marimba Pluck giai điệu ngộ nghĩnh và Shaker giữ nhịp đều đặn.
+     - **Smart Audio Ducking**: Khi phát âm từ vựng tiếng Nhật (`speakJapanese`), nhạc nền tự động giảm âm lượng xuống 20% để giọng đọc tiếng Nhật rõ nét 100%, sau đó mượt mà fade-in trở lại.
+  2. **Nút Bật/Tắt Nhạc Nền [ ♫ ] trên HUD**:
+     - Bổ sung nút `#climberBtnMusic` trên thanh công cụ góc phải (kế bên nút loa).
+     - Bật: icon nốt nhạc tím neon nhấp nháy chuyển động (`musicNoteBounce`), phát nhạc nền êm dịu.
+     - Tắt: icon loa gạch chéo, tắt nhạc và hiển thị floating text `🔇 Tắt nhạc nền`.
+     - Tự động lưu trạng thái vào `localStorage` (`edumanga_climber_music`).
+  3. **Nâng cấp SFX Đanh Giòn (Crispy Mechanical & ASMR Game Feel)**:
+     - `playKeyCorrectSound()`: Kết hợp tiếng click cơ học ASMR tần số cao + nốt nhạc thăng hoa theo thang âm Ngũ Cung (Pentatonic) tương ứng với từng ký tự Romaji gõ đúng.
+     - `playJumpSound()`: Hiệu ứng lò xo bay vút parabol sống động.
+     - `playLandSound()`: Tiếng táp cành cây chắc nịch.
+
+### ✅ Công việc đã hoàn thành
+- **[Động Cơ BGM & SFX Mới] ([`js/mimikara-climber-engine.js`](file:///g:/My%20Drive/hk261/Dự%20án%20manga/js/mimikara-climber-engine.js))**:
+  - Tích hợp `startBGM()`, `stopBGM()`, `toggleMusic()`, `duckBGM()`, `playBGMNote()`, `playShaker()`.
+  - Cập nhật `playKeyCorrectSound()`, `playJumpSound()`, `playLandSound()`, `playVictoryFanfare()`.
+  - Bổ sung nút `#climberBtnMusic` và quản lý vòng đời phát nhạc theo game state.
+- **[CSS HUD & Animation Nốt Nhạc] ([`css/mimikara-practice.css`](file:///g:/My%20Drive/hk261/Dự%20án%20manga/css/mimikara-practice.css))**:
+  - Thiết kế nút `.climber-icon-btn.music-btn.active` với gradient tím hồng neon và animation `@keyframes musicNoteBounce`.
+- **[Nâng Cache-Buster lên v=4.3] ([`index.html`](file:///g:/My%20Drive/hk261/Dự%20án%20manga/index.html), [`detail.html`](file:///g:/My%20Drive/hk261/Dự%20án manga/detail.html), [`reader.html`](file:///g:/My%20Drive/hk261/Dự%20án%20manga/reader.html))**: Nâng cache buster lên `?v=4.3`.
+
+---
+
 ## [2026-09-12 06:40] - Bước 4 (Nghe Điền): Ẩn Đáp Án Ở Placeholder, Thể Hiện Ô Ký Tự Romaji & Chỉ Show Kanji Kèm Furigana Phía Trên Khi Check Đúng
 
 ### 🎯 Mục tiêu

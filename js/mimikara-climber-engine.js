@@ -81,9 +81,18 @@ class MimikaraClimberGame {
     this.particles = [];
     this.floatingTexts = [];
 
-    // Web Audio Sound Synthesizer
+    // Web Audio Sound Synthesizer & Procedural BGM Engine
     this.audioCtx = null;
     this.isMuted = false;
+    this.isMusicEnabled = localStorage.getItem('edumanga_climber_music') !== 'false';
+    this.bgmTimer = null;
+    this.bgmGainNode = null;
+    this.sfxGainNode = null;
+    this.bgmVolume = 0.13;
+    this.bgmStep = 0;
+    this.bgmTempo = 96;
+    this.nextBeatTime = 0;
+    this.duckTimer = null;
 
     this.initDOM();
     this.initAudio();
@@ -122,10 +131,14 @@ class MimikaraClimberGame {
           </div>
 
           <!-- Right: Score & Audio controls -->
-          <div style="display: flex; align-items: center; gap: 14px;">
+          <div style="display: flex; align-items: center; gap: 12px;">
             <div style="font-size: 0.95rem; color: #fbbf24; font-weight: 800; letter-spacing: 0.5px;">
               Score: <span id="climberScoreText">0</span>
             </div>
+
+            <button type="button" id="climberBtnMusic" class="climber-icon-btn music-btn ${this.isMusicEnabled ? 'active' : ''}" title="Bật/Tắt Nhạc Nền BGM" style="background: ${this.isMusicEnabled ? 'rgba(168,85,247,0.25)' : 'rgba(255,255,255,0.06)'}; border: 1px solid ${this.isMusicEnabled ? '#c084fc' : 'rgba(255,255,255,0.15)'}; color: ${this.isMusicEnabled ? '#f472b6' : '#94a3b8'}; width: 34px; height: 34px; border-radius: 8px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s;">
+              <i class="fas ${this.isMusicEnabled ? 'fa-music' : 'fa-volume-xmark'}"></i>
+            </button>
 
             <button type="button" id="climberBtnAudio" class="climber-icon-btn" title="Nghe lại phát âm (Phím Space)" style="background: rgba(6,182,212,0.2); border: 1px solid rgba(6,182,212,0.4); color: #22d3ee; width: 34px; height: 34px; border-radius: 8px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s;">
               <i class="fas fa-volume-up"></i>
@@ -176,6 +189,9 @@ class MimikaraClimberGame {
     this.ctx = this.canvas.getContext('2d');
     this.hiddenInput = document.getElementById('climberHiddenInput');
 
+    // Nút BGM nhạc nền
+    const musicBtn = document.getElementById('climberBtnMusic');
+    if (musicBtn) musicBtn.addEventListener('click', () => this.toggleMusic());
     // Nút audio replay
     document.getElementById('climberBtnAudio').addEventListener('click', () => this.replayCurrentAudio());
     // Nút thoát
@@ -236,10 +252,227 @@ class MimikaraClimberGame {
       const AudioCtx = window.AudioContext || window.webkitAudioContext;
       if (AudioCtx) {
         this.audioCtx = new AudioCtx();
+
+        // Master BGM Gain Node
+        this.bgmGainNode = this.audioCtx.createGain();
+        this.bgmVolume = 0.13;
+        this.bgmGainNode.gain.setValueAtTime(this.isMusicEnabled ? this.bgmVolume : 0, this.audioCtx.currentTime);
+        this.bgmGainNode.connect(this.audioCtx.destination);
+
+        // Master SFX Gain Node
+        this.sfxGainNode = this.audioCtx.createGain();
+        this.sfxGainNode.gain.setValueAtTime(0.24, this.audioCtx.currentTime);
+        this.sfxGainNode.connect(this.audioCtx.destination);
       }
     } catch (e) {
       console.warn("Web Audio API not supported", e);
     }
+  }
+
+  startBGM() {
+    if (!this.audioCtx || !this.isMusicEnabled || this.bgmTimer) return;
+    try {
+      if (this.audioCtx.state === 'suspended') {
+        this.audioCtx.resume();
+      }
+    } catch (e) {}
+
+    this.bgmStep = 0;
+    this.bgmTempo = 96; // 96 BPM nhịp nhàng vui tươi (giống gameplay.mp4)
+    const beatSec = 60 / this.bgmTempo;
+    this.nextBeatTime = this.audioCtx.currentTime + 0.08;
+
+    // Vòng hòa âm 4 Bars: Fmaj7 -> C -> Dm7 -> Bb
+    const chords = [
+      { bass: 87.31, notes: [174.61, 220.00, 261.63, 329.63] }, // Fmaj7
+      { bass: 65.41, notes: [130.81, 196.00, 261.63, 329.63] }, // C
+      { bass: 73.42, notes: [146.83, 174.61, 220.00, 261.63] }, // Dm7
+      { bass: 58.27, notes: [116.54, 174.61, 233.08, 293.66] }  // Bb
+    ];
+
+    // Giai điệu Marimba / Glockenspiel ngộ nghĩnh, tươi vui
+    const melodyPattern = [
+      // Bar 0 (Fmaj7)
+      { bar: 0, beat: 0, freq: 440.00, dur: 0.28 },
+      { bar: 0, beat: 0.75, freq: 523.25, dur: 0.22 },
+      { bar: 0, beat: 1.5, freq: 659.25, dur: 0.35 },
+      { bar: 0, beat: 2.5, freq: 523.25, dur: 0.22 },
+      { bar: 0, beat: 3.0, freq: 440.00, dur: 0.25 },
+      // Bar 1 (C)
+      { bar: 1, beat: 0, freq: 392.00, dur: 0.28 },
+      { bar: 1, beat: 0.75, freq: 440.00, dur: 0.22 },
+      { bar: 1, beat: 1.5, freq: 523.25, dur: 0.35 },
+      { bar: 1, beat: 2.5, freq: 392.00, dur: 0.22 },
+      { bar: 1, beat: 3.0, freq: 329.63, dur: 0.25 },
+      // Bar 2 (Dm7)
+      { bar: 2, beat: 0, freq: 349.23, dur: 0.28 },
+      { bar: 2, beat: 0.75, freq: 440.00, dur: 0.22 },
+      { bar: 2, beat: 1.5, freq: 587.33, dur: 0.35 },
+      { bar: 2, beat: 2.5, freq: 523.25, dur: 0.22 },
+      { bar: 2, beat: 3.0, freq: 440.00, dur: 0.25 },
+      // Bar 3 (Bb)
+      { bar: 3, beat: 0, freq: 293.66, dur: 0.28 },
+      { bar: 3, beat: 0.75, freq: 349.23, dur: 0.22 },
+      { bar: 3, beat: 1.5, freq: 392.00, dur: 0.35 },
+      { bar: 3, beat: 2.5, freq: 440.00, dur: 0.22 },
+      { bar: 3, beat: 3.0, freq: 523.25, dur: 0.25 }
+    ];
+
+    const scheduleAheadTime = 0.25;
+
+    const scheduler = () => {
+      if (!this.isRunning || !this.isMusicEnabled || !this.audioCtx) return;
+
+      while (this.nextBeatTime < this.audioCtx.currentTime + scheduleAheadTime) {
+        const currentTotalBeat = this.bgmStep;
+        const currentBar = Math.floor((currentTotalBeat % 16) / 4);
+        const beatInBar = currentTotalBeat % 4;
+        const chord = chords[currentBar];
+
+        // 1. Bouncy Bassline (nảy nhẹ theo nhịp)
+        if (beatInBar === 0) {
+          this.playBGMNote(chord.bass, 'triangle', this.nextBeatTime, beatSec * 0.9, 0.28, 400);
+        } else if (beatInBar === 1) {
+          this.playBGMNote(chord.bass * 1.5, 'triangle', this.nextBeatTime + beatSec * 0.5, beatSec * 0.45, 0.2, 400);
+        } else if (beatInBar === 2) {
+          this.playBGMNote(chord.bass, 'triangle', this.nextBeatTime, beatSec * 0.7, 0.25, 400);
+        } else if (beatInBar === 3) {
+          this.playBGMNote(chord.bass * 1.5, 'triangle', this.nextBeatTime + beatSec * 0.6, beatSec * 0.5, 0.2, 400);
+        }
+
+        // 2. Chords pad êm dịu (gảy ở phách 0.5 và 2.5)
+        chord.notes.forEach(noteFreq => {
+          this.playBGMNote(noteFreq, 'sine', this.nextBeatTime + beatSec * 0.5, beatSec * 0.55, 0.04, 750);
+        });
+
+        // 3. Giai điệu Marimba / Pluck
+        melodyPattern.forEach(m => {
+          if (m.bar === currentBar && Math.floor(m.beat) === beatInBar) {
+            const exactTime = this.nextBeatTime + (m.beat - beatInBar) * beatSec;
+            this.playBGMNote(m.freq, 'sine', exactTime, m.dur, 0.16, 2200);
+          }
+        });
+
+        // 4. Tiếng Shaker giữ nhịp đều đặn trên mỗi nốt móc đơn (8th note)
+        this.playShaker(this.nextBeatTime, 0.02, 0.022);
+        this.playShaker(this.nextBeatTime + beatSec * 0.5, 0.02, 0.016);
+
+        this.nextBeatTime += beatSec;
+        this.bgmStep++;
+      }
+    };
+
+    this.bgmTimer = setInterval(scheduler, 45);
+  }
+
+  stopBGM() {
+    if (this.bgmTimer) {
+      clearInterval(this.bgmTimer);
+      this.bgmTimer = null;
+    }
+  }
+
+  toggleMusic() {
+    this.isMusicEnabled = !this.isMusicEnabled;
+    try {
+      localStorage.setItem('edumanga_climber_music', this.isMusicEnabled ? 'true' : 'false');
+    } catch (e) {}
+
+    const btn = document.getElementById('climberBtnMusic');
+    if (btn) {
+      btn.classList.toggle('active', this.isMusicEnabled);
+      btn.style.background = this.isMusicEnabled ? 'rgba(168,85,247,0.25)' : 'rgba(255,255,255,0.06)';
+      btn.style.borderColor = this.isMusicEnabled ? '#c084fc' : 'rgba(255,255,255,0.15)';
+      btn.style.color = this.isMusicEnabled ? '#f472b6' : '#94a3b8';
+      btn.innerHTML = `<i class="fas ${this.isMusicEnabled ? 'fa-music' : 'fa-volume-xmark'}"></i>`;
+    }
+
+    if (this.isMusicEnabled) {
+      if (this.audioCtx && this.bgmGainNode) {
+        this.bgmGainNode.gain.cancelScheduledValues(this.audioCtx.currentTime);
+        this.bgmGainNode.gain.setValueAtTime(0, this.audioCtx.currentTime);
+        this.bgmGainNode.gain.linearRampToValueAtTime(this.bgmVolume, this.audioCtx.currentTime + 0.3);
+      }
+      this.startBGM();
+      this.addFloatingText(this.character.x, this.character.y - 45, '🎵 Bật nhạc nền', '#c084fc');
+    } else {
+      if (this.audioCtx && this.bgmGainNode) {
+        this.bgmGainNode.gain.cancelScheduledValues(this.audioCtx.currentTime);
+        this.bgmGainNode.gain.linearRampToValueAtTime(0, this.audioCtx.currentTime + 0.2);
+      }
+      setTimeout(() => this.stopBGM(), 220);
+      this.addFloatingText(this.character.x, this.character.y - 45, '🔇 Tắt nhạc nền', '#94a3b8');
+    }
+  }
+
+  duckBGM(durationMs = 2200) {
+    if (!this.audioCtx || !this.bgmGainNode || !this.isMusicEnabled) return;
+    try {
+      this.bgmGainNode.gain.cancelScheduledValues(this.audioCtx.currentTime);
+      this.bgmGainNode.gain.setTargetAtTime(0.025, this.audioCtx.currentTime, 0.08); // duck xuống 20%
+      
+      clearTimeout(this.duckTimer);
+      this.duckTimer = setTimeout(() => {
+        if (this.audioCtx && this.bgmGainNode && this.isMusicEnabled) {
+          this.bgmGainNode.gain.setTargetAtTime(this.bgmVolume, this.audioCtx.currentTime, 0.35);
+        }
+      }, durationMs);
+    } catch (e) {}
+  }
+
+  playBGMNote(freq, type = 'sine', startTime, duration = 0.1, gain = 0.1, cutoff = 1500) {
+    if (!this.audioCtx || !this.isMusicEnabled) return;
+    try {
+      const osc = this.audioCtx.createOscillator();
+      const gainNode = this.audioCtx.createGain();
+      osc.type = type;
+      osc.frequency.setValueAtTime(freq, startTime);
+
+      const filter = this.audioCtx.createBiquadFilter();
+      filter.type = 'lowpass';
+      filter.frequency.setValueAtTime(cutoff, startTime);
+
+      gainNode.gain.setValueAtTime(0.001, startTime);
+      gainNode.gain.linearRampToValueAtTime(gain, startTime + 0.015);
+      gainNode.gain.exponentialRampToValueAtTime(0.0001, startTime + duration);
+
+      osc.connect(filter);
+      filter.connect(gainNode);
+      gainNode.connect(this.bgmGainNode || this.audioCtx.destination);
+
+      osc.start(startTime);
+      osc.stop(startTime + duration);
+    } catch (e) {}
+  }
+
+  playShaker(startTime, duration = 0.02, gain = 0.02) {
+    if (!this.audioCtx || !this.isMusicEnabled) return;
+    try {
+      const bufferSize = Math.max(1, Math.floor(this.audioCtx.sampleRate * duration));
+      const buffer = this.audioCtx.createBuffer(1, bufferSize, this.audioCtx.sampleRate);
+      const data = buffer.getChannelData(0);
+      for (let i = 0; i < bufferSize; i++) {
+        data[i] = Math.random() * 2 - 1;
+      }
+
+      const noise = this.audioCtx.createBufferSource();
+      noise.buffer = buffer;
+
+      const filter = this.audioCtx.createBiquadFilter();
+      filter.type = 'highpass';
+      filter.frequency.setValueAtTime(6500, startTime);
+
+      const gainNode = this.audioCtx.createGain();
+      gainNode.gain.setValueAtTime(gain, startTime);
+      gainNode.gain.exponentialRampToValueAtTime(0.0001, startTime + duration);
+
+      noise.connect(filter);
+      filter.connect(gainNode);
+      gainNode.connect(this.bgmGainNode || this.audioCtx.destination);
+
+      noise.start(startTime);
+      noise.stop(startTime + duration);
+    } catch (e) {}
   }
 
   playBeep(freq = 440, type = 'sine', duration = 0.08, gain = 0.15) {
@@ -255,20 +488,54 @@ class MimikaraClimberGame {
       gainNode.gain.setValueAtTime(gain, this.audioCtx.currentTime);
       gainNode.gain.exponentialRampToValueAtTime(0.001, this.audioCtx.currentTime + duration);
       osc.connect(gainNode);
-      gainNode.connect(this.audioCtx.destination);
+      gainNode.connect(this.sfxGainNode || this.audioCtx.destination);
       osc.start();
       osc.stop(this.audioCtx.currentTime + duration);
     } catch (e) {}
   }
 
+  // SFX Gõ đúng: Kết hợp tiếng Click cơ học ASMR + nốt Ngũ âm trong trẻo
   playKeyCorrectSound() {
-    this.playBeep(650 + (this.inputIndex * 40), 'sine', 0.05, 0.12);
+    if (this.isMuted || !this.audioCtx) return;
+    try {
+      if (this.audioCtx.state === 'suspended') this.audioCtx.resume();
+      const now = this.audioCtx.currentTime;
+
+      // 1. Tiếng Click cơ học ASMR (tần số cao đanh giòn)
+      const clickOsc = this.audioCtx.createOscillator();
+      const clickGain = this.audioCtx.createGain();
+      clickOsc.type = 'triangle';
+      clickOsc.frequency.setValueAtTime(2400, now);
+      clickOsc.frequency.exponentialRampToValueAtTime(500, now + 0.02);
+      clickGain.gain.setValueAtTime(0.15, now);
+      clickGain.gain.exponentialRampToValueAtTime(0.001, now + 0.025);
+      clickOsc.connect(clickGain);
+      clickGain.connect(this.sfxGainNode || this.audioCtx.destination);
+      clickOsc.start(now);
+      clickOsc.stop(now + 0.025);
+
+      // 2. Nốt nhạc thăng hoa theo số ký tự đã gõ (Pentatonic Scale: C5, D5, E5, G5, A5, C6...)
+      const pentatonic = [523.25, 587.33, 659.25, 783.99, 880.00, 1046.50, 1174.66];
+      const noteFreq = pentatonic[this.inputIndex % pentatonic.length];
+      const chimeOsc = this.audioCtx.createOscillator();
+      const chimeGain = this.audioCtx.createGain();
+      chimeOsc.type = 'sine';
+      chimeOsc.frequency.setValueAtTime(noteFreq, now);
+      chimeGain.gain.setValueAtTime(0.12, now);
+      chimeGain.gain.exponentialRampToValueAtTime(0.001, now + 0.1);
+      chimeOsc.connect(chimeGain);
+      chimeGain.connect(this.sfxGainNode || this.audioCtx.destination);
+      chimeOsc.start(now);
+      chimeOsc.stop(now + 0.1);
+    } catch (e) {}
   }
 
+  // SFX Gõ sai: Tiếng thud mộc nhẹ nhàng
   playKeyWrongSound() {
-    this.playBeep(180, 'sawtooth', 0.12, 0.18);
+    this.playBeep(160, 'triangle', 0.1, 0.2);
   }
 
+  // SFX Bật nhảy: Lò xo bay vút parabol
   playJumpSound() {
     if (this.isMuted || !this.audioCtx) return;
     try {
@@ -276,33 +543,35 @@ class MimikaraClimberGame {
       const osc = this.audioCtx.createOscillator();
       const gainNode = this.audioCtx.createGain();
       osc.type = 'triangle';
-      osc.frequency.setValueAtTime(260, this.audioCtx.currentTime);
-      osc.frequency.exponentialRampToValueAtTime(620, this.audioCtx.currentTime + 0.2);
-      gainNode.gain.setValueAtTime(0.2, this.audioCtx.currentTime);
-      gainNode.gain.exponentialRampToValueAtTime(0.001, this.audioCtx.currentTime + 0.25);
+      osc.frequency.setValueAtTime(240, this.audioCtx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(680, this.audioCtx.currentTime + 0.22);
+      gainNode.gain.setValueAtTime(0.22, this.audioCtx.currentTime);
+      gainNode.gain.exponentialRampToValueAtTime(0.001, this.audioCtx.currentTime + 0.26);
       osc.connect(gainNode);
-      gainNode.connect(this.audioCtx.destination);
+      gainNode.connect(this.sfxGainNode || this.audioCtx.destination);
       osc.start();
-      osc.stop(this.audioCtx.currentTime + 0.25);
+      osc.stop(this.audioCtx.currentTime + 0.26);
     } catch (e) {}
   }
 
+  // SFX Tiếp đất: Tiếng táp cành cây
   playLandSound() {
-    this.playBeep(120, 'triangle', 0.1, 0.2);
+    this.playBeep(110, 'sine', 0.08, 0.22);
   }
 
   playVictoryFanfare() {
-    const notes = [523.25, 659.25, 783.99, 1046.50]; // C, E, G, C
+    const notes = [523.25, 659.25, 783.99, 1046.50, 1318.51]; // C, E, G, C, E
     notes.forEach((freq, idx) => {
       setTimeout(() => {
-        this.playBeep(freq, 'sine', 0.25, 0.2);
-      }, idx * 100);
+        this.playBeep(freq, 'sine', 0.3, 0.22);
+      }, idx * 90);
     });
   }
 
   speakJapanese(text) {
     if (!text || !('speechSynthesis' in window)) return;
     window.speechSynthesis.cancel();
+    this.duckBGM(2200); // Tự động giảm nhẹ âm lượng BGM khi phát âm
     const u = new SpeechSynthesisUtterance(text);
     u.lang = 'ja-JP';
     u.rate = 0.95;
@@ -449,9 +718,13 @@ class MimikaraClimberGame {
     this.boundKeyDown = this.handleKeyDown.bind(this);
     window.addEventListener('keydown', this.boundKeyDown);
 
-    // Kích hoạt hidden input khi click vào canvas
+    // Kích hoạt hidden input khi click vào canvas & resume audio nếu bị suspended
     this.canvas.addEventListener('click', () => {
       if (this.hiddenInput) this.hiddenInput.focus();
+      if (this.audioCtx && this.audioCtx.state === 'suspended') {
+        this.audioCtx.resume();
+        if (this.isMusicEnabled && !this.bgmTimer) this.startBGM();
+      }
     });
 
     if (this.hiddenInput) {
@@ -468,6 +741,11 @@ class MimikaraClimberGame {
 
   handleKeyDown(e) {
     if (!this.isRunning || this.isPaused || this.character.isJumping) return;
+
+    if (this.audioCtx && this.audioCtx.state === 'suspended') {
+      this.audioCtx.resume();
+      if (this.isMusicEnabled && !this.bgmTimer) this.startBGM();
+    }
 
     // Phím nghe lại Audio: Chỉ dùng 'Space' (loại bỏ phím R để tránh xung đột với chữ cái Romaji 'r')
     if (e.code === 'Space' && this.targetRomaji) {
@@ -617,6 +895,9 @@ class MimikaraClimberGame {
       });
     }
 
+    // Tắt BGM và bật nhạc vinh quang
+    this.stopBGM();
+
     setTimeout(() => {
       this.options.onVictory({
         score: this.score,
@@ -627,6 +908,7 @@ class MimikaraClimberGame {
 
   triggerGameOver() {
     this.isRunning = false;
+    this.stopBGM();
     const modal = document.getElementById('climberGameOverModal');
     const failNum = document.getElementById('climberFailBranchNum');
     if (failNum) failNum.textContent = this.currentBranchIndex;
@@ -643,6 +925,9 @@ class MimikaraClimberGame {
     this.setupBranches();
     this.isRunning = true;
     this.updateHUD();
+    if (this.isMusicEnabled) {
+      this.startBGM();
+    }
   }
 
   // --------------------------------------------------------------------------
@@ -650,6 +935,9 @@ class MimikaraClimberGame {
   // --------------------------------------------------------------------------
   start() {
     this.isRunning = true;
+    if (this.isMusicEnabled) {
+      this.startBGM();
+    }
     const loop = () => {
       if (this.isRunning) {
         this.update();
@@ -662,6 +950,7 @@ class MimikaraClimberGame {
 
   destroy() {
     this.isRunning = false;
+    this.stopBGM();
     if (this.animationFrameId) {
       cancelAnimationFrame(this.animationFrameId);
     }
@@ -670,6 +959,11 @@ class MimikaraClimberGame {
     }
     if ('speechSynthesis' in window) {
       window.speechSynthesis.cancel();
+    }
+    if (this.audioCtx) {
+      try {
+        this.audioCtx.close();
+      } catch (e) {}
     }
   }
 

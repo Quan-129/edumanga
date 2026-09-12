@@ -399,6 +399,41 @@ body.mimikara-active .floating-reader-dock {
   max-height: 840px !important;
 }
 
+/* Climber HUD Buttons & BGM Pulsing Indicator */
+.climber-icon-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  font-size: 0.95rem;
+}
+
+.climber-icon-btn:hover {
+  transform: translateY(-2px) scale(1.08);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+}
+
+.climber-icon-btn.music-btn.active {
+  background: linear-gradient(135deg, rgba(168, 85, 247, 0.3), rgba(236, 72, 153, 0.25)) !important;
+  border: 1px solid #c084fc !important;
+  color: #f472b6 !important;
+  box-shadow: 0 0 16px rgba(168, 85, 247, 0.45) !important;
+}
+
+.climber-icon-btn.music-btn.active i {
+  animation: musicNoteBounce 1.4s infinite ease-in-out;
+}
+
+@keyframes musicNoteBounce {
+  0%, 100% { transform: scale(1) rotate(0deg); }
+  30% { transform: scale(1.22) rotate(-8deg); }
+  60% { transform: scale(1.15) rotate(8deg); }
+}
+
 /* Modal Body */
 .mimikara-modal-body {
   padding: 1.5rem 2rem;
