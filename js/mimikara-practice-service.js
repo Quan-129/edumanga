@@ -1740,6 +1740,11 @@ class MimikaraPracticeService {
     const u = clean(userInput);
     if (!u) return false;
 
+    // Chuẩn hóa Romaji trường âm linh hoạt (ví dụ: moushiwakenai <-> moshiwakenai)
+    const normRomaji = s => (s || '').toLowerCase().replace(/[^a-z]/g, '').replace(/ou/g, 'o').replace(/oo/g, 'o');
+    const uRomaji = normRomaji(u);
+    const targetRomaji = normRomaji(word.romaji);
+
     if (direction === 'kanji_to_reading') {
       // Chấp nhận: reading, romaji, hoặc từ khóa trong meaning
       const reading = clean(word.reading);
@@ -1747,7 +1752,7 @@ class MimikaraPracticeService {
       const meaning = clean(word.meaning);
       const hanViet = clean(word.han_viet);
 
-      if (u === reading || u === romaji || u === hanViet) return true;
+      if (u === reading || u === romaji || (uRomaji && targetRomaji && uRomaji === targetRomaji) || u === hanViet) return true;
       if (meaning.includes(u) && u.length >= 2) return true;
 
       // So khớp từng từ nghĩa phân cách bằng dấu gạch ngang hoặc phẩy
@@ -1755,11 +1760,11 @@ class MimikaraPracticeService {
       if (parts.some(p => p === u || (p.length >= 2 && u.includes(p)))) return true;
       return false;
     } else {
-      // meaning_to_kanji: Chấp nhận term (Kanji) hoặc reading
+      // meaning_to_kanji: Chấp nhận term (Kanji), reading (Hiragana) hoặc romaji (kể cả dạng ou -> o)
       const term = clean(word.term);
       const reading = clean(word.reading);
       const romaji = clean(word.romaji);
-      return (u === term || u === reading || u === romaji);
+      return (u === term || u === reading || u === romaji || (uRomaji && targetRomaji && uRomaji === targetRomaji));
     }
   }
 
