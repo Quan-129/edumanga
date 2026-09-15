@@ -1740,8 +1740,11 @@ class MimikaraPracticeService {
     const u = clean(userInput);
     if (!u) return false;
 
-    // Chuẩn hóa Romaji trường âm linh hoạt (ví dụ: moushiwakenai <-> moshiwakenai)
-    const normRomaji = s => (s || '').toLowerCase().replace(/[^a-z]/g, '').replace(/ou/g, 'o').replace(/oo/g, 'o');
+    // Chuẩn hóa Romaji trường âm & đuôi tính từ linh hoạt (koishi <-> koishii, moshiwakenai <-> moushiwakenai)
+    const normRomaji = s => (s || '').toLowerCase().replace(/[^a-z]/g, '')
+      .replace(/ou/g, 'o').replace(/oo/g, 'o')
+      .replace(/ii/g, 'i').replace(/uu/g, 'u')
+      .replace(/ee/g, 'e').replace(/aa/g, 'a');
     const uRomaji = normRomaji(u);
     const targetRomaji = normRomaji(word.romaji);
 
