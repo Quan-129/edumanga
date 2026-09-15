@@ -83,8 +83,9 @@ class MimikaraClimberGame {
 
     // Web Audio Sound Synthesizer & Procedural BGM Engine
     this.audioCtx = null;
-    this.isMuted = false;
-    this.isMusicEnabled = localStorage.getItem('edumanga_climber_music') !== 'false';
+    this.isSilentMode = !!this.options.isSilentMode;
+    this.isMuted = this.isSilentMode;
+    this.isMusicEnabled = this.isSilentMode ? false : (localStorage.getItem('edumanga_climber_music') !== 'false');
     this.bgmTimer = null;
     this.bgmGainNode = null;
     this.sfxGainNode = null;
@@ -136,11 +137,11 @@ class MimikaraClimberGame {
               Score: <span id="climberScoreText">0</span>
             </div>
 
-            <button type="button" id="climberBtnMusic" class="climber-icon-btn music-btn ${this.isMusicEnabled ? 'active' : ''}" title="Bật/Tắt Nhạc Nền BGM" style="background: ${this.isMusicEnabled ? 'rgba(168,85,247,0.25)' : 'rgba(255,255,255,0.06)'}; border: 1px solid ${this.isMusicEnabled ? '#c084fc' : 'rgba(255,255,255,0.15)'}; color: ${this.isMusicEnabled ? '#f472b6' : '#94a3b8'}; width: 34px; height: 34px; border-radius: 8px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s;">
+            <button type="button" id="climberBtnMusic" class="climber-icon-btn music-btn ${this.isMusicEnabled ? 'active' : ''}" title="Bật/Tắt Nhạc Nền BGM" style="${this.isSilentMode ? 'display: none !important;' : ''} background: ${this.isMusicEnabled ? 'rgba(168,85,247,0.25)' : 'rgba(255,255,255,0.06)'}; border: 1px solid ${this.isMusicEnabled ? '#c084fc' : 'rgba(255,255,255,0.15)'}; color: ${this.isMusicEnabled ? '#f472b6' : '#94a3b8'}; width: 34px; height: 34px; border-radius: 8px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s;">
               <i class="fas ${this.isMusicEnabled ? 'fa-music' : 'fa-volume-xmark'}"></i>
             </button>
 
-            <button type="button" id="climberBtnAudio" class="climber-icon-btn" title="Nghe lại phát âm (Phím Space)" style="background: rgba(6,182,212,0.2); border: 1px solid rgba(6,182,212,0.4); color: #22d3ee; width: 34px; height: 34px; border-radius: 8px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s;">
+            <button type="button" id="climberBtnAudio" class="climber-icon-btn" title="Nghe lại phát âm (Phím Space)" style="${this.isSilentMode ? 'display: none !important;' : ''} background: rgba(6,182,212,0.2); border: 1px solid rgba(6,182,212,0.4); color: #22d3ee; width: 34px; height: 34px; border-radius: 8px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s;">
               <i class="fas fa-volume-up"></i>
             </button>
 
@@ -156,12 +157,13 @@ class MimikaraClimberGame {
           
           <!-- Virtual Keyboard / Mobile Tip -->
           <div style="position: absolute; bottom: 8px; right: 14px; color: rgba(255,255,255,0.4); font-size: 0.72rem; pointer-events: none;">
-            ⌨️ Gõ Romaji trực tiếp • Phím [Space] nghe lại âm
+            ${this.isSilentMode ? '⌨️ Gõ Romaji trực tiếp • Chế độ Yên Lặng 🤫' : '⌨️ Gõ Romaji trực tiếp • Phím [Space] nghe lại âm'}
           </div>
 
           <!-- Hidden Input for mobile touch devices -->
           <input type="text" id="climberHiddenInput" style="position: absolute; opacity: 0; pointer-events: none; left: -9999px;" autocomplete="off" autocapitalize="off" spellcheck="false" />
         </div>
+
 
         <!-- Game Over Modal Overlay -->
         <div id="climberGameOverModal" style="display: none; position: absolute; inset: 0; background: rgba(15, 23, 42, 0.92); backdrop-filter: blur(10px); z-index: 100; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 24px;">
@@ -612,7 +614,7 @@ class MimikaraClimberGame {
   }
 
   speakJapanese(text) {
-    if (!text || !('speechSynthesis' in window)) return;
+    if (this.isMuted || this.isSilentMode || !text || !('speechSynthesis' in window)) return;
     window.speechSynthesis.cancel();
     this.duckBGM(2200); // Tự động giảm nhẹ âm lượng BGM khi phát âm
     const u = new SpeechSynthesisUtterance(text);
@@ -623,6 +625,7 @@ class MimikaraClimberGame {
   }
 
   replayCurrentAudio() {
+    if (this.isSilentMode) return;
     const nextBranch = this.branches[this.currentBranchIndex + 1];
     if (nextBranch) {
       this.speakJapanese(nextBranch.word.reading || nextBranch.word.term);
@@ -657,15 +660,40 @@ class MimikaraClimberGame {
     };
     this.branches.push(startBranch);
 
-    // Tạo danh sách 15 thử thách: mỗi từ có 3 dạng (Kanji, Nghĩa, Audio)
+    // Tạo danh sách 15 thử thách:
     let challenges = [];
-    words.forEach(w => {
-      const cleanRomaji = (w.romaji || '').toLowerCase().replace(/[^a-z]/g, '');
-      challenges.push({ word: w, type: 'kanji', display: w.term, targetRomaji: cleanRomaji, label: 'Chữ Hán' });
-      challenges.push({ word: w, type: 'meaning', display: this.shortenMeaning(w.meaning), targetRomaji: cleanRomaji, label: 'Ý Nghĩa' });
-      // Với Audio: chỉ để icon Loa 🔊, tuyệt đối không đính kèm w.term để giữ tính bất ngờ thử thách!
-      challenges.push({ word: w, type: 'audio', display: '🔊', targetRomaji: cleanRomaji, label: 'Nghe Âm' });
-    });
+    if (this.isSilentMode) {
+      // CHẾ ĐỘ YÊN LẶNG: BỎ HOÀN TOÀN CÀNH AUDIO (🔊)
+      if (this.options.mode === 'session') {
+        // Đúng 5 từ: mỗi từ 1 Kanji + 1 Nghĩa + 1 củng cố xen kẽ = đúng 15 cành Marathon!
+        words.forEach((w, idx) => {
+          const cleanRomaji = (w.romaji || '').toLowerCase().replace(/[^a-z]/g, '');
+          challenges.push({ word: w, type: 'kanji', display: w.term, targetRomaji: cleanRomaji, label: 'Chữ Hán' });
+          challenges.push({ word: w, type: 'meaning', display: this.shortenMeaning(w.meaning), targetRomaji: cleanRomaji, label: 'Ý Nghĩa' });
+          if (idx % 2 === 0) {
+            challenges.push({ word: w, type: 'kanji', display: w.term, targetRomaji: cleanRomaji, label: 'Chữ Hán' });
+          } else {
+            challenges.push({ word: w, type: 'meaning', display: this.shortenMeaning(w.meaning), targetRomaji: cleanRomaji, label: 'Ý Nghĩa' });
+          }
+        });
+      } else {
+        // Endless Mode: chỉ Kanji và Nghĩa, không có Audio
+        words.forEach(w => {
+          const cleanRomaji = (w.romaji || '').toLowerCase().replace(/[^a-z]/g, '');
+          challenges.push({ word: w, type: 'kanji', display: w.term, targetRomaji: cleanRomaji, label: 'Chữ Hán' });
+          challenges.push({ word: w, type: 'meaning', display: this.shortenMeaning(w.meaning), targetRomaji: cleanRomaji, label: 'Ý Nghĩa' });
+        });
+      }
+    } else {
+      // Chế độ Bình Thường: 5 Kanji + 5 Nghĩa + 5 Audio = 15 cành
+      words.forEach(w => {
+        const cleanRomaji = (w.romaji || '').toLowerCase().replace(/[^a-z]/g, '');
+        challenges.push({ word: w, type: 'kanji', display: w.term, targetRomaji: cleanRomaji, label: 'Chữ Hán' });
+        challenges.push({ word: w, type: 'meaning', display: this.shortenMeaning(w.meaning), targetRomaji: cleanRomaji, label: 'Ý Nghĩa' });
+        // Với Audio: chỉ để icon Loa 🔊, tuyệt đối không đính kèm w.term để giữ tính bất ngờ thử thách!
+        challenges.push({ word: w, type: 'audio', display: '🔊', targetRomaji: cleanRomaji, label: 'Nghe Âm' });
+      });
+    }
 
     // Thuật toán xáo trộn thông minh (Smart Shuffle): không có 2 từ liên tiếp trùng nhau
     challenges = this.smartShuffleChallenges(challenges);
@@ -744,7 +772,7 @@ class MimikaraClimberGame {
       this.lastInputState = 'normal';
 
       // Nếu là cành Audio, tự động phát giọng đọc ngay khi đến lượt!
-      if (nextBranch.type === 'audio') {
+      if (nextBranch.type === 'audio' && !this.isSilentMode) {
         setTimeout(() => {
           this.speakJapanese(nextBranch.word.reading || nextBranch.word.term);
         }, 350);
@@ -795,8 +823,8 @@ class MimikaraClimberGame {
     this.unlockAudio();
     if (!this.isRunning || this.isPaused || this.character.isJumping) return;
 
-    // Phím nghe lại Audio: Chỉ dùng 'Space' (loại bỏ phím R để tránh xung đột với chữ cái Romaji 'r')
-    if (e.code === 'Space' && this.targetRomaji) {
+    // Phím nghe lại Audio: Chỉ dùng 'Space' khi KHÔNG ở chế độ yên lặng
+    if (!this.isSilentMode && e.code === 'Space' && this.targetRomaji) {
       e.preventDefault();
       this.replayCurrentAudio();
       return;

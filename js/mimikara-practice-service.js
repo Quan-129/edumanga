@@ -54,6 +54,9 @@ class MimikaraPracticeService {
     this.translationState = 'input'; // 'input' | 'correct' | 'incorrect'
     this.n2TranslationsDb = null;
 
+    // Chế độ Yên Lặng (Silent / Library Mode)
+    this.isSilentMode = localStorage.getItem('edumanga_silent_mode') === 'true';
+
     // Dynamic Funnel Step State
     this.currentStepId = 'flashcard';
     this.currentStepNumber = 1;
@@ -86,6 +89,11 @@ class MimikaraPracticeService {
         }
       }
     } catch (e) {}
+
+    // ĐẶC BIỆT: KHI BẬT CHẾ ĐỘ YÊN LẶNG (SILENT MODE) -> TỰ ĐỘNG BỎ QUA BƯỚC 4: NGHE ĐIỀN (DICTATION)
+    if (this.isSilentMode) {
+      modes.dictation = false;
+    }
 
     const defs = config && config.definitions ? config.definitions : [
       { id: 'flashcard', originalStep: 1, name: 'Flashcard', shortName: 'Flashcard', icon: 'fa-clone', desc: 'Lướt từ & Chiết tự Mindmap' },
@@ -249,6 +257,7 @@ class MimikaraPracticeService {
 
   // Text-To-Speech Pronunciation
   speak(text, rate = 0.9) {
+    if (this.isSilentMode) return; // IM LẶNG HOÀN TOÀN TRONG CHẾ ĐỘ YÊN LẶNG
     if (!('speechSynthesis' in window) || !text) return;
     try {
       window.speechSynthesis.cancel();
@@ -273,6 +282,13 @@ class MimikaraPracticeService {
           e.preventDefault();
           this.revealDictationAnswer();
         }
+        return;
+      }
+
+      // Phím tắt 'S': Bật / Tắt nhanh Chế Độ Yên Lặng (Thư viện / Ban đêm)
+      if (e.code === 'KeyS' && !e.ctrlKey && !e.altKey && !e.metaKey) {
+        e.preventDefault();
+        this.toggleSilentMode();
         return;
       }
 
@@ -366,6 +382,78 @@ class MimikaraPracticeService {
     }
   }
 
+  // Chuyển đổi Bật / Tắt Chế Độ Yên Lặng (Thư viện / Ban đêm)
+  toggleSilentMode() {
+    this.isSilentMode = !this.isSilentMode;
+    try {
+      localStorage.setItem('edumanga_silent_mode', this.isSilentMode ? 'true' : 'false');
+    } catch (e) {}
+
+    // 1. Cập nhật UI nút gạt trên Header
+    const btn = document.getElementById('mimikaraBtnSilentToggle');
+    if (btn) {
+      btn.classList.toggle('active', this.isSilentMode);
+      btn.innerHTML = `
+        <i class="fas ${this.isSilentMode ? 'fa-volume-xmark' : 'fa-volume-high'}"></i>
+        <span>${this.isSilentMode ? 'Yên lặng 🤫' : 'Âm thanh'}</span>
+      `;
+      btn.title = this.isSilentMode 
+        ? 'Chế độ Yên Lặng ĐANG BẬT (Đã tắt toàn bộ âm thanh & bỏ bước nghe điền) [Phím S]' 
+        : 'Chế độ Âm Thanh ĐANG BẬT (Đầy đủ phát âm & bước nghe điền) [Phím S]';
+    }
+
+    // 2. Cập nhật Subtitle trên Header
+    this.updateHeaderSubtitle();
+
+    // 3. Nếu đang trong một phiên học (stepper đang hiển thị), cập nhật lại thanh stepper pills
+    const stepperContainer = document.querySelector('.mimikara-stepper-header');
+    if (stepperContainer && this.currentChunkWords) {
+      const pillsContainer = stepperContainer.querySelector('.mimikara-stepper-pills');
+      if (pillsContainer) {
+        const activeSteps = this.getActiveSteps();
+        const currentActive = activeSteps.find(s => s.id === this.currentStepId) || activeSteps.find(s => s.originalStep === this.currentStep) || activeSteps[0];
+        const currentStepNum = currentActive ? currentActive.stepNumber : 1;
+
+        pillsContainer.innerHTML = activeSteps.map(s => {
+          let stateClass = '';
+          let icon = s.icon;
+          if (s.stepNumber === currentStepNum) {
+            stateClass = 'active';
+          } else if (s.stepNumber < currentStepNum) {
+            stateClass = 'completed';
+            icon = 'fa-check';
+          }
+          return `
+            <div class="mimikara-step-pill ${stateClass}" title="${escapeHtml(s.desc)}">
+              <i class="fas ${icon}"></i> Bước ${s.stepNumber}: ${escapeHtml(s.name)}
+            </div>
+          `;
+        }).join('');
+      }
+
+      // Nếu đang đứng ở đúng bước dictation mà người dùng bật Silent Mode, tự động chuyển sang bước kế tiếp (Leo Tháp)!
+      if (this.isSilentMode && this.currentStepId === 'dictation') {
+        this.startNextActiveStep('dictation');
+      }
+    }
+
+    // 4. Nếu minigame leo tháp đang chạy, đồng bộ mute vào game
+    if (this.activeClimberGame) {
+      if (this.isSilentMode) {
+        this.activeClimberGame.isMuted = true;
+        this.activeClimberGame.isMusicEnabled = false;
+        if (this.activeClimberGame.stopBGM) this.activeClimberGame.stopBGM();
+      }
+    }
+
+    // 5. Hiển thị thông báo nhanh (Toast)
+    if (typeof showToast === 'function') {
+      showToast(this.isSilentMode 
+        ? '🤫 Đã BẬT Chế Độ Yên Lặng: Tắt toàn bộ âm thanh & bỏ bước nghe để an tâm học!' 
+        : '🔊 Đã BẬT Chế Độ Âm Thanh: Mở lại phát âm & bước nghe điền câu!');
+    }
+  }
+
   // Close Modal
   closeModal() {
     if (this.activeClimberGame) {
@@ -429,6 +517,17 @@ class MimikaraPracticeService {
   ensureModalDOM() {
     if (document.getElementById('mimikaraMasterModal')) {
       this.updateHeaderSubtitle();
+      const silentBtn = document.getElementById('mimikaraBtnSilentToggle');
+      if (silentBtn) {
+        silentBtn.classList.toggle('active', this.isSilentMode);
+        silentBtn.innerHTML = `
+          <i class="fas ${this.isSilentMode ? 'fa-volume-xmark' : 'fa-volume-high'}"></i>
+          <span>${this.isSilentMode ? 'Yên lặng 🤫' : 'Âm thanh'}</span>
+        `;
+        silentBtn.title = this.isSilentMode 
+          ? 'Chế độ Yên Lặng ĐANG BẬT [Phím S]' 
+          : 'Chế độ Âm Thanh ĐANG BẬT [Phím S]';
+      }
       return;
     }
 
@@ -451,6 +550,10 @@ class MimikaraPracticeService {
               </div>
             </div>
             <div style="display: flex; align-items: center; gap: 8px;">
+              <button type="button" id="mimikaraBtnSilentToggle" class="mimikara-btn-silent-toggle ${this.isSilentMode ? 'active' : ''}" onclick="window.mimikaraService.toggleSilentMode()" title="${this.isSilentMode ? 'Chế độ Yên Lặng ĐANG BẬT [Phím S]' : 'Chế độ Âm Thanh ĐANG BẬT [Phím S]'}">
+                <i class="fas ${this.isSilentMode ? 'fa-volume-xmark' : 'fa-volume-high'}"></i>
+                <span id="mimikaraSilentText">${this.isSilentMode ? 'Yên lặng 🤫' : 'Âm thanh'}</span>
+              </button>
               <button type="button" id="mimikaraBtnFullscreen" class="mimikara-btn-fullscreen" onclick="window.mimikaraService.toggleFullscreen()" title="Toàn màn hình / Thu nhỏ">
                 <i class="fas fa-expand"></i>
               </button>
@@ -2598,6 +2701,7 @@ class MimikaraPracticeService {
       this.activeClimberGame = new window.MimikaraClimberGame(container, {
         mode: 'session',
         words: this.currentChunkWords,
+        isSilentMode: this.isSilentMode,
         onVictory: (stats) => {
           this.startNextActiveStep('climbing');
         },
@@ -2645,6 +2749,7 @@ class MimikaraPracticeService {
       this.activeClimberGame = new window.MimikaraClimberGame(container, {
         mode: 'endless',
         words: unit.words,
+        isSilentMode: this.isSilentMode,
         onVictory: (stats) => {
           alert(`🎉 Chúc mừng! Bạn đã đạt ${stats.score.toLocaleString()} điểm và leo được ${stats.branchesClimbed} cành cây!`);
           this.renderUnitChunks(unitId);

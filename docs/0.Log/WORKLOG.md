@@ -3,6 +3,34 @@
 
 Nơi ghi lại toàn bộ tiến trình phát triển, các quyết định kiến trúc kỹ thuật (ADR) và danh sách việc cần làm tiếp theo cho dự án EduManga Hub.
 
+## [2026-09-15 09:30] - Triển Khai Chế Độ Yên Lặng (Silent / Library Mode): Tự Động Bỏ Qua Bước Nghe Điền & Tinh Chỉnh Leo Tháp 15 Cành Thuần Kanji/Nghĩa
+
+### 🎯 Mục tiêu
+- Đáp ứng yêu cầu người học khi cần môi trường yên tĩnh (thư viện, trường học, ban đêm, nơi công cộng):
+  - Bổ sung **cần gạt Chế Độ Yên Lặng (Silent / Library Mode)**.
+  - Các bước 1 (Flashcard), 2 (Ghép Cặp), 3 (Gõ Từ): Giữ nguyên nhưng **im lặng toàn bộ phát âm audio**.
+  - Bước 4 (Nghe Điền): **Tự động bỏ qua hoàn toàn** vì không thể nghe âm thanh; thanh tiến trình đôn Bước Leo Tháp lên thành Bước 4 liền mạch.
+  - Bước Leo Tháp (Minigame Ninja): **Bỏ toàn bộ các cành cây Audio (🔊)**; lặp lại củng cố xen kẽ Kanji và Nghĩa tiếng Việt để **đủ trọn vẹn 15 cành Marathon**; tắt sạch toàn bộ SFX (tiếng gõ phím cơ, beep, nhảy, tiếp đất, fanfare) và BGM synthesizer.
+
+### ✅ Công việc đã hoàn thành
+- **[UI Nút Gạt & Phím Tắt S] ([`css/mimikara-practice.css`](file:///g:/My%20Drive/hk261/Dự%20án%20manga/css/mimikara-practice.css), [`js/mimikara-practice-service.js`](file:///g:/My%20Drive/hk261/Dự%20án%20manga/js/mimikara-practice-service.js))**:
+  - Tạo style `.mimikara-btn-silent-toggle` với 2 trạng thái: `Âm thanh` (xám) và `Yên lặng 🤫` (xanh ngọc phát sáng).
+  - Tích hợp nút gạt vào thanh Header modal cạnh nút toàn màn hình.
+  - Hỗ trợ phím tắt **`S`** để chuyển đổi nhanh tức thì, lưu trạng thái vào `localStorage` (`edumanga_silent_mode`).
+- **[Dynamic Stepper Funnel Thích Ứng] ([`js/mimikara-practice-service.js`](file:///g:/My%20Drive/hk261/Dự%20án%20manga/js/mimikara-practice-service.js))**:
+  - Cập nhật `getActiveSteps()`: Khi `this.isSilentMode === true`, đặt `modes.dictation = false`.
+  - Tự động co giãn thanh tiến trình còn 4 bước (Flashcard ➔ Ghép Cặp ➔ Gõ Từ ➔ Leo Tháp).
+  - Tắt toàn bộ phát âm qua `speak()` (kiểm tra `if (this.isSilentMode) return;`).
+- **[Ninja Leo Tháp 15 Cành Không Audio] ([`js/mimikara-climber-engine.js`](file:///g:/My%20Drive/hk261/Dự%20án%20manga/js/mimikara-climber-engine.js))**:
+  - Tiếp nhận cờ `isSilentMode`: Tự động đặt `this.isMuted = true` và `this.isMusicEnabled = false`.
+  - Ẩn nút phát âm thanh (`climberBtnAudio`) và nút nhạc (`climberBtnMusic`) trên HUD.
+  - Cập nhật `setupBranches()`: Loại bỏ toàn bộ cành `type: 'audio'`. Luân phiên lặp lại Kanji và Nghĩa tiếng Việt từ 5 từ vựng để tạo đủ **đúng 15 thử thách Marathon**, chạy qua `smartShuffleChallenges` đảm bảo không trùng lặp liền kề.
+  - Chặn phát âm trong `speakJapanese()` và `setNextTarget()`.
+- **[Nâng Cache-Buster lên v=4.9] ([`index.html`](file:///g:/My%20Drive/hk261/Dự%20án%20manga/index.html), [`detail.html`](file:///g:/My%20Drive/hk261/Dự%20án%20manga/detail.html), [`reader.html`](file:///g:/My%20Drive/hk261/Dự%20án%20manga/reader.html))**:
+  - Cập nhật toàn bộ bundle `css/mimikara-practice.css?v=4.9`, `js/mimikara-climber-engine.js?v=4.9`, `js/mimikara-practice-service.js?v=4.9`.
+
+---
+
 ## [2026-09-12 19:40] - Phóng To Toàn Diện Sơ Đồ Mindmap Phân Tích Hán Tự (Radical & Compound Mindmap) Trên Flashcard Bước 1
 
 ### 🎯 Mục tiêu
