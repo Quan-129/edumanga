@@ -57,6 +57,9 @@ class MimikaraPracticeService {
     // Chế độ Yên Lặng (Silent / Library Mode)
     this.isSilentMode = localStorage.getItem('edumanga_silent_mode') === 'true';
 
+    // Điều hướng phân cấp (Hierarchical Backtracking: 'overview' | 'unit_chunks' | 'practice_session')
+    this.currentNavLevel = 'overview';
+
     // Dynamic Funnel Step State
     this.currentStepId = 'flashcard';
     this.currentStepNumber = 1;
@@ -276,12 +279,26 @@ class MimikaraPracticeService {
       const modal = document.getElementById('mimikaraMasterModal');
       if (!modal || !modal.classList.contains('active')) return;
 
-      // Hỗ trợ phím Tab xem gợi ý ngay cả khi đang trong ô nhập liệu ở Bước 4
+      // Hỗ trợ phím Tab và Escape ngay cả khi đang trong ô nhập liệu
       if (e.target && (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA')) {
         if (this.currentStep === 4 && e.code === 'Tab') {
           e.preventDefault();
           this.revealDictationAnswer();
+          return;
         }
+        if (e.code === 'Escape') {
+          e.preventDefault();
+          e.target.blur();
+          this.handleBacktrack();
+          return;
+        }
+        return;
+      }
+
+      // Phím tắt 'Escape': Quay lui phân cấp (Backtracking)
+      if (e.code === 'Escape') {
+        e.preventDefault();
+        this.handleBacktrack();
         return;
       }
 
@@ -454,8 +471,56 @@ class MimikaraPracticeService {
     }
   }
 
+  // Cập nhật icon và tooltip cho nút Thoát/Quay lại trên Header theo cấp độ điều hướng hiện tại
+  updateNavCloseButton() {
+    const btn = document.getElementById('mimikaraBtnClose');
+    if (!btn) return;
+
+    if (this.currentNavLevel === 'practice_session') {
+      const unit = this.dataset && this.dataset.units ? this.dataset.units.find(u => u.id === this.currentUnitId) : null;
+      const unitTitle = unit ? unit.title : `Unit ${this.currentUnitId}`;
+      btn.innerHTML = '<i class="fas fa-arrow-left"></i>';
+      btn.title = `Quay lại danh sách phiên ${unitTitle} (Esc)`;
+      btn.classList.add('is-back');
+    } else if (this.currentNavLevel === 'unit_chunks') {
+      btn.innerHTML = '<i class="fas fa-arrow-left"></i>';
+      btn.title = 'Quay lại danh mục 14 Unit (Esc)';
+      btn.classList.add('is-back');
+    } else {
+      btn.innerHTML = '<i class="fas fa-times"></i>';
+      btn.title = 'Đóng cửa sổ Mimikara (Esc)';
+      btn.classList.remove('is-back');
+    }
+  }
+
+  // Xử lý quay lui phân cấp (Hierarchical Backtracking)
+  handleBacktrack() {
+    if (this.currentNavLevel === 'practice_session') {
+      // Cấp 3 -> Lùi về Cấp 2: Danh sách phiên của Unit
+      if (this.activeClimberGame) {
+        this.activeClimberGame.destroy();
+        this.activeClimberGame = null;
+      }
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+      }
+      if (typeof showToast === 'function') {
+        showToast('Đã dừng phiên học và quay lại danh sách');
+      }
+      this.renderUnitChunks(this.currentUnitId);
+    } else if (this.currentNavLevel === 'unit_chunks') {
+      // Cấp 2 -> Lùi về Cấp 1: Tổng quan 14 Unit
+      this.renderUnitsOverview();
+    } else {
+      // Cấp 1 -> Đóng hẳn Modal
+      this.closeModal();
+    }
+  }
+
   // Close Modal
   closeModal() {
+    this.currentNavLevel = 'overview';
+    this.updateNavCloseButton();
     if (this.activeClimberGame) {
       this.activeClimberGame.destroy();
       this.activeClimberGame = null;
@@ -517,6 +582,7 @@ class MimikaraPracticeService {
   ensureModalDOM() {
     if (document.getElementById('mimikaraMasterModal')) {
       this.updateHeaderSubtitle();
+      this.updateNavCloseButton();
       const silentBtn = document.getElementById('mimikaraBtnSilentToggle');
       if (silentBtn) {
         silentBtn.classList.toggle('active', this.isSilentMode);
@@ -536,7 +602,7 @@ class MimikaraPracticeService {
     const dynamicSubtitle = `Học từ vựng ${activeSteps.length} bước: ${stepNames}`;
 
     const modalHtml = `
-      <div id="mimikaraMasterModal" class="mimikara-modal" onclick="if(event.target===this) window.mimikaraService.closeModal()">
+      <div id="mimikaraMasterModal" class="mimikara-modal" onclick="if(event.target===this) window.mimikaraService.handleBacktrack()">
         <div class="mimikara-modal-container">
           <!-- Header -->
           <div class="mimikara-modal-header">
@@ -557,7 +623,7 @@ class MimikaraPracticeService {
               <button type="button" id="mimikaraBtnFullscreen" class="mimikara-btn-fullscreen" onclick="window.mimikaraService.toggleFullscreen()" title="Toàn màn hình / Thu nhỏ">
                 <i class="fas fa-expand"></i>
               </button>
-              <button type="button" class="mimikara-btn-close" onclick="window.mimikaraService.closeModal()" title="Đóng cửa sổ">
+              <button type="button" id="mimikaraBtnClose" class="mimikara-btn-close" onclick="window.mimikaraService.handleBacktrack()" title="Đóng cửa sổ (Esc)">
                 <i class="fas fa-times"></i>
               </button>
             </div>
@@ -587,6 +653,8 @@ class MimikaraPracticeService {
   // VIEW 1: 14 UNITS OVERVIEW
   // --------------------------------------------------------------------------
   renderUnitsOverview() {
+    this.currentNavLevel = 'overview';
+    this.updateNavCloseButton();
     const body = document.getElementById('mimikaraModalBody');
     if (!body || !this.dataset) return;
 
@@ -657,6 +725,8 @@ class MimikaraPracticeService {
   // --------------------------------------------------------------------------
   renderUnitChunks(unitId) {
     this.currentUnitId = unitId;
+    this.currentNavLevel = 'unit_chunks';
+    this.updateNavCloseButton();
     // Khi thoát phiên về danh sách chunk của Unit, hoàn lại chế độ cửa sổ bình thường
     this.toggleFullscreen(false);
     const body = document.getElementById('mimikaraModalBody');
@@ -742,6 +812,8 @@ class MimikaraPracticeService {
   startChunkPractice(unitId, chunkIndex) {
     this.currentUnitId = unitId;
     this.currentChunkIndex = chunkIndex;
+    this.currentNavLevel = 'practice_session';
+    this.updateNavCloseButton();
     const unit = this.dataset.units.find(u => u.id === unitId);
     if (!unit) return;
 
@@ -784,7 +856,7 @@ class MimikaraPracticeService {
     return `
       <div class="mimikara-stepper-header">
         <div style="display: flex; align-items: center; gap: 0.75rem;">
-          <button type="button" class="mimikara-btn-back" onclick="window.mimikaraService.renderUnitChunks(${this.currentUnitId})" style="padding: 5px 12px; font-size: 0.78rem;">
+          <button type="button" class="mimikara-btn-back" onclick="window.mimikaraService.handleBacktrack()" style="padding: 5px 12px; font-size: 0.78rem;">
             <i class="fas fa-arrow-left"></i> Dừng phiên
           </button>
           <span style="color: #cbd5e1; font-size: 0.85rem; font-weight: 700;">
@@ -2691,6 +2763,8 @@ class MimikaraPracticeService {
   // BƯỚC 6: NINJA LEO THÁP PHẢN XẠ 15 CÀNH (MARATHON SHUFFLE)
   // --------------------------------------------------------------------------
   startStep6Climbing() {
+    this.currentNavLevel = 'practice_session';
+    this.updateNavCloseButton();
     const body = document.getElementById('mimikaraModalBody');
     if (!body) return;
 
@@ -2717,7 +2791,7 @@ class MimikaraPracticeService {
           this.startFirstActiveStep();
         },
         onExit: () => {
-          this.renderUnitChunks(this.currentUnitId);
+          this.handleBacktrack();
         }
       });
     }
@@ -2726,6 +2800,8 @@ class MimikaraPracticeService {
   // Khởi động chế độ Leo Tháp Vô Tận (Endless Climber) cho toàn Unit
   startEndlessClimbing(unitId) {
     this.currentUnitId = unitId;
+    this.currentNavLevel = 'practice_session';
+    this.updateNavCloseButton();
     const unit = this.dataset.units.find(u => u.id === unitId);
     if (!unit) return;
 
@@ -2742,7 +2818,7 @@ class MimikaraPracticeService {
 
     body.innerHTML = `
       <div class="mimikara-nav-bar" style="margin-bottom: 12px;">
-        <button type="button" class="mimikara-btn-back" onclick="window.mimikaraService.renderUnitChunks(${unitId})">
+        <button type="button" class="mimikara-btn-back" onclick="window.mimikaraService.handleBacktrack()">
           <i class="fas fa-arrow-left"></i> Quay lại Unit ${unitId}
         </button>
         <span style="color: #38bdf8; font-weight: 800; font-size: 1rem;">
@@ -2766,7 +2842,7 @@ class MimikaraPracticeService {
           this.startEndlessClimbing(unitId);
         },
         onExit: () => {
-          this.renderUnitChunks(unitId);
+          this.handleBacktrack();
         }
       });
     }

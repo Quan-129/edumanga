@@ -3,6 +3,45 @@
 
 Nơi ghi lại toàn bộ tiến trình phát triển, các quyết định kiến trúc kỹ thuật (ADR) và danh sách việc cần làm tiếp theo cho dự án EduManga Hub.
 
+## [2026-09-15 18:35] - Triển Khai Điều Hướng Quay Lui Phân Cấp (Hierarchical Backtracking) Cho Mimikara N2
+
+### 🎯 Mục tiêu
+- Xử lý vấn đề người dùng phản ánh: khi đang trong phiên học hoặc minigame leo tháp, bấm nút Thoát (`X` trên header) hoặc nhấn phím `Esc` làm văng phụt ra tận màn hình ngoài cùng (trang đọc truyện/trang chủ) thay vì lùi dần từng cấp.
+- Triển khai giải pháp **Nút Biến Hình Thông Minh & Quay Lui Phân Cấp (Hierarchical Backtracking)** theo mô hình 3 cấp độ:
+  - **Cấp 3 (Đang học trong phiên / Minigame leo tháp)** ➔ Lùi về **Cấp 2 (Danh sách phiên của Unit)**, dọn dẹp game/âm thanh và giữ nguyên tiến độ.
+  - **Cấp 2 (Danh sách phiên của Unit)** ➔ Lùi về **Cấp 1 (Tổng quan 14 Unit)**.
+  - **Cấp 1 (Tổng quan 14 Unit)** ➔ Đóng hẳn Modal.
+
+### ✅ Công việc đã hoàn thành
+- **[Nút Biến Hình Thông Minh & CSS] ([`css/mimikara-practice.css`](file:///g:/My%20Drive/hk261/Dự%20án%20manga/css/mimikara-practice.css), [`js/mimikara-practice-service.js`](file:///g:/My%20Drive/hk261/Dự%20án%20manga/js/mimikara-practice-service.js))**:
+  - Tạo class `.mimikara-btn-close.is-back` với hiệu ứng hover nhích nhẹ sang trái (`transform: translateX(-3px)`), tạo cảm giác nút Back native mượt mà.
+  - Xây dựng phương thức `updateNavCloseButton()` tự động biến hình nút `#mimikaraBtnClose`:
+    - Ở Cấp 2 & Cấp 3: Chuyển sang icon `<i class="fas fa-arrow-left"></i>` kèm tooltip tương ứng (*"Quay lại danh sách phiên Unit X (Esc)"* hoặc *"Quay lại danh mục 14 Unit (Esc)"*).
+    - Ở Cấp 1: Chuyển sang icon `<i class="fas fa-times"></i>` kèm tooltip *"Đóng cửa sổ Mimikara (Esc)"*.
+- **[Quản Lý Trạng Thái & Bộ Điều Khiển Backtracking] ([`js/mimikara-practice-service.js`](file:///g:/My%20Drive/hk261/Dự%20án%20manga/js/mimikara-practice-service.js))**:
+  - Khởi tạo `this.currentNavLevel = 'overview'` trong constructor và quản lý 3 giá trị chuỗi: `'overview'`, `'unit_chunks'`, `'practice_session'`.
+  - Tích hợp cập nhật `currentNavLevel` và `updateNavCloseButton()` tại tất cả các điểm chuyển hướng giao diện:
+    - `renderUnitsOverview()`: Gán `'overview'`.
+    - `renderUnitChunks(unitId)`: Gán `'unit_chunks'`.
+    - `startChunkPractice(unitId, chunkIndex)`: Gán `'practice_session'`.
+    - `startStep6Climbing()` & `startEndlessClimbing(unitId)`: Gán `'practice_session'`.
+  - Xây dựng phương thức `handleBacktrack()`:
+    - Nếu đang ở `practice_session`: Dừng `activeClimberGame`, ngắt `speechSynthesis.cancel()`, hiển thị Toast thông báo và gọi `renderUnitChunks(this.currentUnitId)`.
+    - Nếu đang ở `unit_chunks`: Lùi về `renderUnitsOverview()`.
+    - Nếu đang ở `overview`: Gọi `closeModal()`.
+  - Nút "Dừng phiên" trong thanh Stepper Header và sự kiện `onExit` của Ninja Climber Game được kết nối trực tiếp vào `this.handleBacktrack()`.
+  - Backdrop click (`#mimikaraMasterModal`) được điều hướng qua `handleBacktrack()` thay vì đóng hẳn.
+- **[Hỗ Trợ Phím Tắt Esc Đa Tầng] ([`js/mimikara-practice-service.js`](file:///g:/My%20Drive/hk261/Dự%20án%20manga/js/mimikara-practice-service.js))**:
+  - Bắt sự kiện phím `Escape` ngay cả khi con trỏ đang active trong `<input>` / `<textarea>` (gõ Romaji / Cloze test), tự động gọi `e.target.blur()` và kích hoạt `handleBacktrack()`.
+- **[Nâng Cache-Buster v=5.0] ([`index.html`](file:///g:/My%20Drive/hk261/Dự%20án%20manga/index.html), [`detail.html`](file:///g:/My%20Drive/hk261/Dự%20án%20manga/detail.html), [`reader.html`](file:///g:/My%20Drive/hk261/Dự%20án%20manga/reader.html))**:
+  - Đồng bộ nâng phiên bản bundle `css/mimikara-practice.css?v=5.0`, `js/mimikara-climber-engine.js?v=5.0`, `js/mimikara-practice-service.js?v=5.0` trên toàn bộ 3 trang giao diện người dùng.
+
+### 💡 Quyết định Kỹ thuật & Kiến trúc (ADR)
+- **Phương án 1 (Nút Biến Hình Thông Minh)** được lựa chọn thay vì chèn thêm nút phụ để giữ cho thanh Header cực kỳ gọn gàng, tránh làm rối mắt người học trên màn hình nhỏ/mobile, trong khi vẫn đạt được trải nghiệm UX chuẩn mực của ứng dụng di động/desktop hiện đại.
+- Sử dụng biến chuỗi trực quan `currentNavLevel` thay vì mảng history stack giúp tránh lỗi tràn stack hoặc lặp vòng vô hạn (infinite loop) khi người dùng chuyển qua lại giữa các màn hình nhiều lần.
+
+---
+
 ## [2026-09-15 09:30] - Triển Khai Chế Độ Yên Lặng (Silent / Library Mode): Tự Động Bỏ Qua Bước Nghe Điền & Tinh Chỉnh Leo Tháp 15 Cành Thuần Kanji/Nghĩa
 
 ### 🎯 Mục tiêu
